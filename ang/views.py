@@ -14,7 +14,7 @@ from django.shortcuts import render
 #     return render(request, "ang/app/stats.html", {})
 
 class MainTemplateView(TemplateView):
-    template_name='ang/home.html'
+    template_name='ang/reference_app/home.html'
 
     def get_context_data(self, **kwargs):
         ctx = super(MainTemplateView, self).get_context_data(**kwargs)
