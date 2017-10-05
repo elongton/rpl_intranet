@@ -1,0 +1,25 @@
+<div class="row justify-content-md-center" ng-if="chartswitch" ng-class="loading_class" style="padding-bottom: 20px; padding-top: 20px;">
+  <div class="col-sm-3 text-center">
+    <span class="">Request Distribution</span>
+    <canvas id="pie" class="chart chart-pie"
+      chart-data="plotdata" chart-labels="labels" chart-options="options">
+    </canvas>
+  </div><!--col-sm-3 pie-chart -->
+
+  <div class="col-sm-6 text-center">
+    <span ng-show = "showchartdata == true">Average # of Requests Per Hour</span>
+    <canvas ng-show = "showchartdata == true" id="line" class="chart chart-line" chart-data="line_data"
+        chart-labels="line_labels" chart-series="line_series" chart-options="line_options"
+        chart-dataset-override="line_datasetOverride">
+    </canvas>
+    <div ng-show = "showchartdata == false" style="height: 100%;
+      width: 100%; margin-bottom: 10px;
+      background:url('{{staticfiles('img/max_average_background.png')}}');
+      background-repeat: no-repeat;
+      background-size: cover;"
+      class="table_parent">
+      <span class="table_child"><button class='btn btn-success' ng-click = "retrieve_bigdatachart(branch.replace(' ', '+'), from, to);">Load Average # of Requests Per Hour</button></span>
+    </div>
+  </div>
+
+</div><!-- chart row -->

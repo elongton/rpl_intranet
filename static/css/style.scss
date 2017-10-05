@@ -1,0 +1,100 @@
+.table_parent {
+  display: table; }
+.table_child {
+  display: table-cell;
+  vertical-align: middle; }
+
+h1{margin: 20px 0;}
+.dashed{border: 1px dashed black;}
+.dashedred{border: 2px dashed red;}
+.red{color: red;}
+.appfont{
+  font-family: apple-system,system-ui,BlinkMacSystemFont,'Segoe UI', Roboto,'Helvetica Neue',Arial,sans-serif;
+}
+
+/*container media query*/
+@media (min-width: 1px) { .container{min-width: 992px!important;} }
+@media (min-width: 576px) { .container{min-width: 992px!important;} }
+@media (min-width: 768px) { .container{min-width: 992px!important;} }
+@media (min-width: 992px) { .container{min-width: 992px!important;} }
+
+.row{margin-bottom: 10px;}
+.userlogin{text-align: center;}
+.timeinput{text-align: center;}
+.timeinput span{font-size: 39px;}
+.timeinput input{height: 80px;
+                 width: 100px;
+                 font-size: 40px;
+                 text-align: center;}
+
+
+// info page
+.infoh2{margin: 20px 0;}
+
+/*login page*/
+.login_field{margin-bottom: 10px;}
+
+
+/*stats page*/
+// .filter_row{display:none;}
+$blur_radius: blur(3px);
+.table_blur{
+  -webkit-filter: $blur_radius;
+  -moz-filter: $blur_radius;
+  -o-filter: $blur_radius;
+  -ms-filter: $blur_radius;
+  filter: $blur_radius;
+}
+.itemfilter{
+            //  width: 50px!important;
+             border-radius: 4px;
+             background-color: #0275d8;
+             color: white;
+             display: inline-block;
+             padding: 4px 8px;
+             }
+.itemfilter:hover{
+            background-color: #d9534f;
+            cursor: default;
+}
+.filtercell:hover{
+    cursor: default;
+}
+
+#datepickernav li div button,
+#datepickernav li button{height: 42px;}
+.datepicker input{width: 170px;}
+.datepicker{margin-left: 10px;}
+.stats_table thead tr td a{color: #93c54b;}
+.statspagination{margin: 14px 0; padding: 5px 0;}
+.statspagination ul{margin-bottom: 0;}
+.statspagination ul li a{color: black;}
+.fa-times{display: none;}
+.stat_row:hover .fa-times{display: inline;}
+.delete_request i:hover{color: red;}
+.delete_modal_table td{vertical-align: top; text-align: left; }
+.delete_table_title{width: 125px;}
+#excel_button, #chart_button{padding: 3px 3px; margin-left: 6px;}
+  // modal build csv button
+  .modal-footer a:link,
+  .modal-footer a:visited,
+  .modal-footer a:hover,
+  .modal-footer a:active{color: white;}
+
+.request_stat{padding: 1px 4px;}
+// color legend
+.redpie{background-color: rgba(247,70,74,.7); border-radius: 4px; }
+.bluepie{background-color: rgba(151,187,205,.7); border-radius: 4px;}
+.greypie{background-color: rgba(220,220,220,1); border-radius: 4px;}
+
+
+
+/*rotation (loading) animation*/
+.spinner{
+-webkit-animation:spin .9s linear infinite;
+-moz-animation:spin .9s linear infinite;
+animation:spin .9s linear infinite;
+}
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }

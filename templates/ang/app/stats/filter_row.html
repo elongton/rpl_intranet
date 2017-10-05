@@ -1,0 +1,16 @@
+<div ng-if = "userfilter || mediumfilter || fivefilter" class="row filter_row">
+  <div class="col-sm-12">
+    <div ng-if = "userfilter" ng-click = "changeuserfilter('')" class="itemfilter">
+      {{userfilter}}
+      <i style = "margin-left: 2px;" class="fa fa-times-circle" aria-hidden="true"></i>
+    </div>
+    <div ng-if = "mediumfilter" ng-click = "changemediumfilter('')" class="itemfilter">
+      {{mediumfilter}}
+      <i style = "margin-left: 2px;" class="fa fa-times-circle" aria-hidden="true"></i>
+    </div>
+    <div ng-if = "fivefilter" ng-click = "changefivefilter('')" class="itemfilter">
+      {{fivefilter}}
+      <i style = "margin-left: 2px;" class="fa fa-times-circle" aria-hidden="true"></i>
+    </div>
+  </div>
+</div><!-- filter row -->

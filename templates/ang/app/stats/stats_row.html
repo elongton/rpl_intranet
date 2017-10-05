@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="col-sm-12">
+    <span><strong>Total requests:</strong>&nbsp;&nbsp;{{total_quant}}</span>
+    <span class="request_stat" ng-class="legend_ref"><strong>Reference:&nbsp;&nbsp;</strong>{{ref_quant}}</span>
+    <span class="request_stat" ng-class="legend_circ"><strong>Circulation:&nbsp;&nbsp;</strong>{{circ_quant}}</span>
+    <span class="request_stat" ng-class="legend_dir"><strong>Directional:&nbsp;&nbsp;</strong>{{dir_quant}}</span>
+
+    <span><strong>Percent > 5 mins:&nbsp;&nbsp;</strong>
+      {{percent_quant}}%
+    </span>
+    <span ng-if = ""></span>
+    <span class="pull-right"><button id="excel_button" data-toggle="modal" data-target="#csv_modal" class="btn btn-secondary" ng-disabled = "datedisable"><i class="fa fa-floppy-o" aria-hidden="true"></i></button></span>
+
+    <span class="pull-right">
+      <button id="chart_button"  class="btn btn-secondary" ng-disabled = "datedisable" ng-click = "chart_toggle(); test_bigdata(branch, from, to);">
+        <i class="fa fa-line-chart" aria-hidden="true"></i>
+      </button>
+    </span>
+  </div><!--col-sm-12-->
+</div><!--row-->

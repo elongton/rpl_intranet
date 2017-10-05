@@ -1,0 +1,21 @@
+This app will allow the administrator to change the text/type of data for
+three different buttons which will appear on the web page.
+
+The web page will be powered by AngularJS and give the user to the option to hit
+the button once per minute.  The user will enter the length (time) of the interaction
+and an optional description.  There is a safety checkbox when checked will
+allow the user to submit more than one request per minute.
+
+Structure:
+
+Request object:
+  fields:
+  text,
+  user - foreign key to user that submitted,
+  type -foreign key to the type of requests
+  length - integer field (to record minutes of interaction)
+
+Type object: there will be 3 default instances of this to start - reference, directional, other
+  fields:
+  text,
+  description,

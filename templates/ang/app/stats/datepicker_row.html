@@ -1,0 +1,53 @@
+<div class="row"><!--datepicker row -->
+  <div class="col-sm-12">
+    <nav class="nav nav-pills " id="datepickernav">
+      <li class="nav-item text-left">
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ng-disabled = "datedisable">
+            {{branch}}
+          </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" ng-click = 'changeBranch("Main")' href="#">Main</a>
+              <a class="dropdown-item" ng-click = 'changeBranch("Belmont")' href="#">Belmont</a>
+              <a class="dropdown-item" ng-click = 'changeBranch("Broad Rock")' href="#">Broad Rock</a>
+              <a class="dropdown-item" ng-click = 'changeBranch("East End")' href="#">East End</a>
+              <a class="dropdown-item" ng-click = 'changeBranch("Ginter Park")' href="#">Ginter Park</a>
+              <a class="dropdown-item" ng-click = 'changeBranch("Hull Street")' href="#">Hull Street</a>
+              <a class="dropdown-item" ng-click = 'changeBranch("North Avenue")' href="#">North Avenue</a>
+              <a class="dropdown-item" ng-click = 'changeBranch("West End")' href="#">West End</a>
+              <a class="dropdown-item" ng-click = 'changeBranch("Westover Hills")' href="#">Westover Hills</a>
+              <!-- <div class="dropdown-divider"></div>
+              <a class="dropdown-item" ng-click = 'changeBranch("All Branches")' href="#">All Branches</a> -->
+            </div> <!-- dropdown-menu -->
+        </div> <!-- dropdown -->
+      </li>
+      <li class="nav-item text-left datepicker">
+        <form class="form-inline">
+          <label style="margin-right: 10px;"for="startdate">Start:</label>
+          <input type="date" class="form-control" id="startdate" ng-model="from" ng-disabled = "datedisable">
+        </form>
+
+      </li>
+      <li class="nav-item text-left datepicker">
+        <form class="form-inline">
+          <label style="margin-right: 10px;" for="enddate">End:</label>
+          <input type="date" class="form-control" id="enddate" ng-model="to" ng-disabled = "datedisable">
+        </form>
+      </li>
+      <li class="nav-item text-left datepicker">
+        <button class="btn btn-secondary" ng-click = "todaybutton()" ng-disabled = "datedisable">Today</button>
+      </li>
+      <li class="nav-item text-left datepicker">
+        <button class="btn btn-secondary" ng-click = "yesterdaybutton()" ng-disabled = "datedisable">Yesterday</button>
+      </li>
+      <li class="nav-item text-left datepicker">
+        <button class="btn btn-secondary" ng-click = "weekbutton()" ng-disabled = "datedisable">Week</button>
+      </li>
+      <li class="nav-item text-right ml-auto">
+          <button class="btn btn-success pull-right" ng-click = "reload(branch, from, to, true)" ng-disabled = "datedisable || disable_load"><i class="fa fa-refresh" ng-class="{'spinner': loading}" aria-hidden="true"></i></button>
+      </li>
+    </nav>
+  </div>
+
+</div><!--datepicker row -->

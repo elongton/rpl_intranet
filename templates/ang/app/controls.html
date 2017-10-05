@@ -1,0 +1,192 @@
+<div class="controls_window_container appfont">
+  <!-- who's logged in? -->
+  <div class="row text-center">
+    <!-- <div class="col-sm-12">Logged in as {{username}}</div> -->
+    <label class="control-label text-warning" ng-if="requestError.detail" >{{requestError.detail}}</label>
+  </div>
+
+  <form ng-submit='addRequest()'>
+        <!-- time input -->
+        <div class="row">
+          <div class="col-sm-12 text-center">
+            <!-- <input ng-model="request.time_length" maxlength="2" type="text" id="timecontent"> -->
+            <!-- <span> min(s)</span> -->
+            <input ng-click = "request.over_five = !request.over_five; clickcheck()" type="checkbox" id="cbtest"/>
+            <label for="cbtest" class="check-box"></label>
+          </div>
+          <div class="col-sm-12 text-center">
+            <span>Over 5 minutes?</span>
+          </div>
+        </div>
+        <div style="text-align: center;" class="red">
+          <label class="control-label" for="timecontent" ng-if="requestError.time_length" ><span ng-repeat='error in requestError.time_length'>{{error}}</span></label>
+        </div>
+        <!-- type of request section -->
+        <div class="row">
+          <div class="col-sm-12 requesttypediv">
+            <hr>
+            <div class="radio typeofrequest">
+              <label title="Queries about:&#10;1. Books&#10;2. Research Topics&#10;3. Databases&#10;4. Periodicals&#10;5. Websites&#10;6. Reader Printers&#10;7. Microfilm&#10;8. Job Seeking&#10;9. Scanning&#10;10. Computer Assistance"><input type="radio" name="typeofrequest" ng-model="request.type_of_request" value="1"><br>Reference</label>
+            </div>
+            <div class="radio typeofrequest">
+              <label title="Queries about:&#10;1. Fax&#10;2. Money Related Requests&#10;3. ILL&#10;4. Register library card&#10;5. Renewals&#10;6. Holds&#10;7. Xerox&#10;8. Checkout&#10;9. Notary&#10;10. Room reservations"><input type="radio" name="typeofrequest" ng-model="request.type_of_request" value="3"><br>Circulation</label>
+            </div>
+            <div class="radio typeofrequest">
+              <label title="Queries about:&#10;1. Restrooms&#10;2. Room locations&#10;3. Program Location&#10;4. Redirect to different location&#10;"><input type="radio" name="typeofrequest" ng-model="request.type_of_request" value="2"><br>Directional</label>
+            </div>
+            <hr style="margin-top: 0;">
+          </div><!-- col-sm-12-->
+        </div><!-- row -->
+
+        <!-- medium section -->
+        <div class="row">
+          <div class="col-sm-12 mediumdiv">
+            <div class='mediumdivcontainer'>
+              <div class="radio medium">
+                <label><input type="radio" name="medium" ng-model="request.medium" value="1"> In Person</label>
+              </div>
+              <div class="radio medium">
+                <label><input type="radio" name="medium" ng-model="request.medium" value="2"> Phone</label>
+              </div>
+              <div class="radio medium">
+                <label><input type="radio" name="medium" ng-model="request.medium" value="3"> Email</label>
+              </div>
+            </div>
+          </div><!-- col-sm-12 -->
+        </div><!--row -->
+
+        <!-- comment section -->
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="form-group">
+              <textarea class="form-control" rows="4" id="comment" ng-model = "request.comment" placeholder="Conversation comments."></textarea>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- submit section -->
+        <div class="row">
+          <div class="col-sm-12 submit-section appfont" >
+            <input
+               type="submit" value='Submit' class='btn btn-success appfont' ng-hide = "submitsuccess">
+            <div class= "submit_thanks" style = "margin-top: 10px;" ng-show = "submitsuccess">Thanks    <i class="fa fa-thumbs-up" aria-hidden="true"></i></div>
+          </div><!-- col-sm-12-->
+        </div><!-- row -->
+  </form><!--the form-->
+</div>
+
+
+<div class='wrap' ng-show = "fireworks">
+  <div class='firework'>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+  </div>
+  <div class='firework'>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+  </div>
+  <div class='firework'>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+  </div>
+  <div class='firework'>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+  </div>
+  <div class='firework'>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+    <div class='c'></div>
+  </div>
+</div>

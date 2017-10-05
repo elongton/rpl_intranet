@@ -1,0 +1,25 @@
+<nav-bar></nav-bar>
+
+<div class="container">
+  <!-- TITLE SECTION -->
+  <div class="row">
+    <div class="col-sm-12" ng-init = "load_pagination()">
+        <h1 style="display: inline-block" class="">Request Statistics</h1>
+        <dir-pagination-controls ng-if = "showpagination == true && showdata" style="display: inline-block; vertical-align: bottom;" class="pull-right statspagination"></dir-pagination-controls>
+    </div><!-- col-sm-12 -->
+  </div><!--row -->
+  <!-- DATEPICKER SECTION -->
+  <datepicker-row></datepicker-row>
+  <!-- PLOTS SECTION -->
+  <chart-row></chart-row>
+  <!-- STATS SECTION -->
+  <stats-row></stats-row>
+  <!-- FILTERS SECTION -->
+  <filter-row></filter-row>
+  <!-- TABLE SECTION -->
+  <table-row ng-show = "showdata == true"></table-row>
+  <big-data ng-show = "showdata == false"></big-data>
+</div><!-- container -->
+
+
+<modals></modals>
