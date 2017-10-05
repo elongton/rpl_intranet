@@ -26,14 +26,14 @@ angular.module('referenceApp').
                 $resourceProvider.defaults.stripTrailingSlashes = false;
 
                 $routeProvider
-                .when('/',{
+                .when('/reference',{
                   template: '<stats></stats>',
                   resolve:{
                     loggedIn:onlyLoggedIn
                   },
                   css: staticfiles('css/style.css'),
                 })
-                .when("/controls", {
+                .when("/reference/controls", {
                   template: '<controls></controls>',
                   css: staticfiles('css/controls.css'),
                 })
@@ -41,7 +41,7 @@ angular.module('referenceApp').
                   template: '<login></login>',
                   css: staticfiles('css/style.css'),
                 })
-                .when("/info", {
+                .when("/reference/info", {
                   template: '<infopage></infopage>',
                   css: staticfiles('css/style.css'),
                 })

@@ -7,12 +7,12 @@ angular.module('navBar').
           $scope.opencontrols = function(){
               // console.log($cookies.get("username"))
               // console.log($cookies.get("token"))
-              $scope.controlswindow = $window.open("/controls", "controlswindow", "width=300, height=530");
+              $scope.controlswindow = $window.open("/reference/controls", "controlswindow", "width=300, height=530");
             };
 
 
           $scope.navinfopage = function(){
-              $location.url('/info')
+              $location.url('/reference/info')
           }
 
           $scope.staticfiles = staticfiles;

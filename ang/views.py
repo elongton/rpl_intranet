@@ -25,7 +25,7 @@ class MainTemplateView(TemplateView):
 class AngularTemplateView(View):
     def get(self, request, item=None, *args, **kwargs):
         template_dir_path = settings.TEMPLATES[0]["DIRS"][0]
-        final_path = os.path.join(template_dir_path, "ang", "app", item + ".html")
+        final_path = os.path.join(template_dir_path, "ang", "reference_app", item + ".html")
         try:
             html = open(final_path)
             return HttpResponse(html)
