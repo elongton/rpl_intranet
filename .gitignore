@@ -7,6 +7,8 @@ local.py
 # generated py files
 .pyc
 
+#sass
+.sass-cache/
 
 .DS_Store
 bin/
