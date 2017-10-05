@@ -36,7 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'question_tracker',
+    'reference_stats',
     'rest_framework',
     'accounts',
 ]
@@ -51,7 +51,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'reference.urls'
+ROOT_URLCONF = 'rpl_intranet.urls'
 
 TEMPLATES = [
     {
@@ -69,7 +69,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'reference.wsgi.application'
+WSGI_APPLICATION = 'rpl_intranet.wsgi.application'
 
 
 # Database

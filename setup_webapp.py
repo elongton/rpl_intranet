@@ -1,5 +1,5 @@
 import os
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'reference.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'rpl_intranet.settings')
 
 import django
 django.setup()
@@ -7,12 +7,12 @@ from django.core.management import execute_from_command_line
 
 from django.contrib.auth.models import User
 from accounts.models import Profile, Branch
-from question_tracker.models import Medium, TypeOfRequest
+from reference_stats.models import Medium, TypeOfRequest
 
 
 execute_from_command_line(['manage.py', 'migrate'])
 execute_from_command_line(['manage.py', 'makemigrations', 'accounts'])
-execute_from_command_line(['manage.py', 'makemigrations', 'question_tracker'])
+execute_from_command_line(['manage.py', 'makemigrations', 'reference_stats'])
 execute_from_command_line(['manage.py', 'migrate'])
 
 #['medium', pk]

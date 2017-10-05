@@ -1,5 +1,5 @@
 import os
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'reference.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'rpl_intranet.settings')
 
 import django
 django.setup()
@@ -10,7 +10,7 @@ from datetime import datetime
 from calendar import Calendar
 
 from django.contrib.auth.models import User
-from question_tracker.models import Request, TypeOfRequest, Medium
+from reference_stats.models import Request, TypeOfRequest, Medium
 from accounts.models import Profile, Branch
 from faker import Faker
 
@@ -19,7 +19,7 @@ fakegen = Faker()
 cal = Calendar()
 
 
-def add_requests(N=100, iteryear=2017, itermonth=8): #N is the number of requests per day
+def add_requests(N=2, iteryear=2017, itermonth=10): #N is the number of requests per day
 
     totaldays = 0
     for day in cal.itermonthdates(iteryear, itermonth):
@@ -69,7 +69,7 @@ def add_requests(N=100, iteryear=2017, itermonth=8): #N is the number of request
                     )
 
 print("Populating script!")
-add_requests(10)
+add_requests(2)
 print("Populating complete!")
 
 

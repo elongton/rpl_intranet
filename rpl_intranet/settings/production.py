@@ -9,7 +9,7 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: don't run with debug turned on in production!
-from reference.aws.conf import *
+from rpl_intranet.aws.conf import *
 
 
 DEBUG = False
@@ -31,7 +31,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'question_tracker',
+    'reference_stats',
     'rest_framework',
     'accounts',
     'storages',

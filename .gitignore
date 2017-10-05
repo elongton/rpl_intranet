@@ -3,6 +3,7 @@ local.py
 
 # database
 .sqlite3
+migrations/
 
 # generated py files
 .pyc
