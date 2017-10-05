@@ -3,7 +3,7 @@
 angular.
   module('request').
     factory('Request', function($cookies, $location, $httpParamSerializer, $resource){
-        var url = '/api/requests/'
+        var url = '/api/reference/requests/'
         var requestQuery = {
               url: url,
               method: "GET",
@@ -19,7 +19,7 @@ angular.
 
 
         var requestDelete = {
-          url: '/api/:pk/delete/',
+          url: '/api/reference/:pk/delete/',
           method: "DELETE",
           params: {"pk": '@pk'},
         }
@@ -33,7 +33,7 @@ angular.
         }
 
         var requestCreate = {
-              url: '/api/requests/create/',
+              url: '/api/reference/requests/create/',
               method: "POST",
               interceptor: {responseError: function(response){
                 if (response.status == 401){

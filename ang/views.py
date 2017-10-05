@@ -23,7 +23,7 @@ class MainTemplateView(TemplateView):
 
 
 class AngularTemplateView(View):
-    def get(self, request, item=None, *args, **kwargs):
+    def get(self, request, appname=None, item=None,  *args, **kwargs):
         template_dir_path = settings.TEMPLATES[0]["DIRS"][0]
         final_path = os.path.join(template_dir_path, "ang", "reference_app", item + ".html")
         try:
