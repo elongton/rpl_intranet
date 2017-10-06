@@ -2,7 +2,7 @@
 
 angular.module('controls').
       component('controls', {
-        templateUrl: '/api/templates/controls.html',
+        templateUrl: '/api/templates/reference_app/controls.html',
         controller: function(Request, $scope, $cookies, $http, $rootScope, $window){
 
             $scope.submitsuccess = false;

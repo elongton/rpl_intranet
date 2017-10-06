@@ -20,7 +20,10 @@ from django.contrib import admin
 from django.views.generic.base import TemplateView
 from rest_framework_jwt.views import obtain_jwt_token
 from rest_framework_jwt.views import refresh_jwt_token
-from ang.views import AngularTemplateView, MainTemplateView
+from ang.views import (AngularTemplateView,
+                      ReferenceTemplateView,
+                      UserTemplateView,
+                      HomeTemplateView)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -28,7 +31,7 @@ urlpatterns = [
     url(r'^api/auth/token/refresh/', refresh_jwt_token),
     url(r'^api/reference/', include('reference_stats.api.urls', namespace='questions-api' )),
     url(r'^api/users/', include('accounts.api.urls', namespace='users-api' )),
-    url(r'^api/templates/(?P<item>[A-Za-z0-9\_\-\.\/]+)\.html$', AngularTemplateView.as_view())
+    url(r'^api/templates/(?P<appname>[A-Za-z0-9\_\-\.\/]+)/(?P<item>[A-Za-z0-9\_\-\.\/]+)\.html$', AngularTemplateView.as_view())
 ]
 
 
@@ -38,5 +41,7 @@ if settings.DEBUG:
 
 urlpatterns += [
     # url(r'', TemplateView.as_view(template_name='ang/home.html'))
-    url(r'^reference', MainTemplateView.as_view())
+    url(r'^creds',UserTemplateView.as_view()),
+    url(r'^reference', ReferenceTemplateView.as_view()),
+    url(r'', HomeTemplateView.as_view()),
 ]

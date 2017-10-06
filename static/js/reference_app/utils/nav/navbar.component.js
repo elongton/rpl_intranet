@@ -2,7 +2,7 @@
 
 angular.module('navBar').
       component('navBar', {
-        templateUrl: '/api/templates/menu.html',
+        templateUrl: '/api/templates/reference_app/menu.html',
         controller: function($cookies, $route, $scope, $window, $location, $rootScope){
           $scope.opencontrols = function(){
               // console.log($cookies.get("username"))

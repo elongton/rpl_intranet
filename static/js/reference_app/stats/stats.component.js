@@ -2,7 +2,7 @@
 
 angular.module('stats').
       component('stats', {
-        templateUrl: '/api/templates/stats.html',
+        templateUrl: '/api/templates/reference_app/stats.html',
         controller: function(Request, Cache, BigData, $scope, $rootScope, $timeout, $cookies, $window, $filter, $location){
           $scope.branch = $cookies.get("branch")
           $scope.username = $cookies.get("username")
