@@ -41,7 +41,7 @@ if settings.DEBUG:
 
 urlpatterns += [
     # url(r'', TemplateView.as_view(template_name='ang/home.html'))
-    url(r'^creds',UserTemplateView.as_view()),
+    url(r'^users',UserTemplateView.as_view()),
     url(r'^reference', ReferenceTemplateView.as_view()),
     url(r'', HomeTemplateView.as_view()),
 ]

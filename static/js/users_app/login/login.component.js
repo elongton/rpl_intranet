@@ -2,7 +2,7 @@
 
 angular.module('login').
       component('login', {
-        templateUrl: '/api/templates/login_app/login.html',
+        templateUrl: '/api/templates/users_app/login.html',
         controller: function(
                         User,
                         $cookies,

@@ -19,7 +19,6 @@ class HomeTemplateView(TemplateView):
     def get_context_data(self, **kwargs):
         ctx = super(HomeTemplateView, self).get_context_data(**kwargs)
         ctx['STATIC_URL'] = settings.STATIC_URL
-        return ctx
 
 
 class ReferenceTemplateView(TemplateView):
@@ -31,7 +30,7 @@ class ReferenceTemplateView(TemplateView):
         return ctx
 
 class UserTemplateView(TemplateView):
-    template_name='ang/login_app/userhome.html'
+    template_name='ang/users_app/userhome.html'
 
     def get_context_data(self, **kwargs):
         ctx = super(UserTemplateView, self).get_context_data(**kwargs)
