@@ -15,7 +15,7 @@ angular.module('referenceApp').
                         deferred.resolve();
                     } else {
                         deferred.reject();
-                        $location.url('/login');
+                        $location.url('/users/login');
                     }
                     return deferred.promise;
                 };
@@ -37,7 +37,7 @@ angular.module('referenceApp').
                   template: '<controls></controls>',
                   css: staticfiles('css/controls.css'),
                 })
-                .when("/login", {
+                .when("/users/login", {
                   template: '<login></login>',
                   css: staticfiles('css/style.css'),
                 })
