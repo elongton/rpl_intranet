@@ -10,5 +10,6 @@ angular.module('usersApp', [
 
   //internal
   'user',
+  'login',
 
 ]);
