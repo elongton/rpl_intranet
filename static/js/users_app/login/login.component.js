@@ -61,7 +61,7 @@ angular.module('login').
 
                       var url = "/reference";
                       window.location = url;
-                      window.location.replace (url);
+                      window.location.replace(url);
 
 
                       // $location.path("/reference")

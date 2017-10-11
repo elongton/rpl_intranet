@@ -2,7 +2,7 @@
 
 angular.module('navBar').
       component('navBar', {
-        templateUrl: '/api/templates/reference_app/menu.html',
+        templateUrl: '/api/templates/reference_app/reference_menu.html',
         controller: function($cookies, $route, $scope, $window, $location, $rootScope){
           $scope.opencontrols = function(){
               // console.log($cookies.get("username"))
@@ -41,6 +41,9 @@ angular.module('navBar').
                 $scope.controlswindow.close();
             }
             // $route.reload()
+            var url = "/users/login";
+            window.location = url;
+            window.location.replace(url);
           }
 
           //CLOSE WINDOW function

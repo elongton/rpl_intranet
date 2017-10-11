@@ -15,7 +15,9 @@ angular.module('referenceApp').
                         deferred.resolve();
                     } else {
                         deferred.reject();
-                        $location.url('/users/login');
+                        var url = "/users/login";
+                        window.location = url;
+                        window.location.replace(url);
                     }
                     return deferred.promise;
                 };
