@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en-us" ng-app='usersApp'>
   <head>
-    <base href="/users">
+    <base href="/">
     <meta charset="utf-8">
     <title>Users</title>
 
@@ -26,6 +26,8 @@
     <script src='{% static "js/users_app/app.module.js" %}'></script>
     <script src='{% static "js/users_app/app.config.js" %}'></script>
 
+
+
     <!-- External modules -->
     <script src='{% static "js/external/angular-css.min.js" %}'></script>
     <script src='{% static "js/reference_app/utils/nav/navbar.module.js" %}'></script>
@@ -39,6 +41,10 @@
 
     <script src='{% static "js/users_app/login/login.module.js" %}'></script>
     <script src='{% static "js/users_app/login/login.component.js" %}'></script>
+
+    <script src='{% static "js/users_app/utils/nav/navbar.module.js" %}'></script>
+    <script src='{% static "js/users_app/utils/nav/navbar.component.js" %}'></script>
+
 
     <script>
         var STATIC_URL = '{{ STATIC_URL|escapejs }}';

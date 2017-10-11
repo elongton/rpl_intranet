@@ -12,7 +12,7 @@ angular.module('referenceApp', [
 
   //internal
   'controls',
-  'login',
+  // 'login',
   'stats',
   'navBar',
 

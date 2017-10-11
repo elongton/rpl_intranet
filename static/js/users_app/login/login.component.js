@@ -52,8 +52,20 @@ angular.module('login').
                       $scope.userdata = result
                       $cookies.put("branch", $scope.userdata[0].profile.branch)
                       //could be a message too
-                      $location.path("/")
-                      $route.reload()
+
+
+
+                      // var destinationUrl = '/reference'
+                      // $window.location.href = destinationUrl;
+                      // $window.location.reload();
+
+                      var url = "/reference";
+                      window.location = url;
+                      window.location.replace (url);
+
+
+                      // $location.path("/reference")
+                      // $route.reload()
                     },
                     function(error){
                       console.log(error)
