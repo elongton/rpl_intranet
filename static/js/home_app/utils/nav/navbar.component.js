@@ -4,17 +4,15 @@ angular.module('navBar').
       component('navBar', {
         templateUrl: '/api/templates/home_app/home_menu.html',
         controller: function($cookies, $route, $scope, $window, $location, $rootScope){
-          $scope.opencontrols = function(){
-              // console.log($cookies.get("username"))
-              // console.log($cookies.get("token"))
-              $scope.controlswindow = $window.open("/reference/controls", "controlswindow", "width=300, height=530");
-            };
 
-
-          $scope.navinfopage = function(){
-              $location.url('/reference/info')
+          // on page link functions
+          $scope.referenceapp = function(){
+            var url = "/reference";
+            window.location = url;
+            window.location.replace(url);
           }
 
+          //other
           $scope.staticfiles = staticfiles;
           $scope.reloadpage = function(){
             $route.reload()
@@ -51,24 +49,5 @@ angular.module('navBar').
           };
 
 
-          // scope.userLoggedIn = $cookies.get("token")
-          // console.log($cookies.get("token"))
-
         }
       });
-
-//
-// 'use strict';
-//
-// angular.module('navBar', [])
-//   .controller('NavbarController', function($scope, $window) {
-//     $scope.opencontrols = function(){
-//         $window.open("/controls", "Controller", "width=300, height=500");
-//       };
-//   })
-//   .directive('navBar', function() {
-//     return {
-//       restrict: "E",
-//       templateUrl: '/api/templates/menu.html',
-//     };
-//   });

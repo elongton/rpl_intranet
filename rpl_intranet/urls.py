@@ -23,7 +23,8 @@ from rest_framework_jwt.views import refresh_jwt_token
 from ang.views import (AngularTemplateView,
                       ReferenceTemplateView,
                       UserTemplateView,
-                      HomeTemplateView)
+                      HomeTemplateView,
+                      LibcalTemplateView)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -43,5 +44,6 @@ urlpatterns += [
     # url(r'', TemplateView.as_view(template_name='ang/home.html'))
     url(r'^users',UserTemplateView.as_view()),
     url(r'^reference', ReferenceTemplateView.as_view()),
+    url(r'^libcal', LibcalTemplateView.as_view()),
     url(r'', HomeTemplateView.as_view()),
 ]

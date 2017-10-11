@@ -1,10 +1,10 @@
 {% load staticfiles %}
 <!DOCTYPE html>
-<html lang="en-us" ng-app='usersApp'>
+<html lang="en-us" ng-app='libcalApp'>
   <head>
     <base href="/">
     <meta charset="utf-8">
-    <title>Users</title>
+    <title>LibCal</title>
 
     <link rel="shortcut icon" href='{% static "img/favicon.png" %}' type="image/x-icon">
 
@@ -23,24 +23,18 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-cookies.js"></script>
 
     <!-- Main 'users_app' AngularJS files -->
-    <script src='{% static "js/users_app/app.module.js" %}'></script>
-    <script src='{% static "js/users_app/app.config.js" %}'></script>
-
-
+    <script src='{% static "js/libcal_app/app.module.js" %}'></script>
+    <script src='{% static "js/libcal_app/app.config.js" %}'></script>
 
     <!-- External modules -->
     <script src='{% static "js/external/angular-css.min.js" %}'></script>
-
     <!-- Internal modules -->
+    <script src='{% static "js/libcal_app/events_list/events_list.module.js" %}'></script>
+    <script src='{% static "js/libcal_app/events_list/events_list.component.js" %}'></script>
+    <script src='{% static "js/libcal_app/events_list/events_list.directives.js" %}'></script>
 
-    <script src='{% static "js/users_app/core/user/user.module.js" %}'></script>
-    <script src='{% static "js/users_app/core/user/user.service.js" %}'></script>
-
-    <script src='{% static "js/users_app/login/login.module.js" %}'></script>
-    <script src='{% static "js/users_app/login/login.component.js" %}'></script>
-
-    <script src='{% static "js/users_app/utils/nav/navbar.module.js" %}'></script>
-    <script src='{% static "js/users_app/utils/nav/navbar.component.js" %}'></script>
+    <!-- <script src='{% static "js/libcal_app/utils/nav/navbar.module.js" %}'></script>
+    <script src='{% static "js/libcal_app/utils/nav/navbar.component.js" %}'></script> -->
 
 
     <script>

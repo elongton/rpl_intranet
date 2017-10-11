@@ -17,6 +17,14 @@ class HomeTemplateView(TemplateView):
         ctx['STATIC_URL'] = settings.STATIC_URL
         return ctx
 
+class LibcalTemplateView(TemplateView):
+    template_name='ang/libcal_app/libcal_index.html'
+
+    def get_context_data(self, **kwargs):
+        ctx = super(LibcalTemplateView, self).get_context_data(**kwargs)
+        ctx['STATIC_URL'] = settings.STATIC_URL
+        return ctx
+
 
 class ReferenceTemplateView(TemplateView):
     template_name='ang/reference_app/reference_index.html'

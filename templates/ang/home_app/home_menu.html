@@ -10,14 +10,14 @@
         </a>
         <a href="/" ng-click = "reloadpage()" class="navbar-brand"><span>Intranet</span></a>
 
-        <div class="dropdown">
+        <div class="dropdown" style="margin-top: 4px;">
           <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ng-disabled = "datedisable">
             Links
           </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
               <a class="dropdown-item" href="#">LibCal Program Agenda</a>
-              <a class="dropdown-item" href="#">Request Statistics</a>
+              <a class="dropdown-item" href="" ng-click = "referenceapp()">Request Statistics</a>
 
 
               <div class="dropdown-divider"></div>
@@ -32,8 +32,8 @@
 
 
               <div class="dropdown-divider"></div>
-              <h6 class="dropdown-header">Coming Soon</h6>
-              <a class="dropdown-item disabled" href="#" disable='true'>Policy Wiki</a>
+              <h6 class="dropdown-header text-danger">Coming Soon</h6>
+              <a class="dropdown-item disabled" href="#">Policy Wiki</a>
               <a class="dropdown-item disabled" href="#">Programs Rolodex</a>
               <a class="dropdown-item disabled" href="#">New Employee Handbook</a>
             </div> <!-- dropdown-menu -->
@@ -45,6 +45,9 @@
 
           </ul>
           <ul class="navbar-nav">
+
+
+
             <li class="nav-item" ng-if="userLoggedIn"><a class="nav-link" ng-click='removeUser()' href="">Logout ({{username}})</a></li>
           </ul>
 

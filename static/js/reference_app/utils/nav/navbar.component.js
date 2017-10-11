@@ -4,21 +4,27 @@ angular.module('navBar').
       component('navBar', {
         templateUrl: '/api/templates/reference_app/reference_menu.html',
         controller: function($cookies, $route, $scope, $window, $location, $rootScope){
+
+
+          // on page link functions
+          $scope.loadhomepage = function(){
+            // $route.reload()
+            var url = "/";
+            window.location = url;
+            window.location.replace(url);
+          }
           $scope.opencontrols = function(){
               // console.log($cookies.get("username"))
               // console.log($cookies.get("token"))
               $scope.controlswindow = $window.open("/reference/controls", "controlswindow", "width=300, height=530");
             };
 
-
           $scope.navinfopage = function(){
               $location.url('/reference/info')
           }
 
           $scope.staticfiles = staticfiles;
-          $scope.reloadpage = function(){
-            $route.reload()
-          }
+
 
           $scope.userLoggedIn = false
           var token = $cookies.get("token")
