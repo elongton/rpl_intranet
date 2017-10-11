@@ -9,20 +9,17 @@ from django.views.generic import TemplateView
 from django.shortcuts import render
 
 
-# def get_angular_template(request, item=None):
-#     print(item)
-#     return render(request, "ang/app/stats.html", {})
-
 class HomeTemplateView(TemplateView):
-    template_name='ang/home_app/home.html'
+    template_name='ang/home_app/home_index.html'
 
     def get_context_data(self, **kwargs):
         ctx = super(HomeTemplateView, self).get_context_data(**kwargs)
         ctx['STATIC_URL'] = settings.STATIC_URL
+        return ctx
 
 
 class ReferenceTemplateView(TemplateView):
-    template_name='ang/reference_app/home.html'
+    template_name='ang/reference_app/reference_index.html'
 
     def get_context_data(self, **kwargs):
         ctx = super(ReferenceTemplateView, self).get_context_data(**kwargs)
@@ -30,7 +27,7 @@ class ReferenceTemplateView(TemplateView):
         return ctx
 
 class UserTemplateView(TemplateView):
-    template_name='ang/users_app/userhome.html'
+    template_name='ang/users_app/user_index.html'
 
     def get_context_data(self, **kwargs):
         ctx = super(UserTemplateView, self).get_context_data(**kwargs)

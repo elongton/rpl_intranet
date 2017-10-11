@@ -1,13 +1,12 @@
 'use strict';
 
-angular.module('referenceApp').
+angular.module('homeApp').
             config(
               function(
                 $locationProvider,
                 $resourceProvider,
                 $routeProvider,
               ){
-
 
                 var onlyLoggedIn = function ($location,$q, $cookies) {
                     var deferred = $q.defer();
@@ -27,19 +26,11 @@ angular.module('referenceApp').
                 $resourceProvider.defaults.stripTrailingSlashes = false;
 
                 $routeProvider
-                .when('/reference',{
-                  template: '<stats></stats>',
+                .when("/", {
+                  template: '<homepage></homepage>',
                   resolve:{
                     loggedIn:onlyLoggedIn
                   },
-                  css: staticfiles('css/style.css'),
-                })
-                .when("/reference/controls", {
-                  template: '<controls></controls>',
-                  css: staticfiles('css/controls.css'),
-                })
-                .when("/reference/info", {
-                  template: '<infopage></infopage>',
                   css: staticfiles('css/style.css'),
                 })
                 .otherwise({

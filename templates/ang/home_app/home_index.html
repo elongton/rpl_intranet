@@ -1,0 +1,49 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en-us" ng-app='homeApp'>
+  <head>
+    <base href="/">
+    <meta charset="utf-8">
+    <title>RPL Intranet</title>
+
+    <link rel="shortcut icon" href='{% static "img/favicon.png" %}' type="image/x-icon">
+
+    <!-- BOOTSTRAP-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular-route.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular-resource.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-cookies.js"></script>
+
+    <!-- Main 'home_app' AngularJS files -->
+    <script src='{% static "js/home_app/app.module.js" %}'></script>
+    <script src='{% static "js/home_app/app.config.js" %}'></script>
+    <script src='{% static "js/home_app/app.directives.js" %}'></script>
+
+
+
+    <!-- External modules -->
+    <script src='{% static "js/external/angular-css.min.js" %}'></script>
+    <!-- <script src='{% static "js/reference_app/utils/nav/navbar.module.js" %}'></script>
+    <script src='{% static "js/reference_app/utils/nav/navbar.component.js" %}'></script> -->
+
+    <!-- Internal modules -->
+
+
+
+    <script>
+        var STATIC_URL = '{{ STATIC_URL|escapejs }}';
+        function staticfiles(path) {return STATIC_URL + path;}
+    </script>
+  </head>
+
+  <body>
+    <div ng-view></div>
+  </body>
+</html>
