@@ -1,0 +1,57 @@
+<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
+<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+  <div class="container">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="/" ng-click = "reloadpage()">
+          <img style="height:50px;" src="{{staticfiles('img/rpl_logo_vector.png')}}" alt="RPL Logo">
+          <!-- <img style="height:50px; opacity: 0.5;" class="" src='static/img/floating_otter.png' alt="Otter Friend"> -->
+        </a>
+        <a href="/" ng-click = "reloadpage()" class="navbar-brand"><span>Intranet</span></a>
+
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ng-disabled = "datedisable">
+            Links
+          </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="#">LibCal Program Agenda</a>
+              <a class="dropdown-item" href="#">Request Statistics</a>
+
+
+              <div class="dropdown-divider"></div>
+
+              <a class="dropdown-item" href="https://richmondpubliclibrary.libapps.com/libapps/login.php?site_id=12885&target=" target = '/'>LibCal</a>
+              <a class="dropdown-item" href="https://richmondpubliclibrary.libstaffer.com" target = '/'>LibStaffer</a>
+              <a class="dropdown-item" href="#">LibraryAware</a>
+
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" target = '/' href="http://rvalibrary.org">rvalibrary.org</a>
+              <a class="dropdown-item" target = '/' href="https://rapidsweb.ci.richmond.va.us/">RAPIDS</a>
+
+
+              <div class="dropdown-divider"></div>
+              <h6 class="dropdown-header">Coming Soon</h6>
+              <a class="dropdown-item disabled" href="#" disable='true'>Policy Wiki</a>
+              <a class="dropdown-item disabled" href="#">Programs Rolodex</a>
+              <a class="dropdown-item disabled" href="#">New Employee Handbook</a>
+            </div> <!-- dropdown-menu -->
+        </div> <!-- dropdown -->
+
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+
+          </ul>
+          <ul class="navbar-nav">
+            <li class="nav-item" ng-if="userLoggedIn"><a class="nav-link" ng-click='removeUser()' href="">Logout ({{username}})</a></li>
+          </ul>
+
+        </div>
+  </div><!-- container -->
+</nav>
+
+
+
+<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->

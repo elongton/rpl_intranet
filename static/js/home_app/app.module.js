@@ -12,6 +12,6 @@ angular.module('homeApp', [
   // 'homepage',
   // 'user',
   // 'login',
-  // 'navBar',
+  'navBar',
 
 ]);
