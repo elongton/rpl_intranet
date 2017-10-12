@@ -12,6 +12,6 @@ angular.module('libcalApp', [
   'events',
   // 'user',
   // 'login',
-  // 'navBar',
+  'navBar',
 
 ]);

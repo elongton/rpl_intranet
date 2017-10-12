@@ -11,6 +11,11 @@ angular.module('navBar').
             window.location = url;
             window.location.replace(url);
           }
+          $scope.libcalapp = function(){
+            var url = "/libcal";
+            window.location = url;
+            window.location.replace(url);
+          }
 
           //other
           $scope.staticfiles = staticfiles;
@@ -39,6 +44,9 @@ angular.module('navBar').
                 $scope.controlswindow.close();
             }
             // $route.reload()
+            var url = "/users/login";
+            window.location = url;
+            window.location.replace(url);
           }
 
           //CLOSE WINDOW function
