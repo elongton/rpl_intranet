@@ -7,12 +7,7 @@ angular.module('navBar').
 
 
           // on page link functions
-          $scope.loadhomepage = function(){
-            // $route.reload()
-            var url = "/";
-            window.location = url;
-            window.location.replace(url);
-          }
+
           $scope.opencontrols = function(){
               // console.log($cookies.get("username"))
               // console.log($cookies.get("token"))

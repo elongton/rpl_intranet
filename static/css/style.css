@@ -160,5 +160,7 @@ h1 {
   100% {
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg); } }
+.rpl-links .dropdown-item {
+  cursor: pointer; }
 
 /*# sourceMappingURL=style.css.map */

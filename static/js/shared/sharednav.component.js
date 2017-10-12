@@ -26,3 +26,21 @@
 
           }
         })
+        .component('navbarBrand', {
+          templateUrl: '/api/templates/shared/link_brand.html',
+          controller: function($scope){
+
+
+            $scope.staticfiles = staticfiles;
+
+            $scope.loadhomepage = function(){
+              // $route.reload()
+              var url = "/";
+              window.location = url;
+              window.location.replace(url);
+            }
+
+
+          }
+
+        })
