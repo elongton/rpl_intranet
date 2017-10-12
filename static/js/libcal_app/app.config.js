@@ -26,7 +26,7 @@ angular.module('libcalApp').
                 $resourceProvider.defaults.stripTrailingSlashes = false;
 
                 $routeProvider
-                .when("/libcal", {
+                .when('/libcal', {
                   template: '<events-list></events-list>',
                   resolve:{
                     loggedIn:onlyLoggedIn

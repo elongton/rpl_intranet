@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module('libcalApp', []);
+angular.module('events', []);
