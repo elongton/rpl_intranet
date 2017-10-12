@@ -12,5 +12,6 @@ angular.module('usersApp', [
   'user',
   'login',
   'navBar',
+  'sharednav',
 
 ]);
