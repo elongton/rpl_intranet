@@ -10,35 +10,8 @@
         </a>
         <a href="/" ng-click = "reloadpage()" class="navbar-brand"><span>Intranet</span></a>
 
-        <div class="dropdown" style="margin-top: 4px;">
-          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ng-disabled = "datedisable">
-            Links
-          </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="" ng-click = "libcalapp()">LibCal Program Agenda</a>
-              <a class="dropdown-item" href="" ng-click = "referenceapp()">Request Statistics</a>
-
-
-              <div class="dropdown-divider"></div>
-
-              <a class="dropdown-item" href="https://richmondpubliclibrary.libapps.com/libapps/login.php?site_id=12885&target=" target = '/'>LibCal</a>
-              <a class="dropdown-item" href="https://richmondpubliclibrary.libstaffer.com" target = '/'>LibStaffer</a>
-              <a class="dropdown-item" href="#">LibraryAware</a>
-
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" target = '/' href="http://rvalibrary.org">rvalibrary.org</a>
-              <a class="dropdown-item" target = '/' href="https://rapidsweb.ci.richmond.va.us/">RAPIDS</a>
-
-
-              <div class="dropdown-divider"></div>
-              <h6 class="dropdown-header text-danger">Coming Soon</h6>
-              <a class="dropdown-item disabled" href="#">Policy Wiki</a>
-              <a class="dropdown-item disabled" href="#">Programs Rolodex</a>
-              <a class="dropdown-item disabled" href="#">New Employee Handbook</a>
-            </div> <!-- dropdown-menu -->
-        </div> <!-- dropdown -->
-
+        <!-- dropdown menu -->
+        <link-dropdown></link-dropdown>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">

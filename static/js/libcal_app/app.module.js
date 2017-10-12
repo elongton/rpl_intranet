@@ -10,6 +10,7 @@ angular.module('libcalApp', [
 
   //internal
   'events',
+  'sharednav',
   // 'user',
   // 'login',
   'navBar',
