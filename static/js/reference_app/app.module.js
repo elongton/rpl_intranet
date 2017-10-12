@@ -13,6 +13,7 @@ angular.module('referenceApp', [
   //internal
   'controls',
   // 'login',
+  'sharednav',
   'stats',
   'navBar',
 

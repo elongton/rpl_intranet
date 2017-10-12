@@ -5,17 +5,6 @@ angular.module('navBar').
         templateUrl: '/api/templates/home_app/home_menu.html',
         controller: function($cookies, $route, $scope, $window, $location, $rootScope){
 
-          // on page link functions
-          $scope.referenceapp = function(){
-            var url = "/reference";
-            window.location = url;
-            window.location.replace(url);
-          }
-          $scope.libcalapp = function(){
-            var url = "/libcal";
-            window.location = url;
-            window.location.replace(url);
-          }
 
           //other
           $scope.staticfiles = staticfiles;
