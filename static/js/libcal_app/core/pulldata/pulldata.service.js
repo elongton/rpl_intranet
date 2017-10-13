@@ -1,8 +1,8 @@
 'use strict';
 
 angular.
-  module('request').
-    factory('Request', function($cookies, $location, $httpParamSerializer, $resource){
+  module('pulldata').
+    factory('Pulldata', function($cookies, $location, $httpParamSerializer, $resource){
         var url = '/api/reference/requests/'
         var requestQuery = {
               url: url,
