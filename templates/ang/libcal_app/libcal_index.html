@@ -22,20 +22,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular-resource.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-cookies.js"></script>
 
-    <!-- Main 'users_app' AngularJS files -->
-    <script src='{% static "js/libcal_app/app.module.js" %}'></script>
-    <script src='{% static "js/libcal_app/app.config.js" %}'></script>
-
     <!-- External modules -->
     <script src='{% static "js/external/angular-css.min.js" %}'></script>
     <script src='{% static "js/shared/sharednav.module.js" %}'></script>
     <script src='{% static "js/shared/sharednav.component.js" %}'></script>
-
-
-    <script src='{% static "js/external/node_modules/angular-cookies/angular-cookies.min.js" %}'></script>
-    <script src='{% static "js/external/node_modules/query-string/query-string.js" %}'></script>
-    <script src='{% static "js/external/node_modules/angular-oauth2/dist/angular-oauth2.min.js" %}'></script>
-
 
     <!-- Internal modules -->
     <script src='{% static "js/libcal_app/events_list/events_list.module.js" %}'></script>
@@ -44,6 +34,9 @@
     <script src='{% static "js/libcal_app/nav/navbar.module.js" %}'></script>
     <script src='{% static "js/libcal_app/nav/navbar.component.js" %}'></script>
 
+    <!-- Main 'users_app' AngularJS files -->
+    <script src='{% static "js/libcal_app/app.module.js" %}'></script>
+    <script src='{% static "js/libcal_app/app.config.js" %}'></script>
 
     <script>
         var STATIC_URL = '{{ STATIC_URL|escapejs }}';
