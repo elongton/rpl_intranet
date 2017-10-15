@@ -3,11 +3,46 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-12">
-      <h1>This is the LibCal events lister.</h1>
-      <h3>Token:</h3>
-      <p>{{libcaltoken}}</p>
-      <button ng-if="libcaltoken" class="btn btn-secondary" ng-click="pullspaces()" >Get spaces</button>
+      <h1>LibCal events lister.</h1>
+
+      <!-- <button ng-if="libcaltoken" class="btn btn-secondary" ng-click="pullspaces()" >Get spaces</button> -->
 
     </div>
   </div>
+  <div class="row"><!--datepicker row -->
+    <div class="col-sm-12">
+      <nav class="nav nav-pills " id="datepickernav">
+        <li class="nav-item text-left">
+
+        </li>
+        <li class="nav-item text-left datepicker">
+          <form class="form-inline">
+            <label style="margin-right: 10px;"for="startdate">Start:</label>
+            <input type="date" class="form-control" id="startdate" ng-model="from" ng-disabled = "datedisable">
+          </form>
+
+        </li>
+        <li class="nav-item text-left datepicker">
+          <form class="form-inline">
+            <label style="margin-right: 10px;" for="enddate">End:</label>
+            <input type="date" class="form-control" id="enddate" ng-model="to" ng-disabled = "datedisable">
+          </form>
+        </li>
+        <li class="nav-item text-left datepicker">
+          <button class="btn btn-secondary" ng-click = "todaybutton()" ng-disabled = "datedisable">Today</button>
+        </li>
+        <li class="nav-item text-left datepicker">
+          <button class="btn btn-secondary" ng-click = "weekbutton()" ng-disabled = "datedisable">Week</button>
+        </li>
+        <li class="nav-item text-right ml-auto">
+            <button class="btn btn-success pull-right"  ng-disabled = "datedisable || disable_load">Look Up</button>
+        </li>
+      </nav>
+    </div>
+
+  </div><!--datepicker row -->
+
+
+
+
 </div>

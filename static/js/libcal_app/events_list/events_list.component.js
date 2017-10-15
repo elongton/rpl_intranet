@@ -7,6 +7,59 @@ angular.module('events').
           $scope.branch = $cookies.get("branch")
           $scope.username = $cookies.get("username")
           $scope.staticfiles = staticfiles;
+          var one_day = 1000*60*60*24;
+
+          var makeaday = function(start, end){
+            start.setHours(0,0,0,0);
+            end.setHours(23,59,59,999);
+          }
+
+
+          $scope.todaybutton = function(){
+            $scope.from= new Date();
+            $scope.to = new Date();
+            makeaday($scope.from, $scope.to);
+          }
+          //run today button on reload
+          $scope.todaybutton();
+
+          //managing the datepicker
+          $scope.weekbutton = function(){
+            $scope.to = new Date();
+            $scope.from = new Date();
+            var week = $scope.from.getDate() - 7;
+            makeaday($scope.from, $scope.to);
+            $scope.from.setDate(week);
+
+          }
+          $scope.$watch('from', function(){
+            var total_days = Math.round(($scope.to.getTime() - $scope.from.getTime())/one_day);
+            if ($scope.from > $scope.to){
+              $scope.to = new Date($scope.from.getTime())
+              makeaday($scope.from, $scope.to);
+            }
+          })
+          $scope.$watch('to', function(){
+            var total_days = Math.round(($scope.to.getTime() - $scope.from.getTime())/one_day);
+            if ($scope.to < $scope.from){
+              $scope.from = new Date($scope.to.getTime())
+              makeaday($scope.from, $scope.to);
+            }
+          })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
           // PULL DATA
           $scope.pullspaces = function(){
