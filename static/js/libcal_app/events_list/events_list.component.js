@@ -8,7 +8,6 @@ angular.module('events').
           $scope.username = $cookies.get("username")
           $scope.staticfiles = staticfiles;
 
-
           // PULL DATA
           $scope.pullspaces = function(){
             function successCallback(response) {
@@ -18,7 +17,9 @@ angular.module('events').
             function errorCallback(response) {
                 console.log(response)
               }
-            var endpoint = 'https://api2.libcal.com/1.1/space/bookings?lid=1598&limit=20&date=2017-10-18&formAnswers=1'
+            // var endpoint = 'https://api2.libcal.com/1.1/space/bookings?lid=1598&limit=20&date=2017-12-30&formAnswers=1'
+            // var endpoint = 'https://api2.libcal.com/1.1/space/form/2710'
+            var endpoint = 'https://api2.libcal.com/1.1/space/booking/cs_pK8YyFr&formAnswers=1'
             var req = {
                           method: "GET",
                           url: endpoint,
@@ -36,8 +37,8 @@ angular.module('events').
           // OBTAIN THE ACCESS TOKEN!
           $scope.getcreds = function(){
             function successCallback(response) {
-                console.log('success!')
-                console.log(response)
+                // console.log('success!')
+                // console.log(response)
                 $scope.libcaltoken = response.data.access_token
               }
             function errorCallback(response) {
@@ -58,6 +59,8 @@ angular.module('events').
                       }//req
             var requestAction = $http(req).then(successCallback, errorCallback)
           }
+          // call getcreds on page load
+          $scope.getcreds();
 
         }//controller
 
