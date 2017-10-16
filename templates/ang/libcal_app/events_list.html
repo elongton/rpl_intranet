@@ -34,14 +34,23 @@
         <li class="nav-item text-left datepicker">
           <button class="btn btn-secondary" ng-click = "weekbutton()" ng-disabled = "datedisable">Week</button>
         </li>
+        <!-- GO BUTTON -->
         <li class="nav-item text-right ml-auto">
-            <button class="btn btn-success pull-right"  ng-disabled = "datedisable || disable_load">Look Up</button>
+            <button class="btn btn-success pull-right"  ng-click = "get_events()" ng-disabled = "datedisable || disable_load">Look Up</button>
         </li>
       </nav>
     </div>
 
   </div><!--datepicker row -->
 
+
+  <div class="row">
+    <div class="col-sm-12">{{myarray}}</div>
+  </div>
+
+  <!-- <div class="row">
+    <div class="col-sm-12"><button class="btn btn-secondary" ng-click="pullspaces('2017-10-16')">Click Me</button></div>
+  </div> -->
 
 
 
