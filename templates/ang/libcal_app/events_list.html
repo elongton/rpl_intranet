@@ -52,13 +52,12 @@
       </div>
       <div ng-if = "$odd">
         <div style = "margin-bottom: 10px;" ng-repeat = "detail in event_item">
+          <h5>{{get_time(detail.fromDate)}} - {{get_time(detail.toDate)}}</h5>
           Name: {{detail.firstName}} {{detail.lastName}}
           <br>
           Email: {{detail.email}}
           <br>
-          Start: {{get_time(detail.fromDate)}}
-          <br>
-          Finish: {{get_time(detail.toDate)}}
+
         </div>
       </div>
 
