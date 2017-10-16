@@ -44,8 +44,25 @@
   </div><!--datepicker row -->
 
 
-  <div class="row">
-    <div class="col-sm-12">{{myarray}}</div>
+
+  <div class="row" ng-if="eventarray">
+    <div class="col-sm-12" ng-repeat="event_item in eventarray">
+      <div ng-if = "$even">
+        <h2>{{event_item}}</h2>
+      </div>
+      <div ng-if = "$odd">
+        <div style = "margin-bottom: 10px;" ng-repeat = "detail in event_item">
+          Name: {{detail.firstName}} {{detail.lastName}}
+          <br>
+          Email: {{detail.email}}
+          <br>
+          Start: {{get_time(detail.fromDate)}}
+          <br>
+          Finish: {{get_time(detail.toDate)}}
+        </div>
+      </div>
+
+    </div>
   </div>
 
   <!-- <div class="row">

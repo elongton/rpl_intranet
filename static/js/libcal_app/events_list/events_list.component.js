@@ -3,7 +3,7 @@
 angular.module('events').
       component('eventsList', {
         templateUrl: '/api/templates/libcal_app/events_list.html',
-        controller: function($scope, $cookies, $location,$http){
+        controller: function($scope, $cookies, $location,$http, $rootScope){
           $scope.branch = $cookies.get("branch")
           $scope.username = $cookies.get("username")
           $scope.staticfiles = staticfiles;
@@ -50,7 +50,6 @@ angular.module('events').
 
           // Step 1: Obtain array of correctly formatted dates
           // Step 2: Create a loop of $http requests that will return the arrays of bookings
-
           // Correct format: YYYY-MM-DD
 
           Date.prototype.addDays = function(days) {
@@ -74,30 +73,7 @@ angular.module('events').
               return dateArray;
           }
           $scope.dateArray = getDates($scope.from, $scope.to);
-
-
-          // PULL DATA
-          $scope.pullspaces = function(iterdate){
-            function successCallback(response) {
-                console.log('success!')
-                // console.log(response)
-                return response;
-              }
-            function errorCallback(response) {
-                console.log(response)
-              }
-            var endpoint = 'https://api2.libcal.com/1.1/space/bookings?lid=1598&limit=20&date=' + iterdate + '&formAnswers=1'
-            // var endpoint = 'https://api2.libcal.com/1.1/space/form/2710'
-            // var endpoint = 'https://api2.libcal.com/1.1/space/booking/cs_pK8YyFr&formAnswers=1'
-            var req = {
-                          method: "GET",
-                          url: endpoint,
-                          headers: {
-                            authorization: "Bearer " + $scope.libcaltoken
-                          },
-                      }//req
-            var requestAction = $http(req).then(successCallback, errorCallback)
-          }
+          $scope.eventarray = new Array();
 
           // OBTAIN THE ACCESS TOKEN!
           var getcreds = function(){
@@ -127,29 +103,88 @@ angular.module('events').
           // call getcreds on page load
           getcreds();
 
+          // PULL DATA
+          $scope.pullspaces = function(iterdate){
+            function successCallback(response) {
+                var monthNames = ["January", "February", "March", "April", "May", "June",
+                                  "July", "August", "September", "October", "November", "December"
+                                  ];
+                var datesplit = iterdate.split("-");
+                console.log('success!')
+                console.log(response)
+                $scope.eventarray.push(monthNames[datesplit[1]-1] + ' ' + datesplit[2] + ', ' + datesplit[0])
+                $scope.eventarray.push(response.data)
+                // return response;
+              }
+            function errorCallback(response) {
+                console.log(response)
+              }
+            var endpoint = 'https://api2.libcal.com/1.1/space/bookings?lid=1598&limit=20&date=' + iterdate + '&formAnswers=1'
+            // var endpoint = 'https://api2.libcal.com/1.1/space/form/2710'
+            // var endpoint = 'https://api2.libcal.com/1.1/space/booking/cs_pK8YyFr&formAnswers=1'
+            var req = {
+                          method: "GET",
+                          url: endpoint,
+                          headers: {
+                            authorization: "Bearer " + $scope.libcaltoken
+                          },
+                      }//req
+            var requestAction = $http(req).then(successCallback, errorCallback)
+          }
+
+
+          function formatDate(date) {
+            var d = new Date(date);
+            var hh = d.getHours();
+            var m = d.getMinutes();
+            var s = d.getSeconds();
+            var dd = "AM";
+            var h = hh;
+            if (h >= 12) {
+              h = hh - 12;
+              dd = "PM";
+            }
+            if (h == 0) {
+              h = 12;
+            }
+            m = m < 10 ? "0" + m : m;
+            s = s < 10 ? "0" + s : s;
+            /* if you want 2 digit hours:
+            h = h<10?"0"+h:h; */
+            // var pattern = new RegExp("0?" + hh + ":" + m + ":" + s);
+            // var replacement = h + ":" + m;
+            /* if you want to add seconds
+            replacement += ":"+s;  */
+            // replacement += " " + dd;
+            // return date.replace(pattern, replacement);
+            return h + ":" + m + " " + dd
+          }
+
+
+
+          // Get time function
+          $scope.get_time = function(timestring){
+            // var mytime = new Date(timestring);
+            // var minutes = mytime.getMinutes()
+            // var hours = mytime.getHours()
+            // var mytimestring = mytime.toTimeString()
+            // return hours + ':' + minutes
+
+            var mytime = formatDate(timestring)
+            return mytime
+          }
+          // console.log($scope.get_time())
+
+
           // GET EVENTS BUTTON
           $scope.get_events = function(){
-            var prelimarray = new Array();
+            // var prelimarray = new Array();
+            $scope.eventarray = [];
+            $scope.event_item = [];
             for (var i = 0; i < $scope.dateArray.length; i++ ){
-              $scope.pullspaces($scope.dateArray[i]).$promise.then(
-                function(result){
-                  $scope.responsedata = result.data;
-                },
-                function(error){
-                });
-              console.log($scope.responsedata)
-              // prelimarray.push(responsedata);
-              // console.log(prelimarray)
+              $scope.pullspaces($scope.dateArray[i]);
             }
-            $scope.myarray = prelimarray;
-
-
           } //$scope.get_events()
-
-
-
-
-
         }//controller
 
         });
