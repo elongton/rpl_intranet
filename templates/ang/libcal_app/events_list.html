@@ -3,7 +3,7 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-12">
-      <h1>LibCal events lister.</h1>
+      <h1>LibCal events lister (Main Branch)</h1>
 
       <!-- <button ng-if="libcaltoken" class="btn btn-secondary" ng-click="pullspaces()" >Get spaces</button> -->
 
@@ -32,7 +32,13 @@
           <button class="btn btn-secondary" ng-click = "todaybutton()" ng-disabled = "datedisable">Today</button>
         </li>
         <li class="nav-item text-left datepicker">
+          <button class="btn btn-secondary" ng-click = "" ng-disabled = "datedisable" style="font-size: 20px;">+</i></button>
+        </li>
+        <li class="nav-item text-left datepicker">
           <button class="btn btn-secondary" ng-click = "weekbutton()" ng-disabled = "datedisable">Week</button>
+        </li>
+        <li class="nav-item text-left datepicker">
+          <button class="btn btn-secondary" ng-click = "" ng-disabled = "datedisable" style="font-size: 20px;">+</i></button>
         </li>
         <!-- GO BUTTON -->
         <li class="nav-item text-right ml-auto">
@@ -45,24 +51,29 @@
 
 
 
-  <div class="row">
-    <!-- <div class="col-sm-12">{{eventarray[0].date}}</div> -->
-    <!-- <div class="col-sm-12">{{mytestdate}}</div> -->
+  <div class="row" style="padding-left: 10px;">
+      <div class="col-sm-12" ng-repeat="event_item in sortedarray">
+          <h2 style="margin-bottom: 20px;">{{event_item.date}}</h2>
+          <div style = "margin-bottom: 10px;" ng-repeat = "detail in event_item.eventinfo">
+            <h5>{{get_time(detail.fromDate)}} - {{get_time(detail.toDate)}}</h5>
+            Name: {{detail.firstName}} {{detail.lastName}}
+            <br>
+            Email: {{detail.email}}
+            <br>
+          </div>
 
-    <!-- {{eventarray}} -->
-    <div class="col-sm-12" ng-repeat="event_item in sortedarray">
-        <h2 style="margin-bottom: 20px;">{{event_item.date}}</h2>
-        <div style = "margin-bottom: 10px;" ng-repeat = "detail in event_item.eventinfo">
-          <h5>{{get_time(detail.fromDate)}} - {{get_time(detail.toDate)}}</h5>
-          Name: {{detail.firstName}} {{detail.lastName}}
-          <br>
-          Email: {{detail.email}}
-          <br>
-        </div>
-
-    </div><!--col-sm-12-->
+      </div><!--col-sm-12-->
     </div><!--row -->
+
+    <div class="row" style="padding-left: 10px;">
+      <div class="col-sm-12">
+        <button class="btn btn-success"  ng-click = "pullspaces()" ng-disabled = "datedisable || disable_load">Spaces</button>
+      </div>
+    </div>
+
   </div><!--container -->
+
+
 
 
 

@@ -8,7 +8,6 @@ angular.module('events').
           $scope.username = $cookies.get("username")
           $scope.staticfiles = staticfiles;
           var one_day = 1000*60*60*24;
-
           var makeaday = function(start, end){
             start.setHours(0,0,0,0);
             end.setHours(23,59,59,999);
@@ -71,6 +70,7 @@ angular.module('events').
           $scope.dateArray = getDates($scope.from, $scope.to);
           $scope.eventarray = new Array();
 
+///////////////////////   HTTP  //////////////////////////////
           // OBTAIN THE ACCESS TOKEN!
           var getcreds = function(){
             function successCallback(response) {
@@ -96,12 +96,10 @@ angular.module('events').
           }
           // call getcreds on page load
           getcreds();
-
-          // PULL DATA
-          var pullspaces = function(iterdate){
+          // PULL EVENT DATA
+          var pullevents = function(iterdate){
             var d = $q.defer();
             function successCallback(response) {
-
                 var arraypush = {
                   date: iterdate,
                   eventinfo: response.data,}
@@ -115,9 +113,35 @@ angular.module('events').
                     url: endpoint,
                     headers: {authorization: "Bearer " + $scope.libcaltoken},
                   }//req
-            var requestAction = $http(req).then(successCallback, errorCallback)//.then(d.resolve(requestAction));
+            var requestAction = $http(req).then(successCallback, errorCallback)
             return d.promise;
           }
+
+
+          // PULL SPACE DATA
+          var pullcategories = function(){
+            var d = $q.defer();
+            function successCallback(response) {
+              console.log(response)
+              d.resolve(arraypush)
+            }
+            function errorCallback(error) {console.log(error)}
+            var endpoint = 'https://api2.libcal.com/1.1/space/categories/1598'
+            var req = {
+                    method: "GET",
+                    url: endpoint,
+                    headers: {authorization: "Bearer " + $scope.libcaltoken},
+                  }//req
+            var requestAction = $http(req).then(successCallback, errorCallback)
+            return d.promise;
+          }
+
+
+
+  // var endpoint = 'https://api2.libcal.com/1.1/space/category/3434,2710?details=1'
+
+///////////////////////  END HTTP  //////////////////////////////
+
           function formatDate(date) {
             var d = new Date(date);
             var hh = d.getHours();
@@ -144,15 +168,12 @@ angular.module('events').
 
             var funcArray = new Array();
             for (var i = 0; i < $scope.dateArray.length; i++ ){
-              funcArray.push(pullspaces($scope.dateArray[i]));
+              funcArray.push(pullevents($scope.dateArray[i]));
             }
 
             $q.all(funcArray)
               .then(function(data){
-                data.sort(function(a,b)
-                {
-                  return new Date(b.date) - new Date(a.date);
-                }).reverse();
+                data.sort(function(a,b){return new Date(b.date) - new Date(a.date);}).reverse();
                 var monthNames = ["January", "February", "March", "April", "May", "June",
                                   "July", "August", "September", "October", "November", "December"
                                    ];
@@ -161,12 +182,12 @@ angular.module('events').
                   var thedate = new Date(data[i].date);
                   var datesplit = data[i].date.split("-");
                   data[i].date = dayNames[thedate.getDay()] + ", " + monthNames[datesplit[1]-1] + ' ' + datesplit[2];
+                  data[i].eventinfo.sort(function(a,b){return new Date(b.fromDate) - new Date(a.fromDate);}).reverse();
                 }
+
                 $scope.sortedarray = data;
             });
           } //$scope.get_events()
-
-
         }//controller
 
         });
