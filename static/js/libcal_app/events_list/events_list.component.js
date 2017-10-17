@@ -122,10 +122,20 @@ angular.module('events').
           var pullcategories = function(){
             var d = $q.defer();
             function successCallback(response) {
-              console.log(response)
-              d.resolve(arraypush)
+              // console.log(response)
+              var cids = response.data[0].categories;
+              var cat_string = '';
+              for (var i = 0; i < cids.length; i++){
+                cat_string = cat_string.concat(cids[i].cid );
+                if (i+1 < cids.length){
+                  cat_string = cat_string.concat(',');
+                }
+              }
+              d.resolve(cat_string)
             }
-            function errorCallback(error) {console.log(error)}
+            function errorCallback(error) {d.reject(error)}
+            //in the future, we will look up all the locations so we can obtain a full category list
+            //however, for now we are not doing that
             var endpoint = 'https://api2.libcal.com/1.1/space/categories/1598'
             var req = {
                     method: "GET",
@@ -136,9 +146,29 @@ angular.module('events').
             return d.promise;
           }
 
+          var pullspaces = function(categoryList){
+            function successCallback(response) {
+              console.log(response)
+            }
+            function errorCallback(error) {console.log(error)}
+            var endpoint = 'https://api2.libcal.com/1.1/space/category/' + categoryList + '?details=1'
+            var req = {
+                    method: "GET",
+                    url: endpoint,
+                    headers: {authorization: "Bearer " + $scope.libcaltoken},
+                  }//req
+            var requestAction = $http(req).then(successCallback, errorCallback)
+          }
 
 
-  // var endpoint = 'https://api2.libcal.com/1.1/space/category/3434,2710?details=1'
+          $scope.get_room_info = function(){
+
+            var promise = pullcategories();
+            promise.then(function(categoryList){
+              pullspaces(categoryList);
+            },function(failure){console.log('this is a failure:' + failure)});
+
+          };//get_room_info()
 
 ///////////////////////  END HTTP  //////////////////////////////
 
