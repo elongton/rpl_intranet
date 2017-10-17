@@ -3,7 +3,7 @@
 angular.module('events').
       component('eventsList', {
         templateUrl: '/api/templates/libcal_app/events_list.html',
-        controller: function($scope, $cookies, $location,$http, $rootScope){
+        controller: function($scope, $cookies, $location,$http, $rootScope, $q){
           $scope.branch = $cookies.get("branch")
           $scope.username = $cookies.get("username")
           $scope.staticfiles = staticfiles;
@@ -25,9 +25,9 @@ angular.module('events').
           $scope.weekbutton = function(){
             $scope.to = new Date();
             $scope.from = new Date();
-            var week = $scope.from.getDate() - 7;
-            makeaday($scope.from, $scope.to);
-            $scope.from.setDate(week);
+            var week = $scope.to.getDate() + 7;
+            // makeaday($scope.from, $scope.to);
+            $scope.to.setDate(week);
 
           }
           $scope.$watch('from', function(){
@@ -47,10 +47,6 @@ angular.module('events').
             $scope.dateArray = getDates($scope.from, $scope.to);
           })
 
-
-          // Step 1: Obtain array of correctly formatted dates
-          // Step 2: Create a loop of $http requests that will return the arrays of bookings
-          // Correct format: YYYY-MM-DD
 
           Date.prototype.addDays = function(days) {
               var date = new Date(this.valueOf())
@@ -78,8 +74,6 @@ angular.module('events').
           // OBTAIN THE ACCESS TOKEN!
           var getcreds = function(){
             function successCallback(response) {
-                // console.log('success!')
-                // console.log(response)
                 $scope.libcaltoken = response.data.access_token
               }
             function errorCallback(response) {
@@ -87,51 +81,43 @@ angular.module('events').
               }
             var token_url = 'https://api2.libcal.com/1.1/oauth/token'
             var req = {
-                          method: "POST",
-                          url: token_url,
-                          data: {
-                            client_id: '135',
-                            client_secret: '906a3eab0c7f08ebad67e5160f0ae951',
-                            grant_type: 'client_credentials',
-                          },
-                          headers: {
-                            // authorization: "JWT " + token
-                          },
-                      }//req
+                  method: "POST",
+                  url: token_url,
+                  data: {
+                    client_id: '135',
+                    client_secret: '906a3eab0c7f08ebad67e5160f0ae951',
+                    grant_type: 'client_credentials',
+                  },
+                  headers: {
+                    // authorization: "JWT " + token
+                  },
+                }//req
             var requestAction = $http(req).then(successCallback, errorCallback)
           }
           // call getcreds on page load
           getcreds();
 
           // PULL DATA
-          $scope.pullspaces = function(iterdate){
+          var pullspaces = function(iterdate){
+            var d = $q.defer();
             function successCallback(response) {
-                var monthNames = ["January", "February", "March", "April", "May", "June",
-                                  "July", "August", "September", "October", "November", "December"
-                                  ];
-                var datesplit = iterdate.split("-");
-                console.log('success!')
-                console.log(response)
-                $scope.eventarray.push(monthNames[datesplit[1]-1] + ' ' + datesplit[2] + ', ' + datesplit[0])
-                $scope.eventarray.push(response.data)
-                // return response;
-              }
-            function errorCallback(response) {
-                console.log(response)
-              }
-            var endpoint = 'https://api2.libcal.com/1.1/space/bookings?lid=1598&limit=20&date=' + iterdate + '&formAnswers=1'
-            // var endpoint = 'https://api2.libcal.com/1.1/space/form/2710'
-            // var endpoint = 'https://api2.libcal.com/1.1/space/booking/cs_pK8YyFr&formAnswers=1'
-            var req = {
-                          method: "GET",
-                          url: endpoint,
-                          headers: {
-                            authorization: "Bearer " + $scope.libcaltoken
-                          },
-                      }//req
-            var requestAction = $http(req).then(successCallback, errorCallback)
-          }
 
+                var arraypush = {
+                  date: iterdate,
+                  eventinfo: response.data,}
+                  console.log(arraypush)
+                d.resolve(arraypush)
+              }
+            function errorCallback(response) {console.log(response)}
+            var endpoint = 'https://api2.libcal.com/1.1/space/bookings?lid=1598&limit=20&date=' + iterdate + '&formAnswers=1'
+            var req = {
+                    method: "GET",
+                    url: endpoint,
+                    headers: {authorization: "Bearer " + $scope.libcaltoken},
+                  }//req
+            var requestAction = $http(req).then(successCallback, errorCallback)//.then(d.resolve(requestAction));
+            return d.promise;
+          }
           function formatDate(date) {
             var d = new Date(date);
             var hh = d.getHours();
@@ -148,32 +134,39 @@ angular.module('events').
             s = s < 10 ? "0" + s : s;
             return h + ":" + m + " " + dd
           }
-
-
-
           // Get time function
           $scope.get_time = function(timestring){
-            // var mytime = new Date(timestring);
-            // var minutes = mytime.getMinutes()
-            // var hours = mytime.getHours()
-            // var mytimestring = mytime.toTimeString()
-            // return hours + ':' + minutes
-
             var mytime = formatDate(timestring)
             return mytime
           }
-          // console.log($scope.get_time())
-
-
           // GET EVENTS BUTTON
           $scope.get_events = function(){
-            // var prelimarray = new Array();
-            $scope.eventarray = [];
-            $scope.event_item = [];
+
+            var funcArray = new Array();
             for (var i = 0; i < $scope.dateArray.length; i++ ){
-              $scope.pullspaces($scope.dateArray[i]);
+              funcArray.push(pullspaces($scope.dateArray[i]));
             }
+
+            $q.all(funcArray)
+              .then(function(data){
+                data.sort(function(a,b)
+                {
+                  return new Date(b.date) - new Date(a.date);
+                }).reverse();
+                var monthNames = ["January", "February", "March", "April", "May", "June",
+                                  "July", "August", "September", "October", "November", "December"
+                                   ];
+                var dayNames = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+                for (var i=0; i < data.length; i++){
+                  var thedate = new Date(data[i].date);
+                  var datesplit = data[i].date.split("-");
+                  data[i].date = dayNames[thedate.getDay()] + ", " + monthNames[datesplit[1]-1] + ' ' + datesplit[2];
+                }
+                $scope.sortedarray = data;
+            });
           } //$scope.get_events()
+
+
         }//controller
 
         });
