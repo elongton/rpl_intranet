@@ -256,19 +256,20 @@ angular.module('events').
                   var datesplit = data[i].date.split("-");
                   data[i].date = dayNames[thedate.getDay()] + ", " + monthNames[datesplit[1]-1] + ' ' + datesplit[2];
                   data[i].eventinfo.sort(function(a,b){return new Date(b.fromDate) - new Date(a.fromDate);}).reverse();
+
                   //lets create an array just for keys that start with 'q'
+
                   for (var j=0; j < data[i].eventinfo.length; j++){
-                    var qdict = []
+                    var qdict = {}
+                    // data[i].eventinfo[j].questions = {};
                     for (var key in data[i].eventinfo[j]){
                       // console.log(typeof(key))
                       if (key[0] == 'q'){
                         qdict[key] = data[i].eventinfo[j][key]
                       }//if
-
-                    }//for
-                    data[i].eventinfo.push(qdict)
-
-                  }
+                    }//for var key
+                    data[i].eventinfo[j].questions = qdict
+                  }//for var j=0
 
 
 
