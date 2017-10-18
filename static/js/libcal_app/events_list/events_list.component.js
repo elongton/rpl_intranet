@@ -70,14 +70,18 @@ angular.module('events').
           $scope.dateArray = getDates($scope.from, $scope.to);
           $scope.eventarray = new Array();
 
+
+
+
 ///////////////////////   HTTP  //////////////////////////////
           // OBTAIN THE ACCESS TOKEN!
           var getcreds = function(){
+            var d = $q.defer();
             function successCallback(response) {
-                $scope.libcaltoken = response.data.access_token
+              d.resolve($scope.libcaltoken = response.data.access_token)
               }
             function errorCallback(response) {
-                console.log(response)
+                d.reject(response)
               }
             var token_url = 'https://api2.libcal.com/1.1/oauth/token'
             var req = {
@@ -93,9 +97,9 @@ angular.module('events').
                   },
                 }//req
             var requestAction = $http(req).then(successCallback, errorCallback)
-          }
+            return d.promise;
+          }//getcreds()
           // call getcreds on page load
-          getcreds();
           // PULL EVENT DATA
           var pullevents = function(iterdate){
             var d = $q.defer();
@@ -103,7 +107,7 @@ angular.module('events').
                 var arraypush = {
                   date: iterdate,
                   eventinfo: response.data,}
-                  console.log(arraypush)
+                  // console.log(arraypush)
                 d.resolve(arraypush)
               }
             function errorCallback(response) {console.log(response)}
@@ -115,7 +119,7 @@ angular.module('events').
                   }//req
             var requestAction = $http(req).then(successCallback, errorCallback)
             return d.promise;
-          }
+          }//pullevents()
 
 
           // PULL SPACE DATA
@@ -133,7 +137,7 @@ angular.module('events').
               }
               d.resolve(cat_string)
             }
-            function errorCallback(error) {d.reject(error)}
+            function errorCallback(error) {d.reject('total error zone baby')}
             //in the future, we will look up all the locations so we can obtain a full category list
             //however, for now we are not doing that
             var endpoint = 'https://api2.libcal.com/1.1/space/categories/1598'
@@ -144,11 +148,20 @@ angular.module('events').
                   }//req
             var requestAction = $http(req).then(successCallback, errorCallback)
             return d.promise;
-          }
+          }//pullcategories()
 
           var pullspaces = function(categoryList){
             function successCallback(response) {
-              console.log(response)
+              //this is where you create the room array
+              var raw_spaces_list = new Array();
+              for (var i=0; i < response.data.length; i++){
+                raw_spaces_list = raw_spaces_list.concat(response.data[i].items)
+              }
+              $scope.spaces_dict = {};
+              for (var i=0; i< raw_spaces_list.length; i++){
+                var dictval = raw_spaces_list[i].id;
+                $scope.spaces_dict[dictval] = raw_spaces_list[i].name
+              }
             }
             function errorCallback(error) {console.log(error)}
             var endpoint = 'https://api2.libcal.com/1.1/space/category/' + categoryList + '?details=1'
@@ -158,17 +171,25 @@ angular.module('events').
                     headers: {authorization: "Bearer " + $scope.libcaltoken},
                   }//req
             var requestAction = $http(req).then(successCallback, errorCallback)
-          }
+          }//pullspaces()
 
 
-          $scope.get_room_info = function(){
-
+          var get_room_info = function(){
             var promise = pullcategories();
             promise.then(function(categoryList){
               pullspaces(categoryList);
-            },function(failure){console.log('this is a failure:' + failure)});
-
+            },function(failure){console.log(failure)});
           };//get_room_info()
+
+          var page_startup = function(){
+            var promise = getcreds();
+            promise.then(function(){
+              get_room_info();
+            },function(){console.log(failure)}
+            )
+          }
+          page_startup();
+
 
 ///////////////////////  END HTTP  //////////////////////////////
 
@@ -193,9 +214,13 @@ angular.module('events').
             var mytime = formatDate(timestring)
             return mytime
           }
+
+          $scope.get_room_key = function(eid){
+            return $scope.spaces_dict[eid]
+          }
+
           // GET EVENTS BUTTON
           $scope.get_events = function(){
-
             var funcArray = new Array();
             for (var i = 0; i < $scope.dateArray.length; i++ ){
               funcArray.push(pullevents($scope.dateArray[i]));
@@ -216,8 +241,15 @@ angular.module('events').
                 }
 
                 $scope.sortedarray = data;
+                // console.log(data);
             });
           } //$scope.get_events()
+
+
+
+
+
+
         }//controller
 
         });

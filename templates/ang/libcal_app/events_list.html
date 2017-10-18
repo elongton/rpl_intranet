@@ -55,24 +55,18 @@
       <div class="col-sm-12" ng-repeat="event_item in sortedarray">
           <h2 style="margin-bottom: 20px;">{{event_item.date}}</h2>
           <div style = "margin-bottom: 10px;" ng-repeat = "detail in event_item.eventinfo">
-            <h5>{{get_time(detail.fromDate)}} - {{get_time(detail.toDate)}}</h5>
+            <h5>{{get_room_key(detail.eid)}} : {{get_time(detail.fromDate)}} - {{get_time(detail.toDate)}}</h5>
+            <h6></h6>
             Name: {{detail.firstName}} {{detail.lastName}}
             <br>
             Email: {{detail.email}}
             <br>
+
           </div>
-
       </div><!--col-sm-12-->
-    </div><!--row -->
-
-    <div class="row" style="padding-left: 10px;">
-      <div class="col-sm-12">
-        <button class="btn btn-success"  ng-click = "get_room_info()" ng-disabled = "datedisable || disable_load">Spaces</button>
-      </div>
-    </div>
+  </div><!--row -->
 
   </div><!--container -->
-
 
 
 
