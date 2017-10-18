@@ -27,8 +27,26 @@ angular.module('events').
             var week = $scope.to.getDate() + 7;
             // makeaday($scope.from, $scope.to);
             $scope.to.setDate(week);
-
           }
+
+          $scope.add_day_button = function(){
+            // $scope.to = new Date();
+            var dummy_date = new Date();
+            dummy_date.setDate($scope.from.getDate() + 1)
+            // makeaday($scope.from, $scope.to);
+            $scope.from = dummy_date;
+            $scope.to = $scope.from;
+          }
+
+          $scope.add_week_button = function(){
+            // $scope.to = new Date();
+            var dummy_date = new Date();
+            dummy_date.setDate($scope.from.getDate() + 7)
+            // makeaday($scope.from, $scope.to);
+            $scope.from = dummy_date;
+            $scope.to = $scope.from;
+          }
+
           $scope.$watch('from', function(){
             var total_days = Math.round(($scope.to.getTime() - $scope.from.getTime())/one_day);
             if ($scope.from > $scope.to){
@@ -107,7 +125,7 @@ angular.module('events').
                 var arraypush = {
                   date: iterdate,
                   eventinfo: response.data,}
-                  // console.log(arraypush)
+                  console.log(arraypush)
                 d.resolve(arraypush)
               }
             function errorCallback(response) {console.log(response)}
@@ -238,17 +256,28 @@ angular.module('events').
                   var datesplit = data[i].date.split("-");
                   data[i].date = dayNames[thedate.getDay()] + ", " + monthNames[datesplit[1]-1] + ' ' + datesplit[2];
                   data[i].eventinfo.sort(function(a,b){return new Date(b.fromDate) - new Date(a.fromDate);}).reverse();
+                  //lets create an array just for keys that start with 'q'
+                  for (var j=0; j < data[i].eventinfo.length; j++){
+                    var qdict = []
+                    for (var key in data[i].eventinfo[j]){
+                      // console.log(typeof(key))
+                      if (key[0] == 'q'){
+                        qdict[key] = data[i].eventinfo[j][key]
+                      }//if
+
+                    }//for
+                    data[i].eventinfo.push(qdict)
+
+                  }
+
+
+
                 }
 
                 $scope.sortedarray = data;
                 // console.log(data);
             });
           } //$scope.get_events()
-
-
-
-
-
 
         }//controller
 

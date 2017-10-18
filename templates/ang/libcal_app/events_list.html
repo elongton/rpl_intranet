@@ -32,13 +32,13 @@
           <button class="btn btn-secondary" ng-click = "todaybutton()" ng-disabled = "datedisable">Today</button>
         </li>
         <li class="nav-item text-left datepicker">
-          <button class="btn btn-secondary" ng-click = "" ng-disabled = "datedisable" style="font-size: 20px;">+</i></button>
+          <button class="btn btn-secondary" ng-click = "add_day_button()" ng-disabled = "datedisable" style="font-size: 20px;">+</i></button>
         </li>
         <li class="nav-item text-left datepicker">
           <button class="btn btn-secondary" ng-click = "weekbutton()" ng-disabled = "datedisable">Week</button>
         </li>
         <li class="nav-item text-left datepicker">
-          <button class="btn btn-secondary" ng-click = "" ng-disabled = "datedisable" style="font-size: 20px;">+</i></button>
+          <button class="btn btn-secondary" ng-click = "add_week_button()" ng-disabled = "datedisable" style="font-size: 20px;">+</i></button>
         </li>
         <!-- GO BUTTON -->
         <li class="nav-item text-right ml-auto">
@@ -55,13 +55,13 @@
       <div class="col-sm-12" ng-repeat="event_item in sortedarray">
           <h2 style="margin-bottom: 20px;">{{event_item.date}}</h2>
           <div style = "margin-bottom: 10px;" ng-repeat = "detail in event_item.eventinfo">
-            <h5>{{get_room_key(detail.eid)}} : {{get_time(detail.fromDate)}} - {{get_time(detail.toDate)}}</h5>
-            <h6></h6>
+            <h4 ng-if = "detail.cid != '2710'">{{get_room_key(detail.eid)}} : {{get_time(detail.fromDate)}} - {{get_time(detail.toDate)}}</h4>
+            <h6 ng-if = "detail.cid == '2710'" style="margin-bottom: 5px;">{{get_room_key(detail.eid)}} : {{get_time(detail.fromDate)}} - {{get_time(detail.toDate)}}</h6>
             Name: {{detail.firstName}} {{detail.lastName}}
             <br>
             Email: {{detail.email}}
             <br>
-
+            <hr style="margin-right: 25%;">
           </div>
       </div><!--col-sm-12-->
   </div><!--row -->
