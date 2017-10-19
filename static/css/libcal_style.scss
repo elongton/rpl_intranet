@@ -6,10 +6,12 @@
   display: table-cell;
   vertical-align: middle; }
 
+.dashed{border: 1px dashed black;}
+
 
 @media only screen and (max-width: 768px) {
   nav.navbar{display: none;}
-  div.mobile_dates{
+  div.mobile_dates_button{
     height: 85px;
     width: 85px;
     background-color: #4885ed;
@@ -19,16 +21,32 @@
     right: 15px;
     color: white;
     font-size: 35px;}
-    #datepickernav{display: none;}
-  div.mobile_date_menu{
+
+
+  div.mobile_menu_button{
+    height: 40px;
+    width: 40px;
+    background-color: #4885ed;
+    border-radius: 100%;
     position: fixed;
-    height: 100px;
-    width: 100%;
-    background-color: black;
+    bottom: 30px;
+    left: 37px;
+    color: white;
+    font-size: 20px;}
+
+
+    #datepickernav{display: none;}
+
+  div.mobile_date_menu_container{
+    position: fixed;
     bottom: 10px;
+    width: 100%;
+    padding: 0 10px;}
 
+  div.mobile_date_menu{
+    position: relative;
+    height: 400px;
+    width: 100%;
+    background-color: #4885ed;
   }
-
-
-
 }
