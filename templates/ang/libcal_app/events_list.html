@@ -3,7 +3,7 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-12">
-      <h1>LibCal Events (Main Branch)</h1>
+      <h1>LibCal Events</h1>
 
       <!-- <button ng-if="libcaltoken" class="btn btn-secondary" ng-click="pullspaces()" >Get spaces</button> -->
 
@@ -11,7 +11,7 @@
   </div>
   <div class="row"><!--datepicker row -->
     <div class="col-sm-12">
-      <nav class="nav nav-pills " id="datepickernav">
+      <nav class="nav nav-pills" id="datepickernav">
         <li class="nav-item text-left">
 
         </li>
@@ -51,26 +51,33 @@
 
 
 
-  <div class="row" style="padding-left: 10px;">
-      <div class="col-sm-12" ng-repeat="event_item in sortedarray">
-          <h2 style="margin-bottom: 20px;">{{event_item.date}}</h2>
-          <div style = "margin-bottom: 10px;" ng-repeat = "detail in event_item.eventinfo">
-            <h4 ng-if = "detail.cid != '2710'">{{get_room_key(detail.eid)}} : {{get_time(detail.fromDate)}} - {{get_time(detail.toDate)}}</h4>
-            <h6 ng-if = "detail.cid == '2710'" style="margin-bottom: 5px;">{{get_room_key(detail.eid)}} : {{get_time(detail.fromDate)}} - {{get_time(detail.toDate)}}</h6>
-            Name: {{detail.firstName}} {{detail.lastName}}
-            <br>
-            Email: {{detail.email}}
-            <br>
-            <div ng-repeat = "(number, question) in detail.questions">
-              {{question}}
+    <div class="row" style="padding-left: 10px;">
+        <div class="col-sm-12" ng-repeat="event_item in sortedarray">
+            <h2 style="margin-bottom: 20px;">{{event_item.date}}</h2>
+            <div style = "margin-bottom: 10px;" ng-repeat = "detail in event_item.eventinfo">
+              <h4 ng-if = "detail.cid != '2710'">{{get_room_key(detail.eid)}} : {{get_time(detail.fromDate)}} - {{get_time(detail.toDate)}}</h4>
+              <h6 ng-if = "detail.cid == '2710'" style="margin-bottom: 5px;">{{get_room_key(detail.eid)}} : {{get_time(detail.fromDate)}} - {{get_time(detail.toDate)}}</h6>
+              Name: {{detail.firstName}} {{detail.lastName}}
+              <br>
+              Email: {{detail.email}}
+              <br>
+              <div ng-repeat = "(number, question) in detail.questions">
+                {{question}}
+              </div>
+              <hr style="margin-right: 25%;">
             </div>
-            <hr style="margin-right: 25%;">
-          </div>
-      </div><!--col-sm-12-->
-  </div><!--row -->
+        </div><!--col-sm-12-->
+    </div><!--row -->
 
   </div><!--container -->
 
+
+
+  <div class="mobile_dates table_parent text-center">
+    <i class="fa fa-calendar table_child" aria-hidden="true"></i>
+  </div>
+  <div class="mobile_date_menu">
+  </div>
 
 
 

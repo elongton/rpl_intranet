@@ -1,1 +1,34 @@
 //this is te libcal app stylesheet
+.table_parent {
+  display: table; }
+
+.table_child {
+  display: table-cell;
+  vertical-align: middle; }
+
+
+@media only screen and (max-width: 768px) {
+  nav.navbar{display: none;}
+  div.mobile_dates{
+    height: 85px;
+    width: 85px;
+    background-color: #4885ed;
+    border-radius: 100%;
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    color: white;
+    font-size: 35px;}
+    #datepickernav{display: none;}
+  div.mobile_date_menu{
+    position: fixed;
+    height: 100px;
+    width: 100%;
+    background-color: black;
+    bottom: 10px;
+
+  }
+
+
+
+}
