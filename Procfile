@@ -1,1 +1,1 @@
-web: gunicorn reference.wsgi
+web: gunicorn rpl_intranet.wsgi

@@ -13,7 +13,7 @@ from rpl_intranet.aws.conf import *
 
 
 DEBUG = False
-ALLOWED_HOSTS =  ['rpl-reference.herokuapp.com', 'www.rpl-intranet.org', 'rpl-intranet.org', 'www.rpl-intranet.org.herokudns.com']
+ALLOWED_HOSTS =  ['rpl-intranet.herokuapp.com', 'www.rpl-intranet.org', 'rpl-intranet.org', 'www.rpl-intranet.org.herokudns.com']
 
 
 
@@ -47,7 +47,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'reference.urls'
+ROOT_URLCONF = 'rpl_intranet.urls'
 
 TEMPLATES = [
     {
@@ -65,7 +65,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'reference.wsgi.application'
+WSGI_APPLICATION = 'rpl_intranet.wsgi.application'
 
 
 # Database
