@@ -8,6 +8,12 @@
 .dashed {
   border: 1px dashed black; }
 
+@media (min-width: 768px) {
+  div.mobile_dates_button {
+    display: none; }
+
+  div.mobile_menu_button {
+    display: none; } }
 @media only screen and (max-width: 768px) {
   nav.navbar {
     display: none; }
@@ -47,6 +53,25 @@
     position: relative;
     height: 400px;
     width: 100%;
-    background-color: #4885ed; } }
+    background-color: #4885ed; }
+
+  div.events_title {
+    text-align: center;
+    padding: 10px 0;
+    position: absolute;
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    width: 100%;
+    color: white;
+    background-color: #4885ed; }
+
+  div.events_title h1 {
+    margin: 0 0;
+    padding: 0; }
+
+  div.angular_event_list {
+    margin-top: 85px; } }
 
 /*# sourceMappingURL=libcal_style.css.map */

@@ -51,7 +51,7 @@
 
 
 
-    <div class="row" style="padding-left: 10px;">
+    <div class="row angular_event_list" style="padding-left: 10px;">
         <div class="col-sm-12" ng-repeat="event_item in sortedarray">
             <h2 style="margin-bottom: 20px;">{{event_item.date}}</h2>
             <div style = "margin-bottom: 10px;" ng-repeat = "detail in event_item.eventinfo">
@@ -71,7 +71,7 @@
   </div><!--container -->
 
   <!-- mobile stuff -->
-  <div class="mobile_dates_button table_parent text-center">
+  <div class="mobile_dates_button table_parent text-center" ng-click = "get_events()">
     <i class="fa fa-calendar table_child" aria-hidden="true"></i>
   </div>
   <div class="mobile_menu_button table_parent text-center">
