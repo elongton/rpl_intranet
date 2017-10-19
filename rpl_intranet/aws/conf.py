@@ -7,9 +7,9 @@ AWS_FILE_EXPIRE = 200
 AWS_PRELOAD_METADATA = True
 AWS_QUERYSTRING_AUTH = True
 
-DEFAULT_FILE_STORAGE = 'reference.aws.utils.MediaRootS3BotoStorage'
-STATICFILES_STORAGE = 'reference.aws.utils.StaticRootS3BotoStorage'
-AWS_STORAGE_BUCKET_NAME = 'rpl-reference'
+DEFAULT_FILE_STORAGE = 'rpl_intranet.aws.utils.MediaRootS3BotoStorage'
+STATICFILES_STORAGE = 'rpl_intranet.aws.utils.StaticRootS3BotoStorage'
+AWS_STORAGE_BUCKET_NAME = 'rpl-intranet-bucket'
 S3DIRECT_REGION = 'us-west-2'
 S3_URL = '//%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
 MEDIA_URL = '//%s.s3.amazonaws.com/media/' % AWS_STORAGE_BUCKET_NAME
