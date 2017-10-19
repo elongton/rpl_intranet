@@ -12,7 +12,7 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 from rpl_intranet.aws.conf import *
 
 
-DEBUG = False
+DEBUG = True
 ALLOWED_HOSTS =  ['rpl-intranet.herokuapp.com', 'www.rpl-intranet.org', 'rpl-intranet.org', 'www.rpl-intranet.org.herokudns.com']
 
 
