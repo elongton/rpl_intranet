@@ -77,9 +77,27 @@
   <div class="mobile_menu_button table_parent text-center">
     <i class="fa fa-bars table_child" aria-hidden="true"></i>
   </div>
-  <!-- <div class="mobile_date_menu_container">
-    <div class="mobile_date_menu"></div>
-  </div> -->
+  <div class="mobile_date_menu_container">
+    <div class="mobile_date_menu">
+      <span>Start Date:</span>
+      <input type="date" class="form-control" id="startdate" ng-model="from" ng-disabled = "datedisable">
+      <span>End Date:</span>
+      <input type="date" class="form-control" id="enddate" ng-model="to" ng-disabled = "datedisable">
+
+      <form class="form-inline">
+        <button class="btn btn-secondary left_button">-</button>
+        <button class="btn btn-secondary right_button">+</button>
+      </form>
+
+
+      <form class="form-inline">
+        <button class="btn btn-secondary left_button">-</button>
+        <button class="btn btn-secondary right_button">+</button>
+      </form>
+
+
+    </div>
+  </div>
 
 
 

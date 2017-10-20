@@ -12,6 +12,7 @@
 @media (min-width: 768px){
   div.mobile_dates_button{display: none;}
   div.mobile_menu_button{display: none;}
+  div.mobile_date_menu_container{display:none;}
 }
 
 //mobile size
@@ -54,7 +55,13 @@
     height: 400px;
     width: 100%;
     background-color: #4885ed;
+    padding: 10px 10px;
   }
+  .mobile_date_menu span{color: white;}
+  .mobile_date_menu input{margin-bottom: 10px;}
+  .mobile_date_menu button{width: 50%;}
+  .right_button{padding-left: 5px;}
+  .left_button{padding-right: 5px;}
 
   div.events_title{
     text-align: center;
