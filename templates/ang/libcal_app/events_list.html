@@ -79,21 +79,34 @@
   </div>
   <div class="mobile_date_menu_container">
     <div class="mobile_date_menu">
-      <span>Start Date:</span>
+
+      <div class="button_container">
+        <div class="menu_button_div_left menu_button_div"><button class="btn btn-success"><i class="fa fa-minus" aria-hidden="true"></i></button></div>
+        <div class="menu_button_div_right menu_button_div"><button class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i></button></div>
+      </div>
+      <div class="button_container">
+        <div class="menu_button_div_left menu_button_div"><button class="btn btn-success">Today</i></button></div>
+        <div class="menu_button_div_right menu_button_div"><button class="btn btn-success">Week</i></button></div>
+      </div>
+
+      <span>Start:</span>
       <input type="date" class="form-control" id="startdate" ng-model="from" ng-disabled = "datedisable">
-      <span>End Date:</span>
+      <span>End:</span>
       <input type="date" class="form-control" id="enddate" ng-model="to" ng-disabled = "datedisable">
 
+
+
+
+
+        <!-- <button class="btn btn-secondary left_button">-</button>
+        <button class="btn btn-secondary right_button">+</button> -->
+
+
+<!--
       <form class="form-inline">
         <button class="btn btn-secondary left_button">-</button>
         <button class="btn btn-secondary right_button">+</button>
-      </form>
-
-
-      <form class="form-inline">
-        <button class="btn btn-secondary left_button">-</button>
-        <button class="btn btn-secondary right_button">+</button>
-      </form>
+      </form> -->
 
 
     </div>

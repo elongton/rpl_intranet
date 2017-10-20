@@ -60,8 +60,8 @@
   .mobile_date_menu span{color: white;}
   .mobile_date_menu input{margin-bottom: 10px;}
   .mobile_date_menu button{width: 50%;}
-  .right_button{padding-left: 5px;}
-  .left_button{padding-right: 5px;}
+  // .right_button{padding-left: 5px;}
+  // .left_button{padding-right: 5px;}
 
   div.events_title{
     text-align: center;
@@ -76,6 +76,13 @@
     background-color: #4885ed;}
   div.events_title h1{margin: 0 0; padding: 0;}
   div.angular_event_list{margin-top: 85px;}
+  div.button_container{margin-bottom: 10px;}
+  div.menu_button_div{
+    display: inline-block;
+    width: 49.2%;
+  }
+  div.menu_button_div button{width: 100%;}
+  div.menu_button_div_left{padding-right: 3px;}
+  div.menu_button_div_right{padding-left: 3px;}
 
-
-}
+}//media query
