@@ -7,6 +7,26 @@ angular.module('events').
           $scope.branch = $cookies.get("branch")
           $scope.username = $cookies.get("username")
           $scope.staticfiles = staticfiles;
+
+          //animating the buttons in mobile:
+          $scope.menu_position = true;
+          $scope.removeanimation = function(){
+            $scope.dates_button_class = '';
+          }
+          $scope.addanimation = function(){
+            if ($scope.menu_position == true){
+              $scope.dates_button_class = 'animate_date_button_down';
+              $scope.menu_position = !$scope.menu_position
+            }
+            else{
+              $scope.dates_button_class = 'animate_date_button_up';
+              $scope.menu_position = !$scope.menu_position
+            }//if
+
+          }//addanimation()
+
+
+
           var one_day = 1000*60*60*24;
           var makeaday = function(start, end){
             start.setHours(0,0,0,0);

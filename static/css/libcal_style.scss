@@ -15,31 +15,65 @@
   div.mobile_date_menu_container{display:none;}
 }
 
+
+//date button variables
+$xtrans: 85px;
+$datebuttondim: 85px;
+$datebuttonpos: 17.5px;
+$animationspeed: .2s;
+$dateupangle: 225deg;
+$datedownangle:135deg;
+
+@keyframes date_down {
+  from { transform: rotate($dateupangle) translateX($xtrans) rotate(-$dateupangle); }
+  to   { transform: rotate($datedownangle) translateX($xtrans) rotate(-$datedownangle); }
+}
+@keyframes date_up {
+  from { transform: rotate($datedownangle) translateX($xtrans) rotate(-$datedownangle);}
+  to   { transform: rotate($dateupangle) translateX($xtrans) rotate(-$dateupangle); }
+}
+
+//menu button variables
+@keyframes menu_button_down {
+  from { transform: rotate($dateupangle) translateX($xtrans) rotate(-$dateupangle); }
+  to   { transform: rotate($datedownangle) translateX($xtrans) rotate(-$datedownangle); }
+}
+@keyframes menu_button_up {
+  from { transform: rotate($datedownangle) translateX($xtrans) rotate(-$datedownangle);}
+  to   { transform: rotate($dateupangle) translateX($xtrans) rotate(-$dateupangle); }
+}
+
+
 //mobile size
 @media only screen and (max-width: 768px) {
   nav.navbar{display: none;}
 
-  @keyframes myOrbit {
-    from { transform: rotate(0deg) translateX(20px) rotate(0deg); }
-    to   { transform: rotate(360deg) translateX(20px) rotate(-360deg); }
+
+
+  .animate_date_button_down{
+    animation: date_down $animationspeed linear forwards; // infinite; /* Chrome, Firefox 16+, IE 10+, Safari 5 */
+    bottom: -$datebuttondim/2!important;
+    right: -$datebuttondim/2!important;
   }
 
+  .animate_date_button_up{
+    animation: date_up $animationspeed linear forwards; // infinite; /* Chrome, Firefox 16+, IE 10+, Safari 5 */
+    bottom: -$datebuttondim/2!important;
+    right: -$datebuttondim/2!important;
+  }
+
+
   div.mobile_dates_button{
-    height: 85px;
-    width: 85px;
+    height: $datebuttondim;
+    width: $datebuttondim;
     background-color: #4885ed;
     border-radius: 100%;
     position: fixed;
-    // bottom: -42.5px;
-    // right: -42.5px;
-    bottom: 15px;
-    right: 15px;
-    // bottom: 0;
-    // right: 0;
+    bottom: $datebuttonpos;
+    right: $datebuttonpos;
     color: white;
     font-size: 35px;
 
-    animation: myOrbit 4s linear infinite; /* Chrome, Firefox 16+, IE 10+, Safari 5 */
     }
 
 

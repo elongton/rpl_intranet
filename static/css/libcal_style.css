@@ -17,27 +17,50 @@
 
   div.mobile_date_menu_container {
     display: none; } }
+@keyframes date_down {
+  from {
+    transform: rotate(225deg) translateX(85px) rotate(-225deg); }
+  to {
+    transform: rotate(135deg) translateX(85px) rotate(-135deg); } }
+@keyframes date_up {
+  from {
+    transform: rotate(135deg) translateX(85px) rotate(-135deg); }
+  to {
+    transform: rotate(225deg) translateX(85px) rotate(-225deg); } }
+@keyframes menu_button_down {
+  from {
+    transform: rotate(225deg) translateX(85px) rotate(-225deg); }
+  to {
+    transform: rotate(135deg) translateX(85px) rotate(-135deg); } }
+@keyframes menu_button_up {
+  from {
+    transform: rotate(135deg) translateX(85px) rotate(-135deg); }
+  to {
+    transform: rotate(225deg) translateX(85px) rotate(-225deg); } }
 @media only screen and (max-width: 768px) {
   nav.navbar {
     display: none; }
 
-  @keyframes myOrbit {
-    from {
-      transform: rotate(0deg) translateX(20px) rotate(0deg); }
-    to {
-      transform: rotate(360deg) translateX(20px) rotate(-360deg); } }
+  .animate_date_button_down {
+    animation: date_down 0.2s linear forwards;
+    bottom: -42.5px !important;
+    right: -42.5px !important; }
+
+  .animate_date_button_up {
+    animation: date_up 0.2s linear forwards;
+    bottom: -42.5px !important;
+    right: -42.5px !important; }
+
   div.mobile_dates_button {
     height: 85px;
     width: 85px;
     background-color: #4885ed;
     border-radius: 100%;
     position: fixed;
-    bottom: 15px;
-    right: 15px;
+    bottom: 17.5px;
+    right: 17.5px;
     color: white;
-    font-size: 35px;
-    animation: myOrbit 4s linear infinite;
-    /* Chrome, Firefox 16+, IE 10+, Safari 5 */ }
+    font-size: 35px; }
 
   div.mobile_menu_button {
     height: 40px;
