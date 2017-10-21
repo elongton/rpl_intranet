@@ -5,6 +5,9 @@
   display: table-cell;
   vertical-align: middle; }
 
+.nodisplay {
+  display: none; }
+
 .dashed {
   border: 1px dashed black; }
 

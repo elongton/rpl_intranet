@@ -9,7 +9,7 @@ angular.module('events').
           $scope.staticfiles = staticfiles;
 
           //animating the buttons in mobile:
-          $scope.menu_position = true;
+          $scope.menu_position = true; //this variable defines whether the buttons are shown or not
           $scope.removeanimation = function(){
             $scope.dates_button_class = '';
           }
@@ -24,6 +24,13 @@ angular.module('events').
             }//if
 
           }//addanimation()
+
+          //actual menu
+          $scope.is_shown = 'nodisplay';
+
+          $scope.showmenu = function(){$scope.is_shown = '';}
+          $scope.hidemenu = function(){$scope.is_shown = 'nodisplay';}
+
 
 
 
