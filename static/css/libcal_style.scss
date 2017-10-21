@@ -33,29 +33,24 @@ $datedownangle:135deg;
   to   { transform: rotate($dateupangle) translateX($xtrans) rotate(-$dateupangle); }
 }
 
-//menu button variables
-@keyframes menu_button_down {
-  from { transform: rotate($dateupangle) translateX($xtrans) rotate(-$dateupangle); }
-  to   { transform: rotate($datedownangle) translateX($xtrans) rotate(-$datedownangle); }
-}
-@keyframes menu_button_up {
-  from { transform: rotate($datedownangle) translateX($xtrans) rotate(-$datedownangle);}
-  to   { transform: rotate($dateupangle) translateX($xtrans) rotate(-$dateupangle); }
-}
+//date menu variables
+
+
+
 
 
 //mobile size
 @media only screen and (max-width: 768px) {
   nav.navbar{display: none;}
 
-
+  .animate_menu_up{animation: date_menu_up $animationspeed linear forwards;}
+  .animate_menu_down{animation: date_menu_down $animationspeed linear forwards;}
 
   .animate_date_button_down{
     animation: date_down $animationspeed linear forwards; // infinite; /* Chrome, Firefox 16+, IE 10+, Safari 5 */
     bottom: -$datebuttondim/2!important;
     right: -$datebuttondim/2!important;
   }
-
   .animate_date_button_up{
     animation: date_up $animationspeed linear forwards; // infinite; /* Chrome, Firefox 16+, IE 10+, Safari 5 */
     bottom: -$datebuttondim/2!important;

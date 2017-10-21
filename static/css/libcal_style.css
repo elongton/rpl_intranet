@@ -27,19 +27,15 @@
     transform: rotate(135deg) translateX(85px) rotate(-135deg); }
   to {
     transform: rotate(225deg) translateX(85px) rotate(-225deg); } }
-@keyframes menu_button_down {
-  from {
-    transform: rotate(225deg) translateX(85px) rotate(-225deg); }
-  to {
-    transform: rotate(135deg) translateX(85px) rotate(-135deg); } }
-@keyframes menu_button_up {
-  from {
-    transform: rotate(135deg) translateX(85px) rotate(-135deg); }
-  to {
-    transform: rotate(225deg) translateX(85px) rotate(-225deg); } }
 @media only screen and (max-width: 768px) {
   nav.navbar {
     display: none; }
+
+  .animate_menu_up {
+    animation: date_menu_up 0.2s linear forwards; }
+
+  .animate_menu_down {
+    animation: date_menu_down 0.2s linear forwards; }
 
   .animate_date_button_down {
     animation: date_down 0.2s linear forwards;
