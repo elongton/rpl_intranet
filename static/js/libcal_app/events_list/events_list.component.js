@@ -3,7 +3,7 @@
 angular.module('events').
       component('eventsList', {
         templateUrl: '/api/templates/libcal_app/events_list.html',
-        controller: function($scope, $cookies, $location,$http, $rootScope, $q){
+        controller: function($scope, $cookies, $location,$http, $rootScope, $q, $window){
           $scope.branch = $cookies.get("branch")
           $scope.username = $cookies.get("username")
           $scope.staticfiles = staticfiles;
@@ -31,7 +31,21 @@ angular.module('events').
           $scope.showmenu = function(){$scope.is_shown = '';}
           $scope.hidemenu = function(){$scope.is_shown = 'nodisplay';}
 
+          //scroll direction code:
+          $scope.lastScrollTop = 0;
+          $scope.direction = "";
+          angular.element($window).on("scroll", function() {
+                $scope.st = window.pageYOffset;
+                if ($scope.st > $scope.lastScrollTop) {
+                    $scope.direction = "down";
+                } else {
+                    $scope.direction = "up";
+                }
 
+                $scope.lastScrollTop = $scope.st;
+                $scope.$apply();
+                // console.log($scope.direction);
+           });
 
 
           var one_day = 1000*60*60*24;
