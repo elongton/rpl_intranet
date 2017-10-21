@@ -21,6 +21,11 @@
   nav.navbar {
     display: none; }
 
+  @keyframes myOrbit {
+    from {
+      transform: rotate(0deg) translateX(20px) rotate(0deg); }
+    to {
+      transform: rotate(360deg) translateX(20px) rotate(-360deg); } }
   div.mobile_dates_button {
     height: 85px;
     width: 85px;
@@ -30,7 +35,9 @@
     bottom: 15px;
     right: 15px;
     color: white;
-    font-size: 35px; }
+    font-size: 35px;
+    animation: myOrbit 4s linear infinite;
+    /* Chrome, Firefox 16+, IE 10+, Safari 5 */ }
 
   div.mobile_menu_button {
     height: 40px;
