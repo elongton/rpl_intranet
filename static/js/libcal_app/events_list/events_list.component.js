@@ -9,20 +9,14 @@ angular.module('events').
           $scope.staticfiles = staticfiles;
 
           //animating the buttons in mobile:
-          $scope.menu_position = true; //this variable defines whether the buttons are shown or not
-          $scope.removeanimation = function(){
-            $scope.dates_button_class = '';
+
+          var downanimation = function(){
+            $scope.dates_button_class = 'animate_date_button_up';
+            $scope.menu_position = !$scope.menu_position
           }
-          $scope.addanimation = function(){
-            if ($scope.menu_position == true){
+          var upanimation = function(){
               $scope.dates_button_class = 'animate_date_button_down';
               $scope.menu_position = !$scope.menu_position
-            }
-            else{
-              $scope.dates_button_class = 'animate_date_button_up';
-              $scope.menu_position = !$scope.menu_position
-            }//if
-
           }//addanimation()
 
           //actual menu
@@ -38,8 +32,10 @@ angular.module('events').
                 $scope.st = window.pageYOffset;
                 if ($scope.st > $scope.lastScrollTop) {
                     $scope.direction = "down";
+                    upanimation();
                 } else {
                     $scope.direction = "up";
+                    downanimation();
                 }
 
                 $scope.lastScrollTop = $scope.st;
@@ -77,6 +73,16 @@ angular.module('events').
             // makeaday($scope.from, $scope.to);
             $scope.from = dummy_date;
             $scope.to = $scope.from;
+          }
+
+
+          $scope.lose_day_button = function(){
+            // $scope.to = new Date();
+            var dummy_date = new Date();
+            dummy_date.setDate($scope.to.getDate() - 1)
+            // makeaday($scope.from, $scope.to);
+            $scope.to = dummy_date;
+            $scope.from = $scope.to;
           }
 
           $scope.add_week_button = function(){

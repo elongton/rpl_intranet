@@ -88,12 +88,12 @@
     <div class="mobile_date_menu">
 
       <div class="button_container">
-        <div class="menu_button_div_left menu_button_div"><button class="btn btn-success"><i class="fa fa-minus" aria-hidden="true"></i></button></div>
-        <div class="menu_button_div_right menu_button_div"><button class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i></button></div>
+        <div class="menu_button_div_left menu_button_div"><button class="btn btn-success" ng-click="lose_day_button()"><i class="fa fa-minus" aria-hidden="true"></i></button></div>
+        <div class="menu_button_div_right menu_button_div"><button class="btn btn-success" ng-click = "add_day_button()"><i class="fa fa-plus" aria-hidden="true"></i></button></div>
       </div>
       <div class="button_container">
-        <div class="menu_button_div_left menu_button_div"><button class="btn btn-success">Today</i></button></div>
-        <div class="menu_button_div_right menu_button_div"><button class="btn btn-success">Week</i></button></div>
+        <div class="menu_button_div_left menu_button_div"><button class="btn btn-success" ng-click = "todaybutton()">Today</i></button></div>
+        <div class="menu_button_div_right menu_button_div"><button class="btn btn-success" ng-click = "weekbutton()">Week</i></button></div>
       </div>
 
       <span>Start:</span>
