@@ -3,7 +3,7 @@
 angular.module('events').
       component('eventsList', {
         templateUrl: '/api/templates/libcal_app/events_list.html',
-        controller: function($scope, $cookies, $location,$http, $rootScope, $q, $window){
+        controller: function($scope, $cookies, $location,$http, $rootScope, $q, $window, $document){
           $scope.branch = $cookies.get("branch")
           $scope.username = $cookies.get("username")
           $scope.staticfiles = staticfiles;
@@ -25,6 +25,14 @@ angular.module('events').
           $scope.showmenu = function(){$scope.is_shown = '';}
           $scope.hidemenu = function(){$scope.is_shown = 'nodisplay';}
 
+
+          // remove menu for everything but element
+          // angular.element($window).on("click",function(e){
+          //    if( !angular.element(e.target).hasClass("mobile_date_menu") ) {
+          //        $scope.hidemenu();
+          //    }
+          // });
+
           //scroll direction code:
           $scope.lastScrollTop = 0;
           $scope.direction = "";
@@ -42,6 +50,10 @@ angular.module('events').
                 $scope.$apply();
                 // console.log($scope.direction);
            });
+
+
+
+
 
 
           var one_day = 1000*60*60*24;

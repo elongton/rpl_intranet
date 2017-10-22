@@ -3,7 +3,7 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-12">
-      <div class="events_title">
+      <div class="events_title" ng-click="hidemenu()">
         <h1>RPL Events</h1>
       </div>
       <!-- <button ng-if="libcaltoken" class="btn btn-secondary" ng-click="pullspaces()" >Get spaces</button> -->
@@ -84,7 +84,7 @@
     <i class="fa fa-bars table_child" aria-hidden="true"></i>
   </div> -->
 
-  <div class="mobile_date_menu_container" ng-class="is_shown">
+  <div class="mobile_date_menu_container" ng-class="is_shown" id="date_menu">
     <div class="mobile_date_menu">
 
       <div class="button_container">
