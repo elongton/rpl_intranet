@@ -32,10 +32,8 @@
     transform: rotate(225deg) translateX(85px) rotate(-225deg); } }
 @media only screen and (max-width: 768px) {
   .header-opacity {
-    opacity: 0; }
-
-  .events_title.header-opacity {
-    opacity: 0; }
+    opacity: 0;
+    transition: all 1s ease-in-out; }
 
   div.cancel_clickable {
     height: 100vh;
@@ -114,14 +112,14 @@
   div.events_title {
     text-align: center;
     padding: 10px 0;
-    position: absolute;
     position: fixed;
     z-index: 10;
     top: 0;
     left: 0;
     width: 100%;
     color: white;
-    background-color: #4885ed; }
+    background-color: #4885ed;
+    transition: all .2s ease-in-out; }
 
   div.events_title h1 {
     margin: 0 0;

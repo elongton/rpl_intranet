@@ -12,10 +12,12 @@ angular.module('events').
 
           var downanimation = function(){
             $scope.dates_button_class = 'animate_date_button_up';
+            $scope.header_shown = '';
             $scope.menu_position = !$scope.menu_position
           }
           var upanimation = function(){
               $scope.dates_button_class = 'animate_date_button_down';
+              $scope.header_shown = 'header-opacity';
               $scope.menu_position = !$scope.menu_position
           }//addanimation()
 

@@ -46,9 +46,11 @@ $datedownangle:135deg;
 //mobile size
 @media only screen and (max-width: 768px) {
   //header transition
-  .header-opacity{opacity: 0;}
+  .header-opacity{
+    opacity: 0;
+    transition: all 1s ease-in-out;
+  }
 
-  .events_title.header-opacity{opacity: 0;}
 
   div.cancel_clickable{
     height:100vh;
@@ -131,14 +133,18 @@ $datedownangle:135deg;
   div.events_title{
     text-align: center;
     padding: 10px 0;
-    position: absolute;
+    // position: absolute;
     position: fixed;
     z-index: 10;
     top: 0;
     left: 0;
     width: 100%;
     color: white;
-    background-color: #4885ed;}
+    background-color: #4885ed;
+    // opacity: 1;
+    transition: all .2s ease-in-out;
+
+    }
   div.events_title h1{margin: 0 0; padding: 0;}
   div.angular_event_list{margin-top: 85px;}
   div.button_container{margin-bottom: 10px;}
