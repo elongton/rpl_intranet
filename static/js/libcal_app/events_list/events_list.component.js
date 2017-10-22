@@ -240,7 +240,7 @@ angular.module('events').
                 $scope.spaces_dict[dictval] = raw_spaces_list[i].name
               }
             }
-            function errorCallback(error) {console.log(error)}
+            function errorCallback(error) {console.log(error); getcreds();}
             var endpoint = 'https://api2.libcal.com/1.1/space/category/' + categoryList + '?details=1'
             var req = {
                     method: "GET",

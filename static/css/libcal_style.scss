@@ -37,7 +37,7 @@ $datedownangle:135deg;
   to   { transform: rotate($dateupangle) translateX($xtrans) rotate(-$dateupangle); }
 }
 
-//date menu variables
+//header variables
 
 
 
@@ -45,6 +45,22 @@ $datedownangle:135deg;
 
 //mobile size
 @media only screen and (max-width: 768px) {
+  //header transition
+  .header-opacity{opacity: 0;}
+
+  .events_title.header-opacity{opacity: 0;}
+
+  div.cancel_clickable{
+    height:100vh;
+    width: 100vh;
+    // background-color: black;
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+
+
   nav.navbar{display: none;}
 
   .animate_menu_up{animation: date_menu_up $animationspeed linear forwards;}
@@ -90,13 +106,17 @@ $datedownangle:135deg;
 
     #datepickernav{display: none;}
 
+
+
   div.mobile_date_menu_container{
+    z-index: 3;
     position: fixed;
     bottom: 10px;
     width: 100%;
     padding: 0 10px;}
 
   div.mobile_date_menu{
+
     position: relative;
     width: 100%;
     background-color: #4885ed;
