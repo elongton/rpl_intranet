@@ -54,10 +54,6 @@ angular.module('events').
            });
 
 
-
-
-
-
           var one_day = 1000*60*60*24;
           var makeaday = function(start, end){
             start.setHours(0,0,0,0);
@@ -230,6 +226,7 @@ angular.module('events').
           }//pullcategories()
 
           var pullspaces = function(categoryList){
+            var d = $q.defer();
             function successCallback(response) {
               //this is where you create the room array
               var raw_spaces_list = new Array();
@@ -241,6 +238,7 @@ angular.module('events').
                 var dictval = raw_spaces_list[i].id;
                 $scope.spaces_dict[dictval] = raw_spaces_list[i].name
               }
+              d.resolve()
             }
             function errorCallback(error) {console.log(error); getcreds();}
             var endpoint = 'https://api2.libcal.com/1.1/space/category/' + categoryList + '?details=1'
@@ -250,13 +248,20 @@ angular.module('events').
                     headers: {authorization: "Bearer " + $scope.libcaltoken},
                   }//req
             var requestAction = $http(req).then(successCallback, errorCallback)
+            return d.promise;
           }//pullspaces()
 
+          var get_initial_data = function(categoryList){
+            var promise = pullspaces(categoryList);
+            promise.then(function(){
+              $scope.get_events();
+            }, function(failure){console.log(failure)});
+          }
 
           var get_room_info = function(){
             var promise = pullcategories();
             promise.then(function(categoryList){
-              pullspaces(categoryList);
+              get_initial_data(categoryList);
             },function(failure){console.log(failure)});
           };//get_room_info()
 

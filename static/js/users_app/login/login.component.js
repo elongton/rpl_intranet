@@ -59,7 +59,7 @@ angular.module('login').
                       // $window.location.href = destinationUrl;
                       // $window.location.reload();
 
-                      var url = "/";
+                      var url = "/libcal";
                       window.location = url;
                       window.location.replace(url);
 
