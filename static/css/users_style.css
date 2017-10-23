@@ -12,19 +12,7 @@
   nav.navbar {
     display: none; }
 
-  #login_button {
-    width: 100%; }
-
-  #login_container {
-    height: 100vh;
-    width: 100vw;
-    display: table; }
-
-  #login_child {
-    display: table-cell;
-    vertical-align: middle; }
-
   #login_child h1 {
-    margin-bottom: 20px; } }
+    margin: 20px 0; } }
 
 /*# sourceMappingURL=users_style.css.map */
