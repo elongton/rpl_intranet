@@ -37,17 +37,6 @@ angular.module('events').
 
           function doThisStuffOnScroll() {
               didScroll = true;
-              $scope.st = window.pageYOffset;
-              if ($scope.st > $scope.lastScrollTop) {
-                  $scope.direction = "down";
-                  upanimation();
-              } else {
-                  $scope.direction = "up";
-                  downanimation();
-              }
-
-              $scope.lastScrollTop = $scope.st;
-              $scope.$apply();
               // console.log($scope.direction);
           }
 
@@ -58,9 +47,19 @@ angular.module('events').
           $interval(function() {
               if(didScroll) {
                   didScroll = false;
-                  // console.log('You scrolled');
+                  $scope.st = window.pageYOffset;
+                  if ($scope.st > $scope.lastScrollTop) {
+                      $scope.direction = "down";
+                      upanimation();
+                  } else {
+                      $scope.direction = "up";
+                      downanimation();
+                  }
+
+                  $scope.lastScrollTop = $scope.st;
+                  $scope.$apply();
               }
-          }, 500);
+          }, 100);
 
 
 
