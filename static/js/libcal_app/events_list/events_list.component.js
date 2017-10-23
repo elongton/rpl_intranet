@@ -59,7 +59,7 @@ angular.module('events').
                   $scope.lastScrollTop = $scope.st;
                   $scope.$apply();
               }
-          }, 100);
+          }, 500);
 
 
 
