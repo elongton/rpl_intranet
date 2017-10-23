@@ -60,7 +60,7 @@ angular.module('events').
                   didScroll = false;
                   // console.log('You scrolled');
               }
-          }, 100);
+          }, 500);
 
 
 
