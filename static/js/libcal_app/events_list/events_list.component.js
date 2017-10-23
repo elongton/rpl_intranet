@@ -37,6 +37,7 @@ angular.module('events').
 
           angular.element($window).on("scroll", function() {
             $scope.didScroll = true;
+            $scope.scrollheight = window.pageYOffset;
           })
 
           $interval(function() {
@@ -46,7 +47,7 @@ angular.module('events').
                   if ($scope.st > $scope.lastScrollTop) {
                       $scope.direction = "down";
                       upanimation();
-                  } else if($scope.st < $scope.lastScrollTop && window.pageYOffset > 100) {
+                  } else if($scope.st < $scope.lastScrollTop && $scope.scrollheight > 200) {
                       $scope.direction = "up";
                       downanimation();
                   }
