@@ -12,8 +12,6 @@
 
 .dashed{border: 1px dashed black;}
 
-
-
 //above mobile size
 @media (min-width: 768px){
   div.mobile_dates_button{display: none;}
@@ -34,9 +32,7 @@
   .datepicker input{width: 170px;}
   .datepicker{margin-left: 10px;}
 
-
 }
-
 
 //date button variables
 $xtrans: 85px;
@@ -55,17 +51,10 @@ $datedownangle:135deg;
   to   { transform: rotate($dateupangle) translateX($xtrans) rotate(-$dateupangle); }
 }
 
-//header variables
-
-
-
-
 
 //mobile size
 @media only screen and (max-width: 768px) {
   //header transition
-
-
 
   div.cancel_clickable{
     height:100vh;
@@ -76,7 +65,6 @@ $datedownangle:135deg;
     top: 0;
     left: 0;
   }
-
 
   nav.navbar{display: none;}
 
@@ -94,7 +82,6 @@ $datedownangle:135deg;
     right: -$datebuttondim/2!important;
   }
 
-
   div.mobile_dates_button{
     height: $datebuttondim;
     width: $datebuttondim;
@@ -107,7 +94,6 @@ $datedownangle:135deg;
     font-size: 35px;
 
     }
-
 
   div.mobile_menu_button{
     height: 40px;
@@ -176,3 +162,29 @@ $datedownangle:135deg;
 
 
 }//media query
+
+// PRINTING
+@media screen {
+    #printSection {display: none;}
+}
+
+@media print {
+    body * {
+        visibility:hidden;
+    }
+    #printSection, #printSection * {
+        visibility:visible;
+    }
+    #printSection {
+        position:absolute;
+        left:0;
+        top:0;
+    }
+
+    h1::first-letter,
+    h2::first-letter,
+    h3::first-letter,
+    h4::first-letter{
+    margin-top: 0;
+    }
+}

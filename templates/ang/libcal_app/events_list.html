@@ -44,7 +44,9 @@
         </li>
         <!-- GO BUTTON -->
         <li class="nav-item text-right ml-auto">
-            <button class="btn btn-success pull-right"  ng-click = "get_events()" ng-disabled = "datedisable || disable_load">Look Up</button>
+          <button class="btn btn-success pull-right"  ng-click = "get_events()" ng-disabled = "datedisable || disable_load">Look Up</button>
+          <button style = "margin-right: 10px;" class="btn btn-secondary pull-right"  ng-print print-element-id="printThisElement" ng-disabled = "datedisable || disable_load"><i class="fa fa-print" aria-hidden="true"></i></button>
+
         </li>
       </nav>
     </div>
@@ -53,7 +55,7 @@
 
 
 
-    <div class="row angular_event_list" style="padding-left: 10px;">
+    <div class="row angular_event_list" id = "printThisElement" style="padding-left: 10px;">
         <div class="col-sm-12" ng-repeat="event_item in sortedarray">
             <h2 style="margin-bottom: 20px;">{{event_item.date}}</h2>
             <div ng-if="event_item.eventinfo.length > 0">
