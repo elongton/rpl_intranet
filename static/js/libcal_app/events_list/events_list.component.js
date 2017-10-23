@@ -3,7 +3,7 @@
 angular.module('events').
       component('eventsList', {
         templateUrl: '/api/templates/libcal_app/events_list.html',
-        controller: function($scope, $cookies, $location,$http, $rootScope, $q, $window, $document){
+        controller: function($scope, $cookies, $location,$http, $rootScope, $q, $window, $document, $interval){
           $scope.branch = $cookies.get("branch")
           $scope.username = $cookies.get("username")
           $scope.staticfiles = staticfiles;
@@ -12,12 +12,12 @@ angular.module('events').
 
           var downanimation = function(){
             $scope.dates_button_class = 'animate_date_button_up';
-            $scope.header_shown = '';
+            // $scope.header_shown = '';
             $scope.menu_position = !$scope.menu_position
           }
           var upanimation = function(){
               $scope.dates_button_class = 'animate_date_button_down';
-              $scope.header_shown = 'header-opacity';
+              // $scope.header_shown = 'header-opacity';
               $scope.menu_position = !$scope.menu_position
           }//addanimation()
 
@@ -28,30 +28,42 @@ angular.module('events').
           $scope.hidemenu = function(){$scope.is_shown = 'nodisplay';}
 
 
-          // remove menu for everything but element
-          // angular.element($window).on("click",function(e){
-          //    if( !angular.element(e.target).hasClass("mobile_date_menu") ) {
-          //        $scope.hidemenu();
-          //    }
-          // });
-
           //scroll direction code:
           $scope.lastScrollTop = 0;
           $scope.direction = "";
-          angular.element($window).on("scroll", function() {
-                $scope.st = window.pageYOffset;
-                if ($scope.st > $scope.lastScrollTop) {
-                    $scope.direction = "down";
-                    upanimation();
-                } else {
-                    $scope.direction = "up";
-                    downanimation();
-                }
 
-                $scope.lastScrollTop = $scope.st;
-                $scope.$apply();
-                // console.log($scope.direction);
-           });
+
+          var didScroll = false;
+
+          function doThisStuffOnScroll() {
+              didScroll = true;
+              $scope.st = window.pageYOffset;
+              if ($scope.st > $scope.lastScrollTop) {
+                  $scope.direction = "down";
+                  upanimation();
+              } else {
+                  $scope.direction = "up";
+                  downanimation();
+              }
+
+              $scope.lastScrollTop = $scope.st;
+              $scope.$apply();
+              // console.log($scope.direction);
+          }
+
+          angular.element($window).on("scroll", function() {
+            doThisStuffOnScroll();
+          })
+
+          $interval(function() {
+              if(didScroll) {
+                  didScroll = false;
+                  // console.log('You scrolled');
+              }
+          }, 100);
+
+
+
 
 
           var one_day = 1000*60*60*24;

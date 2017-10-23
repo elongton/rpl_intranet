@@ -12,19 +12,21 @@
 
 .dashed{border: 1px dashed black;}
 
+
+
 //above mobile size
 @media (min-width: 768px){
   div.mobile_dates_button{display: none;}
   div.mobile_menu_button{display: none;}
   div.mobile_date_menu_container{display:none;}
 
-
+  h2{font-family: 'Mate SC';}
   .events_title{
     padding: 10px 0px;
     font-family: 'Mate SC';}
   .events_title h1{font-size: 50px; font-weight: bold;}
 
-  h2{font-family: 'Mate SC';}
+
 
   #datepickernav{margin-bottom: 20px;}
   #datepickernav li div button,
@@ -62,10 +64,7 @@ $datedownangle:135deg;
 //mobile size
 @media only screen and (max-width: 768px) {
   //header transition
-  .header-opacity{
-    opacity: 0;
-    transition: all 1s ease-in-out;
-  }
+
 
 
   div.cancel_clickable{
@@ -134,7 +133,6 @@ $datedownangle:135deg;
     padding: 0 10px;}
 
   div.mobile_date_menu{
-
     position: relative;
     width: 100%;
     background-color: #4885ed;
@@ -149,19 +147,15 @@ $datedownangle:135deg;
   div.events_title{
     text-align: center;
     padding: 10px 0;
-    // position: absolute;
-    position: fixed;
+    position: absolute;
     z-index: 10;
     top: 0;
     left: 0;
     width: 100%;
     color: white;
     background-color: #4885ed;
-    // opacity: 1;
-    transition: all .2s ease-in-out;
-
     }
-  div.events_title h1{margin: 0 0; padding: 0;}
+  div.events_title h1{margin: 0 0; padding: 0; font-family: 'Mate SC';}
   div.angular_event_list{margin-top: 85px;}
   div.button_container{margin-bottom: 10px;}
   div.menu_button_div{
