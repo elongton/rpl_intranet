@@ -35,29 +35,22 @@ angular.module('events').
 
           var didScroll = false;
 
-          function doThisStuffOnScroll() {
-              didScroll = true;
-              // console.log($scope.direction);
-          }
-
           angular.element($window).on("scroll", function() {
-            doThisStuffOnScroll();
+            $scope.didScroll = true;
           })
 
           $interval(function() {
-              if(didScroll) {
-                  didScroll = false;
+              if($scope.didScroll) {
+                  $scope.didScroll = false;
                   $scope.st = window.pageYOffset;
                   if ($scope.st > $scope.lastScrollTop) {
                       $scope.direction = "down";
                       upanimation();
-                  } else {
+                  } else if($scope.st < $scope.lastScrollTop && window.pageYOffset > 100) {
                       $scope.direction = "up";
                       downanimation();
                   }
-
                   $scope.lastScrollTop = $scope.st;
-                  $scope.$apply();
               }
           }, 500);
 
