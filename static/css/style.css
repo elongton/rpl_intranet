@@ -54,10 +54,6 @@ h1 {
 .infoh2 {
   margin: 20px 0; }
 
-/*login page*/
-.login_field {
-  margin-bottom: 10px; }
-
 /*stats page*/
 .table_blur {
   -webkit-filter: blur(3px);

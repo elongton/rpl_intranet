@@ -26,7 +26,7 @@ angular.module('usersApp').
                 $routeProvider
                 .when("/users/login", {
                   template: '<login></login>',
-                  css: staticfiles('css/style.css'),
+                  css: staticfiles('css/users_style.css'),
                 })
                 .otherwise({
                   template: "<div class='container'><h1>Page not found</h1></div>"
