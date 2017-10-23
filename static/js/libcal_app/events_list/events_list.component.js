@@ -47,9 +47,12 @@ angular.module('events').
                   if ($scope.st > $scope.lastScrollTop) {
                       $scope.direction = "down";
                       upanimation();
-                  } else if($scope.st < $scope.lastScrollTop && $scope.scrollheight > 200) {
+                  }else{
                       $scope.direction = "up";
-                      downanimation();
+                      if($scope.scrollheight > 300){
+                        downanimation();
+                      }
+
                   }
                   $scope.lastScrollTop = $scope.st;
               }
