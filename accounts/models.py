@@ -50,7 +50,6 @@ class UserManager(BaseUserManager):
         user = self.create_user(
             username,
             password=password,
-
         )
         user.staff = True
         user.admin = True
@@ -63,9 +62,9 @@ class User(AbstractBaseUser):
     email = models.EmailField(
         verbose_name='email address',
         max_length=255,
-        unique=True,
+        # unique=True,
     )
-    id = models.IntegerField(primary_key=True)
+    # id = models.IntegerField(primary_key=True)
     username=models.CharField(max_length=25, unique=True)
     active = models.BooleanField(default=True)
     staff = models.BooleanField(default=False) # a admin user; non super-user
