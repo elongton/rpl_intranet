@@ -26,7 +26,7 @@ from rest_framework.filters import (
     OrderingFilter,
 )
 
-from accounts.models import Profile
+# from accounts.models import Profile
 
 from .pagination import RequestLimitOffsetPagination, RequestPageNumberPagination
 from rest_framework.permissions import (

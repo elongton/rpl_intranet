@@ -3,7 +3,7 @@ from rest_framework.serializers import (
                                 HyperlinkedIdentityField,
                                 SerializerMethodField,)
 
-from accounts.api.serializers import UserDetailSerializer
+# from accounts.api.serializers import UserDetailSerializer
 from ..models import Request
 
 
@@ -67,7 +67,7 @@ class RequestCreateUpdateSerializer(ModelSerializer):
     #     return obj.branch
 
 class RequestDetailSerializer(ModelSerializer):
-    user = UserDetailSerializer(read_only=True)
+    # user = UserDetailSerializer(read_only=True)
     class Meta:
         model = Request
         # user = SerializerMethodField()

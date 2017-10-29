@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.dispatch import receiver
 
-from accounts.models import Branch
+# from accounts.models import Branch
 
 class Medium(models.Model):
     type = models.CharField(max_length=255)
@@ -29,7 +29,7 @@ class Request(models.Model):
     type_of_request = models.ForeignKey(TypeOfRequest, related_name='requests')
     medium = models.ForeignKey(Medium, related_name='requests')
     comment = models.TextField(blank=True)
-    branch = models.ForeignKey(Branch, blank=True, null=True)
+    # branch = models.ForeignKey(Branch, blank=True, null=True)
     create_date = models.DateTimeField(default = timezone.now)
     # create_date = models.DateTimeField()
     over_five = models.BooleanField(default=False)
