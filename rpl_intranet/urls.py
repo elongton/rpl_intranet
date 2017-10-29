@@ -31,7 +31,7 @@ urlpatterns = [
     url(r'^api/auth/token/', obtain_jwt_token),
     url(r'^api/auth/token/refresh/', refresh_jwt_token),
     url(r'^api/reference/', include('reference_stats.api.urls', namespace='questions-api' )),
-    # url(r'^api/users/', include('accounts.api.urls', namespace='users-api' )),
+    url(r'^api/users/', include('accounts.api.urls', namespace='users-api' )),
     url(r'^api/templates/(?P<appname>[A-Za-z0-9\_\-\.\/]+)/(?P<item>[A-Za-z0-9\_\-\.\/]+)\.html$', AngularTemplateView.as_view())
 ]
 
