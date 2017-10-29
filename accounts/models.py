@@ -6,6 +6,15 @@ from django.contrib.auth.models import (
 )
 
 
+class Branch(models.Model):
+    name = models.CharField(max_length=120)
+    def __str__(self):
+        return self.name
+    class Meta:
+        verbose_name = 'Branch'
+        verbose_name_plural = 'Branches'
+
+
 class UserManager(BaseUserManager):
     def create_user(self, username, password=None):
         """
@@ -34,13 +43,15 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, password, username):
+    def create_superuser(self, password, username, email):
         """
         Creates and saves a superuser with the given email and password.
         """
         user = self.create_user(
             username,
+            email=email,
             password=password,
+
         )
         user.staff = True
         user.admin = True
@@ -55,10 +66,12 @@ class User(AbstractBaseUser):
         max_length=255,
         unique=True,
     )
+    id = models.IntegerField(primary_key=True)
     username=models.CharField(max_length=25, unique=True)
     active = models.BooleanField(default=True)
     staff = models.BooleanField(default=False) # a admin user; non super-user
     admin = models.BooleanField(default=False) # a superuser
+    branch = models.ForeignKey(Branch, related_name = 'accounts', blank=True, null=True)
     # notice the absence of a "Password field", that's built in.
 
     USERNAME_FIELD = 'username'
