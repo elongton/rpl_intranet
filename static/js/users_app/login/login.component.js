@@ -50,7 +50,7 @@ angular.module('login').
                   User.query({q:user.username}).$promise.then(
                     function(result){
                       $scope.userdata = result
-                      $cookies.put("branch", $scope.userdata[0].profile.branch)
+                      $cookies.put("branch", $scope.userdata[0].branch)
                       //could be a message too
 
 

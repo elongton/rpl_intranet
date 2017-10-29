@@ -16,7 +16,6 @@ execute_from_command_line(['manage.py', 'makemigrations', 'reference_stats'])
 execute_from_command_line(['manage.py', 'migrate'])
 input("Press Enter to continue...")
 
-
 #['medium', pk]
 media = [['Email', 3],
          ['Phone', 2],
@@ -26,32 +25,32 @@ types = [['Circulation', 3],
          ['Directional', 2],
          ['Reference', 1]]
 
-branches = ['Main',
-            'Broad Rock',
-            'Hull Street',
-            'North Avenue',
-            'Ginter Park',
-            'Westover Hills',
-            'West End',
-            'Belmont',
-            'East End',]
+branches = {'Main':1,
+            'Broad Rock':2,
+            'Hull Street':3,
+            'North Avenue':4,
+            'Ginter Park':5,
+            'Westover Hills':6,
+            'West End':7,
+            'Belmont':8,
+            'East End':9,}
 
 account_password = 'reading123'
 #['account_name', branch_pk]
-accounts = [['main-comp', 'Main'],
-            ['main-circ', 'Main'],
-            ['main-ref', 'Main'],
-            ['belmont-circ', 'Belmont'],
-            ['east-circ', 'East End'],
-            ['west-circ', 'West End'],
-            ['westover-circ', 'Westover Hills'],
-            ['north-circ', 'North Avenue'],
+accounts = [['main-comp', branches['Main']],
+            ['main-circ', branches['Main']],
+            ['main-ref', branches['Main']],
+            ['belmont-circ', branches['Belmont']],
+            ['east-circ', branches['East End']],
+            ['west-circ', branches['West End']],
+            ['westover-circ', branches['Westover Hills']],
+            ['north-circ', branches['North Avenue']],
             # ['hull-circ', 'Hull Street'],
-            ['broad-circ', 'Broad Rock'],
-            ['ginter-circ', 'Ginter Park'],
+            ['broad-circ', branches['Broad Rock']],
+            ['ginter-circ', branches['Ginter Park']],
             ]
 
-superusers = [['elongton', 'Main', 'Read1ng_1tw0']]
+superusers = [['elongton', branches['Main'], 'Read1ng_1tw0']]
 
 
 #########  CREATE MEDIUMS  #############
