@@ -43,13 +43,12 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, password, username, email):
+    def create_superuser(self, password, username):
         """
         Creates and saves a superuser with the given email and password.
         """
         user = self.create_user(
             username,
-            email=email,
             password=password,
 
         )
