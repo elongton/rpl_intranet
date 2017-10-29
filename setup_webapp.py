@@ -16,6 +16,7 @@ execute_from_command_line(['manage.py', 'makemigrations', 'reference_stats'])
 execute_from_command_line(['manage.py', 'migrate'])
 input("Press Enter to continue...")
 
+
 #['medium', pk]
 media = [['Email', 3],
          ['Phone', 2],
