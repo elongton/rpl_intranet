@@ -24,7 +24,7 @@ class TypeOfRequest(models.Model):
 
 # Create your models here.
 class Request(models.Model):
-    user = models.ForeignKey(User)
+    # user = models.ForeignKey(User)
     time_length = models.PositiveSmallIntegerField(blank=True, null=True)
     type_of_request = models.ForeignKey(TypeOfRequest, related_name='requests')
     medium = models.ForeignKey(Medium, related_name='requests')
