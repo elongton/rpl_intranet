@@ -5,15 +5,17 @@ import django
 django.setup()
 from django.core.management import execute_from_command_line
 
-from django.contrib.auth.models import User
-from accounts.models import Profile, Branch
+from accounts.models import User, Branch
 from reference_stats.models import Medium, TypeOfRequest
 
 
-execute_from_command_line(['manage.py', 'migrate'])
 execute_from_command_line(['manage.py', 'makemigrations', 'accounts'])
+# input("Press Enter to continue...")
 execute_from_command_line(['manage.py', 'makemigrations', 'reference_stats'])
+# input("Press Enter to continue...")
 execute_from_command_line(['manage.py', 'migrate'])
+input("Press Enter to continue...")
+
 
 #['medium', pk]
 media = [['Email', 3],
@@ -52,8 +54,6 @@ accounts = [['main-comp', 'Main'],
 superusers = [['elongton', 'Main', 'Read1ng_1tw0']]
 
 
-
-
 #########  CREATE MEDIUMS  #############
 print('------------------')
 print('Types of Media:\n')
@@ -79,6 +79,7 @@ for typeset in types:
         mytype = TypeOfRequest.objects.get(type=typeset[0])
         print(mytype)
 
+
 #########  CREATE BRANCHES  #############
 print('------------------')
 print('Branches:\n')
@@ -90,36 +91,31 @@ for branch in branches:
     else: #if the user does exist
         mybranch = Branch.objects.get(name=branch)
         print(mybranch)
+
+
+input("Press Enter to continue...")
+
+
 #########  CREATE ACCOUNTS  #############
 print('------------------')
 print('Accounts:\n')
 for account in accounts:
     if not User.objects.filter(username=account[0]).exists(): #if the user does not exist
-        user = User.objects.create_user(username=account[0], password=account_password)
+        user = User.objects.create_user(username=account[0], password=account_password, branch=account[1])
         user.save()
-        profile = Profile.objects.get(user=user)
-        profile.branch = Branch.objects.get(name=account[1])
-        profile.save()
-        print('(ADDED) ' + str(profile.user) + ' - ' + str(profile.branch))
+        print('(ADDED) ' + str(user.username) + ' - ' + str(user.branch))
     else: #if the user does exist
         user = User.objects.get(username=account[0])
-        profile = Profile.objects.get(user=user)
-        print(str(profile.user) + ' - ' + str(profile.branch))
+        print(str(user) + ' - ' + str(user.branch))
 
 #########  CREATE SUPERUSERS  #############
 print('------------------')
 print('Superusers:\n')
 for account in superusers:
     if not User.objects.filter(username=account[0]).exists(): #if the user does not exist
-        user = User.objects.create_user(username=account[0], password=account[2])
-        user.is_staff = True
-        user.is_superuser = True
+        user = User.objects.create_superuser(username=account[0], branch= account[1], password=account[2])
         user.save()
-        profile = Profile.objects.get(user=user)
-        profile.branch = Branch.objects.get(name=account[1])
-        profile.save()
-        print('(ADDED) ' + str(profile.user) + ' - ' + str(profile.branch))
+        print('(ADDED) ' + str(user) + ' - ' + str(user.branch))
     else: #if the user does exist
         user = User.objects.get(username=account[0])
-        profile = Profile.objects.get(user=user)
-        print(str(profile.user) + ' - ' + str(profile.branch))
+        print(str(user) + ' - ' + str(user.branch))

@@ -16,28 +16,31 @@ class Branch(models.Model):
 
 
 class UserManager(BaseUserManager):
-    def create_user(self, username, password=None):
+    def create_user(self, username, branch, password=None):
         # if not email:
         #     raise ValueError('Users must have an email address')
         user = self.model(
-            username=username
+            username=username,
+            branch=Branch.objects.get(id = branch),
         )
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_staffuser(self, email, password):
+    def create_staffuser(self, username, branch, password):
         user = self.create_user(
-            email,
+            username=username,
+            branch=branch,
             password=password,
         )
         user.staff = True
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, password, username):
+    def create_superuser(self, password, branch, username):
         user = self.create_user(
-            username,
+            username=username,
+            branch=branch,
             password=password,
         )
         user.staff = True
@@ -46,11 +49,6 @@ class UserManager(BaseUserManager):
         return user
 
 class User(AbstractBaseUser):
-    email = models.EmailField(
-        verbose_name='email address',
-        max_length=255,
-        # unique=True,
-    )
     username=models.CharField(max_length=25, unique=True)
     active = models.BooleanField(default=True)
     staff = models.BooleanField(default=False) # a admin user; non super-user
@@ -58,10 +56,15 @@ class User(AbstractBaseUser):
     branch = models.ForeignKey(Branch, related_name = 'accounts', blank=True, null=True)
     first_name = models.CharField(max_length=50, blank=True)
     last_name = models.CharField(max_length=50, blank=True)
+    email = models.EmailField(
+        verbose_name='email address',
+        max_length=255,
+        # unique=True,
+    )
     # notice the absence of a "Password field", that's built in.
 
     USERNAME_FIELD = 'username'
-    REQUIRED_FIELDS = [] # Email & Password are required by default.
+    REQUIRED_FIELDS = ['branch'] # Email & Password are required by default.
 
 
     objects = UserManager()
