@@ -64,6 +64,10 @@ $loading_dim: 100px;
   div.mobile_menu_button{display: none;}
   div.mobile_date_menu_container{display:none;}
 
+  .events_container,
+  .nav_container{min-width: 992px;}
+
+
   h2{font-family: 'Mate SC';}
   .events_title{
     padding: 10px 0px;

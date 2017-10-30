@@ -63,6 +63,10 @@
   div.mobile_date_menu_container {
     display: none; }
 
+  .events_container,
+  .nav_container {
+    min-width: 992px; }
+
   h2 {
     font-family: 'Mate SC'; }
 
