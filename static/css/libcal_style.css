@@ -11,6 +11,48 @@
 .dashed {
   border: 1px dashed black; }
 
+.rpl-links {
+  cursor: pointer; }
+
+.page_blur {
+  -webkit-filter: blur(3px);
+  -moz-filter: blur(3px);
+  -o-filter: blur(3px);
+  -ms-filter: blur(3px);
+  filter: blur(3px); }
+
+.spinner {
+  -webkit-animation: spin 1.3s linear infinite;
+  -moz-animation: spin 1.3s linear infinite;
+  animation: spin 1.3s linear infinite; }
+
+@-moz-keyframes spin {
+  100% {
+    -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg); } }
+@keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg); } }
+.loading_div_parent {
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  z-index: 100; }
+
+.loading_div {
+  z-index: 101;
+  height: 100px;
+  width: 100px;
+  margin: calc(50vh - 50px) auto;
+  font-size: 100px; }
+
+.loadshow {
+  display: inline !important; }
+
 @media (min-width: 768px) {
   div.mobile_dates_button {
     display: none; }

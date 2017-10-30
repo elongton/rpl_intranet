@@ -185,12 +185,16 @@ angular.module('events').
           // PULL EVENT DATA
           var pullevents = function(iterdate){
             var d = $q.defer();
+            $scope.loading_display = 'loadshow';
+            $scope.loading_blur = 'page_blur';
             function successCallback(response) {
                 var arraypush = {
                   date: iterdate,
                   eventinfo: response.data,}
                   console.log(arraypush)
                 d.resolve(arraypush)
+                $scope.loading_display = '';
+                $scope.loading_blur = '';
               }
             function errorCallback(response) {console.log(response)}
             var endpoint = 'https://api2.libcal.com/1.1/space/bookings?lid=1598&limit=20&date=' + iterdate + '&formAnswers=1'
@@ -273,6 +277,8 @@ angular.module('events').
           };//get_room_info()
 
           var page_startup = function(){
+            $scope.loading_display = 'loadshow';
+            $scope.loading_blur = 'page_blur';
             var promise = getcreds();
             promise.then(function(){
               get_room_info();

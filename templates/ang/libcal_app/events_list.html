@@ -1,7 +1,13 @@
 <nav-bar></nav-bar>
 
 
-<div class="container">
+<div class="loading_div_parent" style="display:none;" ng-class="loading_display">
+  <div class="loading_div table_parent" style="text-align: center;"><i class="fa fa-spinner table_child spinner" aria-hidden="true"></i></div>
+</div>
+
+
+
+<div class="container" ng-class="loading_blur">
   <div class="row">
     <div class="col-sm-12">
 
@@ -37,11 +43,14 @@
           <button class="btn btn-secondary" ng-click = "add_day_button()" ng-disabled = "datedisable" style="font-size: 20px;">+</i></button>
         </li>
         <li class="nav-item text-left datepicker">
+          <button class="btn btn-secondary" ng-click = "lose_day_button()" ng-disabled = "datedisable" style="font-size: 20px;">-</i></button>
+        </li>
+        <!-- <li class="nav-item text-left datepicker">
           <button class="btn btn-secondary" ng-click = "weekbutton()" ng-disabled = "datedisable">Week</button>
         </li>
         <li class="nav-item text-left datepicker">
           <button class="btn btn-secondary" ng-click = "add_week_button()" ng-disabled = "datedisable" style="font-size: 20px;">+</i></button>
-        </li>
+        </li> -->
         <!-- GO BUTTON -->
         <li class="nav-item text-right ml-auto">
           <button class="btn btn-success pull-right"  ng-click = "get_events()" ng-disabled = "datedisable || disable_load">Look Up</button>
