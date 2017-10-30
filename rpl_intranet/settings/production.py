@@ -66,7 +66,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'rpl_intranet.wsgi.application'
-
+AUTH_USER_MODEL = 'accounts.User'
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
