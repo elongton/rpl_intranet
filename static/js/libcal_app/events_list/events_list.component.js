@@ -86,9 +86,11 @@ angular.module('events').
           $scope.add_day_button = function(){
             // $scope.to = new Date();
             var dummy_date = new Date();
+            dummy_date.setMonth($scope.from.getMonth())
             dummy_date.setDate($scope.from.getDate() + 1)
+
             // makeaday($scope.from, $scope.to);
-            $scope.from = dummy_date;
+            $scope.from = new Date(dummy_date);
             $scope.to = $scope.from;
           }
 
@@ -96,7 +98,9 @@ angular.module('events').
           $scope.lose_day_button = function(){
             // $scope.to = new Date();
             var dummy_date = new Date();
+
             dummy_date.setDate($scope.to.getDate() - 1)
+            dummy_date.setMonth($scope.to.getMonth())
             // makeaday($scope.from, $scope.to);
             $scope.to = dummy_date;
             $scope.from = $scope.to;
