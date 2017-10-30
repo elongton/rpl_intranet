@@ -32,8 +32,6 @@ h1{margin: 20px 0;}
 .infoh2{margin: 20px 0;}
 
 
-
-
 /*stats page*/
 // .filter_row{display:none;}
 $blur_radius: blur(3px);
@@ -98,7 +96,4 @@ animation:spin .9s linear infinite;
 @-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
 @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
 
-
-
-// menu
 .rpl-links{cursor: pointer;}

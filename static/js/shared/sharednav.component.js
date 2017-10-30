@@ -3,6 +3,7 @@
   angular.module('sharednav')
         .component('linkDropdown', {
           templateUrl: '/api/templates/shared/link_dropdown.html',
+          // styles: ['.rpl-links{cursor: pointer;}'],
           controller: function($scope){
             // on page link functions
             $scope.referenceapp = function(){
@@ -17,6 +18,7 @@
             }
 
           }
+
         })
         .component('navbarBrand', {
           templateUrl: '/api/templates/shared/link_brand.html',

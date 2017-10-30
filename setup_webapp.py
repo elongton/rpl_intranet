@@ -39,6 +39,7 @@ branches = {'Main':1,
 account_password = 'reading123'
 #['account_name', branch_pk]
 accounts = [['main-comp', branches['Main']],
+            ['pparks', branches['Main']],
             ['main-circ', branches['Main']],
             ['main-ref', branches['Main']],
             ['belmont-circ', branches['Belmont']],

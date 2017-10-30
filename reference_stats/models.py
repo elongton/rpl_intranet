@@ -6,7 +6,11 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.dispatch import receiver
 
+
 from accounts.models import Branch, User
+
+
+
 
 class Medium(models.Model):
     type = models.CharField(max_length=255)
@@ -44,6 +48,6 @@ class Request(models.Model):
     #     return super(Request, self).save(*args, **kwargs)
 
 
-# 
+#
 # class MediumAdmin(admin.ModelAdmin):
 #     list_display = ('type', 'id')
