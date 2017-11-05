@@ -45,6 +45,7 @@ class UserManager(BaseUserManager):
         )
         user.staff = True
         user.admin = True
+        user.is_superuser = True
         user.save(using=self._db)
         return user
 
@@ -56,6 +57,7 @@ class User(AbstractBaseUser):
     branch = models.ForeignKey(Branch, related_name = 'accounts', blank=True, null=True)
     first_name = models.CharField(max_length=50, blank=True)
     last_name = models.CharField(max_length=50, blank=True)
+    is_superuser = models.BooleanField(default=False)
     email = models.EmailField(
         verbose_name='email address',
         max_length=255,

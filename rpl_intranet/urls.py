@@ -20,6 +20,10 @@ from django.contrib import admin
 from django.views.generic.base import TemplateView
 from rest_framework_jwt.views import obtain_jwt_token
 from rest_framework_jwt.views import refresh_jwt_token
+
+from wiki.urls import get_pattern as get_wiki_pattern
+from django_nyt.urls import get_pattern as get_nyt_pattern
+
 from ang.views import (AngularTemplateView,
                       ReferenceTemplateView,
                       UserTemplateView,
@@ -45,5 +49,7 @@ urlpatterns += [
     url(r'^users',UserTemplateView.as_view()),
     url(r'^reference', ReferenceTemplateView.as_view()),
     url(r'^libcal', LibcalTemplateView.as_view()),
+    url(r'^wiki/notifications/', get_nyt_pattern()),
+    url(r'^wiki/', get_wiki_pattern()),
     url(r'', HomeTemplateView.as_view()),
 ]
