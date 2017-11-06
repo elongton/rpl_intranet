@@ -88,7 +88,7 @@ def _clean_slug(slug, urlpath):
     if settings.CHECK_SLUG_URL_AVAILABLE:
         try:
             # Fail validation if URL resolves to non-wiki app
-            match = resolve(urlpath.path + '/' + slug + '/')
+            match = resolve(urlpath.path + '/wiki/' + slug + '/')
             if match.app_name != 'wiki':
                 raise forms.ValidationError(
                     ugettext('This slug conflicts with an existing URL.'))

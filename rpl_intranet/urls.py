@@ -52,5 +52,5 @@ urlpatterns += [
     url(r'^wiki/', get_wiki_pattern()),
     url(r'^wiki/notifications/', get_nyt_pattern()),
     url(r'^wiki/auth/', include('django.contrib.auth.urls')),
-    url(r'', HomeTemplateView.as_view(), name='homeview'),
+    url(r'^(?!wiki/).*$', HomeTemplateView.as_view(), name='homeview'),
 ]
