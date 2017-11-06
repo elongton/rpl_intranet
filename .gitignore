@@ -4,6 +4,8 @@ local.py
 # database
 .sqlite3
 migrations/
+db.sqlite3
+db
 
 # generated py files
 .pyc
