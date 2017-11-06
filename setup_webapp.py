@@ -13,6 +13,8 @@ execute_from_command_line(['manage.py', 'makemigrations', 'accounts'])
 # input("Press Enter to continue...")
 execute_from_command_line(['manage.py', 'makemigrations', 'reference_stats'])
 # input("Press Enter to continue...")
+execute_from_command_line(['manage.py', 'makemigrations', 'wiki'])
+
 execute_from_command_line(['manage.py', 'migrate'])
 input("Press Enter to continue...")
 
