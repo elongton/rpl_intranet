@@ -108,7 +108,8 @@ class WikiURLPatterns(object):
         else:
             urlpatterns = [
                 url(r'^_accounts/logout/$',
-                    accounts.altlogout, name='altlogout'),
+                    accounts.altlogout,
+                    name='altlogout'),
             ]
         return urlpatterns
 

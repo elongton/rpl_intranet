@@ -9,11 +9,11 @@ from accounts.models import User, Branch
 from reference_stats.models import Medium, TypeOfRequest
 
 
-execute_from_command_line(['manage.py', 'makemigrations', 'accounts'])
+# execute_from_command_line(['manage.py', 'makemigrations', 'accounts'])
 # input("Press Enter to continue...")
-execute_from_command_line(['manage.py', 'makemigrations', 'reference_stats'])
+# execute_from_command_line(['manage.py', 'makemigrations', 'reference_stats'])
 # input("Press Enter to continue...")
-execute_from_command_line(['manage.py', 'makemigrations', 'wiki'])
+# execute_from_command_line(['manage.py', 'makemigrations', 'wiki'])
 
 execute_from_command_line(['manage.py', 'migrate'])
 input("Press Enter to continue...")
