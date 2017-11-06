@@ -153,13 +153,14 @@ WIKI_ACCOUNT_SIGNUP_ALLOWED = False
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'static-root')
-MEDIA_ROOT = ''
+# MEDIA_ROOT = ''
 
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 
+# STATICFILES_STORAGE = os.path.join(BASE_DIR, 'static_storage')
 
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': (
