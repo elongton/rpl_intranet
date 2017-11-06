@@ -16,6 +16,11 @@
               window.location = url;
               window.location.replace(url);
             }
+            $scope.wikiapp = function(){
+              var url = "/wiki/";
+              window.location = url;
+              window.location.replace(url);
+            }
 
           }
 

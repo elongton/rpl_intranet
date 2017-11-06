@@ -9,9 +9,8 @@ from django.utils import timezone
 from datetime import datetime
 from calendar import Calendar
 
-from django.contrib.auth.models import User
 from reference_stats.models import Request, TypeOfRequest, Medium
-from accounts.models import Profile, Branch
+from accounts.models import User, Branch
 from faker import Faker
 
 fakegen = Faker()
@@ -26,15 +25,15 @@ def add_requests(N=2, iteryear=2017, itermonth=10): #N is the number of requests
         totaldays = totaldays+1
 
     totalusers = 0
-    for profile in Profile.objects.all():
-        if profile.user.is_superuser == False:
+    for profile in User.objects.all():
+        if profile.is_superuser == False:
             totalusers = totalusers+1
 
     total_entries = totaldays * totalusers * N
     current_entry = 0
     for day in cal.itermonthdates(iteryear, itermonth):
-        for profile in Profile.objects.all():
-            if profile.user.is_superuser == False:
+        for profile in User.objects.all():
+            if profile.is_superuser == False:
                 for entry in range(N):
                     current_entry = current_entry+1
                     print(str(current_entry) + ' of ' + str(total_entries))
@@ -58,7 +57,7 @@ def add_requests(N=2, iteryear=2017, itermonth=10): #N is the number of requests
                     branch = profile.branch
                     over_five = bool(random.getrandbits(1))
                     request_maker = Request.objects.get_or_create(
-                            user = profile.user,
+                            user = profile,
                             time_length = 1,
                             type_of_request = TypeOfRequest.objects.get(pk=type_of_request),
                             medium = Medium.objects.get(pk=medium),
