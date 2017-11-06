@@ -65,7 +65,7 @@ STORAGE_BACKEND = getattr(
 APPEND_EXTENSION = getattr(
     django_settings,
     'WIKI_ATTACHMENTS_APPEND_EXTENSION',
-    True)
+    False)
 
 #: Important for e.g. S3 backends: If your storage backend does not have a .path
 #: attribute for the file, but only a .url attribute, you should use False.
