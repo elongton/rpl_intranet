@@ -12,7 +12,11 @@ import os
 import datetime
 
 from django.core.urlresolvers import reverse_lazy
+# from django.contrib.auth import logout
+
 LOGIN_REDIRECT_URL = reverse_lazy('wiki:get', kwargs={'path': ''})
+# LOGOUT_URL= '/wiki/accounts/logout/'
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -144,6 +148,7 @@ USE_TZ = True
 
 WIKI_ACCOUNT_HANDLING = False
 WIKI_ACCOUNT_SIGNUP_ALLOWED = False
+
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'

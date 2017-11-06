@@ -106,7 +106,10 @@ class WikiURLPatterns(object):
                     name='profile_update'),
             ]
         else:
-            urlpatterns = []
+            urlpatterns = [
+                url(r'^_accounts/logout/$',
+                    accounts.altlogout, name='altlogout'),
+            ]
         return urlpatterns
 
     def get_revision_urls(self):

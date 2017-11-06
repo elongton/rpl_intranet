@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="">
     <meta name="author" content="www.django-wiki.org">
+        <link rel="shortcut icon" href='{% static "img/favicon.png" %}' type="image/x-icon">
 
     <!-- Le styles -->
     <link href="{% static "wiki/bootstrap/css/wiki-bootstrap.min.css" %}" rel="stylesheet">
@@ -37,9 +38,14 @@
             <span class="icon-bar"></span>
           </button>
           {% block wiki_header_branding %}
-          <a class="navbar-brand" href="{% url 'wiki:root' %}">RPL-\/\/ i K |</a>
+          <!-- <div class="navbar-brand rpl-links" ng-click = "loadhomepage()"> -->
+            <a href="{% url 'homeview' %}" class="navbar-brand" style="padding: 5px 5px">
+              <img style="height: 100%;" src="{% static "img/rpl_logo_vector.png" %}" alt="RPL Logo">
+            </a>
+          <!-- </div> -->
           {% endblock %}
         </div>
+
         <div class="navbar-collapse collapse">
           <form class="navbar-form navbar-right" id="wiki-search-form" method="GET" action="{% url 'wiki:search' %}">
             <div class="input-group">
@@ -70,7 +76,7 @@
                   </li>
                   {% endif %}
                   <li>
-                    <a href="{{ "LOGOUT_URL"|wiki_settings }}">
+                    <a href="{% url 'wiki:altlogout'%}">
                       <i class="fa fa-power-off"></i>
                       {% trans "Log out" %}
                     </a>
@@ -107,7 +113,27 @@
           </div>
           {% block wiki_header_navlinks %}
           <ul class="nav navbar-nav">
-            <li class="active"><a href="/">{% trans "Home" %}</a></li>
+            <li><a href="/wiki/">Wiki Home</a></li>
+            <li class="dropdown">
+               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Intranet<span class="caret"></span></a>
+               <ul class="dropdown-menu">
+                 <li><a href="/libcal">LibCal Program Agenda</a></li>
+                 <li><a href="#">Policy Wiki</a></li>
+                 <li role="separator" class="divider"></li>
+                 <li class="dropdown-header">Subscription Web Apps</li>
+                 <li><a target = '/' href="https://richmondpubliclibrary.libapps.com/libapps/login.php?site_id=12885&target=">LibCal</a></li>
+                 <li><a target = '/' href="https://richmondpubliclibrary.libstaffer.com">LibStaffer</a></li>
+                 <li><a target = '/' href="#">LibraryAware</a></li>
+                 <li role="separator" class="divider"></li>
+                 <li><a target = '/' href="http://rvalibrary.org">rvalibrary.org</a></li>
+                 <li><a target = '/' href="https://rapidsweb.ci.richmond.va.us/">RAPIDS</a></li>
+                 <li role="separator" class="divider"></li>
+                 <li class="dropdown-header" style="color: #d9534f;">Coming Soon</li>
+                 <li class="disabled"><a href="#">Request Statistics</a></li>
+                 <li class="disabled"><a href="#">New Employee Handbook</a></li>
+               </ul>
+             </li>
+            <!-- <li class="active"><a href="/">{% trans "Home" %}</a></li> -->
             <!-- <li><a href="https://github.com/django-wiki/django-wiki" target="_blank">{% trans "About" %}</a></li> -->
           </ul>
           {% endblock %}

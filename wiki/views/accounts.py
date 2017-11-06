@@ -27,6 +27,10 @@ from wiki.conf import settings
 
 User = get_user_model()
 
+def altlogout(request):
+    auth_logout(request)
+    print('hello')
+    return redirect("wiki:root")
 
 class Signup(CreateView):
     model = User
@@ -61,7 +65,6 @@ class Signup(CreateView):
 
 
 class Logout(View):
-
     def dispatch(self, request, *args, **kwargs):
         if not settings.ACCOUNT_HANDLING:
             return redirect(settings.LOGOUT_URL)
