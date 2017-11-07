@@ -77,7 +77,6 @@ class Logout(View):
 
 
 class Login(FormView):
-
     form_class = AuthenticationForm
     template_name = "wiki/accounts/login.html"
 
@@ -115,6 +114,27 @@ class Login(FormView):
                 return redirect("wiki:root")
             return redirect(self.referer)
 
+class MaxLogin(FormView):
+    form_class = AuthenticationForm
+    template_name = "wiki/accounts/maxlogin.html"
+
+    # def dispatch(self, request, *args, **kwargs):
+    #     return super(MaxLogin, self).dispatch(request, *args, **kwargs)
+    def post(self, request, *args, **kwargs):
+        self.referer = request.session.get('login_referer', '')
+        return super(MaxLogin, self).post(request, *args, **kwargs)
+
+    def form_valid(self, form, *args, **kwargs):
+        auth_login(self.request, form.get_user())
+        messages.info(self.request, _("You are now logged in! Have fun!"))
+        if self.request.GET.get("next", None):
+            return redirect(self.request.GET['next'])
+        if django_settings.LOGIN_REDIRECT_URL:
+            return redirect(django_settings.LOGIN_REDIRECT_URL)
+        else:
+            if not self.referer:
+                return redirect("wiki:root")
+            return redirect(self.referer)
 
 class Update(UpdateView):
     model = User

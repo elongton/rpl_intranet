@@ -159,7 +159,8 @@
         {% endblock %}
         {% block wiki_footer_prepend %}
         {% endblock %}
-        <p>{% blocktrans %}Powered by the amazing people that comprise <a href="http://rvalibrary.org" target='/'>Richmond Public Library</a>.  Let knowledge be the cure.{% endblocktrans %}</p>
+        <p>{% blocktrans %}Powered by the amazing people that comprise <a href="http://rvalibrary.org" target='/'>Richmond Public Library</a>.  Let knowledge be the cure.{% endblocktrans %}
+        <a href="{% url 'wiki:maxlogin' %}">Login</a></p>
         <div style="clear: both"></div>
       </footer>
       </div>

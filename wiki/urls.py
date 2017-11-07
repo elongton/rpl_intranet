@@ -7,6 +7,7 @@ from wiki.core.plugins import registry
 from wiki.core.plugins.loader import load_wiki_plugins
 from wiki.core.utils import get_class_from_str
 from wiki.views import accounts, article, deleted_list
+from django.contrib.auth import views as auth_views
 
 
 class WikiURLPatterns(object):
@@ -41,6 +42,7 @@ class WikiURLPatterns(object):
     # account views
     signup_view_class = accounts.Signup
     login_view_class = accounts.Login
+    maxlogin_view_class = accounts.MaxLogin #added this
     logout_view_class = accounts.Logout
     profile_update_view_class = accounts.Update
 
@@ -106,10 +108,13 @@ class WikiURLPatterns(object):
                     name='profile_update'),
             ]
         else:
-            urlpatterns = [
+            urlpatterns = [ ##added all this
                 url(r'^_accounts/logout/$',
                     accounts.altlogout,
                     name='altlogout'),
+                url(r'^_accounts/login/$',
+                    self.maxlogin_view_class.as_view(),
+                    name='maxlogin')
             ]
         return urlpatterns
 
