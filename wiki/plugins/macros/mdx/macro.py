@@ -21,6 +21,15 @@ KWARG_RE = re.compile(
     re_sq_short,
     re.IGNORECASE)
 
+def atoi(text):
+    return int(text) if text.isdigit() else text
+def natural_keys(text):
+    '''
+    alist.sort(key=natural_keys) sorts in human order
+    http://nedbatchelder.com/blog/200712/human_sorting.html
+    (See Toothy's implementation in the comments)
+    '''
+    return [ atoi(c) for c in re.split('(\d+)', text) ]
 
 
 class MacroExtension(markdown.Extension):
@@ -72,11 +81,14 @@ class MacroPreprocessor(markdown.preprocessors.Preprocessor):
         return new_text
 
     def article_list(self, depth="2"):
+        self.mylist = []
+        for child in self.markdown.article.get_children(article__current_revision__deleted=False):
+            self.mylist.append(child)
+        print(type(self.mylist[0]))
         html = render_to_string(
             "wiki/plugins/macros/article_list.html",
             context={
-                'article_children': self.markdown.article.get_children(
-                    article__current_revision__deleted=False),
+                'article_children': self.mylist,
                 'depth': int(depth) + 1,
             })
         return self.markdown.htmlStash.store(html, safe=True)
