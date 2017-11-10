@@ -8,20 +8,6 @@ from wiki.core.plugins import registry
 
 log = logging.getLogger(__name__)
 
-#####sorting
-import re
-def atoi(text):
-    return int(text) if text.isdigit() else text
-def natural_keys(obj):
-    myobj = obj.article.current_revision.title
-    '''
-    alist.sort(key=natural_keys) sorts in human order
-    http://nedbatchelder.com/blog/200712/human_sorting.html
-    (See Toothy's implementation in the comments)
-    '''
-    return [ atoi(c) for c in re.split('(\d+)', myobj) ]
-#####sorting
-
 class ArticleMixin(TemplateResponseMixin):
 
     """A mixin that receives an article object as a parameter (usually from a wiki
@@ -40,9 +26,6 @@ class ArticleMixin(TemplateResponseMixin):
                         articles__article__current_revision__deleted=False,
                         user_can_read=request.user):
                     self.children_slice.append(child)
-                #####sorting
-                self.children_slice.sort(key=natural_keys)
-                #####sorting
             except AttributeError as e:
                 log.error(
                     "Attribute error most likely caused by wrong MPTT version. Use 0.5.3+.\n\n" +

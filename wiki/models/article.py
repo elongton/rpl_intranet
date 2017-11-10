@@ -18,6 +18,21 @@ from wiki.conf import settings
 from wiki.core import compat, permissions
 from wiki.core.markdown import article_markdown
 from wiki.decorators import disable_signal_for_loaddata
+import re
+
+
+#####sorting
+def atoi(text):
+    return int(text) if text.isdigit() else text
+def natural_keys(obj):
+    myobj = obj.article.current_revision.title
+    '''
+    alist.sort(key=natural_keys) sorts in human order
+    http://nedbatchelder.com/blog/200712/human_sorting.html
+    (See Toothy's implementation in the comments)
+    '''
+    return [ atoi(c) for c in re.split('(\d+)', myobj) ]
+#####sorting
 
 
 
@@ -105,8 +120,11 @@ class Article(models.Model):
                     **kwargs).can_read(user_can_read)
             else:
                 objects = obj.content_object.get_children().filter(**kwargs)
-            for child in objects.order_by(
-                    'articles__article__current_revision__title'):
+            child_list = []
+            for child in objects:
+                child_list.append(child)
+            child_list.sort(key=natural_keys)
+            for child in child_list:
                 cnt += 1
                 if max_num and cnt > max_num:
                     return
