@@ -12,29 +12,24 @@ angular.module('events').
 
           var downanimation = function(){
             $scope.dates_button_class = 'animate_date_button_up';
-            // $scope.header_shown = '';
             $scope.menu_position = !$scope.menu_position
           }
           var upanimation = function(){
               $scope.dates_button_class = 'animate_date_button_down';
-              // $scope.header_shown = 'header-opacity';
               $scope.menu_position = !$scope.menu_position
           }//addanimation()
 
           //actual menu
           $scope.is_shown = 'nodisplay';
-
           $scope.showmenu = function(){$scope.is_shown = '';}
           $scope.hidemenu = function(){$scope.is_shown = 'nodisplay';}
 
-
+          //MOBILE STUFF
           //scroll direction code:
           $scope.lastScrollTop = 0;
           $scope.direction = "";
 
-
           var didScroll = false;
-
           angular.element($window).on("scroll", function() {
             $scope.didScroll = true;
             $scope.scrollheight = window.pageYOffset;
@@ -60,7 +55,7 @@ angular.module('events').
 
 
 
-
+          //TIME STUFF
           var one_day = 1000*60*60*24;
           var makeaday = function(start, end){
             start.setHours(0,0,0,0);
@@ -79,38 +74,28 @@ angular.module('events').
             $scope.to = new Date();
             $scope.from = new Date();
             var week = $scope.to.getDate() + 7;
-            // makeaday($scope.from, $scope.to);
             $scope.to.setDate(week);
           }
 
           $scope.add_day_button = function(){
-            // $scope.to = new Date();
             var dummy_date = new Date();
             dummy_date.setMonth($scope.from.getMonth())
             dummy_date.setDate($scope.from.getDate() + 1)
-
-            // makeaday($scope.from, $scope.to);
             $scope.from = new Date(dummy_date);
             $scope.to = $scope.from;
           }
 
-
           $scope.lose_day_button = function(){
-            // $scope.to = new Date();
             var dummy_date = new Date();
-
             dummy_date.setDate($scope.to.getDate() - 1)
             dummy_date.setMonth($scope.to.getMonth())
-            // makeaday($scope.from, $scope.to);
             $scope.to = dummy_date;
             $scope.from = $scope.to;
           }
 
           $scope.add_week_button = function(){
-            // $scope.to = new Date();
             var dummy_date = new Date();
             dummy_date.setDate($scope.from.getDate() + 7)
-            // makeaday($scope.from, $scope.to);
             $scope.from = dummy_date;
             $scope.to = $scope.from;
           }
@@ -123,6 +108,7 @@ angular.module('events').
             }
             $scope.dateArray = getDates($scope.from, $scope.to);
           })
+
           $scope.$watch('to', function(){
             var total_days = Math.round(($scope.to.getTime() - $scope.from.getTime())/one_day);
             if ($scope.to < $scope.from){
@@ -132,7 +118,7 @@ angular.module('events').
             $scope.dateArray = getDates($scope.from, $scope.to);
           })
 
-
+          //SETS THE INTIAL DATE
           Date.prototype.addDays = function(days) {
               var date = new Date(this.valueOf())
               date.setDate(date.getDate() + days);
@@ -155,8 +141,6 @@ angular.module('events').
           }
           $scope.dateArray = getDates($scope.from, $scope.to);
           $scope.eventarray = new Array();
-
-
 
 
 ///////////////////////   HTTP  //////////////////////////////
