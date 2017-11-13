@@ -3,18 +3,10 @@
 angular.
   module('libcaldata').
     factory('LibCalData', function($cookies, $location, $httpParamSerializer, $resource){
-        var url = ''
+        var url = 'https://api2.libcal.com/1.1/oauth/token'
         var getCreds = {
-              url: 'https://api2.libcal.com/1.1/oauth/token',
+              url: url,
               method: "POST",
-              data: {
-                client_id: '135',
-                client_secret: '906a3eab0c7f08ebad67e5160f0ae951',
-                grant_type: 'client_credentials',
-              },
-              headers: {
-                // authorization: "JWT " + token
-              },
         }
 
         // var requestDelete = {

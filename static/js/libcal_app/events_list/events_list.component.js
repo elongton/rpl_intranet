@@ -5,7 +5,12 @@ angular.module('events').
         templateUrl: '/api/templates/libcal_app/events_list.html',
         controller: function(getDates, LibCalData, $scope, $cookies, $location, $http, $rootScope, $q, $window, $document, $interval){
           $scope.staticfiles = staticfiles;
-          LibCalData.getCreds().$promise.then(
+
+          LibCalData.getCreds({
+                client_id: '135',
+                client_secret: '906a3eab0c7f08ebad67e5160f0ae951',
+                grant_type: 'client_credentials',
+              }).$promise.then(
               function(result){console.log(result)},
               function(error){console.log(result)}
             );
