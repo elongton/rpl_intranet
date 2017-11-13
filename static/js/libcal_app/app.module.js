@@ -11,6 +11,7 @@ angular.module('libcalApp', [
   //internal
   'events',
   'sharednav',
+  'dates',
   // 'user',
   // 'login',
   'navBar',
