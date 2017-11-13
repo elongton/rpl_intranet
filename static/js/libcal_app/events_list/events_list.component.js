@@ -3,13 +3,15 @@
 angular.module('events').
       component('eventsList', {
         templateUrl: '/api/templates/libcal_app/events_list.html',
-        controller: function(Dates, $scope, $cookies, $location, $http, $rootScope, $q, $window, $document, $interval,){
-          $scope.branch = $cookies.get("branch")
-          $scope.username = $cookies.get("username")
+        controller: function(getDates, LibCalData, $scope, $cookies, $location, $http, $rootScope, $q, $window, $document, $interval){
           $scope.staticfiles = staticfiles;
+          LibCalData.getCreds().$promise.then(
+              function(result){console.log(result)},
+              function(error){console.log(result)}
+            );
+
 
           //animating the buttons in mobile:
-
           var downanimation = function(){
             $scope.dates_button_class = 'animate_date_button_up';
             $scope.menu_position = !$scope.menu_position
@@ -52,11 +54,78 @@ angular.module('events').
               }
           }, 500);
 
-
-
-
           //TIME STUFF
-          Dates();
+          var one_day = 1000*60*60*24;
+          var makeaday = function(start, end){
+            start.setHours(0,0,0,0);
+            end.setHours(23,59,59,999);
+          }
+          $scope.todaybutton = function(){
+            $scope.from= new Date();
+            $scope.to = new Date();
+            makeaday($scope.from, $scope.to);
+          }
+          //run today button on reload
+          $scope.todaybutton();
+
+          //managing the datepicker
+          $scope.weekbutton = function(){
+            $scope.to = new Date();
+            $scope.from = new Date();
+            var week = $scope.to.getDate() + 7;
+            $scope.to.setDate(week);
+          }
+
+          $scope.add_day_button = function(){
+            var dummy_date = new Date();
+            dummy_date.setMonth($scope.from.getMonth())
+            dummy_date.setDate($scope.from.getDate() + 1)
+            $scope.from = new Date(dummy_date);
+            $scope.to = $scope.from;
+          }
+
+          $scope.lose_day_button = function(){
+            var dummy_date = new Date();
+            dummy_date.setDate($scope.to.getDate() - 1)
+            dummy_date.setMonth($scope.to.getMonth())
+            $scope.to = dummy_date;
+            $scope.from = $scope.to;
+          }
+
+          $scope.add_week_button = function(){
+            var dummy_date = new Date();
+            dummy_date.setDate($scope.from.getDate() + 7)
+            $scope.from = dummy_date;
+            $scope.to = $scope.from;
+          }
+
+          $scope.$watch('from', function(){
+            var total_days = Math.round(($scope.to.getTime() - $scope.from.getTime())/one_day);
+            if ($scope.from > $scope.to){
+              $scope.to = new Date($scope.from.getTime())
+              makeaday($scope.from, $scope.to);
+            }
+            $scope.dateArray = getDates($scope.from, $scope.to);
+          })
+
+          $scope.$watch('to', function(){
+            var total_days = Math.round(($scope.to.getTime() - $scope.from.getTime())/one_day);
+            if ($scope.to < $scope.from){
+              $scope.from = new Date($scope.to.getTime())
+              makeaday($scope.from, $scope.to);
+            }
+            $scope.dateArray = getDates($scope.from, $scope.to);
+          })
+
+          //Sets the intial date
+          Date.prototype.addDays = function(days) {
+              var date = new Date(this.valueOf())
+              date.setDate(date.getDate() + days);
+              return date;
+          }
+
+          $scope.dateArray = getDates($scope.from, $scope.to);
+          $scope.eventarray = new Array();
 
 
 ///////////////////////   HTTP  //////////////////////////////
