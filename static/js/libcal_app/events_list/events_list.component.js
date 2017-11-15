@@ -13,7 +13,12 @@ angular.module('events').
               }).$promise.then(
               function(result){console.log(result)},
               function(error){console.log(result)}
-            );
+            ).$promise.then(console.log('yay!'));
+
+          // LibCalData.pullCats({headers: {authorization: "Bearer " + $scope.libcaltoken}}).$promise.then(
+          //   function(result){console.log(result)},
+          //   function(error){console.log(result)}
+          // )
 
 
           //animating the buttons in mobile:

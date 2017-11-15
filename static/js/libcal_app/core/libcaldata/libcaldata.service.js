@@ -9,6 +9,19 @@ angular.
               method: "POST",
         }
 
+
+        var pullcategories = {
+              url: 'https://api2.libcal.com/1.1/space/categories/1598',
+              method: 'GET',
+              // headers: {authorization: "Bearer " + $scope.libcaltoken},
+              isArray: true,
+              transformResponse: function(data, headersGetter, status){
+                var finalData = angular.fromJson(data)
+                // console.log(finalData.results)
+                return finalData//.results
+              }
+        }
+
         // var requestDelete = {
         //   url: '/api/reference/:pk/delete/',
         //   method: "DELETE",
@@ -47,6 +60,7 @@ angular.
 
         return $resource(url, {}, {
             getCreds: getCreds,
+            pullCats: pullcategories,
             // get: requestGet,
             // create: requestCreate,
             // delete: requestDelete,
