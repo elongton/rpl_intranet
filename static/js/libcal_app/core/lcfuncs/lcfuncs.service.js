@@ -1,8 +1,8 @@
 'use strict';
 
 angular.
-  module('dates').
-    factory('getDates', function(){
+  module('lcfuncs').
+    factory('lcFuncs', function(){
       return function(startDate, stopDate){
             var dateArray = new Array();
             var currentDate = startDate;

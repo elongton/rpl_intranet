@@ -3,49 +3,50 @@
 angular.module('events').
       component('eventsList', {
         templateUrl: '/api/templates/libcal_app/events_list.html',
-        controller: function(getDates, LibCalData, $scope, $cookies, $location, $http, $rootScope, $q, $window, $document, $interval){
+        controller: function(lcFuncs, lcData, $scope, $cookies, $location, $http, $rootScope, $q, $window, $document, $interval){
           $scope.staticfiles = staticfiles;
 
           //progression here is the following (the code is read from bottom to top):
-          //#1 getCreds
-          //#2 pullCats
-          //#3 pullSpaces
-          //#4 pullEvents
+          //#1 getCreds - get the access token
+          //#2 pullCats - get the categories of spaces for the location
+          //#3 pullSpaces - get the spaces for all the categories
 
-          var credsSuccess, credsError, catsSuccess, catsError,
-              eventsSuccess, eventsError, spacesSuccess, spacesError
-
-          ///////this is #4///////
+          var credsSuccess, credsError, catsSuccess,
+              catsError, spacesSuccess, spacesError
+          ///////this is #3///////
           spacesSuccess = function(result){
-            console.log(result)
+            var raw_spaces_list = new Array();
+            for (var i=0; i < result.length; i++){
+              raw_spaces_list = raw_spaces_list.concat(result[i].items)}//for
+            $scope.spaces_dict = {};
+            for (var i=0; i< raw_spaces_list.length; i++){
+              var dictval = raw_spaces_list[i].id;
+              $scope.spaces_dict[dictval] = raw_spaces_list[i].name}//for
           }
           spacesError = function(result){console.log(result)}
 
-          ///////this is #3///////
+          ///////this is #2///////
           catsSuccess = function(result){
             //we need a list of the category IDs, that's the goal of the following code
             var cats = result[0].categories;
             var cat_string = '';
             for (var i = 0; i < cats.length; i++){
               cat_string = cat_string.concat(cats[i].cid );
-              if (i+1 < cats.length){cat_string = cat_string.concat(',');}
-            }
+              if (i+1 < cats.length){cat_string = cat_string.concat(',');}}//for
             //now we call the space puller
-            LibCalData({token:$scope.libcaltoken,iterdate:null,categoryList:cat_string})
+            lcData({token:$scope.libcaltoken,iterdate:null,categoryList:cat_string})
             .pullSpaces().$promise.then(spacesSuccess, spacesError);
           };//catsSuccess
           catsError = function(result){console.log(result)};
 
-          ///////this is #2///////
+          ///////this is #1///////
           credsSuccess = function(result){
             $scope.libcaltoken = result.access_token
-            // console.log()
-            LibCalData({token:$scope.libcaltoken}).pullCats()
+            lcData({token:$scope.libcaltoken}).pullCats()
             .$promise.then(catsSuccess, catsError);}
           credsError = function(result){console.log(result)}
 
-          ///////this is #1///////
-          LibCalData().getCreds({
+          lcData().getCreds({
                 client_id: '135',
                 client_secret: '906a3eab0c7f08ebad67e5160f0ae951',
                 grant_type: 'client_credentials',
@@ -147,7 +148,7 @@ angular.module('events').
               $scope.to = new Date($scope.from.getTime())
               makeaday($scope.from, $scope.to);
             }
-            $scope.dateArray = getDates($scope.from, $scope.to);
+            $scope.dateArray = lcFuncs($scope.from, $scope.to);
           })
 
           $scope.$watch('to', function(){
@@ -156,7 +157,7 @@ angular.module('events').
               $scope.from = new Date($scope.to.getTime())
               makeaday($scope.from, $scope.to);
             }
-            $scope.dateArray = getDates($scope.from, $scope.to);
+            $scope.dateArray = lcFuncs($scope.from, $scope.to);
           })
 
           //Sets the intial date
@@ -166,7 +167,7 @@ angular.module('events').
               return date;
           }
 
-          $scope.dateArray = getDates($scope.from, $scope.to);
+          $scope.dateArray = lcFuncs($scope.from, $scope.to);
           $scope.eventarray = new Array();
 
 
@@ -350,9 +351,7 @@ angular.module('events').
                   var datesplit = data[i].date.split("-");
                   data[i].date = dayNames[thedate.getDay()] + ", " + monthNames[datesplit[1]-1] + ' ' + datesplit[2];
                   data[i].eventinfo.sort(function(a,b){return new Date(b.fromDate) - new Date(a.fromDate);}).reverse();
-
                   //lets create an array just for keys that start with 'q'
-
                   for (var j=0; j < data[i].eventinfo.length; j++){
                     var qdict = {}
                     // data[i].eventinfo[j].questions = {};
@@ -364,8 +363,6 @@ angular.module('events').
                     }//for var key
                     data[i].eventinfo[j].questions = qdict
                   }//for var j=0
-
-
 
                 }
 

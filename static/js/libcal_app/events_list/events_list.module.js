@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module('events', ['dates', 'libcaldata']);
+angular.module('events', ['lcfuncs', 'lcdata']);
