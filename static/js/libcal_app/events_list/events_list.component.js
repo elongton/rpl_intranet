@@ -95,7 +95,7 @@ angular.module('events').
                   }
                   $scope.lastScrollTop = $scope.st;
               }
-          }, 500);
+          }, 500);//$interval
 
           //TIME STUFF
           var one_day = 1000*60*60*24;
@@ -148,7 +148,7 @@ angular.module('events').
               $scope.to = new Date($scope.from.getTime())
               makeaday($scope.from, $scope.to);
             }
-            $scope.dateArray = lcFuncs($scope.from, $scope.to);
+            $scope.dateArray = lcFuncs.getDates($scope.from, $scope.to);
           })
 
           $scope.$watch('to', function(){
@@ -157,7 +157,7 @@ angular.module('events').
               $scope.from = new Date($scope.to.getTime())
               makeaday($scope.from, $scope.to);
             }
-            $scope.dateArray = lcFuncs($scope.from, $scope.to);
+            $scope.dateArray = lcFuncs.getDates($scope.from, $scope.to);
           })
 
           //Sets the intial date
@@ -167,7 +167,7 @@ angular.module('events').
               return date;
           }
 
-          $scope.dateArray = lcFuncs($scope.from, $scope.to);
+          $scope.dateArray = lcFuncs.getDates($scope.from, $scope.to);
           $scope.eventarray = new Array();
 
 
@@ -278,53 +278,38 @@ angular.module('events').
             return d.promise;
           }//pullspaces()
 
-          // var get_initial_data = function(categoryList){
-          //   var promise = pullspaces(categoryList);
-          //   promise.then(function(){
-          //     $scope.get_events();
-          //   }, function(failure){console.log(failure)});
-          // }
-          //
-          // var get_room_info = function(){
-          //   var promise = pullcategories();
-          //   promise.then(function(categoryList){
-          //     get_initial_data(categoryList);
-          //   },function(failure){console.log(failure)});
-          // };//get_room_info()
-          //
-          // var page_startup = function(){
-          //   $scope.loading_display = 'loadshow';
-          //   $scope.loading_blur = 'page_blur';
-          //   var promise = getcreds();
-          //   promise.then(function(){
-          //     get_room_info();
-          //   },function(){console.log(failure)}
-          //   )
-          // }
-          // page_startup();
+          var get_initial_data = function(categoryList){
+            var promise = pullspaces(categoryList);
+            promise.then(function(){
+              $scope.get_events();
+            }, function(failure){console.log(failure)});
+          }
+
+          var get_room_info = function(){
+            var promise = pullcategories();
+            promise.then(function(categoryList){
+              get_initial_data(categoryList);
+            },function(failure){console.log(failure)});
+          };//get_room_info()
+
+          var page_startup = function(){
+            $scope.loading_display = 'loadshow';
+            $scope.loading_blur = 'page_blur';
+            var promise = getcreds();
+            promise.then(function(){
+              get_room_info();
+            },function(){console.log(failure)}
+            )
+          }
+          page_startup();
 
 
 ///////////////////////  END HTTP  //////////////////////////////
 
-          function formatDate(date){
-            var d = new Date(date);
-            var hh = d.getHours();
-            var m = d.getMinutes();
-            var s = d.getSeconds();
-            var dd = "AM";
-            var h = hh;
-            if (h >= 12) {
-              h = hh - 12;
-              dd = "PM";
-            }
-            if (h == 0) {h = 12;}
-            m = m < 10 ? "0" + m : m;
-            s = s < 10 ? "0" + s : s;
-            return h + ":" + m + " " + dd
-          }
+
           // Get time function
           $scope.get_time = function(timestring){
-            var mytime = formatDate(timestring)
+            var mytime = lcFuncs.formatDate(timestring)
             return mytime
           }
 
@@ -338,37 +323,8 @@ angular.module('events').
             for (var i = 0; i < $scope.dateArray.length; i++ ){
               funcArray.push(pullevents($scope.dateArray[i]));
             }
-
             $q.all(funcArray)
-              .then(function(data){
-                data.sort(function(a,b){return new Date(b.date) - new Date(a.date);}).reverse();
-                var monthNames = ["January", "February", "March", "April", "May", "June",
-                                  "July", "August", "September", "October", "November", "December"
-                                   ];
-                var dayNames = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
-                for (var i=0; i < data.length; i++){
-                  var thedate = new Date(data[i].date);
-                  var datesplit = data[i].date.split("-");
-                  data[i].date = dayNames[thedate.getDay()] + ", " + monthNames[datesplit[1]-1] + ' ' + datesplit[2];
-                  data[i].eventinfo.sort(function(a,b){return new Date(b.fromDate) - new Date(a.fromDate);}).reverse();
-                  //lets create an array just for keys that start with 'q'
-                  for (var j=0; j < data[i].eventinfo.length; j++){
-                    var qdict = {}
-                    // data[i].eventinfo[j].questions = {};
-                    for (var key in data[i].eventinfo[j]){
-                      // console.log(typeof(key))
-                      if (key[0] == 'q'){
-                        qdict[key] = data[i].eventinfo[j][key]
-                      }//if
-                    }//for var key
-                    data[i].eventinfo[j].questions = qdict
-                  }//for var j=0
-
-                }
-
-                $scope.sortedarray = data;
-                // console.log(data);
-            });
+              .then($scope.sortedarray = lcFuncs.formatEvents(data));
           } //$scope.get_events()
 
         }//controller
