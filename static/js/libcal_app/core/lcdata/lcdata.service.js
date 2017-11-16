@@ -38,6 +38,7 @@ angular.
         var pullevents = {
             url: 'https://api2.libcal.com/1.1/space/bookings?lid=1598&limit=20&date=' + iterdate + '&formAnswers=1',
             method: "GET",
+            isArray: true,
             headers: {authorization: "Bearer " + token},
             transformResponse: function(data, headersGetter, status){
               var finalData = angular.fromJson(data)
