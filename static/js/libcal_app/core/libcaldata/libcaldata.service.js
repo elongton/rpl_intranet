@@ -3,66 +3,56 @@
 angular.
   module('libcaldata').
     factory('LibCalData', function($cookies, $location, $httpParamSerializer, $resource){
-        var url = 'https://api2.libcal.com/1.1/oauth/token'
+      return function({token = null,
+                      iterdate = null,
+                      categoryList = null} = {}){
         var getCreds = {
-              url: url,
+              url: 'https://api2.libcal.com/1.1/oauth/token',
               method: "POST",
-        }
-
+        }//get_creds
 
         var pullcategories = {
               url: 'https://api2.libcal.com/1.1/space/categories/1598',
               method: 'GET',
-              // headers: {authorization: "Bearer " + $scope.libcaltoken},
               isArray: true,
+              headers: {authorization: "Bearer " + token},
               transformResponse: function(data, headersGetter, status){
                 var finalData = angular.fromJson(data)
                 // console.log(finalData.results)
                 return finalData//.results
-              }
+              },
+        }//pullcategories
+
+        // var pullevents = {
+        //     url: 'https://api2.libcal.com/1.1/space/bookings?lid=1598&limit=20&date=' + iterdate + '&formAnswers=1',
+        //     method: "GET",
+        //     headers: {authorization: "Bearer " + token},
+        //     transformResponse: function(data, headersGetter, status){
+        //       var finalData = angular.fromJson(data)
+        //       // console.log(finalData.results)
+        //       return finalData//.results
+        //     },
+        // }//pullevents
+
+        var pullspaces = {
+            url: 'https://api2.libcal.com/1.1/space/category/' + categoryList + '?details=1',
+            method: "GET",
+            isArray: true,
+            headers: {authorization: "Bearer " + token},
+            transformResponse: function(data, headersGetter, status){
+              var finalData = angular.fromJson(data)
+              // console.log(finalData.results)
+              return finalData//.results
+            },
         }
 
-        // var requestDelete = {
-        //   url: '/api/reference/:pk/delete/',
-        //   method: "DELETE",
-        //   params: {"pk": '@pk'},
-        // }
-        //
-        // var requestGet = {
-        //       url: url,
-        //       method: "GET",
-        //       // params: {"id": @id},
-        //       isArray: true,
-        //       cache: true,
-        // }
-        //
-        // var requestCreate = {
-        //       url: '/api/reference/requests/create/',
-        //       method: "POST",
-        //       interceptor: {responseError: function(response){
-        //         if (response.status == 401){
-        //           console.log("you need to log in.")
-        //         }
-        //       }},
-        //       transformResponse: function(data, headersGetter, status){
-        //         var data = angular.fromJson(data)
-        //         // console.log(data)
-        //         return data//.results
-        //       }
-        //
-        // }
-        //
-        // var token = $cookies.get("token")
-        // if (token) {
-        //   requestCreate["headers"] = {"Authorization": "JWT " + token}
-        //   requestDelete["headers"] = {"Authorization": "JWT " + token}
-        // }
-
-        return $resource(url, {}, {
-            getCreds: getCreds,
-            pullCats: pullcategories,
-            // get: requestGet,
-            // create: requestCreate,
-            // delete: requestDelete,
-        })
+       return $resource(null, {}, {
+              getCreds: getCreds,
+              pullCats: pullcategories,
+              // pullEvents: pullevents,
+              pullSpaces: pullspaces,
+              // create: requestCreate,
+              // delete: requestDelete,
+          })//$resource
+      }//function
     });

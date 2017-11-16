@@ -6,19 +6,51 @@ angular.module('events').
         controller: function(getDates, LibCalData, $scope, $cookies, $location, $http, $rootScope, $q, $window, $document, $interval){
           $scope.staticfiles = staticfiles;
 
-          LibCalData.getCreds({
+          //progression here is the following (the code is read from bottom to top):
+          //#1 getCreds
+          //#2 pullCats
+          //#3 pullSpaces
+          //#4 pullEvents
+
+          var credsSuccess, credsError, catsSuccess, catsError,
+              eventsSuccess, eventsError, spacesSuccess, spacesError
+
+          ///////this is #4///////
+          spacesSuccess = function(result){
+            console.log(result)
+          }
+          spacesError = function(result){console.log(result)}
+
+          ///////this is #3///////
+          catsSuccess = function(result){
+            //we need a list of the category IDs, that's the goal of the following code
+            var cats = result[0].categories;
+            var cat_string = '';
+            for (var i = 0; i < cats.length; i++){
+              cat_string = cat_string.concat(cats[i].cid );
+              if (i+1 < cats.length){cat_string = cat_string.concat(',');}
+            }
+            //now we call the space puller
+            LibCalData({token:$scope.libcaltoken,iterdate:null,categoryList:cat_string})
+            .pullSpaces().$promise.then(spacesSuccess, spacesError);
+          };//catsSuccess
+          catsError = function(result){console.log(result)};
+
+          ///////this is #2///////
+          credsSuccess = function(result){
+            $scope.libcaltoken = result.access_token
+            // console.log()
+            LibCalData({token:$scope.libcaltoken}).pullCats()
+            .$promise.then(catsSuccess, catsError);}
+          credsError = function(result){console.log(result)}
+
+          ///////this is #1///////
+          LibCalData().getCreds({
                 client_id: '135',
                 client_secret: '906a3eab0c7f08ebad67e5160f0ae951',
                 grant_type: 'client_credentials',
-              }).$promise.then(
-              function(result){console.log(result)},
-              function(error){console.log(result)}
-            ).$promise.then(console.log('yay!'));
+          }).$promise.then(credsSuccess, credsError);
 
-          // LibCalData.pullCats({headers: {authorization: "Bearer " + $scope.libcaltoken}}).$promise.then(
-          //   function(result){console.log(result)},
-          //   function(error){console.log(result)}
-          // )
 
 
           //animating the buttons in mobile:
@@ -245,30 +277,30 @@ angular.module('events').
             return d.promise;
           }//pullspaces()
 
-          var get_initial_data = function(categoryList){
-            var promise = pullspaces(categoryList);
-            promise.then(function(){
-              $scope.get_events();
-            }, function(failure){console.log(failure)});
-          }
-
-          var get_room_info = function(){
-            var promise = pullcategories();
-            promise.then(function(categoryList){
-              get_initial_data(categoryList);
-            },function(failure){console.log(failure)});
-          };//get_room_info()
-
-          var page_startup = function(){
-            $scope.loading_display = 'loadshow';
-            $scope.loading_blur = 'page_blur';
-            var promise = getcreds();
-            promise.then(function(){
-              get_room_info();
-            },function(){console.log(failure)}
-            )
-          }
-          page_startup();
+          // var get_initial_data = function(categoryList){
+          //   var promise = pullspaces(categoryList);
+          //   promise.then(function(){
+          //     $scope.get_events();
+          //   }, function(failure){console.log(failure)});
+          // }
+          //
+          // var get_room_info = function(){
+          //   var promise = pullcategories();
+          //   promise.then(function(categoryList){
+          //     get_initial_data(categoryList);
+          //   },function(failure){console.log(failure)});
+          // };//get_room_info()
+          //
+          // var page_startup = function(){
+          //   $scope.loading_display = 'loadshow';
+          //   $scope.loading_blur = 'page_blur';
+          //   var promise = getcreds();
+          //   promise.then(function(){
+          //     get_room_info();
+          //   },function(){console.log(failure)}
+          //   )
+          // }
+          // page_startup();
 
 
 ///////////////////////  END HTTP  //////////////////////////////
