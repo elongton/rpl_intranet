@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module('events', []);
+angular.module('events', ['lcfuncs', 'lcdata']);
