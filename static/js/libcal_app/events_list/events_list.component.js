@@ -125,6 +125,7 @@ angular.module('events').
 ///////////////////////   HTTP  //////////////////////////////
           // OBTAIN THE ACCESS TOKEN!
           var getEvents = function(iterdate){
+            var d = $q.defer();
             $scope.loading_display = 'loadshow';
             $scope.loading_blur = 'page_blur';
             var eventsSuccess, eventsError
@@ -134,14 +135,13 @@ angular.module('events').
                 eventinfo: response,}
               $scope.loading_display = '';
               $scope.loading_blur = '';
-              // console.log('arrayPush:')
-              console.log(arraypush)
-              return arraypush
-
+              d.resolve(arraypush)
             }
             eventsError = function(response){console.log(response)}
             lcData({token:$scope.libcaltoken, iterdate:iterdate}).pullEvents()
               .$promise.then(eventsSuccess, eventsError)
+            //return the array
+            return d.promise;
           }
           //progression here is the following (the code is read from bottom to top):
           //#1 getCreds - get the access token
@@ -212,7 +212,6 @@ angular.module('events').
             }
             $q.all(funcArray)
               .then(function(data){
-                console.log(data)
                 $scope.sortedarray = lcFuncs.formatEvents(data);
               });
           }//$scope.get_events()
