@@ -86,13 +86,6 @@ angular.module('events').
             $scope.from = $scope.to;
           }
 
-          $scope.add_week_button = function(){
-            var dummy_date = new Date();
-            dummy_date.setDate($scope.from.getDate() + 7)
-            $scope.from = dummy_date;
-            $scope.to = $scope.from;
-          }
-
           $scope.$watch('from', function(){
             var total_days = Math.round(($scope.to.getTime() - $scope.from.getTime())/one_day);
             if ($scope.from > $scope.to){
@@ -119,7 +112,25 @@ angular.module('events').
           }
 
           $scope.dateArray = lcFuncs.getDates($scope.from, $scope.to);
-          $scope.eventarray = new Array();
+
+
+          // Get time function
+          $scope.get_time = function(timestring){
+            var mytime = lcFuncs.formatDate(timestring)
+            return mytime
+          }
+          $scope.get_room_key = function(eid){
+            return $scope.spaces_dict[eid]
+          }
+          // GET EVENTS BUTTON
+          $scope.get_events = function(){
+            var funcArray = new Array();
+            for (var i = 0; i < $scope.dateArray.length; i++ ){
+              funcArray.push(getEvents($scope.dateArray[i]));
+            }
+            $q.all(funcArray)
+              .then(function(data){$scope.sortedarray = lcFuncs.formatEvents(data);});
+          }//$scope.get_events()
 
 
 ///////////////////////   HTTP  //////////////////////////////
@@ -159,7 +170,9 @@ angular.module('events').
             for (var i=0; i< raw_spaces_list.length; i++){
               var dictval = raw_spaces_list[i].id;
               $scope.spaces_dict[dictval] = raw_spaces_list[i].name}//for
-          }
+            //run get_events on startup
+            $scope.get_events();
+          }//spacesSuccess
           spacesError = function(result){console.log(result)}
 
           ///////this is #2///////
@@ -192,33 +205,10 @@ angular.module('events').
 
 
 ///////////////////////  END HTTP  //////////////////////////////
+          // $scope.get_events();
 
 
-          // Get time function
-          $scope.get_time = function(timestring){
-            var mytime = lcFuncs.formatDate(timestring)
-            return mytime
-          }
-          $scope.get_room_key = function(eid){
-            return $scope.spaces_dict[eid]
-          }
-          // GET EVENTS BUTTON
-          $scope.get_events = function(){
-            var funcArray = new Array();
-            for (var i = 0; i < $scope.dateArray.length; i++ ){
-              funcArray.push(getEvents($scope.dateArray[i]));
-              console.log($scope.dateArray[i])
-              console.log(getEvents($scope.dateArray[i]))
-            }
-            $q.all(funcArray)
-              .then(function(data){
-                $scope.sortedarray = lcFuncs.formatEvents(data);
-              });
-          }//$scope.get_events()
+
         }//controller
 
       });
-
-
-
-        // https://api2.libcal.com/1.1/space/locations
