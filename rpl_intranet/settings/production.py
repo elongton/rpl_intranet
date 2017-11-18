@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'reference_stats',
     'rest_framework',
     'accounts',
+    'remote_api_manager',
     'storages',
 
     'django.contrib.sites',
