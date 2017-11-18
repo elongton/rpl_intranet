@@ -51,6 +51,7 @@ angular.module('events').
           //TIME STUFF
           var one_day = 1000*60*60*24;
 
+          //Set restrictions on datepickers -- can't choose date before today
           var datepickertoday = new Date().toISOString().split('T')[0];
           document.getElementById('startdate').setAttribute('min', datepickertoday)
           document.getElementById('enddate').setAttribute('min', datepickertoday)
