@@ -67,12 +67,27 @@ angular.
           }//formatevents
 
 
+          var disable_back_button = function(mydate){
+            var disable_check = new Date()
+            var cssvar
 
+            console.log(mydate.getTime())
+            console.log(disable_check.getTime())
+
+
+            if (mydate.getTime() == disable_check.getTime()){
+              console.log('yep')
+              cssvar = 'disabled'
+            }else{cssvar = ''}
+            console.log(cssvar)
+            return cssvar;
+          }
 
         return {
           getDates: getdates,
           formatDate: formatdate,
           formatEvents: formatevents,
+          disableBack: disable_back_button,
         }
 
     });

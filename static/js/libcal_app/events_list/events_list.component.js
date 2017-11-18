@@ -62,14 +62,6 @@ angular.module('events').
           //run today button on reload
           $scope.todaybutton();
 
-          //managing the datepicker
-          $scope.weekbutton = function(){
-            $scope.to = new Date();
-            $scope.from = new Date();
-            var week = $scope.to.getDate() + 7;
-            $scope.to.setDate(week);
-          }
-
           $scope.add_day_button = function(){
             var dummy_date = new Date();
             dummy_date.setMonth($scope.from.getMonth())
@@ -88,11 +80,15 @@ angular.module('events').
 
           $scope.$watch('from', function(){
             var total_days = Math.round(($scope.to.getTime() - $scope.from.getTime())/one_day);
+
             if ($scope.from > $scope.to){
               $scope.to = new Date($scope.from.getTime())
               makeaday($scope.from, $scope.to);
             }
             $scope.dateArray = lcFuncs.getDates($scope.from, $scope.to);
+            $scope.disable_today = lcFuncs.disableBack($scope.from);
+            $scope.$apply
+
           })
 
           $scope.$watch('to', function(){
@@ -102,6 +98,7 @@ angular.module('events').
               makeaday($scope.from, $scope.to);
             }
             $scope.dateArray = lcFuncs.getDates($scope.from, $scope.to);
+
           })
 
           //Sets the intial date
