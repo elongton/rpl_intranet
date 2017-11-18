@@ -124,29 +124,25 @@ angular.module('events').
 
 ///////////////////////   HTTP  //////////////////////////////
           // OBTAIN THE ACCESS TOKEN!
-
-
-          var pullEvents = function(iterdate){
-            // $scope.loading_display = 'loadshow';
-            // $scope.loading_blur = 'page_blur';
+          var getEvents = function(iterdate){
+            var d = $q.defer();
+            $scope.loading_display = 'loadshow';
+            $scope.loading_blur = 'page_blur';
             var eventsSuccess, eventsError
             eventsSuccess = function(response){
-              // var arraypush = {
-              //   date: iterdate,
-              //   eventinfo: response.data,}
-              //   console.log(arraypush)
-              // d.resolve(arraypush)
-              // $scope.loading_display = '';
-              // $scope.loading_blur = '';
-              console.log(response)
+              var arraypush = {
+                date: iterdate,
+                eventinfo: response,}
+              $scope.loading_display = '';
+              $scope.loading_blur = '';
+              d.resolve(arraypush)
             }
             eventsError = function(response){console.log(response)}
             lcData({token:$scope.libcaltoken, iterdate:iterdate}).pullEvents()
               .$promise.then(eventsSuccess, eventsError)
+            //return the array
+            return d.promise;
           }
-
-
-
           //progression here is the following (the code is read from bottom to top):
           //#1 getCreds - get the access token
           //#2 pullCats - get the categories of spaces for the location
@@ -163,9 +159,6 @@ angular.module('events').
             for (var i=0; i< raw_spaces_list.length; i++){
               var dictval = raw_spaces_list[i].id;
               $scope.spaces_dict[dictval] = raw_spaces_list[i].name}//for
-
-              pullEvents('2017-10-10')
-
           }
           spacesError = function(result){console.log(result)}
 
@@ -198,144 +191,6 @@ angular.module('events').
 
 
 
-
-
-
-
-
-
-
-          // var getcreds = function(){
-          //   var d = $q.defer();
-          //   function successCallback(response) {
-          //     d.resolve($scope.libcaltoken = response.data.access_token)
-          //     }
-          //   function errorCallback(response) {
-          //       d.reject(response)
-          //     }
-          //   var token_url = 'https://api2.libcal.com/1.1/oauth/token'
-          //   var req = {
-          //         method: "POST",
-          //         url: token_url,
-          //         data: {
-          //           client_id: '135',
-          //           client_secret: '906a3eab0c7f08ebad67e5160f0ae951',
-          //           grant_type: 'client_credentials',
-          //         },
-          //         headers: {
-          //           // authorization: "JWT " + token
-          //         },
-          //       }//req
-          //   var requestAction = $http(req).then(successCallback, errorCallback)
-          //   return d.promise;
-          // }//getcreds()
-          // call getcreds on page load
-          // PULL EVENT DATA
-          // var pullevents = function(iterdate){
-          //   var d = $q.defer();
-          //   $scope.loading_display = 'loadshow';
-          //   $scope.loading_blur = 'page_blur';
-          //   function successCallback(response) {
-          //       var arraypush = {
-          //         date: iterdate,
-          //         eventinfo: response.data,}
-          //         console.log(arraypush)
-          //       d.resolve(arraypush)
-          //       $scope.loading_display = '';
-          //       $scope.loading_blur = '';
-          //     }
-          //   function errorCallback(response) {console.log(response)}
-          //   var endpoint = 'https://api2.libcal.com/1.1/space/bookings?lid=1598&limit=20&date=' + iterdate + '&formAnswers=1'
-          //   var req = {
-          //           method: "GET",
-          //           url: endpoint,
-          //           headers: {authorization: "Bearer " + $scope.libcaltoken},
-          //         }//req
-          //   var requestAction = $http(req).then(successCallback, errorCallback)
-          //   return d.promise;
-          // }//pullevents()
-
-
-          // // PULL SPACE DATA
-          // var pullcategories = function(){
-          //   var d = $q.defer();
-          //   function successCallback(response) {
-          //     // console.log(response)
-          //     var cids = response.data[0].categories;
-          //     var cat_string = '';
-          //     for (var i = 0; i < cids.length; i++){
-          //       cat_string = cat_string.concat(cids[i].cid );
-          //       if (i+1 < cids.length){
-          //         cat_string = cat_string.concat(',');
-          //       }
-          //     }
-          //     d.resolve(cat_string)
-          //   }
-          //   function errorCallback(error) {d.reject('total error zone baby')}
-          //   //in the future, we will look up all the locations so we can obtain a full category list
-          //   //however, for now we are not doing that
-          //   var endpoint = 'https://api2.libcal.com/1.1/space/categories/1598'
-          //   var req = {
-          //           method: "GET",
-          //           url: endpoint,
-          //           headers: {authorization: "Bearer " + $scope.libcaltoken},
-          //         }//req
-          //   var requestAction = $http(req).then(successCallback, errorCallback)
-          //   return d.promise;
-          // }//pullcategories()
-          //
-          // var pullspaces = function(categoryList){
-          //   var d = $q.defer();
-          //   function successCallback(response) {
-          //     //this is where you create the room array
-          //     var raw_spaces_list = new Array();
-          //     for (var i=0; i < response.data.length; i++){
-          //       raw_spaces_list = raw_spaces_list.concat(response.data[i].items)
-          //     }
-          //     $scope.spaces_dict = {};
-          //     for (var i=0; i< raw_spaces_list.length; i++){
-          //       var dictval = raw_spaces_list[i].id;
-          //       $scope.spaces_dict[dictval] = raw_spaces_list[i].name
-          //     }
-          //     d.resolve()
-          //   }
-          //   function errorCallback(error) {console.log(error); getcreds();}
-          //   var endpoint = 'https://api2.libcal.com/1.1/space/category/' + categoryList + '?details=1'
-          //   var req = {
-          //           method: "GET",
-          //           url: endpoint,
-          //           headers: {authorization: "Bearer " + $scope.libcaltoken},
-          //         }//req
-          //   var requestAction = $http(req).then(successCallback, errorCallback)
-          //   return d.promise;
-          // }//pullspaces()
-          //
-          // var get_initial_data = function(categoryList){
-          //   var promise = pullspaces(categoryList);
-          //   promise.then(function(){
-          //     $scope.get_events();
-          //   }, function(failure){console.log(failure)});
-          // }
-          //
-          // var get_room_info = function(){
-          //   var promise = pullcategories();
-          //   promise.then(function(categoryList){
-          //     get_initial_data(categoryList);
-          //   },function(failure){console.log(failure)});
-          // };//get_room_info()
-          //
-          // var page_startup = function(){
-          //   $scope.loading_display = 'loadshow';
-          //   $scope.loading_blur = 'page_blur';
-          //   var promise = getcreds();
-          //   promise.then(function(){
-          //     get_room_info();
-          //   },function(){console.log(failure)}
-          //   )
-          // }
-          // page_startup();
-
-
 ///////////////////////  END HTTP  //////////////////////////////
 
 
@@ -351,7 +206,9 @@ angular.module('events').
           $scope.get_events = function(){
             var funcArray = new Array();
             for (var i = 0; i < $scope.dateArray.length; i++ ){
-              funcArray.push(pullevents($scope.dateArray[i]));
+              funcArray.push(getEvents($scope.dateArray[i]));
+              console.log($scope.dateArray[i])
+              console.log(getEvents($scope.dateArray[i]))
             }
             $q.all(funcArray)
               .then(function(data){
