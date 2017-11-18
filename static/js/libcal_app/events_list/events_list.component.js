@@ -50,6 +50,13 @@ angular.module('events').
 
           //TIME STUFF
           var one_day = 1000*60*60*24;
+
+          var datepickertoday = new Date().toISOString().split('T')[0];
+          document.getElementById('startdate').setAttribute('min', datepickertoday)
+          document.getElementById('enddate').setAttribute('min', datepickertoday)
+
+          //sets the start and end time so that the
+          //start date starts at 12:00am, and the end date ends at 11:59pm
           var makeaday = function(start, end){
             start.setHours(0,0,0,0);
             end.setHours(23,59,59,999);
@@ -80,13 +87,13 @@ angular.module('events').
 
           $scope.$watch('from', function(){
             var total_days = Math.round(($scope.to.getTime() - $scope.from.getTime())/one_day);
-
             if ($scope.from > $scope.to){
               $scope.to = new Date($scope.from.getTime())
               makeaday($scope.from, $scope.to);
             }
+
             $scope.dateArray = lcFuncs.getDates($scope.from, $scope.to);
-            $scope.disable_today = lcFuncs.disableBack($scope.from);
+            $scope.backdisable = lcFuncs.disableBack($scope.from);
             $scope.$apply
 
           })
@@ -103,14 +110,12 @@ angular.module('events').
 
           //Sets the intial date
           Date.prototype.addDays = function(days) {
-              var date = new Date(this.valueOf())
-              date.setDate(date.getDate() + days);
-              return date;
+            var date = new Date(this.valueOf())
+            date.setDate(date.getDate() + days);
+            return date;
           }
 
           $scope.dateArray = lcFuncs.getDates($scope.from, $scope.to);
-
-
           // Get time function
           $scope.get_time = function(timestring){
             var mytime = lcFuncs.formatDate(timestring)

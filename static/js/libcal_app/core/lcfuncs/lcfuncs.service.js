@@ -4,6 +4,8 @@ angular.
   module('lcfuncs').
     factory('lcFuncs', function(){
 
+
+      //this function creates an array of all the dates in the range
       var getdates =  function(startDate, stopDate){
             var dateArray = new Array();
             var currentDate = startDate;
@@ -69,18 +71,13 @@ angular.
 
           var disable_back_button = function(mydate){
             var disable_check = new Date()
-            var cssvar
-
-            console.log(mydate.getTime())
-            console.log(disable_check.getTime())
-
-
-            if (mydate.getTime() == disable_check.getTime()){
-              console.log('yep')
-              cssvar = 'disabled'
-            }else{cssvar = ''}
-            console.log(cssvar)
-            return cssvar;
+            disable_check.setHours(0,0,0,0)
+            mydate.setHours(0,0,0,0);
+            var backdatedisable
+            if (mydate.getTime() <= disable_check.getTime()){
+              backdatedisable = true
+            }else{backdatedisable = false}
+            return backdatedisable;
           }
 
         return {

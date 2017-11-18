@@ -14,7 +14,6 @@
       <div class="events_title" ng-class="header_shown">
         <h1>Events</h1>
       </div>
-      <!-- <button ng-if="libcaltoken" class="btn btn-secondary" ng-click="pullspaces()" >Get spaces</button> -->
     </div>
   </div>
   <div class="row"><!--datepicker row -->
@@ -40,7 +39,7 @@
           <button class="btn btn-secondary" ng-click = "todaybutton()" ng-disabled = "datedisable">Today</button>
         </li>
         <li class="nav-item text-left datepicker">
-          <button class="btn btn-success" ng-class="disable_today" ng-click = "lose_day_button()" ng-disabled = "datedisable" style="font-size: 20px;">-</i></button>
+          <button class="btn btn-success" ng-class="disable_today" ng-click = "lose_day_button()" ng-disabled = "backdisable" style="font-size: 20px;">-</i></button>
         </li>
         <li class="nav-item text-left datepicker">
           <button class="btn btn-secondary" ng-click = "add_day_button()" ng-disabled = "datedisable" style="font-size: 20px;">+</i></button>
@@ -102,7 +101,7 @@
     <div class="mobile_date_menu">
 
       <div class="button_container">
-        <div class="menu_button_div_left menu_button_div"><button class="btn btn-success" ng-click="lose_day_button()">Previous Day</i></button></div>
+        <div class="menu_button_div_left menu_button_div"><button class="btn btn-success" ng-click="lose_day_button()" ng-disabled = "backdisable">Previous Day</i></button></div>
         <div class="menu_button_div_right menu_button_div"><button class="btn btn-success" ng-click = "add_day_button()">Next Day</i></button></div>
       </div>
       <input type="date" style="text-align: center; font-size: 22px; padding-left: 10px;" class="form-control" id="startdate" ng-model="from" ng-disabled = "datedisable">
