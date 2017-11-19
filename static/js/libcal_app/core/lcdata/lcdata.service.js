@@ -30,7 +30,6 @@ angular.
               headers: {authorization: "Bearer " + token},
               transformResponse: function(data, headersGetter, status){
                 var finalData = angular.fromJson(data)
-                // console.log(finalData.results)
                 return finalData//.results
               },
         }//pullcategories
@@ -42,7 +41,6 @@ angular.
             headers: {authorization: "Bearer " + token},
             transformResponse: function(data, headersGetter, status){
               var finalData = angular.fromJson(data)
-              // console.log(finalData.results)
               return finalData//.results
             },
         }
@@ -54,7 +52,6 @@ angular.
             headers: {authorization: "Bearer " + token},
             transformResponse: function(data, headersGetter, status){
               var finalData = angular.fromJson(data)
-              // console.log(finalData.results)
               return finalData//.results
             },
         }//pullevents
