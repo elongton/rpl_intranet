@@ -3,7 +3,7 @@
 angular.module('login').
   component('login', {
     templateUrl: '/api/templates/users_app/login.html',
-    controller: function(User,$cookies,$http,  $location,$routeParams,$rootScope,$scope,$route,){
+    controller: function(User,$cookies,$http,$location,$routeParams,$rootScope,$scope,$route,){
       var loginUrl = '/api/auth/token/'
       $scope.user = {}
       var tokenExists = $cookies.get("token")

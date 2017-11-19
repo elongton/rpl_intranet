@@ -18,8 +18,9 @@ from django.conf.urls.static import static
 from django.conf.urls import url, include
 from django.contrib import admin
 from django.views.generic.base import TemplateView
-from rest_framework_jwt.views import obtain_jwt_token
-from rest_framework_jwt.views import refresh_jwt_token
+from rest_framework_jwt.views import (obtain_jwt_token,
+                                      verify_jwt_token,
+                                      refresh_jwt_token,)
 
 from wiki.urls import get_pattern as get_wiki_pattern
 from django_nyt.urls import get_pattern as get_nyt_pattern
@@ -33,6 +34,7 @@ from ang.views import (AngularTemplateView,
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api/auth/token/', obtain_jwt_token),
+    url(r'^api/auth/api-token-verify/', verify_jwt_token),
     url(r'^api/auth/token/refresh/', refresh_jwt_token),
     url(r'^api/reference/', include('reference_stats.api.urls', namespace='questions-api' )),
     url(r'^api/users/', include('accounts.api.urls', namespace='users-api' )),

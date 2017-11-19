@@ -16,9 +16,12 @@ angular.
             return finalData//.results
           }
         }//userQuery
-
         var userlogin = {
           url: '/api/auth/token/',
+          method: 'POST',
+        }
+        var tokenverify = {
+          url: '/api/auth/api-token-verify/',
           method: 'POST',
         }
         // var token = $cookies.get("token")
@@ -29,5 +32,6 @@ angular.
         return $resource(null, {}, {
             query: userquery,
             userLogin: userlogin,
+            tokenVerify: tokenverify,
         })
     });

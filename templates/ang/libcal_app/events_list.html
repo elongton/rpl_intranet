@@ -25,7 +25,7 @@
         <li class="nav-item text-left datepicker">
           <form class="form-inline">
             <label style="margin-right: 10px;"for="startdate">Start:</label>
-            <input type="date" class="form-control" id="mobile_startdate" ng-model="from" ng-disabled = "datedisable">
+            <input type="date" class="form-control" id="startdate" ng-model="from" ng-disabled = "datedisable">
           </form>
 
         </li>
@@ -104,7 +104,7 @@
         <div class="menu_button_div_left menu_button_div"><button class="btn btn-success" ng-click="lose_day_button()" ng-disabled = "backdisable">Previous Day</i></button></div>
         <div class="menu_button_div_right menu_button_div"><button class="btn btn-success" ng-click = "add_day_button()">Next Day</i></button></div>
       </div>
-      <input type="date" style="text-align: center; font-size: 22px; padding-left: 10px;" class="form-control" id="startdate" ng-model="from" ng-disabled = "datedisable">
+      <input type="date" style="text-align: center; font-size: 22px; padding-left: 10px;" class="form-control" id="mobile_startdate" ng-model="from" ng-disabled = "datedisable">
       <div class="mobile_bottom_menu_left_div"><button class="todaybutton btn btn-success" ng-click = "todaybutton()">Today</button></div>
       <div class="mobile_bottom_menu_right_div"><button class="retrievebutton btn btn-success" ng-click = "get_events(); hidemenu();">Retrieve</button></div>
     </div>

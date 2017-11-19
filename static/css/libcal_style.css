@@ -89,7 +89,10 @@
     width: 170px; }
 
   .datepicker {
-    margin-left: 10px; } }
+    margin-left: 10px; }
+
+  #startdate, #enddate {
+    width: 165px; } }
 @keyframes date_down {
   from {
     transform: rotate(225deg) translateX(85px) rotate(-225deg); }

@@ -12,6 +12,7 @@ angular.module('referenceApp', [
 
   //internal
   'controls',
+  'user',//for verification
   // 'login',
   'sharednav',
   'stats',
