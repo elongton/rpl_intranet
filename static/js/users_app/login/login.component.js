@@ -4,33 +4,18 @@ angular.module('login').
       component('login', {
         templateUrl: '/api/templates/users_app/login.html',
         controller: function(
-                        User,
-                        $cookies,
-                        $http,
-                        $location,
-                        $routeParams,
-                        $rootScope,
-                        $scope,
-                        $route,
-            ){
+                        User,$cookies,$http,  $location,$routeParams,$rootScope,$scope,$route,){
             var loginUrl = '/api/auth/token/'
             $scope.user = {}
             var tokenExists = $cookies.get("token")
             if (tokenExists) {
               // verify token - we want to verify this on the server
               $cookies.remove("token")
-              $scope.username = {
-                username: $cookies.get("username")
-              }
+              $scope.username = {username: $cookies.get("username")}
             }
 
-//%%%%%%%%%%%%%%%%LOGIN FUNCTION %%%%%%%%%%%%%%%%%%%%//
+//%%%%%%%%%%%%%%%% LOGIN FUNCTION %%%%%%%%%%%%%%%%%%%%//
             $scope.doLogin = function(user){
-                // console.log(user)
-                // shortcut way to do it:
-                // var requestAction = $http.post(loginUrl, user).then(successCallback, errorCallback)
-
-                // best way to do it:
                 var reqConfig = {
                   method: "POST",
                   url: loginUrl,
@@ -51,19 +36,9 @@ angular.module('login').
                     function(result){
                       $scope.userdata = result
                       $cookies.put("branch", $scope.userdata[0].branch)
-                      //could be a message too
-
-
-
-                      // var destinationUrl = '/reference'
-                      // $window.location.href = destinationUrl;
-                      // $window.location.reload();
-
                       var url = "/libcal";
                       window.location = url;
                       window.location.replace(url);
-
-
                       // $location.path("/reference")
                       // $route.reload()
                     },
@@ -71,7 +46,6 @@ angular.module('login').
                       console.log(error)
                     }
                   )
-
                 }//token
                 function errorCallback(response){
                   $scope.loginError = response.data

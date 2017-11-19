@@ -15,14 +15,14 @@ angular.
                 // console.log(finalData.results)
                 return finalData//.results
               }
-        }
-        var userGet = {
-              url: url,
-              method: "GET",
-              // params: {"id": @id},
-              isArray: true,
-              cache: true,
-        }
+        }//userQuery
+        // var userGet = {
+        //       url: url,
+        //       method: "GET",
+        //       // params: {"id": @id},
+        //       isArray: true,
+        //       cache: true,
+        // }
 
         // var token = $cookies.get("token")
         // if (token) {
@@ -31,7 +31,7 @@ angular.
 
         return $resource(url, {}, {
             query: userQuery,
-            get: userGet,
+            // get: userGet,
             // create: userCreate,
         })
     });

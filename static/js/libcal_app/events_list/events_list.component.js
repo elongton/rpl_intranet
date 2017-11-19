@@ -223,7 +223,7 @@ angular.module('events').
 
           ///////this is #0///////
           requestCredsSuccess = function(result){
-            if ($cookies.get("libcal_token") && $scope.renewtoken == false){
+            if ($scope.renewtoken == false){
               lcData({token:$cookies.get("libcal_token")}).pullCats()
               .$promise.then(catsSuccess, catsError);
             }else{
