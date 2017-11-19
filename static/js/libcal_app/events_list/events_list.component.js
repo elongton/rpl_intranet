@@ -143,21 +143,24 @@ angular.module('events').
             $scope.loading_display = 'loadshow';
             $scope.loading_blur = 'page_blur';
             var eventsSuccess, eventsError
-            eventsSuccess = function(response){
+            eventsSuccess = function(result){
               var arraypush = {
                 date: iterdate,
-                eventinfo: response,}
+                eventinfo: result,}
               $scope.loading_display = '';
               $scope.loading_blur = '';
               d.resolve(arraypush)
             }
-            eventsError = function(response){console.log(response)}
-            lcData({token:$scope.libcaltoken, iterdate:iterdate}).pullEvents()
+            eventsError = function(result){
+              console.log('events error'); console.log(result)
+              lcFuncs.tokenExpired(result, lcData().getRequestCreds({q:'springshare'}), requestCredsSuccess, requestCredsError)
+            }
+            lcData({token:$scope.libcaltoken, iterdate:iterdate}).pullEvents()//$scope.libcaltoken
               .$promise.then(eventsSuccess, eventsError)
             //return the array
             return d.promise;
           }
-          //progression here is the following (the code is read from bottom to top):
+          //progression here is the following (read code from bottom to top):
           //#0 getRequestCreds - ask local Django api for request creds
           //#1 getCreds - get the access token
           //#2 pullCats - get the categories of spaces for the location
@@ -177,7 +180,10 @@ angular.module('events').
             //run get_events on startup
             $scope.get_events();
           }//spacesSuccess
-          spacesError = function(result){console.log(result)}
+          spacesError = function(result){
+            console.log('spacesError error'); console.log(result)
+            lcFuncs.tokenExpired(result, lcData().getRequestCreds({q:'springshare'}), requestCredsSuccess, requestCredsError)
+          }
 
           ///////this is #2///////
           catsSuccess = function(result){
@@ -191,14 +197,18 @@ angular.module('events').
             lcData({token:$scope.libcaltoken, categoryList:cat_string})
             .pullSpaces().$promise.then(spacesSuccess, spacesError);
           };//catsSuccess
-          catsError = function(result){console.log(result)};
+          catsError = function(result){
+            console.log('Cats error'); console.log(result)
+            lcFuncs.tokenExpired(result, lcData().getRequestCreds({q:'springshare'}), requestCredsSuccess, requestCredsError)
+          };
 
           ///////this is #1///////
           credsSuccess = function(result){
+            console.log(result)
             $scope.libcaltoken = result.access_token
             lcData({token:$scope.libcaltoken}).pullCats()
             .$promise.then(catsSuccess, catsError);}
-          credsError = function(result){console.log(result)}
+          credsError = function(result){console.log('Creds error'); console.log(result)}
 
           ///////this is #0///////
           requestCredsSuccess = function(result){
@@ -208,7 +218,7 @@ angular.module('events').
               grant_type: result[0].grant_type,
             }).$promise.then(credsSuccess, credsError);
           }
-          requestCredsError = function(result){console.log(result)}
+          requestCredsError = function(result){console.log('requestCreds error'); console.log(result)}
           lcData().getRequestCreds({q:'springshare'}).$promise.then(requestCredsSuccess, requestCredsError);
 
 ///////////////////////  END HTTP  //////////////////////////////

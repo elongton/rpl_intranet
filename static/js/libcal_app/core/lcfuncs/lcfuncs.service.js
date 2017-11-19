@@ -5,6 +5,12 @@ angular.
     factory('lcFuncs', function(){
 
 
+      var tokenexpired = function(result, resolve_func, success, error){
+        if (result.data.error_description == "The access token provided has expired"){
+          resolve_func.$promise.then(success, error);
+        }//if
+      }//tokenexpired
+
       //this function creates an array of all the dates in the range
       var getdates =  function(startDate, stopDate){
             var dateArray = new Array();
@@ -85,6 +91,7 @@ angular.
           formatDate: formatdate,
           formatEvents: formatevents,
           disableBack: disable_back_button,
+          tokenExpired: tokenexpired,
         }
 
     });
