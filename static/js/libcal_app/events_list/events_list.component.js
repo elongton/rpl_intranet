@@ -4,6 +4,7 @@ angular.module('events').
       component('eventsList', {
         templateUrl: '/api/templates/libcal_app/events_list.html',
         controller: function(lcFuncs, lcData, $scope, $cookies, $location, $http, $rootScope, $q, $window, $document, $interval){
+
           $scope.staticfiles = staticfiles;
           //animating the buttons in mobile:
           var downanimation = function(){
@@ -51,8 +52,9 @@ angular.module('events').
 
           //Set restrictions on datepickers -- can't choose date before today
           var datepickertoday = new Date()
-          datepickertoday.setDate(datepickertoday.getDate() - 1)
+          datepickertoday.setDate(datepickertoday.getDate())
           datepickertoday = datepickertoday.toISOString().split('T')[0];
+          document.getElementById('mobile_startdate').setAttribute('min', datepickertoday)
           document.getElementById('startdate').setAttribute('min', datepickertoday)
           document.getElementById('enddate').setAttribute('min', datepickertoday)
 
@@ -72,19 +74,24 @@ angular.module('events').
 
           $scope.add_day_button = function(){
             var dummy_date = new Date();
+            dummy_date.setFullYear($scope.from.getFullYear())
             dummy_date.setMonth($scope.from.getMonth())
             dummy_date.setDate($scope.from.getDate() + 1)
             $scope.from = new Date(dummy_date);
             $scope.to = $scope.from;
+
+
           }
 
           $scope.lose_day_button = function(){
             var dummy_date = new Date();
-            dummy_date.setDate($scope.to.getDate() - 1)
+            dummy_date.setFullYear($scope.to.getFullYear())
             dummy_date.setMonth($scope.to.getMonth())
+            dummy_date.setDate($scope.to.getDate() - 1)
             $scope.to = dummy_date;
             $scope.from = $scope.to;
-          }
+            }
+
 
           $scope.$watch('from', function(){
             var total_days = Math.round(($scope.to.getTime() - $scope.from.getTime())/one_day);
@@ -204,7 +211,6 @@ angular.module('events').
 
           ///////this is #1///////
           credsSuccess = function(result){
-            console.log(result)
             $scope.libcaltoken = result.access_token
             lcData({token:$scope.libcaltoken}).pullCats()
             .$promise.then(catsSuccess, catsError);}
