@@ -22,7 +22,7 @@ from ..models import RemoteAPI
 
 class RemoteAPIListAPIView(ListAPIView):
     serializer_class = APIListSerializer
-    # permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
     filter_backends = [SearchFilter, OrderingFilter]
     search_fields = ['name']
     def get_queryset(self, *args, **kwargs):

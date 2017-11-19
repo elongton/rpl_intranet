@@ -2,10 +2,22 @@
 
 angular.
   module('lcdata').
-    factory('lcData', function($cookies, $location, $httpParamSerializer, $resource){
+    factory('lcData', function($resource, $cookies){
       return function({token = null,
                       iterdate = null,
                       categoryList = null} = {}){
+
+        var getrequestcreds = {
+          url: '/api/remoteapis/list/',
+          method: "GET",
+          params: {},
+          isArray: true,
+          transformResponse: function(data, headersGetter, status){
+            var finalData = angular.fromJson(data)
+            return finalData
+          }
+        }//getrequestcreds
+
         var getCreds = {
               url: 'https://api2.libcal.com/1.1/oauth/token',
               method: "POST",
@@ -47,7 +59,16 @@ angular.
             },
         }//pullevents
 
+
+        //get token for querying our API for secret key
+        var token = $cookies.get("token")
+        if (token) {
+          getrequestcreds["headers"] = {"Authorization": "JWT " + token}
+        }
+
+
        return $resource(null, {}, {
+              getRequestCreds:getrequestcreds,
               getCreds: getCreds,
               pullCats: pullcategories,
               pullSpaces: pullspaces,

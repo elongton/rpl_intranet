@@ -14,12 +14,10 @@ angular.module('events').
               $scope.dates_button_class = 'animate_date_button_down';
               $scope.menu_position = !$scope.menu_position
           }//addanimation()
-
           //actual menu
           $scope.is_shown = 'nodisplay';
           $scope.showmenu = function(){$scope.is_shown = '';}
           $scope.hidemenu = function(){$scope.is_shown = 'nodisplay';}
-
           //MOBILE STUFF
           //scroll direction code:
           $scope.lastScrollTop = 0;
@@ -52,7 +50,9 @@ angular.module('events').
           var one_day = 1000*60*60*24;
 
           //Set restrictions on datepickers -- can't choose date before today
-          var datepickertoday = new Date().toISOString().split('T')[0];
+          var datepickertoday = new Date()
+          datepickertoday.setDate(datepickertoday.getDate() - 1)
+          datepickertoday = datepickertoday.toISOString().split('T')[0];
           document.getElementById('startdate').setAttribute('min', datepickertoday)
           document.getElementById('enddate').setAttribute('min', datepickertoday)
 
@@ -158,12 +158,13 @@ angular.module('events').
             return d.promise;
           }
           //progression here is the following (the code is read from bottom to top):
+          //#0 getRequestCreds - ask local Django api for request creds
           //#1 getCreds - get the access token
           //#2 pullCats - get the categories of spaces for the location
           //#3 pullSpaces - get the spaces for all the categories
-
           var credsSuccess, credsError, catsSuccess,
-              catsError, spacesSuccess, spacesError
+              catsError, spacesSuccess, spacesError,
+              requestCredsSuccess, requestCredsError
           ///////this is #3///////
           spacesSuccess = function(result){
             var raw_spaces_list = new Array();
@@ -199,18 +200,18 @@ angular.module('events').
             .$promise.then(catsSuccess, catsError);}
           credsError = function(result){console.log(result)}
 
-          lcData().getCreds({
-                client_id: '135',
-                client_secret: '906a3eab0c7f08ebad67e5160f0ae951',
-                grant_type: 'client_credentials',
-          }).$promise.then(credsSuccess, credsError);
-
-
+          ///////this is #0///////
+          requestCredsSuccess = function(result){
+            lcData().getCreds({
+              client_id: result[0].client_id,
+              client_secret: result[0].client_secret,
+              grant_type: result[0].grant_type,
+            }).$promise.then(credsSuccess, credsError);
+          }
+          requestCredsError = function(result){console.log(result)}
+          lcData().getRequestCreds({q:'springshare'}).$promise.then(requestCredsSuccess, requestCredsError);
 
 ///////////////////////  END HTTP  //////////////////////////////
-          // $scope.get_events();
-
-
 
         }//controller
 
