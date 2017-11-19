@@ -144,6 +144,8 @@ angular.module('events').
 
 
 ///////////////////////   HTTP  //////////////////////////////
+          //check if there's a token. if not, get one
+          if ($cookies.get("libcal_token")){$scope.renewtoken=false}else{$scope.renewtoken=true}
           // OBTAIN THE ACCESS TOKEN!
           var getEvents = function(iterdate){
             var d = $q.defer();
@@ -160,9 +162,10 @@ angular.module('events').
             }
             eventsError = function(result){
               console.log('events error'); console.log(result)
+              $scope.renewtoken = true
               lcFuncs.tokenExpired(result, lcData().getRequestCreds({q:'springshare'}), requestCredsSuccess, requestCredsError)
             }
-            lcData({token:$scope.libcaltoken, iterdate:iterdate}).pullEvents()//$scope.libcaltoken
+            lcData({token:$cookies.get("libcal_token"), iterdate:iterdate}).pullEvents()//$scope.libcaltoken
               .$promise.then(eventsSuccess, eventsError)
             //return the array
             return d.promise;
@@ -189,6 +192,7 @@ angular.module('events').
           }//spacesSuccess
           spacesError = function(result){
             console.log('spacesError error'); console.log(result)
+            $scope.renewtoken = true
             lcFuncs.tokenExpired(result, lcData().getRequestCreds({q:'springshare'}), requestCredsSuccess, requestCredsError)
           }
 
@@ -201,28 +205,37 @@ angular.module('events').
               cat_string = cat_string.concat(cats[i].cid );
               if (i+1 < cats.length){cat_string = cat_string.concat(',');}}//for
             //now we call the space puller
-            lcData({token:$scope.libcaltoken, categoryList:cat_string})
+            lcData({token:$cookies.get("libcal_token"), categoryList:cat_string})
             .pullSpaces().$promise.then(spacesSuccess, spacesError);
           };//catsSuccess
           catsError = function(result){
             console.log('Cats error'); console.log(result)
+            $scope.renewtoken = true
             lcFuncs.tokenExpired(result, lcData().getRequestCreds({q:'springshare'}), requestCredsSuccess, requestCredsError)
           };
 
           ///////this is #1///////
           credsSuccess = function(result){
-            $scope.libcaltoken = result.access_token
-            lcData({token:$scope.libcaltoken}).pullCats()
+            $cookies.put("libcal_token", result.access_token)
+            lcData({token:$cookies.get("libcal_token")}).pullCats()
             .$promise.then(catsSuccess, catsError);}
           credsError = function(result){console.log('Creds error'); console.log(result)}
 
           ///////this is #0///////
           requestCredsSuccess = function(result){
-            lcData().getCreds({
-              client_id: result[0].client_id,
-              client_secret: result[0].client_secret,
-              grant_type: result[0].grant_type,
-            }).$promise.then(credsSuccess, credsError);
+            if ($cookies.get("libcal_token") && $scope.renewtoken == false){
+              lcData({token:$cookies.get("libcal_token")}).pullCats()
+              .$promise.then(catsSuccess, catsError);
+            }else{
+              console.log('getting a new token')
+              $scope.renewtoken = false
+              lcData().getCreds({
+                client_id: result[0].client_id,
+                client_secret: result[0].client_secret,
+                grant_type: result[0].grant_type,
+              }).$promise.then(credsSuccess, credsError);
+            }//ifelse statment
+
           }
           requestCredsError = function(result){console.log('requestCreds error'); console.log(result)}
           lcData().getRequestCreds({q:'springshare'}).$promise.then(requestCredsSuccess, requestCredsError);
