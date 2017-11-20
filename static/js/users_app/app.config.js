@@ -8,13 +8,27 @@ angular.module('usersApp').
                 $routeProvider,
               ){
 
-                var onlyLoggedIn = function ($location,$q, $cookies) {
+                var onlyLoggedIn = function (User, $location,$q, $cookies,) {
                     var deferred = $q.defer();
-                    if ($cookies.get("token")) {
-                        deferred.resolve();
-                    } else {
-                        deferred.reject();
-                        $location.url('/users/login');
+                    if ($cookies.get("token")){
+                      User.tokenVerify({token: $cookies.get("token")}).$promise.then(
+                        function(success){
+                          deferred.resolve();
+                        },//success,
+                        function(error){
+                          rejection(deferred);
+                          console.log(error)
+                        }//error
+                      )//user.tokenVerify
+                    }else{
+                      rejection(deferred);
+                    }//else
+
+                    function rejection(deferral){
+                      deferral.reject();
+                      var url = "/users/login";
+                      window.location = url;
+                      window.location.replace(url);
                     }
                     return deferred.promise;
                 };
