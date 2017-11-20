@@ -10,7 +10,7 @@ angular.module('homeApp', [
 
   //internal
   // 'homepage',
-  // 'user',
+  'user',
   // 'login',
   'sharednav',
   'navBar',

@@ -9,6 +9,7 @@ angular.module('libcalApp', [
 
 
   //internal
+  'user',
   'events',
   'sharednav',
   'navBar',
