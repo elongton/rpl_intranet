@@ -139,7 +139,10 @@ angular.module('events').
               funcArray.push(getEvents($scope.dateArray[i]));
             }
             $q.all(funcArray)
-              .then(function(data){$scope.sortedarray = lcFuncs.formatEvents(data);});
+              .then(function(data){
+                // console.log(data)
+                $scope.sortedarray = lcFuncs.formatEvents(data);
+              });
           }//$scope.get_events()
 
 
@@ -156,6 +159,7 @@ angular.module('events').
               var arraypush = {
                 date: iterdate,
                 eventinfo: result,}
+              console.log(arraypush)
               $scope.loading_display = '';
               $scope.loading_blur = '';
               d.resolve(arraypush)
