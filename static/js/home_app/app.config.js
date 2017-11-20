@@ -23,6 +23,14 @@ angular.module('homeApp').
                     }else{
                       rejection(deferred);
                     }//else
+
+                    function rejection(deferral){
+                      deferral.reject();
+                      var url = "/users/login";
+                      window.location = url;
+                      window.location.replace(url);
+                    }
+                    return deferred.promise;
                 };
 
 
