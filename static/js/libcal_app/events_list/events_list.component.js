@@ -28,6 +28,8 @@ angular.module('events').
           angular.element($window).on("scroll", function() {
             $scope.didScroll = true;
             $scope.scrollheight = window.pageYOffset;
+            console.log(document.documentElement.scrollHeight)
+            console.log($scope.scrollheight + window.innerHeight)
           })
 
           $interval(function() {
@@ -41,8 +43,10 @@ angular.module('events').
                       }
                   }else{
                       $scope.direction = "up";
-                      downanimation();
-                  }
+                      if((document.documentElement.scrollHeight - ($scope.scrollheight + window.innerHeight)) > 100){
+                        downanimation();
+                      }
+                  }//else
                   $scope.lastScrollTop = $scope.st;
               }
           }, 500);//$interval

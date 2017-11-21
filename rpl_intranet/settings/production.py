@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'accounts',
     'remote_api_manager',
+    'libcal',
     'storages',
 
     'django.contrib.sites',
