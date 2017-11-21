@@ -7,6 +7,17 @@ angular.
                       iterdate = null,
                       categoryList = null} = {}){
 
+        var getbranchmapping = {
+          url: '/api/libcal/list/',
+          method: "GET",
+          params:{},
+          isArray: true,
+          transformResponse: function(data, headersGetter, status){
+            var finalData = angular.fromJson(data)
+            return finalData
+          }
+        }//getbranchmapping
+
         var getrequestcreds = {
           url: '/api/remoteapis/list/',
           method: "GET",
@@ -46,7 +57,7 @@ angular.
         }
 
         var pullevents = {
-            url: 'https://api2.libcal.com/1.1/space/bookings?lid=1598&limit=20&date=' + iterdate + '&formAnswers=1',
+            url: 'https://api2.libcal.com/1.1/space/bookings?lid=1598&limit=100&date=' + iterdate + '&formAnswers=1',
             method: "GET",
             isArray: true,
             headers: {authorization: "Bearer " + token},
@@ -56,15 +67,16 @@ angular.
             },
         }//pullevents
 
-
         //get token for querying our API for secret key
         var token = $cookies.get("token")
         if (token) {
           getrequestcreds["headers"] = {"Authorization": "JWT " + token}
+          getbranchmapping["headers"] = {"Authorization": "JWT " + token}
         }
 
 
        return $resource(null, {}, {
+              getBranchMapping:getbranchmapping,
               getRequestCreds:getrequestcreds,
               getCreds: getCreds,
               pullCats: pullcategories,

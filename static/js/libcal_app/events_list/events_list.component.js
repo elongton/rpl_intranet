@@ -6,6 +6,8 @@ angular.module('events').
         controller: function(lcFuncs, lcData, $scope, $cookies, $location, $http, $rootScope, $q, $window, $document, $interval){
 
           $scope.staticfiles = staticfiles;
+
+///////////////////////   MOBILE  //////////////////////////////
           //animating the buttons in mobile:
           var downanimation = function(){
             $scope.dates_button_class = 'animate_date_button_up';
@@ -28,8 +30,6 @@ angular.module('events').
           angular.element($window).on("scroll", function() {
             $scope.didScroll = true;
             $scope.scrollheight = window.pageYOffset;
-            console.log(document.documentElement.scrollHeight)
-            console.log($scope.scrollheight + window.innerHeight)
           })
 
           $interval(function() {
@@ -38,18 +38,16 @@ angular.module('events').
                   $scope.st = window.pageYOffset;
                   if ($scope.st > $scope.lastScrollTop) {
                       $scope.direction = "down";
-                      if($scope.scrollheight > 100){
-                        upanimation();
-                      }
+                      if($scope.scrollheight > 100){upanimation();}
                   }else{
                       $scope.direction = "up";
-                      if((document.documentElement.scrollHeight - ($scope.scrollheight + window.innerHeight)) > 100){
-                        downanimation();
-                      }
+                      if((document.documentElement.scrollHeight - ($scope.scrollheight + window.innerHeight)) > 100){downanimation();}
                   }//else
                   $scope.lastScrollTop = $scope.st;
-              }
+              }//if $scope.didScroll
           }, 500);//$interval
+
+////////////////////// END MOBILE  //////////////////////////////
 
           //TIME STUFF
           var one_day = 1000*60*60*24;
@@ -246,9 +244,37 @@ angular.module('events').
 
           }
           requestCredsError = function(result){console.log('requestCreds error'); console.log(result)}
-          lcData().getRequestCreds({q:'springshare'}).$promise.then(requestCredsSuccess, requestCredsError);
+          lcData().getRequestCreds({q:'springshare'}).$promise.then(requestCredsSuccess, requestCredsError)
+
+          //get libcal branch mapping information
+          var branchSuccess = function(response){
+            console.log(response)
+            // console.log($cookies.get('branch'))
+            //set the default branch
+            //1. get the current user's branch (should be in cookies)
+            //2. try and match current user's branch id with branch ids in Mapping API
+            //  2a. If exists, set libcal_calendar_id and also libcal_branch_id
+            //  2b. If doesn't exist, set "" and "" to default Main branch
+
+            var branchinfo = lcFuncs.setupBranches(response, $cookies.get('branch'))
+            $scope.branch = branchinfo[0]
+            $scope.lbid = branchinfo[1]
+            $scope.lcalid = branchinfo[2]
+            $scope.mapping = branchinfo[3]
+
+
+          }
+          var branchError = function(response){console.log(response)}
+          lcData().getBranchMapping().$promise.then(branchSuccess, branchError);
 
 ///////////////////////  END HTTP  //////////////////////////////
+
+
+
+
+
+
+
 
         }//controller
 

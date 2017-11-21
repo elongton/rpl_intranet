@@ -86,12 +86,50 @@ angular.
             return backdatedisable;
           }
 
+          var setupbranches = function(apibranchmapping, c_branch){
+            var branchMappingDict = {}
+            var s_branch, s_lbid, s_lcalid
+            for (var i=0; i < apibranchmapping.length; i++){
+              branchMappingDict[apibranchmapping[i].branch] = {
+                      branch: apibranchmapping[i].branch,
+                      lbid: apibranchmapping[i].libcal_branch_id,
+                      lcalid: apibranchmapping[i].libcal_calendar_id,
+                    }
+            }//for
+            try {
+              var mapping = branchMappingDict[c_branch]
+              s_branch = mapping.branch
+              s_lbid = mapping.lbid
+              s_lcalid = mapping.lcalid
+            }catch(err){
+              if (err.name == 'TypeError'){
+                console.log("User account branch hasn't been mapped on our backend. Talk to your admin.")
+              }else{console.log(err)}
+              var defaultmap = branchMappingDict['Main']
+              s_branch = 'Main'
+              s_lbid = defaultmap.lbid
+              s_lcalid = defaultmap.lcalid
+              console.log(s_branch)
+              console.log(s_lbid)
+              console.log(s_lcalid)
+            }//try catch
+            var myArray = new Array(4);
+            myArray[0] = s_branch
+            myArray[1] = s_lbid
+            myArray[2] = s_lcalid
+            myArray[3] = branchMappingDict
+            return myArray
+          }
+
+
+
         return {
           getDates: getdates,
           formatDate: formatdate,
           formatEvents: formatevents,
           disableBack: disable_back_button,
           tokenExpired: tokenexpired,
+          setupBranches: setupbranches,
         }
 
     });

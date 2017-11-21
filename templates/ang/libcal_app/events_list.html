@@ -5,23 +5,25 @@
   <div class="loading_div table_parent" style="text-align: center;"><i class="fa fa-spinner table_child spinner" aria-hidden="true"></i></div>
 </div>
 
-
-
 <div class="container events_container" ng-class="loading_blur">
-  <div class="row">
-    <div class="col-sm-12">
 
-      <div class="events_title" ng-class="header_shown">
-        <h1>Events</h1>
-      </div>
-    </div>
-  </div>
+
+
+
   <div class="row"><!--datepicker row -->
-    <div class="col-sm-12">
+    <div class="col-sm-12" style="margin-top: 10px;">
       <nav class="nav nav-pills" id="datepickernav">
         <li class="nav-item text-left">
-
-        </li>
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ng-disabled = "datedisable">
+              {{branch}}
+            </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" ng-click = 'changeBranch("Main")' href="#">Main</a>
+              </div> <!-- dropdown-menu -->
+          </div> <!-- dropdown -->
+        </li><!-- branch dropdown li -->
         <li class="nav-item text-left datepicker">
           <form class="form-inline">
             <label style="margin-right: 10px;"for="startdate">Start:</label>
