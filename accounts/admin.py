@@ -45,6 +45,6 @@ class UserAdmin(BaseUserAdmin):
 
 
 admin.site.register(User, UserAdmin)
-
+admin.site.register(Branch)
 
 admin.site.unregister(Group) #not using this.
