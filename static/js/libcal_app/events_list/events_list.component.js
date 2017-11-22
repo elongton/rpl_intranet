@@ -81,8 +81,6 @@ angular.module('events').
             dummy_date.setDate($scope.from.getDate() + 1)
             $scope.from = new Date(dummy_date);
             $scope.to = $scope.from;
-
-
           }
 
           $scope.lose_day_button = function(){
@@ -136,6 +134,7 @@ angular.module('events').
           }
           // GET EVENTS BUTTON
           $scope.get_events = function(){
+            // console.log($scope.lbid)
             var funcArray = new Array();
             for (var i = 0; i < $scope.dateArray.length; i++ ){
               funcArray.push(getEvents($scope.dateArray[i]));
@@ -244,28 +243,37 @@ angular.module('events').
 
           }
           requestCredsError = function(result){console.log('requestCreds error'); console.log(result)}
+
+
           lcData().getRequestCreds({q:'springshare'}).$promise.then(requestCredsSuccess, requestCredsError)
 
-          //get libcal branch mapping information
-          var branchSuccess = function(response){
-            console.log(response)
-            // console.log($cookies.get('branch'))
-            //set the default branch
-            var branchinfo = lcFuncs.setupBranches(response, $cookies.get('branch'))
-            $scope.branch = branchinfo[0]
-            $scope.lbid = branchinfo[1]
-            $scope.lcalid = branchinfo[2]
-            $scope.mapping = branchinfo[3]
-          }
-          var branchError = function(response){console.log(response)}
-          lcData().getBranchMapping().$promise.then(branchSuccess, branchError);
+          // //get libcal branch mapping information
+          // var branchSuccess = function(response){
+          //   var branchinfo = lcFuncs.setupBranches(response, $cookies.get('branch'))
+          //   $scope.branch = branchinfo[0]
+          //   $scope.lbid = branchinfo[1]
+          //   $scope.lcalid = branchinfo[2]
+          //   $scope.mapping = branchinfo[3]
+          //   console.log($scope.lbid)
+          //   lcData().getRequestCreds({q:'springshare'}).$promise.then(requestCredsSuccess, requestCredsError)
+          // }
+          // var branchError = function(response){console.log(response)}
+          // lcData().getBranchMapping().$promise.then(branchSuccess, branchError);
 
 ///////////////////////  END HTTP  //////////////////////////////
 
+          // //changing branch dropdown
+          // $scope.changebranch = function(branch){
+          //   $scope.branch = branch
+          //   var newbranch = branch
+          //   $scope.lbid = $scope.mapping[branch].lbid
+          //   $scope.lcalid = $scope.mapping[branch].lcalid
+          //   lcData({token:$cookies.get("libcal_token")}).pullCats({location_id:$scope.lbid})
+          //   .$promise.then(catsSuccess, catsError);
+          //
+          // }
 
-
-
-
+// {location_id:$scope.lbid}
 
 
 

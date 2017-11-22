@@ -8,7 +8,13 @@
 <div class="container events_container" ng-class="loading_blur">
 
 
-
+  <!-- <div class="row">
+    <div class="col-sm-12">
+      <div class="events_title" ng-class="header_shown">
+        <h1>Events</h1>
+      </div>
+    </div>
+  </div> -->
 
   <div class="row"><!--datepicker row -->
     <div class="col-sm-12" style="margin-top: 10px;">
@@ -20,7 +26,7 @@
               {{branch}}
             </button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a ng-repeat = "location in mapping" class="dropdown-item" href="#">{{location.branch}}</a>
+                <a ng-repeat = "location in mapping" class="dropdown-item" ng-click = "changebranch(location.branch)" href="#">{{location.branch}}</a>
               </div> <!-- dropdown-menu -->
           </div> <!-- dropdown -->
         </li><!-- branch dropdown li -->
@@ -73,13 +79,16 @@
               <div style = "margin-bottom: 10px;" ng-repeat = "detail in event_item.eventinfo">
                 <h4 ng-if = "detail.cid != '2710'">{{get_room_key(detail.eid)}} : {{get_time(detail.fromDate)}} - {{get_time(detail.toDate)}}</h4>
                 <h6 ng-if = "detail.cid == '2710'" style="margin-bottom: 5px;">{{get_room_key(detail.eid)}} : {{get_time(detail.fromDate)}} - {{get_time(detail.toDate)}}</h6>
-                Name: {{detail.firstName}} {{detail.lastName}}
-                <br>
-                Email: {{detail.email}}
-                <br>
-                <div ng-repeat = "(number, question) in detail.questions">
-                  {{question}}
+                <div style="padding-left: 5px;">
+                  Name: {{detail.firstName}} {{detail.lastName}}
+                  <br>
+                  Email: {{detail.email}}
+                  <br>
+                  <div ng-repeat = "(number, question) in detail.questions">
+                    {{question}}
+                  </div>
                 </div>
+
                 <hr style="margin-right: 25%;">
               </div>
             </div>
