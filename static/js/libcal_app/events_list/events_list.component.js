@@ -170,7 +170,7 @@ angular.module('events').
               $scope.renewtoken = true
               lcFuncs.tokenExpired(result, lcData().getRequestCreds({q:'springshare'}), requestCredsSuccess, requestCredsError)
             }
-            lcData({token:$cookies.get("libcal_token"), iterdate:iterdate}).pullEvents()//$scope.libcaltoken
+            lcData({token:$cookies.get("libcal_token"), iterdate:iterdate}).pullEvents({location_id:$scope.lbid})//$scope.libcaltoken
               .$promise.then(eventsSuccess, eventsError)
             //return the array
             return d.promise;
@@ -205,6 +205,8 @@ angular.module('events').
           catsSuccess = function(result){
             //we need a list of the category IDs, that's the goal of the following code
             var cats = result[0].categories;
+            console.log('these are the space categories:')
+            console.log(cats)
             var cat_string = '';
             for (var i = 0; i < cats.length; i++){
               cat_string = cat_string.concat(cats[i].cid );
@@ -222,14 +224,14 @@ angular.module('events').
           ///////this is #1///////
           credsSuccess = function(result){
             $cookies.put("libcal_token", result.access_token)
-            lcData({token:$cookies.get("libcal_token")}).pullCats()
+            lcData({token:$cookies.get("libcal_token")}).pullCats({location_id:$scope.lbid})
             .$promise.then(catsSuccess, catsError);}
           credsError = function(result){console.log('Creds error'); console.log(result)}
 
           ///////this is #0///////
           requestCredsSuccess = function(result){
             if ($scope.renewtoken == false){
-              lcData({token:$cookies.get("libcal_token")}).pullCats()
+              lcData({token:$cookies.get("libcal_token")}).pullCats({location_id:$scope.lbid})
               .$promise.then(catsSuccess, catsError);
             }else{
               console.log('getting a new token')
@@ -245,33 +247,33 @@ angular.module('events').
           requestCredsError = function(result){console.log('requestCreds error'); console.log(result)}
 
 
-          lcData().getRequestCreds({q:'springshare'}).$promise.then(requestCredsSuccess, requestCredsError)
+          // lcData().getRequestCreds({q:'springshare'}).$promise.then(requestCredsSuccess, requestCredsError)
 
-          // //get libcal branch mapping information
-          // var branchSuccess = function(response){
-          //   var branchinfo = lcFuncs.setupBranches(response, $cookies.get('branch'))
-          //   $scope.branch = branchinfo[0]
-          //   $scope.lbid = branchinfo[1]
-          //   $scope.lcalid = branchinfo[2]
-          //   $scope.mapping = branchinfo[3]
-          //   console.log($scope.lbid)
-          //   lcData().getRequestCreds({q:'springshare'}).$promise.then(requestCredsSuccess, requestCredsError)
-          // }
-          // var branchError = function(response){console.log(response)}
-          // lcData().getBranchMapping().$promise.then(branchSuccess, branchError);
+          //get libcal branch mapping information
+          var branchSuccess = function(response){
+            var branchinfo = lcFuncs.setupBranches(response, $cookies.get('branch'))
+            $scope.branch = branchinfo[0]
+            $scope.lbid = branchinfo[1]
+            $scope.lcalid = branchinfo[2]
+            $scope.mapping = branchinfo[3]
+            // console.log($scope.lbid)
+            lcData().getRequestCreds({q:'springshare'}).$promise.then(requestCredsSuccess, requestCredsError)
+          }
+          var branchError = function(response){console.log(response)}
+          lcData().getBranchMapping().$promise.then(branchSuccess, branchError);
 
 ///////////////////////  END HTTP  //////////////////////////////
 
-          // //changing branch dropdown
-          // $scope.changebranch = function(branch){
-          //   $scope.branch = branch
-          //   var newbranch = branch
-          //   $scope.lbid = $scope.mapping[branch].lbid
-          //   $scope.lcalid = $scope.mapping[branch].lcalid
-          //   lcData({token:$cookies.get("libcal_token")}).pullCats({location_id:$scope.lbid})
-          //   .$promise.then(catsSuccess, catsError);
-          //
-          // }
+          //changing branch dropdown
+          $scope.changebranch = function(branch){
+            $scope.branch = branch
+            var newbranch = branch
+            $scope.lbid = $scope.mapping[branch].lbid
+            $scope.lcalid = $scope.mapping[branch].lcalid
+            lcData({token:$cookies.get("libcal_token")}).pullCats({location_id:$scope.lbid})
+            .$promise.then(catsSuccess, catsError);
+
+          }
 
 // {location_id:$scope.lbid}
 

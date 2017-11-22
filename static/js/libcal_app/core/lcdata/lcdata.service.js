@@ -35,15 +35,11 @@ angular.
               method: "POST",
         }//get_creds
 
-        // if (location_id){
-        //   console.log('https://api2.libcal.com/1.1/space/categories/' + location_id)
-        // }
-
         var pullcategories = {
               // url: 'https://api2.libcal.com/1.1/space/categories/' + location_id,
-              url: 'https://api2.libcal.com/1.1/space/categories/1598',
+              url: 'https://api2.libcal.com/1.1/space/categories/:location_id',
               method: 'GET',
-              // params: {location_id:'@location_id'},
+              params: {location_id:'@location_id'},
               isArray: true,
               headers: {authorization: "Bearer " + token},
               transformResponse: function(data, headersGetter, status){
@@ -66,10 +62,10 @@ angular.
 
         var pullevents = {
             // url: 'https://api2.libcal.com/1.1/space/bookings?lid=' + location_id + '&limit=100&date=' + iterdate + '&formAnswers=1',
-            url: 'https://api2.libcal.com/1.1/space/bookings?1598&limit=100&date=' + iterdate + '&formAnswers=1',
+            url: 'https://api2.libcal.com/1.1/space/bookings?lid=:location_id&limit=100&date=' + iterdate + '&formAnswers=1',
             method: "GET",
             isArray: true,
-            // params: {location_id:'@location_id'},
+            params: {location_id:'@location_id'},
             headers: {authorization: "Bearer " + token},
             transformResponse: function(data, headersGetter, status){
               var finalData = angular.fromJson(data)
