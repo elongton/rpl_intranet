@@ -92,8 +92,9 @@
                 <hr style="margin-right: 25%;">
               </div>
             </div>
-            <div ng-if="event_item.eventinfo.length == 0">
-              No events today.
+            <!-- <div ng-if="event_item.eventinfo.length == 0"> -->
+            <div ng-if="sortedarray.length == []">
+              {{message}}
             </div>
 
         </div><!--col-sm-12-->

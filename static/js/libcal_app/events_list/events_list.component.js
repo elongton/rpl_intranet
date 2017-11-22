@@ -205,15 +205,19 @@ angular.module('events').
           catsSuccess = function(result){
             //we need a list of the category IDs, that's the goal of the following code
             var cats = result[0].categories;
-            console.log('these are the space categories:')
-            console.log(cats)
             var cat_string = '';
-            for (var i = 0; i < cats.length; i++){
-              cat_string = cat_string.concat(cats[i].cid );
-              if (i+1 < cats.length){cat_string = cat_string.concat(',');}}//for
-            //now we call the space puller
-            lcData({token:$cookies.get("libcal_token"), categoryList:cat_string})
-            .pullSpaces().$promise.then(spacesSuccess, spacesError);
+            try{
+              for (var i = 0; i < cats.length; i++){
+                cat_string = cat_string.concat(cats[i].cid );
+                if (i+1 < cats.length){cat_string = cat_string.concat(',');}}//for
+              //now we call the space puller
+              lcData({token:$cookies.get("libcal_token"), categoryList:cat_string})
+              .pullSpaces().$promise.then(spacesSuccess, spacesError);
+            }catch(err){
+              $scope.message = "There are no accessible categories at this branch."
+              console.log($scope.message)
+            }
+
           };//catsSuccess
           catsError = function(result){
             console.log('Cats error'); console.log(result)
@@ -272,7 +276,8 @@ angular.module('events').
             $scope.lcalid = $scope.mapping[branch].lcalid
             lcData({token:$cookies.get("libcal_token")}).pullCats({location_id:$scope.lbid})
             .$promise.then(catsSuccess, catsError);
-
+            $scope.message = ''
+            $scope.sortedarray = []
           }
 
 // {location_id:$scope.lbid}
