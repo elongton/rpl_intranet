@@ -58,7 +58,7 @@ $loading_dim: 100px;
 
 
 
-//above mobile size
+//////////////////above mobile size//////////////////////
 @media (min-width: 768px){
   div.mobile_dates_button{display: none;}
   div.mobile_menu_button{display: none;}
@@ -74,17 +74,17 @@ $loading_dim: 100px;
     font-family: 'Mate SC';}
   .events_title h1{font-size: 50px; font-weight: bold;}
 
-
-
+  .angular_event_list h4{font-size: 22px; font-weight: normal;}
+  .angular_event_list h6{font-weight: 500;}
   #datepickernav{margin-bottom: 20px;}
   #datepickernav li div button,
   #datepickernav li button{height: 42px;}
   .datepicker input{width: 170px;}
   .datepicker{margin-left: 10px;}
-
   #startdate, #enddate{width: 165px;}
-
 }
+
+////////////////////////mobile size////////////////////////////
 
 //date button variables
 $xtrans: 85px;
@@ -103,8 +103,6 @@ $datedownangle:135deg;
   to   { transform: rotate($dateupangle) translateX($xtrans) rotate(-$dateupangle); }
 }
 
-
-//mobile size
 @media only screen and (max-width: 768px) {
   //header transition
 
@@ -237,7 +235,7 @@ $datedownangle:135deg;
 
 }//media query
 
-// PRINTING
+////////////////////// PRINTING////////////////////////////////
 @media screen {
     #printSection {display: none;}
 }

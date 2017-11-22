@@ -251,18 +251,11 @@ angular.module('events').
             console.log(response)
             // console.log($cookies.get('branch'))
             //set the default branch
-            //1. get the current user's branch (should be in cookies)
-            //2. try and match current user's branch id with branch ids in Mapping API
-            //  2a. If exists, set libcal_calendar_id and also libcal_branch_id
-            //  2b. If doesn't exist, set "" and "" to default Main branch
-
             var branchinfo = lcFuncs.setupBranches(response, $cookies.get('branch'))
             $scope.branch = branchinfo[0]
             $scope.lbid = branchinfo[1]
             $scope.lcalid = branchinfo[2]
             $scope.mapping = branchinfo[3]
-
-
           }
           var branchError = function(response){console.log(response)}
           lcData().getBranchMapping().$promise.then(branchSuccess, branchError);

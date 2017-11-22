@@ -78,6 +78,13 @@
     font-size: 50px;
     font-weight: bold; }
 
+  .angular_event_list h4 {
+    font-size: 22px;
+    font-weight: normal; }
+
+  .angular_event_list h6 {
+    font-weight: 500; }
+
   #datepickernav {
     margin-bottom: 20px; }
 

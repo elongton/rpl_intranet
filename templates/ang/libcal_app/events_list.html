@@ -20,7 +20,7 @@
               {{branch}}
             </button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" ng-click = 'changeBranch("Main")' href="#">Main</a>
+                <a ng-repeat = "location in mapping" class="dropdown-item" href="#">{{location.branch}}</a>
               </div> <!-- dropdown-menu -->
           </div> <!-- dropdown -->
         </li><!-- branch dropdown li -->

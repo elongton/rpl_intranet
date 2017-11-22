@@ -87,6 +87,10 @@ angular.
           }
 
           var setupbranches = function(apibranchmapping, c_branch){
+            //1. get the current user's branch (should be in cookies)
+            //2. try and match current user's branch id with branch ids in Mapping API
+            //  2a. If exists, set libcal_calendar_id and also libcal_branch_id
+            //  2b. If doesn't exist, set "" and "" to default Main branch
             var branchMappingDict = {}
             var s_branch, s_lbid, s_lcalid
             for (var i=0; i < apibranchmapping.length; i++){
