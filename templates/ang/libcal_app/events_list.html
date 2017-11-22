@@ -8,13 +8,13 @@
 <div class="container events_container" ng-class="loading_blur">
 
 
-  <!-- <div class="row">
+  <div class="row" id="libcal_events_header">
     <div class="col-sm-12">
       <div class="events_title" ng-class="header_shown">
         <h1>Events</h1>
       </div>
     </div>
-  </div> -->
+  </div>
 
   <div class="row"><!--datepicker row -->
     <div class="col-sm-12" style="margin-top: 10px;">
@@ -73,6 +73,7 @@
 
 
     <div class="row angular_event_list" id = "printThisElement" style="padding-left: 10px;">
+      <div ng-if = "data_not_available == false">
         <div class="col-sm-12" ng-repeat="event_item in sortedarray">
             <h2 style="margin-bottom: 20px;">{{event_item.date}}</h2>
             <div ng-if="event_item.eventinfo.length > 0">
@@ -92,12 +93,14 @@
                 <hr style="margin-right: 25%;">
               </div>
             </div>
-            <!-- <div ng-if="event_item.eventinfo.length == 0"> -->
-            <div ng-if="sortedarray.length == []">
-              {{message}}
+            <div ng-if="event_item.eventinfo.length == 0">
+              <h5 style="font-weight: 400;">There are no events today.</h5>
             </div>
-
         </div><!--col-sm-12-->
+      </div><!-- ng-if data_not_available == false -->
+      <div ng-if = "data_not_available == true" style="padding-left: 10px;">
+        <h5 style="font-weight: 400;">{{message}}</h5>
+      </div>
     </div><!--row -->
   </div><!--container -->
 

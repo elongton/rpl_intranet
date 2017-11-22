@@ -132,6 +132,12 @@ angular.module('events').
           $scope.get_room_key = function(eid){
             return $scope.spaces_dict[eid]
           }
+
+
+
+///////////////////////   HTTP  //////////////////////////////
+
+
           // GET EVENTS BUTTON
           $scope.get_events = function(){
             // console.log($scope.lbid)
@@ -141,13 +147,11 @@ angular.module('events').
             }
             $q.all(funcArray)
               .then(function(data){
-                // console.log(data)
                 $scope.sortedarray = lcFuncs.formatEvents(data);
               });
           }//$scope.get_events()
 
 
-///////////////////////   HTTP  //////////////////////////////
           //check if there's a token. if not, get one
           if ($cookies.get("libcal_token")){$scope.renewtoken=false}else{$scope.renewtoken=true}
           // OBTAIN THE ACCESS TOKEN!
@@ -204,6 +208,7 @@ angular.module('events').
           ///////this is #2///////
           catsSuccess = function(result){
             //we need a list of the category IDs, that's the goal of the following code
+            $scope.data_not_available = false
             var cats = result[0].categories;
             var cat_string = '';
             try{
@@ -214,6 +219,7 @@ angular.module('events').
               lcData({token:$cookies.get("libcal_token"), categoryList:cat_string})
               .pullSpaces().$promise.then(spacesSuccess, spacesError);
             }catch(err){
+              $scope.data_not_available = true
               $scope.message = "There are no accessible categories at this branch."
               console.log($scope.message)
             }
@@ -250,9 +256,6 @@ angular.module('events').
           }
           requestCredsError = function(result){console.log('requestCreds error'); console.log(result)}
 
-
-          // lcData().getRequestCreds({q:'springshare'}).$promise.then(requestCredsSuccess, requestCredsError)
-
           //get libcal branch mapping information
           var branchSuccess = function(response){
             var branchinfo = lcFuncs.setupBranches(response, $cookies.get('branch'))
@@ -274,10 +277,9 @@ angular.module('events').
             var newbranch = branch
             $scope.lbid = $scope.mapping[branch].lbid
             $scope.lcalid = $scope.mapping[branch].lcalid
+            $scope.message = ''
             lcData({token:$cookies.get("libcal_token")}).pullCats({location_id:$scope.lbid})
             .$promise.then(catsSuccess, catsError);
-            $scope.message = ''
-            $scope.sortedarray = []
           }
 
 // {location_id:$scope.lbid}

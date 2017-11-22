@@ -54,6 +54,9 @@
   display: inline !important; }
 
 @media (min-width: 768px) {
+  #libcal_events_header {
+    display: none; }
+
   div.mobile_dates_button {
     display: none; }
 
@@ -202,7 +205,7 @@
     font-family: 'Mate SC'; }
 
   div.angular_event_list {
-    margin-top: 85px; }
+    margin-top: 65px; }
 
   div.button_container {
     margin-bottom: 10px; }
