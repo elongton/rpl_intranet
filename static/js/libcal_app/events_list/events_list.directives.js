@@ -14,6 +14,7 @@ angular.module('events')
             element.on('click', function () {
                 var elemToPrint = document.getElementById(attrs.printElementId);
                 if (elemToPrint) {
+                    window.onafterprint()
                     printElement(elemToPrint);
                     window.print();
                 }
