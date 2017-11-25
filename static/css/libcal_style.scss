@@ -61,6 +61,8 @@ $loading_dim: 100px;
 //////////////////above mobile size//////////////////////
 @media (min-width: 768px){
 
+
+
   #libcal_events_header{display: none;}
 
   div.mobile_dates_button{display: none;}
@@ -79,12 +81,30 @@ $loading_dim: 100px;
 
   .angular_event_list h4{font-size: 22px; font-weight: normal;}
   .angular_event_list h6{font-weight: 500;}
-  #datepickernav{margin-bottom: 20px;}
+  // #datepickernav{margin-bottom: 20px;}
   #datepickernav li div button,
   #datepickernav li button{height: 42px;}
   .datepicker input{width: 170px;}
   .datepicker{margin-left: 10px;}
   #startdate, #enddate{width: 165px;}
+
+  $ge_size: 65px;
+  #get_events_button{
+    border-radius: $ge_size;
+    width: $ge_size;
+    height: $ge_size;
+    font-size: 25px;
+    // position: fixed;
+    // bottom: 15px;
+    // right: 15px;
+  }
+
+  #bottom_date_nav{
+    height: 100px;
+    border: 1px dashed black;
+
+  }
+
 }
 
 ////////////////////////mobile size////////////////////////////

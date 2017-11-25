@@ -88,9 +88,6 @@
   .angular_event_list h6 {
     font-weight: 500; }
 
-  #datepickernav {
-    margin-bottom: 20px; }
-
   #datepickernav li div button,
   #datepickernav li button {
     height: 42px; }
@@ -102,7 +99,17 @@
     margin-left: 10px; }
 
   #startdate, #enddate {
-    width: 165px; } }
+    width: 165px; }
+
+  #get_events_button {
+    border-radius: 65px;
+    width: 65px;
+    height: 65px;
+    font-size: 25px; }
+
+  #bottom_date_nav {
+    height: 100px;
+    border: 1px dashed black; } }
 @keyframes date_down {
   from {
     transform: rotate(225deg) translateX(85px) rotate(-225deg); }

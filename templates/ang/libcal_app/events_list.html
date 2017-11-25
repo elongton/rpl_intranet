@@ -30,46 +30,12 @@
               </div> <!-- dropdown-menu -->
           </div> <!-- dropdown -->
         </li><!-- branch dropdown li -->
-        <li class="nav-item text-left datepicker">
-          <form class="form-inline">
-            <label style="margin-right: 10px;"for="startdate">Start:</label>
-            <input type="date" class="form-control" id="startdate" ng-model="from" ng-disabled = "datedisable">
-          </form>
 
-        </li>
-        <li class="nav-item text-left datepicker">
-          <form class="form-inline">
-            <label style="margin-right: 10px;" for="enddate">End:</label>
-            <input type="date" class="form-control" id="enddate" ng-model="to" ng-disabled = "datedisable">
-          </form>
-        </li>
-        <li class="nav-item text-left datepicker">
-          <button class="btn btn-secondary" ng-click = "todaybutton()" ng-disabled = "datedisable">Today</button>
-        </li>
-        <li class="nav-item text-left datepicker">
-          <button class="btn btn-secondary" ng-class="disable_today" ng-click = "lose_day_button()" ng-disabled = "backdisable" style="font-size: 20px;">-</i></button>
-        </li>
-        <li class="nav-item text-left datepicker">
-          <button class="btn btn-secondary" ng-click = "add_day_button()" ng-disabled = "datedisable" style="font-size: 20px;">+</i></button>
-        </li>
-
-        <!-- <li class="nav-item text-left datepicker">
-          <button class="btn btn-secondary" ng-click = "weekbutton()" ng-disabled = "datedisable">Week</button>
-        </li>
-        <li class="nav-item text-left datepicker">
-          <button class="btn btn-secondary" ng-click = "add_week_button()" ng-disabled = "datedisable" style="font-size: 20px;">+</i></button>
-        </li> -->
-        <!-- GO BUTTON -->
-        <li class="nav-item text-right ml-auto">
-          <button class="btn btn-success pull-right"  ng-click = "get_events()" ng-disabled = "datedisable || disable_load">Look Up</button>
-          <button style = "margin-right: 10px;" class="btn btn-secondary pull-right"  ng-print print-element-id="printThisElement" ng-disabled = "datedisable || disable_load"><i class="fa fa-print" aria-hidden="true"></i></button>
-
-        </li>
       </nav>
     </div>
 
-  </div><!--datepicker row -->
 
+  </div><!--datepicker row -->
 
 
     <div class="row angular_event_list" id = "printThisElement" style="padding-left: 10px;">
@@ -129,5 +95,42 @@
 
 
 
+  <nav class="navbar fixed-bottom navbar-light bg-faded">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+          <nav class="nav" id="datepickernav">
+            <ul class="nav">
+              <li class="nav-item text-left datepicker">
+                <form class="form-inline">
+                  <label style="margin-right: 10px;"for="startdate">Start:</label>
+                  <input type="date" class="form-control" id="startdate" ng-model="from" ng-disabled = "datedisable">
+                </form>
+              </li>
+              <li class="nav-item text-left datepicker">
+                <form class="form-inline">
+                  <label style="margin-right: 10px;" for="enddate">End:</label>
+                  <input type="date" class="form-control" id="enddate" ng-model="to" ng-disabled = "datedisable">
+                </form>
+              </li>
+              <li class="nav-item text-left datepicker">
+                <button class="btn btn-secondary" ng-click = "todaybutton()" ng-disabled = "datedisable">Today</button>
+              </li>
+              <li class="nav-item text-left datepicker">
+                <button class="btn btn-secondary" ng-class="disable_today" ng-click = "lose_day_button()" ng-disabled = "backdisable" style="font-size: 20px;">-</i></button>
+              </li>
+              <li class="nav-item text-left datepicker">
+                <button class="btn btn-secondary" ng-click = "add_day_button()" ng-disabled = "datedisable" style="font-size: 20px;">+</i></button>
+              </li>
+            </ul>
 
-</div>
+            <ul class="nav" style="right: 0px; bottom: 0px; position: absolute;">
+                  <div style = "style="position: absolute; bottom: 0px; right: 0px;"></div>
+                  <button style="position: absolute; bottom: 0px; right: 0px;" class="btn btn-success" id="get_events_button"  ng-click = "get_events()" ng-disabled = "datedisable || disable_load"><i class="fa fa-search" aria-hidden="true"></i></button>
+            </ul>
+
+          </nav>
+        </div><!-- col-sm-12 -->
+      </div>
+    </div>
+  </nav>
