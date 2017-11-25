@@ -54,6 +54,27 @@
   display: inline !important; }
 
 @media (min-width: 768px) {
+  #get_events_button {
+    border-radius: 65px;
+    width: 65px;
+    height: 65px;
+    font-size: 25px; }
+
+  #querybutton_ul button {
+    position: absolute;
+    bottom: 0px;
+    right: 12.5px; }
+
+  #querybutton_ul div {
+    position: absolute;
+    bottom: -12.5px;
+    right: 0px;
+    width: 90px;
+    height: 90px;
+    background-color: #f7f7f7;
+    border-top-left-radius: 45px;
+    border-top-right-radius: 45px; }
+
   #libcal_events_header {
     display: none; }
 
@@ -88,8 +109,13 @@
   .angular_event_list h6 {
     font-weight: 500; }
 
+  #branchnav {
+    margin-bottom: 15px; }
+
   #datepickernav li div button,
-  #datepickernav li button {
+  #datepickernav li button,
+  #branchnav li div button,
+  #branchnav li button {
     height: 42px; }
 
   .datepicker input {
@@ -100,12 +126,6 @@
 
   #startdate, #enddate {
     width: 165px; }
-
-  #get_events_button {
-    border-radius: 65px;
-    width: 65px;
-    height: 65px;
-    font-size: 25px; }
 
   #bottom_date_nav {
     height: 100px;

@@ -62,6 +62,19 @@ $loading_dim: 100px;
 @media (min-width: 768px){
 
 
+  $ge_size: 65px;
+  $geb_size: $ge_size + 25px;
+  $ge_offset: ($geb_size - $ge_size)/2;
+  #get_events_button{
+    border-radius: $ge_size;
+    width: $ge_size;
+    height: $ge_size;
+    font-size: 25px;
+  }
+  #querybutton_ul button{position: absolute; bottom: 0px; right: $ge_offset;}
+  #querybutton_ul div {position: absolute; bottom: -$ge_offset; right: 0px;
+                      width: $geb_size; height: $geb_size; background-color: #f7f7f7;
+                      border-top-left-radius: $geb_size/2; border-top-right-radius: $geb_size/2;}
 
   #libcal_events_header{display: none;}
 
@@ -81,23 +94,18 @@ $loading_dim: 100px;
 
   .angular_event_list h4{font-size: 22px; font-weight: normal;}
   .angular_event_list h6{font-weight: 500;}
-  // #datepickernav{margin-bottom: 20px;}
+
+  #branchnav{margin-bottom: 15px;}
+
   #datepickernav li div button,
-  #datepickernav li button{height: 42px;}
+  #datepickernav li button,
+  #branchnav li div button,
+  #branchnav li button{height: 42px;}
   .datepicker input{width: 170px;}
   .datepicker{margin-left: 10px;}
   #startdate, #enddate{width: 165px;}
 
-  $ge_size: 65px;
-  #get_events_button{
-    border-radius: $ge_size;
-    width: $ge_size;
-    height: $ge_size;
-    font-size: 25px;
-    // position: fixed;
-    // bottom: 15px;
-    // right: 15px;
-  }
+
 
   #bottom_date_nav{
     height: 100px;
