@@ -1,3 +1,22 @@
+.btn-s1 {
+  background-color: #9061e2;
+  color: white; }
+
+.btn-s1:hover {
+  background-color: #5d34af; }
+
+.btn-s1-active {
+  background-color: #5d34af; }
+
+.btn-s2 {
+  background-color: #ff9d3f; }
+
+.btn-s2-hover {
+  background-color: #ef6c00; }
+
+.btn-s2-active {
+  background-color: #b53d00; }
+
 .table_parent {
   display: table; }
 
@@ -54,6 +73,9 @@
   display: inline !important; }
 
 @media (min-width: 768px) {
+  div.angular_event_list {
+    padding-bottom: 100px; }
+
   #get_events_button {
     border-radius: 65px;
     width: 65px;

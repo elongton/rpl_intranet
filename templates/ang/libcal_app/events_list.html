@@ -19,17 +19,24 @@
   <div class="row"><!--datepicker row -->
     <div class="col-sm-12" style="margin-top: 10px;">
       <nav class="nav nav-pills" id="branchnav">
-        <li class="nav-item text-left">
-          <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ng-disabled = "datedisable">
-              {{branch}}
-            </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a ng-repeat = "location in mapping" class="dropdown-item" ng-click = "changebranch(location.branch)" href="#">{{location.branch}}</a>
-              </div> <!-- dropdown-menu -->
-          </div> <!-- dropdown -->
-        </li><!-- branch dropdown li -->
+          <li class="nav-item text-left">
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ng-disabled = "datedisable">
+                {{branch}}
+              </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a ng-repeat = "location in mapping" class="dropdown-item" ng-click = "changebranch(location.branch)" href="#">{{location.branch}}</a>
+                </div> <!-- dropdown-menu -->
+            </div> <!-- dropdown -->
+          </li><!-- branch dropdown li -->
+
+          <li class="nav-item text-right ml-auto">
+
+            <button class="btn btn-secondary">Bookings</button>
+            <button class="btn" ng-class="button_color" style="margin-left: 10px;">Events</button>
+          </li>
+
 
       </nav>
     </div>
@@ -60,7 +67,7 @@
               </div>
             </div>
             <div ng-if="event_item.eventinfo.length == 0">
-              <h5 style="font-weight: 400;">There are no events today.</h5>
+              <h5 style="font-weight: 400;">There are no bookings today.</h5>
             </div>
         </div><!--col-sm-12-->
       </div><!-- ng-if data_not_available == false -->
@@ -100,7 +107,7 @@
       <div class="row">
         <div class="col-sm-12">
           <nav class="nav" id="datepickernav">
-            <ul class="nav">
+            <ul class="nav" style="padding: 3px 0;">
               <li class="nav-item text-left datepicker">
                 <form class="form-inline">
                   <label style="margin-right: 10px;"for="startdate">Start:</label>
@@ -126,7 +133,7 @@
 
             <ul class="nav" style="right: 0px; bottom: 0px; position: absolute;" id="querybutton_ul">
                   <div class=""></div>
-                  <button class="btn btn-success" id="get_events_button"  ng-click = "get_events()" ng-disabled = "datedisable || disable_load"><i class="fa fa-search" aria-hidden="true"></i></button>
+                  <button class="btn" ng-class="button_color" id="get_events_button"  ng-click = "get_events()" ng-disabled = "datedisable || disable_load"><i class="fa fa-search" aria-hidden="true"></i></button>
             </ul>
 
           </nav>
@@ -134,3 +141,15 @@
       </div>
     </div>
   </nav>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+
+
+
+
+    </div>
+  </div>
+</div>

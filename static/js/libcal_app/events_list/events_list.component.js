@@ -282,6 +282,13 @@ angular.module('events').
             .$promise.then(catsSuccess, catsError);
           }
 
+
+
+          $scope.button_color = 'btn-s1';
+          $scope.logo_color = '#9061e2';
+          $scope.svg_size = "500px";
+
+
 // {location_id:$scope.lbid}
 
 

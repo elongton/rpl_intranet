@@ -3,7 +3,6 @@
 angular.module('events')
     .directive('ngPrint', function(){
         var printSection = document.getElementById('printSection');
-
         // if there is no printing section, create one
         if (!printSection) {
             printSection = document.createElement('div');
@@ -19,7 +18,6 @@ angular.module('events')
                     window.print();
                 }
             });
-
             window.onafterprint = function () {
                 // clean the print section before adding new content
                 printSection.innerHTML = '';
@@ -30,9 +28,14 @@ angular.module('events')
             var domClone = elem.cloneNode(true);
             printSection.appendChild(domClone);
         }
-
         return {
             link: link,
             restrict: 'A'
         };
+  })
+  .directive('rplLogo', function(){
+      return {
+      scope: {bcolor: '=bcolor'},
+      templateUrl: '/api/templates/libcal_app/rpl_logo.html',
+      }
   })

@@ -1,3 +1,26 @@
+//color schemes
+
+$background_dark: #E1E2E1;
+$background_light: #F5F5F6;
+//scheme1
+$s1_primary: #9061e2;
+$s1_primary_light: #c490ff;
+$s1_primary_dark: #5d34af;
+
+.btn-s1{background-color: $s1_primary; color: white;}
+.btn-s1:hover{background-color: $s1_primary_dark;}
+.btn-s1-active{background-color: $s1_primary_dark;}
+
+//scheme2
+$s2_primary: #ef6c00;
+$s2_primary_light: #ff9d3f;
+$s2_primary_dark: #b53d00;
+
+.btn-s2{background-color: $s2_primary_light;}
+.btn-s2-hover{background-color: $s2_primary;}
+.btn-s2-active{background-color: $s2_primary_dark;}
+
+
 //this is te libcal app stylesheet
 .table_parent {
   display: table; }
@@ -61,6 +84,7 @@ $loading_dim: 100px;
 //////////////////above mobile size//////////////////////
 @media (min-width: 768px){
 
+  div.angular_event_list{padding-bottom: 100px;}
 
   $ge_size: 65px;
   $geb_size: $ge_size + 25px;
