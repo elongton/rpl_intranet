@@ -135,8 +135,7 @@ angular.module('events').
 
 
 
-///////////////////////   HTTP  //////////////////////////////
-
+///////////////////////  SPACES HTTP  //////////////////////////////
 
           // GET EVENTS BUTTON
           $scope.get_events = function(){
@@ -224,6 +223,9 @@ angular.module('events').
               console.log($scope.message)
             }
 
+//calendar call
+            lcData({token:$cookies.get("libcal_token")}).pullCalEvents({calendar_id:$scope.lcalid,start_date:'2017-11-15'})
+            .$promise.then(calSuccess, calError);
           };//catsSuccess
           catsError = function(result){
             console.log('Cats error'); console.log(result)
@@ -235,7 +237,10 @@ angular.module('events').
           credsSuccess = function(result){
             $cookies.put("libcal_token", result.access_token)
             lcData({token:$cookies.get("libcal_token")}).pullCats({location_id:$scope.lbid})
-            .$promise.then(catsSuccess, catsError);}
+            .$promise.then(catsSuccess, catsError);
+
+
+          }
           credsError = function(result){console.log('Creds error'); console.log(result)}
 
           ///////this is #0///////
@@ -265,11 +270,27 @@ angular.module('events').
             $scope.mapping = branchinfo[3]
             // console.log($scope.lbid)
             lcData().getRequestCreds({q:'springshare'}).$promise.then(requestCredsSuccess, requestCredsError)
+
+
           }
           var branchError = function(response){console.log(response)}
           lcData().getBranchMapping().$promise.then(branchSuccess, branchError);
 
-///////////////////////  END HTTP  //////////////////////////////
+///////////////////////  END SPACES HTTP  ////////////////////////////
+/////////////////////////////////////////////////////////////////////
+
+
+///////////////////////  CALENDAR HTTP  //////////////////////////////
+
+var calSuccess, calError
+
+calSuccess = function(response){console.log(response)}
+calError = function(response){console.log(response)}
+
+
+
+///////////////////////  END CALENDAR HTTP  //////////////////////////
+
 
           //changing branch dropdown
           $scope.changebranch = function(branch){

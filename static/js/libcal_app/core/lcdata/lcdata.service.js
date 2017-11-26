@@ -30,6 +30,11 @@ angular.
           }
         }//getrequestcreds
 
+
+        ////////////////       ////////////////
+        ////////////////SPACES/////////////////
+        ////////////////      /////////////////
+
         var getCreds = {
               url: 'https://api2.libcal.com/1.1/oauth/token',
               method: "POST",
@@ -73,6 +78,29 @@ angular.
             },
         }//pullevents
 
+
+        /////////////         /////////////
+        /////////////CALENDARS/////////////
+        /////////////         /////////////
+
+        var pullcalevents = {
+          url: 'https://api2.libcal.com/1.1/events?cal_id=:calendar_id&date=:start_date&days=15&limit=100',
+          method: "GET",
+          // isArray: true,
+          params: {calendar_id:'@calendar_id',
+                   start_date:'@start_date'},
+          headers: {authorization: "Bearer " + token},
+          transformResponse: function(data, headersGetter, status){
+            var finalData = angular.fromJson(data)
+            return finalData//.results
+          },
+
+
+        }
+
+
+
+
         //get token for querying our API for secret key
         var intranet_token = $cookies.get("token")
         if (intranet_token) {
@@ -88,6 +116,7 @@ angular.
               pullCats: pullcategories,
               pullSpaces: pullspaces,
               pullEvents: pullevents,
+              pullCalEvents:pullcalevents,
               // create: requestCreate,
               // delete: requestDelete,
           })//$resource
