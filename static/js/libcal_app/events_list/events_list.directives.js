@@ -35,7 +35,12 @@ angular.module('events')
   })
   .directive('rplLogo', function(){
       return {
-      scope: {bcolor: '=bcolor'},
       templateUrl: '/api/templates/libcal_app/rpl_logo.html',
+      replace:true,
+      }
+  })
+  .directive('navBar', function(){
+      return {
+      templateUrl: '/api/templates/libcal_app/libcal_menu.html',
       }
   })

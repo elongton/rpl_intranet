@@ -12,6 +12,5 @@ angular.module('libcalApp', [
   'user',
   'events',
   'sharednav',
-  'navBar',
 
 ]);

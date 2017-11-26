@@ -3,22 +3,39 @@
 $background_dark: #E1E2E1;
 $background_light: #F5F5F6;
 //scheme1
-$s1_primary: #9061e2;
+$s1_primary: #006599;
 $s1_primary_light: #c490ff;
 $s1_primary_dark: #5d34af;
 
-.btn-s1{background-color: $s1_primary; color: white;}
+///////S1 CLASS DEFINITIONS///////
+.btn-s1, .options-s1{background-color: $s1_primary; color: white;}
+.options-s1:focus,.options-s1:active:focus,.options-s1.active:focus,
+.options-s1.focus,.options-s1:active.focus,.options-s1.active.focus {
+    outline: none;
+    box-shadow: none;
+}
 .btn-s1:hover{background-color: $s1_primary_dark;}
-.btn-s1-active{background-color: $s1_primary_dark;}
+
+
 
 //scheme2
-$s2_primary: #ef6c00;
+$s2_primary: #cc6600;//#ef6c00;
 $s2_primary_light: #ff9d3f;
 $s2_primary_dark: #b53d00;
 
 .btn-s2{background-color: $s2_primary_light;}
 .btn-s2-hover{background-color: $s2_primary;}
 .btn-s2-active{background-color: $s2_primary_dark;}
+
+///////S1 CLASS DEFINITIONS///////
+.btn-s2, .options-s2{background-color: $s2_primary; color: white;}
+.options-s2:focus,.options-s2:active:focus,.options-s2.active:focus,
+.options-s2.focus,.options-s2:active.focus,.options-s2.active.focus {
+    outline: none;
+    box-shadow: none;
+}
+.btn-s2:hover{background-color: $s2_primary_dark;}
+
 
 
 //this is te libcal app stylesheet

@@ -284,9 +284,22 @@ angular.module('events').
 
 
 
-          $scope.button_color = 'btn-s1';
-          $scope.logo_color = '#9061e2';
-          $scope.svg_size = "500px";
+          $scope.calendar_option = function(){
+            $scope.button_color = 'btn-s1';
+            $scope.option2_color = 'btn-secondary';
+            $scope.option1_color = 'options-s1';
+            $scope.logo_color = '#006599';
+          }
+
+          $scope.spaces_option = function(){
+            $scope.button_color = 'btn-s2';
+            $scope.option2_color = 'options-s2';
+            $scope.option1_color = 'btn-secondary';
+            $scope.logo_color = '#cc6600';//'#ef6c00';
+          }
+
+          $scope.spaces_option()
+
 
 
 // {location_id:$scope.lbid}

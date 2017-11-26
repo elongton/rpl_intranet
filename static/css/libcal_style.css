@@ -1,20 +1,34 @@
-.btn-s1 {
-  background-color: #9061e2;
+.btn-s1, .options-s1 {
+  background-color: #006599;
   color: white; }
 
-.btn-s1:hover {
-  background-color: #5d34af; }
+.options-s1:focus, .options-s1:active:focus, .options-s1.active:focus,
+.options-s1.focus, .options-s1:active.focus, .options-s1.active.focus {
+  outline: none;
+  box-shadow: none; }
 
-.btn-s1-active {
+.btn-s1:hover {
   background-color: #5d34af; }
 
 .btn-s2 {
   background-color: #ff9d3f; }
 
 .btn-s2-hover {
-  background-color: #ef6c00; }
+  background-color: #cc6600; }
 
 .btn-s2-active {
+  background-color: #b53d00; }
+
+.btn-s2, .options-s2 {
+  background-color: #cc6600;
+  color: white; }
+
+.options-s2:focus, .options-s2:active:focus, .options-s2.active:focus,
+.options-s2.focus, .options-s2:active.focus, .options-s2.active.focus {
+  outline: none;
+  box-shadow: none; }
+
+.btn-s2:hover {
   background-color: #b53d00; }
 
 .table_parent {
