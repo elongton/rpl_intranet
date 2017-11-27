@@ -138,7 +138,7 @@ angular.module('events').
 ///////////////////////  SPACES HTTP  //////////////////////////////
 
           // GET EVENTS BUTTON
-          $scope.get_events = function(){
+          $scope.start_event_loop = function(){
             // console.log($scope.lbid)
             var funcArray = new Array();
             for (var i = 0; i < $scope.dateArray.length; i++ ){
@@ -196,7 +196,7 @@ angular.module('events').
               var dictval = raw_spaces_list[i].id;
               $scope.spaces_dict[dictval] = raw_spaces_list[i].name}//for
             //run get_events on startup
-            $scope.get_events();
+            $scope.start_event_loop();
           }//spacesSuccess
           spacesError = function(result){
             console.log('spacesError error'); console.log(result)

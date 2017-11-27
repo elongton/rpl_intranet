@@ -84,11 +84,10 @@
       </div>
       <input type="date" style="text-align: center; font-size: 22px; padding-left: 10px;" class="form-control" id="mobile_startdate" ng-model="from" ng-disabled = "datedisable">
       <div class="mobile_bottom_menu_left_div"><button class="todaybutton btn btn-success" ng-click = "todaybutton()">Today</button></div>
-      <div class="mobile_bottom_menu_right_div"><button class="retrievebutton btn btn-success" ng-click = "get_events(); hidemenu();">Retrieve</button></div>
+      <div class="mobile_bottom_menu_right_div"><button class="retrievebutton btn btn-success" ng-click = "start_event_loop(); hidemenu();">Retrieve</button></div>
     </div>
 
   </div><!-- mobile_date_menu_container -->
-
 
 
 
@@ -123,7 +122,7 @@
 
             <ul class="nav" style="right: 0px; bottom: 0px; position: absolute;" id="querybutton_ul">
                   <div class=""></div>
-                  <button class="btn" ng-class="button_color" id="get_events_button"  ng-click = "get_events()" ng-disabled = "datedisable || disable_load"><i class="fa fa-search" aria-hidden="true"></i></button>
+                  <button class="btn" ng-class="button_color" id="get_events_button"  ng-click = "start_event_loop()" ng-disabled = "datedisable || disable_load"><i class="fa fa-search" aria-hidden="true"></i></button>
             </ul>
 
           </nav>
