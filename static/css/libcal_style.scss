@@ -1,5 +1,20 @@
-//color schemes
+////general rules
+.table_parent {
+  display: table; }
 
+.table_child {
+  display: table-cell;
+  vertical-align: middle; }
+
+.nodisplay{
+  display:none;
+}
+
+.dashed{border: 1px dashed black;}
+.rpl-links{cursor: pointer;}
+
+
+//color schemes
 $background_dark: #E1E2E1;
 $background_light: #F5F5F6;
 //scheme1
@@ -16,8 +31,6 @@ $s1_primary_dark: #5d34af;
 }
 .btn-s1:hover{background-color: $s1_primary_dark;}
 
-
-
 //scheme2
 $s2_primary: #cc6600;//#ef6c00;
 $s2_primary_light: #ff9d3f;
@@ -27,7 +40,7 @@ $s2_primary_dark: #b53d00;
 .btn-s2-hover{background-color: $s2_primary;}
 .btn-s2-active{background-color: $s2_primary_dark;}
 
-///////S1 CLASS DEFINITIONS///////
+///////S2 CLASS DEFINITIONS///////
 .btn-s2, .options-s2{background-color: $s2_primary; color: white;}
 .options-s2:focus,.options-s2:active:focus,.options-s2.active:focus,
 .options-s2.focus,.options-s2:active.focus,.options-s2.active.focus {
@@ -35,24 +48,6 @@ $s2_primary_dark: #b53d00;
     box-shadow: none;
 }
 .btn-s2:hover{background-color: $s2_primary_dark;}
-
-
-
-//this is te libcal app stylesheet
-.table_parent {
-  display: table; }
-
-.table_child {
-  display: table-cell;
-  vertical-align: middle; }
-
-.nodisplay{
-  display:none;
-}
-
-.dashed{border: 1px dashed black;}
-.rpl-links{cursor: pointer;}
-
 
 //loading blur and spinner
 
@@ -101,7 +96,14 @@ $loading_dim: 100px;
 //////////////////above mobile size//////////////////////
 @media (min-width: 768px){
 
-  #bottom_datepicker_nav{padding-bottom: 15px;}
+  #bottom_datepicker_nav{
+    padding-bottom: 15px;
+    // box-shadow: 0px -1px 2px #939393;
+  }
+
+// box-shadow: none|h-shadow v-shadow blur spread color |inset|initial|inherit;
+
+
 
   #options_row{position: absolute; right: 0; z-index: 100;}
   div.angular_event_list{padding-bottom: 100px;}

@@ -19,52 +19,23 @@
   <div class="row" id="options_row"><!--datepicker row -->
     <div class="col-sm-12" style="margin-top: 15px;">
       <nav class="nav nav-pills" id="branchnav">
-
-
           <li class="nav-item text-right ml-auto">
-
             <button class="btn" ng-class="option2_color" ng-click = "spaces_option()" >Spaces</button>
             <button class="btn" ng-class="option1_color" ng-click = "calendar_option()" style="margin-left: 10px;">Calendar</button>
           </li>
-
-
-      </nav>
+      </nav><!--branchnav-->
     </div>
 
 
   </div><!--datepicker row -->
 
 
-    <div class="row angular_event_list" id = "printThisElement" style="padding-left: 10px;">
-      <div ng-if = "data_not_available == false">
-        <div class="col-sm-12" ng-repeat="event_item in sortedarray">
-            <h2 style="margin-bottom: 20px; margin-top: 15px;">{{event_item.date}}</h2>
-            <div ng-if="event_item.eventinfo.length > 0">
-              <div style = "margin-bottom: 10px;" ng-repeat = "detail in event_item.eventinfo">
-                <h4 ng-if = "detail.cid != '2710'">{{get_room_key(detail.eid)}} : {{get_time(detail.fromDate)}} - {{get_time(detail.toDate)}}</h4>
-                <h6 ng-if = "detail.cid == '2710'" style="margin-bottom: 5px;">{{get_room_key(detail.eid)}} : {{get_time(detail.fromDate)}} - {{get_time(detail.toDate)}}</h6>
-                <div style="padding-left: 5px;">
-                  Name: {{detail.firstName}} {{detail.lastName}}
-                  <br>
-                  Email: {{detail.email}}
-                  <br>
-                  <div ng-repeat = "(number, question) in detail.questions">
-                    {{question}}
-                  </div>
-                </div>
 
-                <hr style="margin-right: 25%;">
-              </div>
-            </div>
-            <div ng-if="event_item.eventinfo.length == 0">
-              <h5 style="font-weight: 400;">There are no bookings today.</h5>
-            </div>
-        </div><!--col-sm-12-->
-      </div><!-- ng-if data_not_available == false -->
-      <div ng-if = "data_not_available == true" style="padding-left: 10px;">
-        <h5 style="font-weight: 400;">{{message}}</h5>
-      </div>
+    <div class="row angular_event_list" id = "printThisElement" style="padding-left: 10px;">
+      <spaces-list ng-if="spaces_option_selected"></spaces-list>
+      <calendar-list ng-if="calendar_option_selected"></calendar-list>
     </div><!--row -->
+
   </div><!--container -->
 
   <!-- mobile stuff -->
@@ -130,15 +101,3 @@
       </div>
     </div>
   </nav>
-
-
-<div class="container">
-  <div class="row">
-    <div class="col-sm-12">
-
-
-
-
-    </div>
-  </div>
-</div>

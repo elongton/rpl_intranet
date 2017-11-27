@@ -44,3 +44,13 @@ angular.module('events')
       templateUrl: '/api/templates/libcal_app/libcal_menu.html',
       }
   })
+  .directive('spacesList', function(){
+      return {
+      templateUrl: '/api/templates/libcal_app/spaces.html',
+      }
+  })
+  .directive('calendarList', function(){
+      return {
+      templateUrl: '/api/templates/libcal_app/calendar.html',
+      }
+  })

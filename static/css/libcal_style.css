@@ -1,3 +1,19 @@
+.table_parent {
+  display: table; }
+
+.table_child {
+  display: table-cell;
+  vertical-align: middle; }
+
+.nodisplay {
+  display: none; }
+
+.dashed {
+  border: 1px dashed black; }
+
+.rpl-links {
+  cursor: pointer; }
+
 .btn-s1, .options-s1 {
   background-color: #006599;
   color: white; }
@@ -30,22 +46,6 @@
 
 .btn-s2:hover {
   background-color: #b53d00; }
-
-.table_parent {
-  display: table; }
-
-.table_child {
-  display: table-cell;
-  vertical-align: middle; }
-
-.nodisplay {
-  display: none; }
-
-.dashed {
-  border: 1px dashed black; }
-
-.rpl-links {
-  cursor: pointer; }
 
 .page_blur {
   -webkit-filter: blur(3px);

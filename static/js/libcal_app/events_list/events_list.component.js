@@ -5,7 +5,20 @@ angular.module('events').
         templateUrl: '/api/templates/libcal_app/events_list.html',
         controller: function(lcFuncs, lcData, $scope, $cookies, $location, $http, $rootScope, $q, $window, $document, $interval){
 
+
+//////////////     app initialization   //////////////
           $scope.staticfiles = staticfiles;
+
+          //starts up in spaces mode
+          $scope.button_color = 'btn-s2';
+          $scope.option2_color = 'options-s2';
+          $scope.option1_color = 'btn-secondary';
+          $scope.logo_color = '#cc6600';//'#ef6c00';
+          $scope.calendar_option_selected = false;
+          $scope.spaces_option_selected = true;
+
+
+
 
 ///////////////////////   MOBILE  //////////////////////////////
           //animating the buttons in mobile:
@@ -222,10 +235,6 @@ angular.module('events').
               $scope.message = "There are no accessible categories at this branch."
               console.log($scope.message)
             }
-
-//calendar call
-            lcData({token:$cookies.get("libcal_token")}).pullCalEvents({calendar_id:$scope.lcalid,start_date:'2017-11-15'})
-            .$promise.then(calSuccess, calError);
           };//catsSuccess
           catsError = function(result){
             console.log('Cats error'); console.log(result)
@@ -246,8 +255,19 @@ angular.module('events').
           ///////this is #0///////
           requestCredsSuccess = function(result){
             if ($scope.renewtoken == false){
-              lcData({token:$cookies.get("libcal_token")}).pullCats({location_id:$scope.lbid})
-              .$promise.then(catsSuccess, catsError);
+            // if spaces option is selected
+              if ($scope.spaces_option_selected){
+                console.log('spaces selected')
+                lcData({token:$cookies.get("libcal_token")}).pullCats({location_id:$scope.lbid})
+                .$promise.then(catsSuccess, catsError);
+              }
+            // else if calendar_id option is selected
+              else if($scope.calendar_option_selected){
+                console.log('calendar selected')
+                lcData({token:$cookies.get("libcal_token")}).pullCalEvents({calendar_id:$scope.lcalid,start_date:'2017-11-15'})
+                .$promise.then(calSuccess, calError);
+              }
+
             }else{
               console.log('getting a new token')
               $scope.renewtoken = false
@@ -282,11 +302,9 @@ angular.module('events').
 
 ///////////////////////  CALENDAR HTTP  //////////////////////////////
 
-var calSuccess, calError
-
-calSuccess = function(response){console.log(response)}
-calError = function(response){console.log(response)}
-
+          var calSuccess, calError
+          calSuccess = function(response){console.log(response)}
+          calError = function(response){console.log(response)}
 
 
 ///////////////////////  END CALENDAR HTTP  //////////////////////////
@@ -310,16 +328,22 @@ calError = function(response){console.log(response)}
             $scope.option2_color = 'btn-secondary';
             $scope.option1_color = 'options-s1';
             $scope.logo_color = '#006599';
+            $scope.calendar_option_selected = true;
+            $scope.spaces_option_selected = false;
           }
 
           $scope.spaces_option = function(){
-            $scope.button_color = 'btn-s2';
-            $scope.option2_color = 'options-s2';
-            $scope.option1_color = 'btn-secondary';
-            $scope.logo_color = '#cc6600';//'#ef6c00';
-          }
+            if ($scope.spaces_option_selected==false){
+              $scope.button_color = 'btn-s2';
+              $scope.option2_color = 'options-s2';
+              $scope.option1_color = 'btn-secondary';
+              $scope.logo_color = '#cc6600';//'#ef6c00';
+              $scope.calendar_option_selected = false;
+              $scope.spaces_option_selected = true;
+              $scope.start_event_loop()
+            }//if statement
 
-          $scope.spaces_option()
+          }
 
 
 
