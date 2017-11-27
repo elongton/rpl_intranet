@@ -107,7 +107,7 @@ angular.
               s_lcalid = mapping.lcalid
             }catch(err){
               if (err.name == 'TypeError'){
-                console.log("User account branch hasn't been mapped on our backend. Talk to your admin.")
+                console.log("User account branch hasn't been mapped on our backend. Talk to Max about this.")
               }else{console.log(err)}
               var defaultmap = branchMappingDict['Main']
               s_branch = 'Main'

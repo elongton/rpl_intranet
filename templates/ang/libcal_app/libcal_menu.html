@@ -11,6 +11,19 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <!-- dropdown menu -->
       <link-dropdown style="margin-left: 10px;"></link-dropdown>
+
+        <div class="dropdown" style="margin-top: 2px; margin-left: 10px;">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ng-disabled = "datedisable">
+            {{branch}}
+          </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a ng-repeat = "location in mapping" class="dropdown-item" ng-click = "changebranch(location.branch)" href="#">{{location.branch}}</a>
+            </div> <!-- dropdown-menu -->
+        </div> <!-- dropdown -->
+
+
+
     </div>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">

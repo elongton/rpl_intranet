@@ -101,6 +101,9 @@ $loading_dim: 100px;
 //////////////////above mobile size//////////////////////
 @media (min-width: 768px){
 
+  #bottom_datepicker_nav{padding-bottom: 15px;}
+
+  #options_row{position: absolute; right: 0;}
   div.angular_event_list{padding-bottom: 100px;}
 
   $ge_size: 65px;
