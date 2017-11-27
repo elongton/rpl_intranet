@@ -87,22 +87,15 @@
   display: inline !important; }
 
 @media (min-width: 768px) {
-  #bottom_datepicker_nav {
-    padding-bottom: 15px; }
-
-  #options_row {
-    position: absolute;
-    right: 0;
-    z-index: 100; }
-
-  div.angular_event_list {
-    padding-bottom: 100px; }
-
   #get_events_button {
     border-radius: 65px;
     width: 65px;
     height: 65px;
     font-size: 25px; }
+
+  #bottom_datepicker_nav {
+    padding-bottom: 15px;
+    background-color: #d6d6d6; }
 
   #querybutton_ul button {
     position: absolute;
@@ -115,9 +108,17 @@
     right: 0px;
     width: 90px;
     height: 90px;
-    background-color: #f7f7f7;
+    background-color: #d6d6d6;
     border-top-left-radius: 45px;
     border-top-right-radius: 45px; }
+
+  #options_row {
+    position: absolute;
+    right: 0;
+    z-index: 100; }
+
+  div.angular_event_list {
+    padding-bottom: 100px; }
 
   #libcal_events_header {
     display: none; }

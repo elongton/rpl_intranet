@@ -96,10 +96,28 @@ $loading_dim: 100px;
 //////////////////above mobile size//////////////////////
 @media (min-width: 768px){
 
+
+  $ge_size: 65px;
+  $geb_size: $ge_size + 25px;
+  $ge_offset: ($geb_size - $ge_size)/2;
+  $bottom_nav_color: #d6d6d6;
+  #get_events_button{
+    border-radius: $ge_size;
+    width: $ge_size;
+    height: $ge_size;
+    font-size: 25px;
+  }
+
   #bottom_datepicker_nav{
     padding-bottom: 15px;
+    background-color: $bottom_nav_color;
     // box-shadow: 0px -1px 2px #939393;
   }
+
+  #querybutton_ul button{position: absolute; bottom: 0px; right: $ge_offset;}
+  #querybutton_ul div {position: absolute; bottom: -$ge_offset; right: 0px;
+                      width: $geb_size; height: $geb_size; background-color: $bottom_nav_color;
+                      border-top-left-radius: $geb_size/2; border-top-right-radius: $geb_size/2;}
 
 // box-shadow: none|h-shadow v-shadow blur spread color |inset|initial|inherit;
 
@@ -108,19 +126,8 @@ $loading_dim: 100px;
   #options_row{position: absolute; right: 0; z-index: 100;}
   div.angular_event_list{padding-bottom: 100px;}
 
-  $ge_size: 65px;
-  $geb_size: $ge_size + 25px;
-  $ge_offset: ($geb_size - $ge_size)/2;
-  #get_events_button{
-    border-radius: $ge_size;
-    width: $ge_size;
-    height: $ge_size;
-    font-size: 25px;
-  }
-  #querybutton_ul button{position: absolute; bottom: 0px; right: $ge_offset;}
-  #querybutton_ul div {position: absolute; bottom: -$ge_offset; right: 0px;
-                      width: $geb_size; height: $geb_size; background-color: #f7f7f7;
-                      border-top-left-radius: $geb_size/2; border-top-right-radius: $geb_size/2;}
+
+
 
   #libcal_events_header{display: none;}
 
