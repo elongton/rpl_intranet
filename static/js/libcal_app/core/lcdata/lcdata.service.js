@@ -84,11 +84,12 @@ angular.
         /////////////         /////////////
 
         var pullcalevents = {
-          url: 'https://api2.libcal.com/1.1/events?cal_id=:calendar_id&date=:start_date&days=15&limit=100',
+          url: 'https://api2.libcal.com/1.1/events?cal_id=:calendar_id&date=:start_date&days=:days&limit=100',
           method: "GET",
           // isArray: true,
           params: {calendar_id:'@calendar_id',
-                   start_date:'@start_date'},
+                   start_date:'@start_date',
+                   days:'@days'},
           headers: {authorization: "Bearer " + token},
           transformResponse: function(data, headersGetter, status){
             var finalData = angular.fromJson(data)

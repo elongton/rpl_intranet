@@ -300,7 +300,7 @@ angular.module('events').
 /////////////////////////////////////////////////////////////////////
 
 
-///////////////////////  CALENDAR HTTP  //////////////////////////////
+///////////////////////  CALENDAR OPTION PROCESSING  //////////////////////////////
 
           var calSuccess, calError
           calSuccess = function(response){console.log(response)}
@@ -322,7 +322,7 @@ angular.module('events').
           }
 
 
-
+          //calendar and spaces options
           $scope.calendar_option = function(){
             $scope.button_color = 'btn-s1';
             $scope.option2_color = 'btn-secondary';
@@ -330,6 +330,11 @@ angular.module('events').
             $scope.logo_color = '#006599';
             $scope.calendar_option_selected = true;
             $scope.spaces_option_selected = false;
+            var calFromDate = lcFuncs.getDates($scope.from, $scope.from);
+            lcData({token:$cookies.get("libcal_token")}).pullCalEvents(
+            {calendar_id:$scope.lcalid,start_date:calFromDate[0],
+             days:lcFuncs.getDaysBetween($scope.from,$scope.to)})
+            .$promise.then(calSuccess, calError);
           }
 
           $scope.spaces_option = function(){
@@ -344,11 +349,6 @@ angular.module('events').
             }//if statement
 
           }
-
-
-
-// {location_id:$scope.lbid}
-
 
 
         }//controller

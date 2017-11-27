@@ -11,6 +11,20 @@ angular.
         }//if
       }//tokenexpired
 
+
+      var getdaysbetween = function(date1, date2){
+        //Get 1 day in milliseconds
+        var one_day=1000*60*60*24;
+        // Convert both dates to milliseconds
+        var date1_ms = date1.getTime();
+        var date2_ms = date2.getTime();
+        // Calculate the difference in milliseconds
+        var difference_ms = date2_ms - date1_ms;
+        // Convert back to days and return
+        return Math.round(difference_ms/one_day);
+      }
+
+
       //this function creates an array of all the dates in the range
       var getdates =  function(startDate, stopDate){
             var dateArray = new Array();
@@ -134,6 +148,7 @@ angular.
           disableBack: disable_back_button,
           tokenExpired: tokenexpired,
           setupBranches: setupbranches,
+          getDaysBetween: getdaysbetween,
         }
 
     });
