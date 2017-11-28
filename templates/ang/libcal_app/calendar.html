@@ -3,7 +3,7 @@
     <h2 style="margin-bottom: 20px">{{event_item.date}}</h2>
       <div ng-if="event_item.eventinfo.length > 0">
         <div class="row" style = "margin-bottom: 10px;" ng-repeat = "item in event_item.eventinfo">
-          <div class="col-xs-12 col-md-6">
+          <div class="col-xs-12 col-md-6" id="event_content_div">
             <a href={{item.url.public}} target="/" style="color: black;"><h4 style="margin-bottom: 10px;">{{item.title}}</h4></a>
             <h6 ng-if="item.location.name">{{item.location.name}}: {{item.start_time}} - {{item.end_time}}</h6>
             <div ng-if="item.location.name==''">
@@ -21,7 +21,7 @@
             </h6>
             <h6 ng-if="item.category.length == 0" style="color: red;">No categories added.  Please contact <i>{{item.owner.name}}</i>.</h6>
           </div>
-          <div class="col-xs-12 col-md-6">
+          <div class="col-xs-12 col-md-6" id="featured_img_div">
             <div ng-if="item.featured_image">
               <a href="{{item.featured_image}}" target='/'><img id="calendar_featured_img" src={{item.featured_image}} alt=""></a>
             </div>

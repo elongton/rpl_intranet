@@ -346,6 +346,17 @@
     top: 0;
     width: 100%; }
 
+  #calendar_featured_img {
+    width: 250px; }
+
+  #event_content_div {
+    width: 45%;
+    display: inline-block; }
+
+  #featured_img_div {
+    display: inline-block;
+    width: 45%; }
+
   h1::first-letter,
   h2::first-letter,
   h3::first-letter,
