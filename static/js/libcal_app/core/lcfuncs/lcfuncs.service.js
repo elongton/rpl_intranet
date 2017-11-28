@@ -15,6 +15,7 @@ angular.
       var getdaysbetween = function(date1, date2){
         //Get 1 day in milliseconds
         var one_day=1000*60*60*24;
+        date1.setHours(23);//set hours of date1 to 23 for rounding purposes (we won't get 2 days)
         // Convert both dates to milliseconds
         var date1_ms = date1.getTime();
         var date2_ms = date2.getTime();
@@ -165,12 +166,12 @@ angular.
             function readable_date(date){
               var monthNames = ["January", "February", "March", "April", "May", "June",
                                 "July", "August", "September", "October", "November", "December"];
-              var dayNames = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+              var dayNames = ["Sunday","Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
               var monthInt = date.getMonth()
               var dayWeekInt = date.getDay()
               var dayMonthInt = date.getDate()
 
-              var readableDate = dayNames[dayWeekInt-1] + ", " + monthNames[monthInt]  + " " + dayMonthInt.toString()
+              var readableDate = dayNames[dayWeekInt] + ", " + monthNames[monthInt]  + " " + dayMonthInt.toString()
               return readableDate
             }//readable_date()
 

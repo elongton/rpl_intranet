@@ -151,10 +151,11 @@ angular.module('events').
               }
               $q.all(funcArray)
               .then(function(data){
-                console.log(data)
                 $scope.sortedarray = lcFuncs.formatEvents(data);
               });
             }else if($scope.calendar_option_selected){
+              $scope.loading_display = 'loadshow';
+              $scope.loading_blur = 'page_blur';
               var calFromDate = lcFuncs.getDates($scope.from, $scope.from);
               lcData({token:$cookies.get("libcal_token")}).pullCalEvents(
               {calendar_id:$scope.lcalid,start_date:calFromDate[0],
@@ -309,8 +310,14 @@ angular.module('events').
             var data = response.events;
             $scope.calendar_array = lcFuncs.processCalData(data)
             console.log($scope.calendar_array)
+            $scope.loading_display = '';
+            $scope.loading_blur = '';
           }//callSuccess
-          calError = function(response){console.log(response)}
+          calError = function(response){
+            console.log('cal events error');
+            $scope.renewtoken = true
+            lcFuncs.tokenExpired(response, lcData().getRequestCreds({q:'springshare'}), requestCredsSuccess, requestCredsError)
+          }
 
 
 ///////////////////////  END CALENDAR HTTP  //////////////////////////
@@ -337,6 +344,8 @@ angular.module('events').
             $scope.logo_color = '#006599';
             $scope.calendar_option_selected = true;
             $scope.spaces_option_selected = false;
+            $scope.loading_display = 'loadshow';
+            $scope.loading_blur = 'page_blur';
             var calFromDate = lcFuncs.getDates($scope.from, $scope.from);
             lcData({token:$cookies.get("libcal_token")}).pullCalEvents(
             {calendar_id:$scope.lcalid,start_date:calFromDate[0],

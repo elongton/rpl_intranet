@@ -87,6 +87,9 @@
   display: inline !important; }
 
 @media (min-width: 768px) {
+  .event_data_container_div {
+    padding-top: 20px; }
+
   #calendar_featured_img {
     width: 250px; }
 
@@ -339,8 +342,9 @@
 
   #printSection {
     position: absolute;
-    left: 0;
-    top: 0; }
+    left: 20px;
+    top: 0;
+    width: 100%; }
 
   h1::first-letter,
   h2::first-letter,

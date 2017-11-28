@@ -96,6 +96,10 @@ $loading_dim: 100px;
 //////////////////above mobile size//////////////////////
 @media (min-width: 768px){
 
+//both spaces and events
+.event_data_container_div{padding-top: 20px;}
+
+
 //events calendar
 #calendar_featured_img{width: 250px;}
 
@@ -338,8 +342,9 @@ $datedownangle:135deg;
     }
     #printSection {
         position:absolute;
-        left:0;
+        left:20px;
         top:0;
+        width: 100%;
     }
 
     h1::first-letter,
