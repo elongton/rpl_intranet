@@ -298,7 +298,8 @@ angular.module('events').
           var calSuccess, calError
           calSuccess = function(response){
             var data = response.events;
-            console.log(lcFuncs.processCalData(data))
+            $scope.calendar_array = lcFuncs.processCalData(data)
+            console.log($scope.calendar_array)
           }//callSuccess
           calError = function(response){console.log(response)}
 
@@ -313,8 +314,9 @@ angular.module('events').
             $scope.lbid = $scope.mapping[branch].lbid
             $scope.lcalid = $scope.mapping[branch].lcalid
             $scope.message = ''
-            lcData({token:$cookies.get("libcal_token")}).pullCats({location_id:$scope.lbid})
-            .$promise.then(catsSuccess, catsError);
+            // lcData({token:$cookies.get("libcal_token")}).pullCats({location_id:$scope.lbid})
+            // .$promise.then(catsSuccess, catsError);
+            lcData().getRequestCreds({q:'springshare'}).$promise.then(requestCredsSuccess, requestCredsError)
           }//$scope.changebranch
 
 

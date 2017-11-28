@@ -1,1 +1,20 @@
-<h2>Your calendar events!</h2>
+<div class="col-sm-12" ng-repeat="event_item in calendar_array">
+  <h2 style="margin-bottom: 20px; margin-top: 15px;">{{event_item.date}}</h2>
+    <div ng-if="event_item.eventinfo.length > 0">
+      <div style = "margin-bottom: 10px;" ng-repeat = "item in event_item.eventinfo">
+        <h4>{{item.title}}</h4>
+      </div><!--ng-repeat -->
+
+    </div><!--ng-if eventinfo.length<0 -->
+
+    <div ng-if="event_item.eventinfo.length == 0">
+      <h5 style="font-weight: 400;">There are no bookings today.</h5>
+    </div>
+
+
+
+
+
+
+
+</div>
