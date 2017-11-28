@@ -96,7 +96,11 @@ $loading_dim: 100px;
 //////////////////above mobile size//////////////////////
 @media (min-width: 768px){
 
+//events calendar
+#calendar_featured_img{width: 250px;}
 
+
+//menu stuff
   $ge_size: 65px;
   $geb_size: $ge_size + 25px;
   $ge_offset: ($geb_size - $ge_size)/2;
@@ -165,11 +169,9 @@ $loading_dim: 100px;
 
   #bottom_date_nav{
     height: 100px;
-    border: 1px dashed black;
+    border: 1px dashed black;}
 
-  }
-
-}
+}//@media desktop
 
 ////////////////////////mobile size////////////////////////////
 

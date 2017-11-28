@@ -141,19 +141,28 @@ angular.module('events').
 
 ///////////////////////  SPACES HTTP  //////////////////////////////
 
-          // GET EVENTS BUTTON
+          // GET EVENTS BUTTON -- this is either calendar or spaces, depending on setting
           $scope.start_event_loop = function(){
             // console.log($scope.lbid)
-            var funcArray = new Array();
-            for (var i = 0; i < $scope.dateArray.length; i++ ){
-              funcArray.push(getEvents($scope.dateArray[i]));
-            }
-            $q.all(funcArray)
+            if($scope.spaces_option_selected){
+              var funcArray = new Array();
+              for (var i = 0; i < $scope.dateArray.length; i++ ){
+                funcArray.push(getEvents($scope.dateArray[i]));
+              }
+              $q.all(funcArray)
               .then(function(data){
                 console.log(data)
                 $scope.sortedarray = lcFuncs.formatEvents(data);
               });
-          }//$scope.get_events()
+            }else if($scope.calendar_option_selected){
+              var calFromDate = lcFuncs.getDates($scope.from, $scope.from);
+              lcData({token:$cookies.get("libcal_token")}).pullCalEvents(
+              {calendar_id:$scope.lcalid,start_date:calFromDate[0],
+               days:lcFuncs.getDaysBetween($scope.from,$scope.to)})
+              .$promise.then(calSuccess, calError);
+            }
+
+          }//$scope.start_event_loop()
 
 
           //check if there's a token. if not, get one

@@ -1,9 +1,22 @@
-<div class="col-sm-12" ng-repeat="event_item in calendar_array">
+<div style="width: 100%;" class="" ng-repeat="event_item in calendar_array">
   <h2 style="margin-bottom: 20px; margin-top: 15px;">{{event_item.date}}</h2>
     <div ng-if="event_item.eventinfo.length > 0">
-      <div style = "margin-bottom: 10px;" ng-repeat = "item in event_item.eventinfo">
-        <h4>{{item.title}}</h4>
-      </div><!--ng-repeat -->
+      <div class="row" style = "margin-bottom: 10px;" ng-repeat = "item in event_item.eventinfo">
+        <div class="col-xs-12 col-md-6">
+          <h4 style="margin-bottom: 10px;">{{item.title}}</h4>
+          <h6 ng-if="item.location.name">{{item.location.name}}: {{item.start_time}} - {{item.end_time}}</h6>
+          <div ng-if="item.location.name==''">
+            <h6 style="color: red;">No location added.  Please contact <i>{{item.owner.name}}</i>.</h6>
+            <h6>{{item.start_time}} - {{item.end_time}}</h6>
+          </div><!--no location added error -->
+          <p ng-bind-html="item.description"></p>
+          <!-- {{| htmlToPlainText}} -->
+          <h6>Organizer: {{item.owner.name}}</h6>
+        </div>
+        <div class="col-xs-12 col-md-6">
+          <a href="{{item.featured_image}}" target='/'><img id="calendar_featured_img" src={{item.featured_image}} alt=""></a>
+        </div>
+      </div><!--ng-repeat, row -->
 
     </div><!--ng-if eventinfo.length<0 -->
 

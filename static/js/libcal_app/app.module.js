@@ -6,6 +6,7 @@ angular.module('libcalApp', [
   'ngCookies',
   'ngRoute',
   'ngResource',
+  'ngSanitize',
 
 
   //internal

@@ -87,6 +87,9 @@
   display: inline !important; }
 
 @media (min-width: 768px) {
+  #calendar_featured_img {
+    width: 250px; }
+
   body {
     background-color: #F5F5F6; }
 
