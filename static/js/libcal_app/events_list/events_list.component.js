@@ -297,37 +297,9 @@ angular.module('events').
 
           var calSuccess, calError
           calSuccess = function(response){
-
-
-            //creation of date dictionary of events
-
             var data = response.events;
-            data.sort(function(a,b){return new Date(b.start) - new Date(a.start);}).reverse();
-            var j = 0; //set date index to zero
-            var caldata = [];
-            for (var i=0; i < data.length; i++){
-              //get the date of the current item
-              var itemday = new Date(data[i].start)
-              var controlday = new Date(data[j].start)
-              itemday.setHours(0,0,0,0)
-              controlday.setHours(0,0,0,0)
-              if (itemday > controlday || i == 0){//if the current item's date is higher than the current date
-                var j = i; //set the index of the new date to be populated
-                var datedict = {date:itemday, eventinfo: []} //create the new dictionary item
-                datedict.eventinfo.push(data[j]) //add the data
-                caldata.push(datedict) //add the dictionary item to the array
-              } else {
-                datedict.eventinfo.push(data[i])
-              }
-
-
-
-              // var formattedtime = lcFuncs.formatDate(data[i].start);
-              // timearray.push(formattedtime)
-            }
-            console.log(caldata)
-
-          }
+            console.log(lcFuncs.processCalData(data))
+          }//callSuccess
           calError = function(response){console.log(response)}
 
 
@@ -343,7 +315,7 @@ angular.module('events').
             $scope.message = ''
             lcData({token:$cookies.get("libcal_token")}).pullCats({location_id:$scope.lbid})
             .$promise.then(catsSuccess, catsError);
-          }
+          }//$scope.changebranch
 
 
           //calendar and spaces options
@@ -359,7 +331,7 @@ angular.module('events').
             {calendar_id:$scope.lcalid,start_date:calFromDate[0],
              days:lcFuncs.getDaysBetween($scope.from,$scope.to)})
             .$promise.then(calSuccess, calError);
-          }
+          }//$scope.calendar_option()
 
           $scope.spaces_option = function(){
             if ($scope.spaces_option_selected==false){
@@ -372,7 +344,7 @@ angular.module('events').
               lcData().getRequestCreds({q:'springshare'}).$promise.then(requestCredsSuccess, requestCredsError)
             }//if statement
 
-          }
+          }//$scope.spaces_option()
 
 
 

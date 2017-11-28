@@ -140,6 +140,45 @@ angular.
           }
 
 
+          var processcaldata = function(data){
+            data.sort(function(a,b){return new Date(b.start) - new Date(a.start);}).reverse();
+            var j = 0; //set date index to zero
+            var caldata = [];
+            for (var i=0; i < data.length; i++){
+              //get the date of the current item
+              var itemday = new Date(data[i].start)
+              var controlday = new Date(data[j].start)
+              itemday.setHours(0,0,0,0)
+              controlday.setHours(0,0,0,0)
+              data[i].start_time = formatdate(data[i].start)
+              data[i].end_time = formatdate(data[i].end)
+              if (itemday > controlday || i == 0){//if the current item's date is higher than the current date
+                var j = i; //set the index of the new date to be populated
+                var datedict = {date:readable_date(itemday), eventinfo: []} //create the new dictionary item
+                datedict.eventinfo.push(data[i]) //add the data
+                caldata.push(datedict) //add the dictionary item to the array
+              } else {
+                datedict.eventinfo.push(data[i])
+              }//if
+            }//for loop
+
+            function readable_date(date){
+              var monthNames = ["January", "February", "March", "April", "May", "June",
+                                "July", "August", "September", "October", "November", "December"];
+              var dayNames = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+              var monthInt = date.getMonth()
+              var dayWeekInt = date.getDay()
+              var dayMonthInt = date.getDate()
+
+              var readableDate = dayNames[dayWeekInt-1] + ", " + monthNames[monthInt]  + " " + dayMonthInt.toString()
+              return readableDate
+            }//readable_date()
+
+
+            return caldata
+          }//processcaldata
+
+
 
         return {
           getDates: getdates,
@@ -149,6 +188,7 @@ angular.
           tokenExpired: tokenexpired,
           setupBranches: setupbranches,
           getDaysBetween: getdaysbetween,
+          processCalData: processcaldata,
         }
 
     });
