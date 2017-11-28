@@ -87,6 +87,9 @@
   display: inline !important; }
 
 @media (min-width: 768px) {
+  body {
+    background-color: #F5F5F6; }
+
   #get_events_button {
     border-radius: 65px;
     width: 65px;
@@ -95,7 +98,10 @@
 
   #bottom_datepicker_nav {
     padding-bottom: 15px;
-    background-color: #d6d6d6; }
+    background-color: #E1E2E1; }
+
+  #libcal_nav {
+    background-color: #E1E2E1; }
 
   #querybutton_ul button {
     position: absolute;
@@ -108,7 +114,7 @@
     right: 0px;
     width: 90px;
     height: 90px;
-    background-color: #d6d6d6;
+    background-color: #E1E2E1;
     border-top-left-radius: 45px;
     border-top-right-radius: 45px; }
 
