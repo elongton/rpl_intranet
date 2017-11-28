@@ -8,8 +8,10 @@ angular.module('events').
 
 //////////////     app initialization   //////////////
           $scope.staticfiles = staticfiles;
-          $scope.calendar_option_selected = true
-          $scope.spaces_option_selected = false
+          $scope.calendar_option_selected = false
+          $scope.spaces_option_selected = true
+          $scope.startup = true
+          $scope.bchange == false
 
 ///////////////////////   MOBILE  //////////////////////////////
           //animating the buttons in mobile:
@@ -260,8 +262,7 @@ angular.module('events').
             // if spaces option is selected
               if ($scope.spaces_option_selected){
                 console.log('spaces selected')
-                lcData({token:$cookies.get("libcal_token")}).pullCats({location_id:$scope.lbid})
-                .$promise.then(catsSuccess, catsError);
+                $scope.spaces_option()
               }
             // else if calendar_id option is selected
               else if($scope.calendar_option_selected){
@@ -330,6 +331,7 @@ angular.module('events').
             $scope.lbid = $scope.mapping[branch].lbid
             $scope.lcalid = $scope.mapping[branch].lcalid
             $scope.message = ''
+            $scope.bchange = true
             // lcData({token:$cookies.get("libcal_token")}).pullCats({location_id:$scope.lbid})
             // .$promise.then(catsSuccess, catsError);
             lcData().getRequestCreds({q:'springshare'}).$promise.then(requestCredsSuccess, requestCredsError)
@@ -338,30 +340,38 @@ angular.module('events').
 
           //calendar and spaces options
           $scope.calendar_option = function(){
-            $scope.button_color = 'btn-s1';
-            $scope.option2_color = 'btn-secondary';
-            $scope.option1_color = 'options-s1';
-            $scope.logo_color = '#006599';
-            $scope.calendar_option_selected = true;
-            $scope.spaces_option_selected = false;
-            $scope.loading_display = 'loadshow';
-            $scope.loading_blur = 'page_blur';
-            var calFromDate = lcFuncs.getDates($scope.from, $scope.from);
-            lcData({token:$cookies.get("libcal_token")}).pullCalEvents(
-            {calendar_id:$scope.lcalid,start_date:calFromDate[0],
-             days:lcFuncs.getDaysBetween($scope.from,$scope.to)})
-            .$promise.then(calSuccess, calError);
+            if ($scope.calendar_option_selected==false || $scope.startup == true || $scope.bchange == true){
+              $scope.button_color = 'btn-s1';
+              $scope.option2_color = 'btn-secondary';
+              $scope.option1_color = 'options-s1';
+              $scope.logo_color = '#006599';
+              $scope.calendar_option_selected = true;
+              $scope.spaces_option_selected = false;
+              $scope.startup = false
+              $scope.bchange = false
+              $scope.loading_display = 'loadshow';
+              $scope.loading_blur = 'page_blur';
+              var calFromDate = lcFuncs.getDates($scope.from, $scope.from);
+              lcData({token:$cookies.get("libcal_token")}).pullCalEvents(
+              {calendar_id:$scope.lcalid,start_date:calFromDate[0],
+               days:lcFuncs.getDaysBetween($scope.from,$scope.to)})
+              .$promise.then(calSuccess, calError);
+            }
           }//$scope.calendar_option()
 
           $scope.spaces_option = function(){
-            if ($scope.spaces_option_selected==false){
+            if ($scope.spaces_option_selected==false || $scope.startup == true || $scope.bchange == true){
               $scope.button_color = 'btn-s2';
               $scope.option2_color = 'options-s2';
               $scope.option1_color = 'btn-secondary';
               $scope.logo_color = '#cc6600';//'#ef6c00';
               $scope.calendar_option_selected = false;
               $scope.spaces_option_selected = true;
-              lcData().getRequestCreds({q:'springshare'}).$promise.then(requestCredsSuccess, requestCredsError)
+              $scope.startup = false
+              $scope.bchange = false
+              // lcData().getRequestCreds({q:'springshare'}).$promise.then(requestCredsSuccess, requestCredsError)
+              lcData({token:$cookies.get("libcal_token")}).pullCats({location_id:$scope.lbid})
+              .$promise.then(catsSuccess, catsError);
             }//if statement
 
           }//$scope.spaces_option()
