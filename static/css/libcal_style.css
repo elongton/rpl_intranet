@@ -96,23 +96,14 @@
   body {
     background-color: #F5F5F6; }
 
-  .bright {
-    border-color: #fee24a;
-    background-color: #fee24a; }
-
-  .blue_bright {
+  .submit_blue {
     border-color: #72cfff;
     background-color: #72cfff; }
 
-  @keyframes glowing {
-    0% {
-      box-shadow: 0 0 6px 0px #fee24a; }
-    40% {
-      box-shadow: 0 0 6px 6px #fee24a; }
-    60% {
-      box-shadow: 0 0 6px 6px #fee24a; }
-    100% {
-      box-shadow: 0 0 6px 0px #fee24a; } }
+  .submit_red {
+    border-color: #E5B27F;
+    background-color: #E5B27F; }
+
   @keyframes glowing_blue {
     0% {
       box-shadow: 0 0 6px 0px #72cfff; }
@@ -122,11 +113,20 @@
       box-shadow: 0 0 6px 6px #72cfff; }
     100% {
       box-shadow: 0 0 6px 0px #72cfff; } }
-  .button_bright {
-    animation: glowing 1500ms infinite; }
-
-  .button_blue_bright {
+  @keyframes glowing_red {
+    0% {
+      box-shadow: 0 0 6px 0px #E5B27F; }
+    40% {
+      box-shadow: 0 0 6px 6px #E5B27F; }
+    60% {
+      box-shadow: 0 0 6px 6px #E5B27F; }
+    100% {
+      box-shadow: 0 0 6px 0px #E5B27F; } }
+  .button_blue {
     animation: glowing_blue 1500ms infinite; }
+
+  .button_red {
+    animation: glowing_red 1500ms infinite; }
 
   #get_events_button {
     border-radius: 65px;

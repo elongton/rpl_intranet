@@ -17,11 +17,11 @@ angular.module('events').
           function addAlert(){
             var button = angular.element( document.querySelector( '#get_events_button' ) );
             if ($scope.calendar_option_selected){
-              $scope.submit_needed = 'bright'
-              button.addClass('button_bright');
+              $scope.submit_needed = 'submit_blue'
+              button.addClass('button_blue');
             }else if ($scope.spaces_option_selected){
-              $scope.submit_needed = 'blue_bright'
-              button.addClass('button_blue_bright');
+              $scope.submit_needed = 'submit_red'
+              button.addClass('button_red');
             }
 
           }
@@ -30,8 +30,8 @@ angular.module('events').
             $scope.set_to = $scope.to;
             $scope.submit_needed = ''
             var button = angular.element( document.querySelector( '#get_events_button' ) );
-            button.removeClass('button_bright');
-            button.removeClass('button_blue_bright');
+            button.removeClass('button_red');
+            button.removeClass('button_blue');
           }
 
 ///////////////////////   MOBILE  //////////////////////////////
