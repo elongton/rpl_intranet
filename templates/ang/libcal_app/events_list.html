@@ -61,7 +61,7 @@
   </div><!-- mobile_date_menu_container -->
 
 
-
+<!--DESKTOP BOTTOM MENU -->
   <nav class="navbar fixed-bottom navbar-light bg-faded" id="bottom_datepicker_nav">
     <div class="container">
       <div class="row">
@@ -71,13 +71,13 @@
               <li class="nav-item text-left datepicker">
                 <form class="form-inline">
                   <label style="margin-right: 10px;"for="startdate">Start:</label>
-                  <input type="date" class="form-control" id="startdate" ng-model="from" ng-disabled = "datedisable">
+                  <input type="date" class="form-control" ng-class="submit_needed" id="startdate" ng-model="from" ng-disabled = "datedisable">
                 </form>
               </li>
               <li class="nav-item text-left datepicker">
                 <form class="form-inline">
                   <label style="margin-right: 10px;" for="enddate">End:</label>
-                  <input type="date" class="form-control" id="enddate" ng-model="to" ng-disabled = "datedisable">
+                  <input type="date" class="form-control" ng-class="submit_needed" id="enddate" ng-model="to" ng-disabled = "datedisable">
                 </form>
               </li>
               <li class="nav-item text-left datepicker">

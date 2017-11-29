@@ -13,6 +13,20 @@ angular.module('events').
           $scope.startup = true
           $scope.bchange == false
 
+
+          function addAlert(){
+            $scope.submit_needed = 'bright'
+            var button = angular.element( document.querySelector( '#get_events_button' ) );
+            button.addClass('button_bright');
+          }
+          function removeAlert(){
+            $scope.set_from = $scope.from;
+            $scope.set_to = $scope.to;
+            $scope.submit_needed = ''
+            var button = angular.element( document.querySelector( '#get_events_button' ) );
+            button.removeClass('button_bright');
+          }
+
 ///////////////////////   MOBILE  //////////////////////////////
           //animating the buttons in mobile:
           var downanimation = function(){
@@ -76,6 +90,12 @@ angular.module('events').
             $scope.from= new Date();
             $scope.to = new Date();
             makeaday($scope.from, $scope.to);
+
+            //add the set date for comparisons
+            if($scope.startup){
+              $scope.set_from = $scope.from;
+              $scope.set_to = $scope.to;
+            }//if
           }
           //run today button on reload
           $scope.todaybutton();
@@ -109,7 +129,10 @@ angular.module('events').
             $scope.dateArray = lcFuncs.getDates($scope.from, $scope.to);
             $scope.backdisable = lcFuncs.disableBack($scope.from);
             $scope.$apply
-
+            //highlight changed field
+            if($scope.from != $scope.set_from){
+              addAlert();
+            }//if
           })
 
           $scope.$watch('to', function(){
@@ -119,7 +142,10 @@ angular.module('events').
               makeaday($scope.from, $scope.to);
             }
             $scope.dateArray = lcFuncs.getDates($scope.from, $scope.to);
-
+            //highlight changed field
+            if($scope.to != $scope.set_to){
+              addAlert();
+            }//if
           })
 
           //Sets the intial date
@@ -154,6 +180,8 @@ angular.module('events').
               $q.all(funcArray)
               .then(function(data){
                 $scope.sortedarray = lcFuncs.formatEvents(data);
+                //add the set date for comparisons
+                removeAlert()
               });
             }else if($scope.calendar_option_selected){
               $scope.loading_display = 'loadshow';
@@ -313,6 +341,8 @@ angular.module('events').
             console.log($scope.calendar_array)
             $scope.loading_display = '';
             $scope.loading_blur = '';
+            //add the set date for comparisons
+            removeAlert()
           }//callSuccess
           calError = function(response){
             console.log('cal events error');

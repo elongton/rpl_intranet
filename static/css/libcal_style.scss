@@ -98,8 +98,6 @@ $loading_dim: 100px;
 
 //both spaces and events
 .event_data_container_div{padding-top: 20px;}
-
-
 //events calendar
 #calendar_featured_img{width: 250px;}
 
@@ -110,6 +108,25 @@ $loading_dim: 100px;
   $ge_offset: ($geb_size - $ge_size)/2;
   $nav_color: $background_dark;//#d6d6d6;
   body{background-color: $background_light;}
+//date change alert
+  $alert_color: #fee24a;
+  .bright{border-color: $alert_color; background-color: $alert_color;}
+
+$glow_size: 8px;
+$glow_spread:8px;
+$glow_time: 1500ms;
+$glow_color: $alert_color;
+  @keyframes glowing {
+    0% { box-shadow: 0 0 $glow_spread 0px $glow_color; }
+    40% { box-shadow: 0 0 $glow_spread $glow_size $glow_color; }
+    60% { box-shadow: 0 0 $glow_spread $glow_size $glow_color; }
+    100% { box-shadow: 0 0 $glow_spread 0px $glow_color; }
+  }
+  .button_bright{animation: glowing $glow_time infinite;}
+
+
+
+
   #get_events_button{
     border-radius: $ge_size;
     width: $ge_size;

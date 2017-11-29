@@ -96,6 +96,22 @@
   body {
     background-color: #F5F5F6; }
 
+  .bright {
+    border-color: #fee24a;
+    background-color: #fee24a; }
+
+  @keyframes glowing {
+    0% {
+      box-shadow: 0 0 8px 0px #fee24a; }
+    40% {
+      box-shadow: 0 0 8px 8px #fee24a; }
+    60% {
+      box-shadow: 0 0 8px 8px #fee24a; }
+    100% {
+      box-shadow: 0 0 8px 0px #fee24a; } }
+  .button_bright {
+    animation: glowing 1500ms infinite; }
+
   #get_events_button {
     border-radius: 65px;
     width: 65px;
