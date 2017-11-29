@@ -54,3 +54,13 @@ angular.module('events')
       templateUrl: '/api/templates/libcal_app/calendar.html',
       }
   })
+  .directive('calendarExpandedView', function(){
+      return {
+      templateUrl: '/api/templates/libcal_app/calendar_expanded_view.html',
+      }
+  })
+  .directive('calendarCondensedView', function(){
+      return {
+      templateUrl: '/api/templates/libcal_app/calendar_condensed_view.html',
+      }
+  })

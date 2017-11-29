@@ -22,9 +22,10 @@
             </div> <!-- dropdown-menu -->
         </div> <!-- dropdown -->
 
+        <!--calendar condensed view checkbox -->
         <div ng-if="calendar_option_selected" class="" style="height: 36px; margin-top: 3px; padding: 3px 0; margin-left: 15px;">
           <label class="tgl" style="vertical-align: middle; margin: 0;">
-            <input type="checkbox" checked/>
+            <input type="checkbox" ng-model="calendartoggleswitch" ng-click="clicked()">
             <span class="tgl_body">
               <span class="tgl_switch"></span>
               <span class="tgl_track">
@@ -34,10 +35,7 @@
             </span>
           </label>
         </div>
-
-
-        <span ng-if="calendar_option_selected" class="navbar-text" style="margin-left: 5px; margin-top: 1px;">Condensed View</span>
-
+        <span ng-if="calendar_option_selected" class="navbar-text" style="margin-left: 5px; margin-top: 1px;">Condensed View: {{calendartoggleswitch}}</span>
 
 
 

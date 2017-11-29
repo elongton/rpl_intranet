@@ -13,6 +13,11 @@ angular.module('events').
           $scope.startup = true
           $scope.bchange == false
 
+          $scope.calendartoggleswitch = true
+          $scope.clicked = function(){
+            $scope.calendartoggleswitch = !$scope.calendartoggleswitch;
+          }
+
 
           function addAlert(){
             var button = angular.element( document.querySelector( '#get_events_button' ) );
