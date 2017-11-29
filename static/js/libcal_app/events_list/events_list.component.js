@@ -15,9 +15,15 @@ angular.module('events').
 
 
           function addAlert(){
-            $scope.submit_needed = 'bright'
             var button = angular.element( document.querySelector( '#get_events_button' ) );
-            button.addClass('button_bright');
+            if ($scope.calendar_option_selected){
+              $scope.submit_needed = 'bright'
+              button.addClass('button_bright');
+            }else if ($scope.spaces_option_selected){
+              $scope.submit_needed = 'blue_bright'
+              button.addClass('button_blue_bright');
+            }
+
           }
           function removeAlert(){
             $scope.set_from = $scope.from;
@@ -25,6 +31,7 @@ angular.module('events').
             $scope.submit_needed = ''
             var button = angular.element( document.querySelector( '#get_events_button' ) );
             button.removeClass('button_bright');
+            button.removeClass('button_blue_bright');
           }
 
 ///////////////////////   MOBILE  //////////////////////////////

@@ -109,21 +109,30 @@ $loading_dim: 100px;
   $nav_color: $background_dark;//#d6d6d6;
   body{background-color: $background_light;}
 //date change alert
-  $alert_color: #fee24a;
-  .bright{border-color: $alert_color; background-color: $alert_color;}
-
-$glow_size: 8px;
-$glow_spread:8px;
-$glow_time: 1500ms;
-$glow_color: $alert_color;
+  $alert_bright_color: #fee24a;
+  $alert_blue_bright_color: #72cfff;
+  .bright{border-color: $alert_bright_color; background-color: $alert_bright_color;}
+  .blue_bright{border-color: $alert_blue_bright_color; background-color: $alert_blue_bright_color;}
+  $glow_size: 6px;
+  $glow_spread:6px;
+  $glow_time: 1500ms;
+  $glow_color: $alert_bright_color;
+  $glow_blue_color: $alert_blue_bright_color;
   @keyframes glowing {
     0% { box-shadow: 0 0 $glow_spread 0px $glow_color; }
     40% { box-shadow: 0 0 $glow_spread $glow_size $glow_color; }
     60% { box-shadow: 0 0 $glow_spread $glow_size $glow_color; }
     100% { box-shadow: 0 0 $glow_spread 0px $glow_color; }
   }
-  .button_bright{animation: glowing $glow_time infinite;}
 
+  @keyframes glowing_blue {
+    0% { box-shadow: 0 0 $glow_spread 0px $glow_blue_color; }
+    40% { box-shadow: 0 0 $glow_spread $glow_size $glow_blue_color; }
+    60% { box-shadow: 0 0 $glow_spread $glow_size $glow_blue_color; }
+    100% { box-shadow: 0 0 $glow_spread 0px $glow_blue_color; }
+  }
+  .button_bright{animation: glowing $glow_time infinite;}
+  .button_blue_bright{animation: glowing_blue $glow_time infinite;}
 
 
 
