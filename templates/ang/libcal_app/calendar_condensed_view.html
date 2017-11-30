@@ -1,69 +1,93 @@
-<div class="row"><div class="col-sm-12"><h2>Events between: {{set_from | date:'MM/dd'}} and {{set_to | date:'MM/dd'}}</h2></div></div>
+
 
 
 <div class="row" ng-if="calendartoggleswitch==true"><!--Log Table -->
+  <div class="col-sm-12"><h2>Events between: {{set_from | date:'MM/dd'}} and {{set_to | date:'MM/dd'}}</h2></div>
   <div class="col-sm-12" ng-class="loading_class">
-    <table class="table table-hover stats_table" id="stats_table">
+    <table class="table table-hover stats_table" id="stats_table" style="margin-top: 15px;">
       <thead>
         <tr>
-          <td><a href="#" ng-click="sortType = 'create_date'; sortReverse = !sortReverse">
+          <td><a href="#" ng-click="sortType = 'start'; sortReverse = !sortReverse">
             Date
-            <span ng-show="sortType == 'create_date' && !sortReverse" class="fa fa-caret-down"></span>
-            <span ng-show="sortType == 'create_date' && sortReverse" class="fa fa-caret-up"></span>
+            <span ng-show="sortType == 'start' && !sortReverse" class="fa fa-caret-down"></span>
+            <span ng-show="sortType == 'start' && sortReverse" class="fa fa-caret-up"></span>
           </a></td>
 
 
-          <td><a href="#" ng-click="sortType = 'create_date'; sortReverse = !sortReverse" >
+          <td><a href="#" ng-click="sortType = 'start_time'; sortReverse = !sortReverse" >
             Time
-            <span ng-show="sortType == 'create_date' && !sortReverse" class="fa fa-caret-down"></span>
-            <span ng-show="sortType == 'create_date' && sortReverse" class="fa fa-caret-up"></span>
+            <span ng-show="sortType == 'start_time' && !sortReverse" class="fa fa-caret-down"></span>
+            <span ng-show="sortType == 'start_time' && sortReverse" class="fa fa-caret-up"></span>
           </a></td>
 
-          <td><a href="#" ng-click="sortType = 'user'; sortReverse = !sortReverse">
+          <td><a href="#" ng-click="sortType = 'title'; sortReverse = !sortReverse">
             Event Title
-            <span ng-show="sortType == 'user' && !sortReverse" class="fa fa-caret-down"></span>
-            <span ng-show="sortType == 'user' && sortReverse" class="fa fa-caret-up"></span>
+            <span ng-show="sortType == 'title' && !sortReverse" class="fa fa-caret-down"></span>
+            <span ng-show="sortType == 'title' && sortReverse" class="fa fa-caret-up"></span>
           </a></td>
 
-          <td><a href="#" ng-click="sortType = 'medium'; sortReverse = !sortReverse">
+          <td><a href="#" ng-click="sortType = 'location.name'; sortReverse = !sortReverse">
+            Location
+            <span ng-show="sortType == 'location.name' && !sortReverse" class="fa fa-caret-down"></span>
+            <span ng-show="sortType == 'location.name' && sortReverse" class="fa fa-caret-up"></span>
+          </a></td>
+
+          <td><a href="#" ng-click="sortType = 'category[0].name'; sortReverse = !sortReverse">
             Categories
-            <span ng-show="sortType == 'medium' && !sortReverse" class="fa fa-caret-down"></span>
-            <span ng-show="sortType == 'medium' && sortReverse" class="fa fa-caret-up"></span>
+            <span ng-show="sortType == 'category[0].name' && !sortReverse" class="fa fa-caret-down"></span>
+            <span ng-show="sortType == 'category[0].name' && sortReverse" class="fa fa-caret-up"></span>
           </a></td>
 
-          <td><a href="#" ng-click="sortType = 'type_of_request'; sortReverse = !sortReverse">
+          <td><a href="#" ng-click="sortType = 'description'; sortReverse = !sortReverse">
             Description
-            <span ng-show="sortType == 'type_of_request' && !sortReverse" class="fa fa-caret-down"></span>
-            <span ng-show="sortType == 'type_of_request' && sortReverse" class="fa fa-caret-up"></span>
+            <span ng-show="sortType == 'description' && !sortReverse" class="fa fa-caret-down"></span>
+            <span ng-show="sortType == 'description' && sortReverse" class="fa fa-caret-up"></span>
           </a></td>
-          <td style="text-align: center;"><a href="#" ng-click="sortType = 'over_five'; sortReverse = !sortReverse">
+          <td style="text-align: center;"><a href="#" ng-click="sortType = 'featured_image'; sortReverse = !sortReverse">
             Image
-            <span ng-show="sortType == 'over_five' && !sortReverse" class="fa fa-caret-down"></span>
-            <span ng-show="sortType == 'over_five' && sortReverse" class="fa fa-caret-up"></span>
+            <span ng-show="sortType == 'featured_image' && !sortReverse" class="fa fa-caret-down"></span>
+            <span ng-show="sortType == 'featured_image' && sortReverse" class="fa fa-caret-up"></span>
           </a></td>
 
-          <td style = "width: 175px;" class=""><a href="#" ng-click="sortType = 'comment'; sortReverse = !sortReverse">
+          <td style = "width: 175px;" class=""><a href="#" ng-click="sortType = 'owner.name'; sortReverse = !sortReverse">
             Owner
-            <span ng-show="sortType == 'comment' && !sortReverse" class="fa fa-caret-down"></span>
-            <span ng-show="sortType == 'comment' && sortReverse" class="fa fa-caret-up"></span>
+            <span ng-show="sortType == 'owner.name' && !sortReverse" class="fa fa-caret-down"></span>
+            <span ng-show="sortType == 'owner.name' && sortReverse" class="fa fa-caret-up"></span>
           </a></td>
 
         </tr>
       </thead>
-      <tbody>
-        <tr class = "stat_row" ng-repeat = "event_item in calendar_array">
-          <div>
-            <td scope="row">{{event_item.event_info.start | date: 'MM/dd'}}</td>
-            <td scope="row">{{x.create_date | date: 'h:mm a'}}</td>
-            <td class="filtercell"><span ng-click="changeuserfilter(x.user)">{{x.user}}</span></td>
-            <td class="filtercell"><span ng-click = "changemediumfilter(x.medium)">{{x.medium}}</span></td>
-            <td>{{x.type_of_request}}</td>
-            <td style="text-align: center;" class="filtercell"><span ng-click = "changefivefilter(x.over_five == true ? 'Over Five Minutes' : 'Under Five Minutes')">{{x.over_five == true ? 'Yes' : 'No'}}</span></td>
-            <td><a href="" data-toggle="modal" data-target="#comment_modal" ng-click = "assign_comment_modal(x)" >{{(x.comment | limitTo : 15) + (x.comment.length > 15 ? '...' : '')}}</a></td>
-          </div>
+      <tbody><!--ng-repeat = "event_item in calendar_array"-->
+        <tr ng-repeat = "event_item in condensed_calendar_array | orderBy:sortType:sortReverse">
+          <td scope="row">{{event_item.start | date:'MM/dd'}}</td>
+          <td scope="row">{{event_item.start_time}}</td>
+          <td class="">{{(event_item.title | limitTo : 20) + (event_item.title.length > 15 ? '...' : '')}}</td>
+          <td class="">
+            <span ng-if="event_item.location.name">{{(event_item.location.name | limitTo : 20) + (event_item.location.name.length > 10 ? '...' : '')}}</span>
+            <span ng-if="event_item.location.name == ''" style="color: red;">no location</span>
+          </td>
+          <td class="">
+            <span ng-if="event_item.category.length != 0">{{event_item.category[0].name}}<span ng-if="event_item.category.length > 1"> (+{{event_item.category.length-1}})</span></span>
+            <span ng-if="event_item.category.length == 0" style="color: red;">no category</span>
+          </td>
+          <td>
+            <span ng-if="event_item.description">{{(event_item.description | htmlToPlainText | limitTo : 10)  + (event_item.description.length > 10 ? '...' : '')}}</span>
+            <span ng-if="event_item.description == ''" style="color: red;">no description</span>
+          </td>
+          <td style="text-align: center;">
+            <span ng-if="event_item.featured_image"><i class="fa fa-check" aria-hidden="true"></i></span>
+            <span ng-if="event_item.featured_image==''" style="color: red;"><i class="fa fa-times" aria-hidden="true"></i></span>
+          </td>
+          <td>{{(event_item.owner.name | limitTo : 10) + (event_item.owner.name.length > 10 ? '...' : '')}}</td>
         </tr>
       </tbody>
     </table>
+<!--
+    <div class = "stat_row" ng-repeat = "event_item in calendar_array">
+      <div ng-repeat="item in event_item.eventinfo">
+        {{item.start | date:'MM/dd'}}
+      </div>
+    </div> -->
 
 
   </div><!--col-sm-12-->

@@ -18,6 +18,10 @@ angular.module('events').
             $scope.calendartoggleswitch = !$scope.calendartoggleswitch;
           }
 
+          //sorting
+          $scope.sortType = 'start';
+          $scope.sortReverse = false;
+
 
           function addAlert(){
             var button = angular.element( document.querySelector( '#get_events_button' ) );
@@ -349,8 +353,11 @@ angular.module('events').
           var calSuccess, calError
           calSuccess = function(response){
             var data = response.events;
-            $scope.calendar_array = lcFuncs.processCalData(data)
-            console.log($scope.calendar_array)
+            var calprocessed_data = lcFuncs.processCalData(data)
+            $scope.calendar_array = calprocessed_data.caldata
+            $scope.condensed_calendar_array = calprocessed_data.caldatacondensed;
+            console.log($scope.condensed_calendar_array)
+            // console.log($scope.calendar_array)
             $scope.loading_display = '';
             $scope.loading_blur = '';
             //add the set date for comparisons
