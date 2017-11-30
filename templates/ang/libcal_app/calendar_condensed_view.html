@@ -52,13 +52,15 @@
       </thead>
       <tbody>
         <tr class = "stat_row" ng-repeat = "event_item in calendar_array">
-          <td scope="row">{{event_item.event_info.start | date: 'MM/dd'}}</td>
-          <td scope="row">{{x.create_date | date: 'h:mm a'}}</td>
-          <td class="filtercell"><span ng-click="changeuserfilter(x.user)">{{x.user}}</span></td>
-          <td class="filtercell"><span ng-click = "changemediumfilter(x.medium)">{{x.medium}}</span></td>
-          <td>{{x.type_of_request}}</td>
-          <td style="text-align: center;" class="filtercell"><span ng-click = "changefivefilter(x.over_five == true ? 'Over Five Minutes' : 'Under Five Minutes')">{{x.over_five == true ? 'Yes' : 'No'}}</span></td>
-          <td><a href="" data-toggle="modal" data-target="#comment_modal" ng-click = "assign_comment_modal(x)" >{{(x.comment | limitTo : 15) + (x.comment.length > 15 ? '...' : '')}}</a></td>
+          <div>
+            <td scope="row">{{event_item.event_info.start | date: 'MM/dd'}}</td>
+            <td scope="row">{{x.create_date | date: 'h:mm a'}}</td>
+            <td class="filtercell"><span ng-click="changeuserfilter(x.user)">{{x.user}}</span></td>
+            <td class="filtercell"><span ng-click = "changemediumfilter(x.medium)">{{x.medium}}</span></td>
+            <td>{{x.type_of_request}}</td>
+            <td style="text-align: center;" class="filtercell"><span ng-click = "changefivefilter(x.over_five == true ? 'Over Five Minutes' : 'Under Five Minutes')">{{x.over_five == true ? 'Yes' : 'No'}}</span></td>
+            <td><a href="" data-toggle="modal" data-target="#comment_modal" ng-click = "assign_comment_modal(x)" >{{(x.comment | limitTo : 15) + (x.comment.length > 15 ? '...' : '')}}</a></td>
+          </div>
         </tr>
       </tbody>
     </table>
