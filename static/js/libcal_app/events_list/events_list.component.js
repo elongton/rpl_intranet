@@ -13,7 +13,7 @@ angular.module('events').
           $scope.startup = true
           $scope.bchange == false
 
-          $scope.calendartoggleswitch = true
+          $scope.calendartoggleswitch = false
           $scope.clicked = function(){
             $scope.calendartoggleswitch = !$scope.calendartoggleswitch;
           }
