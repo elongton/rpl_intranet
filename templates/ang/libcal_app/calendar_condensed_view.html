@@ -1,4 +1,4 @@
-<div class="row"><div class="col-sm-12"><h2>Events between: {{set_from | date:'MM/dd/yyyy'}} and {{set_to | date:'MM/dd/yyyy'}}</h2></div></div>
+<div class="row"><div class="col-sm-12"><h2>Events between: {{set_from | date:'MM/dd'}} and {{set_to | date:'MM/dd'}}</h2></div></div>
 
 
 <div class="row" ng-if="calendartoggleswitch==true"><!--Log Table -->
@@ -20,57 +20,49 @@
           </a></td>
 
           <td><a href="#" ng-click="sortType = 'user'; sortReverse = !sortReverse">
-            User
+            Event Title
             <span ng-show="sortType == 'user' && !sortReverse" class="fa fa-caret-down"></span>
             <span ng-show="sortType == 'user' && sortReverse" class="fa fa-caret-up"></span>
           </a></td>
 
           <td><a href="#" ng-click="sortType = 'medium'; sortReverse = !sortReverse">
-            Medium
+            Categories
             <span ng-show="sortType == 'medium' && !sortReverse" class="fa fa-caret-down"></span>
             <span ng-show="sortType == 'medium' && sortReverse" class="fa fa-caret-up"></span>
           </a></td>
 
           <td><a href="#" ng-click="sortType = 'type_of_request'; sortReverse = !sortReverse">
-            Type
+            Description
             <span ng-show="sortType == 'type_of_request' && !sortReverse" class="fa fa-caret-down"></span>
             <span ng-show="sortType == 'type_of_request' && sortReverse" class="fa fa-caret-up"></span>
           </a></td>
           <td style="text-align: center;"><a href="#" ng-click="sortType = 'over_five'; sortReverse = !sortReverse">
-            Over 5 minutes?
+            Image
             <span ng-show="sortType == 'over_five' && !sortReverse" class="fa fa-caret-down"></span>
             <span ng-show="sortType == 'over_five' && sortReverse" class="fa fa-caret-up"></span>
           </a></td>
 
           <td style = "width: 175px;" class=""><a href="#" ng-click="sortType = 'comment'; sortReverse = !sortReverse">
-            Comment
+            Owner
             <span ng-show="sortType == 'comment' && !sortReverse" class="fa fa-caret-down"></span>
             <span ng-show="sortType == 'comment' && sortReverse" class="fa fa-caret-up"></span>
           </a></td>
-          <td></td>
 
         </tr>
       </thead>
       <tbody>
-        <tr class = "stat_row" dir-paginate = "x in filtered = (data | orderBy:sortType:sortReverse | timefilter:from:to |
-                                                                 filter:userfilter | filter:mediumfilter | filter:fivefilternormal | itemsPerPage: 15)">
-          <td scope="row">{{x.create_date | date: 'MM/dd'}}</td>
+        <tr class = "stat_row" ng-repeat = "event_item in calendar_array">
+          <td scope="row">{{event_item.event_info.start | date: 'MM/dd'}}</td>
           <td scope="row">{{x.create_date | date: 'h:mm a'}}</td>
           <td class="filtercell"><span ng-click="changeuserfilter(x.user)">{{x.user}}</span></td>
           <td class="filtercell"><span ng-click = "changemediumfilter(x.medium)">{{x.medium}}</span></td>
           <td>{{x.type_of_request}}</td>
           <td style="text-align: center;" class="filtercell"><span ng-click = "changefivefilter(x.over_five == true ? 'Over Five Minutes' : 'Under Five Minutes')">{{x.over_five == true ? 'Yes' : 'No'}}</span></td>
           <td><a href="" data-toggle="modal" data-target="#comment_modal" ng-click = "assign_comment_modal(x)" >{{(x.comment | limitTo : 15) + (x.comment.length > 15 ? '...' : '')}}</a></td>
-          <td style="width: 40px;" class="delete_request"><i ng-if = "x.user == username" class="fa fa-times" aria-hidden="true"
-            data-toggle="modal" data-target="#delete_modal" ng-click = "assign_delete_modal(x)"></i></td>
         </tr>
       </tbody>
     </table>
 
-    <div ng-show="filtered.length == 0 && loading != true" class="text-center">
-      <img style = "width: 250px; padding-top: 50px; margin-left: -30px;" src="{{staticfiles('img/floating_otter.png')}}" alt="Otter Says No">
-      <h3 style="margin-top: 10px;">Ripple says you've got no data!</h3>
-    </div>
 
   </div><!--col-sm-12-->
 </div><!--row-->
