@@ -8,8 +8,8 @@ angular.module('events').
 
 //////////////     app initialization   //////////////
           $scope.staticfiles = staticfiles;
-          $scope.calendar_option_selected = false
-          $scope.spaces_option_selected = true
+          $scope.calendar_option_selected = true
+          $scope.spaces_option_selected = false
           $scope.startup = true
           $scope.bchange == false
 
@@ -17,6 +17,22 @@ angular.module('events').
           $scope.clicked = function(){
             $scope.calendartoggleswitch = !$scope.calendartoggleswitch;
           }
+
+          //had to add this b/c page was starting up with black logos and grey buttons
+          if ($scope.calendar_option_selected){
+            $scope.button_color = 'btn-s1';
+            $scope.option2_color = 'btn-secondary';
+            $scope.option1_color = 'options-s1';
+            $scope.logo_color = '#006599';
+          } else if ($scope.spaces_option_selected){
+            $scope.button_color = 'btn-s2';
+            $scope.option2_color = 'options-s2';
+            $scope.option1_color = 'btn-secondary';
+            $scope.logo_color = '#cc6600';//'#ef6c00';
+          }
+
+
+
 
           //sorting
           $scope.sortType = 'start';
@@ -47,7 +63,25 @@ angular.module('events').
           //modals
           $scope.assign_calevent_modal = function(event){
             $scope.calevent_modal = {
+              allday: event.allday,
+              calendar: event.calendar,
+              category: event.category,
+              color: event.color,
               description: event.description,
+              end: event.end,
+              end_time: event.end_time,
+              featured_image: event.featured_image,
+              future_dates: event.future_dates,
+              id: event.id,
+              location: event.location,
+              owner: event.owner,
+              presenter: event.presenter,
+              registration: event.registration,
+              seats: event.seats,
+              start: event.start,
+              start_time: event.start_time,
+              title: event.title,
+              url: event.url,
             }
           }
 
