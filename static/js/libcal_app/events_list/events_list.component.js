@@ -43,6 +43,14 @@ angular.module('events').
             button.removeClass('button_blue');
           }
 
+
+          //modals
+          $scope.assign_calevent_modal = function(event){
+            $scope.calevent_modal = {
+              description: event.description,
+            }
+          }
+
 ///////////////////////   MOBILE  //////////////////////////////
           //animating the buttons in mobile:
           var downanimation = function(){

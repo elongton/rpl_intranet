@@ -64,3 +64,8 @@ angular.module('events')
       templateUrl: '/api/templates/libcal_app/calendar_condensed_view.html',
       }
   })
+  .directive('modals', function(){
+      return {
+      templateUrl: '/api/templates/libcal_app/modals.html',
+      }
+  })
