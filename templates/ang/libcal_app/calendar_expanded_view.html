@@ -1,4 +1,4 @@
-<div ng-if="calendartoggleswitch==false" style="width: 100%;" class="" ng-repeat="event_item in calendar_array">
+<div ng-if="calendartoggleswitch==false" style="width: 100%;" class="cal_event_container" ng-repeat="event_item in calendar_array">
   <h2 style="margin-bottom: 20px">{{event_item.date}}</h2>
     <div ng-if="event_item.eventinfo.length > 0">
       <div class="row" style = "margin-bottom: 10px;" ng-repeat = "item in event_item.eventinfo">

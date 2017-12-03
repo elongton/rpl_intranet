@@ -14,6 +14,7 @@ angular.module('events').
           $scope.bchange == false
 
           $scope.calendartoggleswitch = false
+
           $scope.clicked = function(){
             $scope.calendartoggleswitch = !$scope.calendartoggleswitch;
           }
@@ -31,7 +32,14 @@ angular.module('events').
             $scope.logo_color = '#cc6600';//'#ef6c00';
           }
 
-
+          //mobile header mode picker
+          $scope.mobile_mode_toggle = function(){
+            if ($scope.calendar_option_selected){
+              $scope.spaces_option();
+            } else {
+              $scope.calendar_option();
+            }
+          }
 
 
           //sorting
@@ -438,6 +446,7 @@ angular.module('events').
               $scope.logo_color = '#006599';
               $scope.calendar_option_selected = true;
               $scope.spaces_option_selected = false;
+              $scope.mobile_header = "Calendar"
               $scope.startup = false
               $scope.bchange = false
               $scope.loading_display = 'loadshow';
@@ -460,6 +469,7 @@ angular.module('events').
               $scope.spaces_option_selected = true;
               $scope.startup = false
               $scope.bchange = false
+              $scope.mobile_header = "Spaces"
               // lcData().getRequestCreds({q:'springshare'}).$promise.then(requestCredsSuccess, requestCredsError)
               lcData({token:$cookies.get("libcal_token")}).pullCats({location_id:$scope.lbid})
               .$promise.then(catsSuccess, catsError);

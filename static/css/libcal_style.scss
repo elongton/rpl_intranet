@@ -248,6 +248,9 @@ $datedownangle:135deg;
 }
 
 @media only screen and (max-width: 768px) {
+
+  div.cal_event_container{padding-right:25px; padding-left: 15px;}
+  #calendar_featured_img{width: 100%;}
   //header transition
 
   div.cancel_clickable{
