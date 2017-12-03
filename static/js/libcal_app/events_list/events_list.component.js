@@ -12,6 +12,11 @@ angular.module('events').
           $scope.spaces_option_selected = false
           $scope.startup = true
           $scope.bchange == false
+          if ($scope.calendar_option_selected){
+            $scope.mobile_header = "Calendar"
+          } else {
+            $scope.mobile_header = "Spaces"
+          }
 
           $scope.calendartoggleswitch = false
 
