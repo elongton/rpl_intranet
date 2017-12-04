@@ -109,12 +109,7 @@ $loading_dim: 100px;
   margin: calc(50vh - 50px) auto;
   font-size: 100px;
 }
-
-.loadshow{
-  display: inline!important;
-}
-
-
+.loadshow{display: inline!important;}
 
 //////////////////above mobile size//////////////////////
 @media (min-width: 768px){
@@ -249,6 +244,10 @@ $datedownangle:135deg;
 
 @media only screen and (max-width: 768px) {
 
+  //both spaces and events
+  .event_data_container_div{padding-top: 50px;}
+
+  #options_row{display: none;}
   div.cal_event_container{padding-right:25px; padding-left: 15px;}
   #calendar_featured_img{width: 100%;}
   //header transition

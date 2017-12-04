@@ -251,6 +251,12 @@
   to {
     transform: rotate(225deg) translateX(85px) rotate(-225deg); } }
 @media only screen and (max-width: 768px) {
+  .event_data_container_div {
+    padding-top: 50px; }
+
+  #options_row {
+    display: none; }
+
   div.cal_event_container {
     padding-right: 25px;
     padding-left: 15px; }
