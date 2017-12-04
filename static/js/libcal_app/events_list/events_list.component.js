@@ -3,13 +3,13 @@
 angular.module('events').
       component('eventsList', {
         templateUrl: '/api/templates/libcal_app/events_list.html',
-        controller: function(lcFuncs, lcData, $scope, $cookies, $location, $http, $rootScope, $q, $window, $document, $interval){
+        controller: function(lcFuncs, lcData, $scope, $cookies, $location, $http, $rootScope, $q, $window, $document, $interval, $filter){
 
 
 //////////////     app initialization   //////////////
           $scope.staticfiles = staticfiles;
-          $scope.calendar_option_selected = true
-          $scope.spaces_option_selected = false
+          $scope.calendar_option_selected = false
+          $scope.spaces_option_selected = true
           $scope.startup = true
           $scope.bchange == false
           if ($scope.calendar_option_selected){
@@ -17,11 +17,20 @@ angular.module('events').
           } else {
             $scope.mobile_header = "Spaces"
           }
-
           $scope.calendartoggleswitch = false
 
           $scope.clicked = function(){
             $scope.calendartoggleswitch = !$scope.calendartoggleswitch;
+          }
+
+          //main branch study room filter
+          $scope.main_study_rooms = false
+          $scope.filter_study_rooms = function(){
+            $scope.main_study_rooms = !$scope.main_study_rooms
+            if ($scope.main_study_rooms){
+              $scope.categoryfilter = function(detail){
+                return detail.cid !== 2710}
+              }else{$scope.categoryfilter = ''}
           }
 
           //had to add this b/c page was starting up with black logos and grey buttons
@@ -251,6 +260,7 @@ angular.module('events').
               $q.all(funcArray)
               .then(function(data){
                 $scope.sortedarray = lcFuncs.formatEvents(data);
+                $scope.filter_study_rooms()
                 //add the set date for comparisons
                 removeAlert()
               });

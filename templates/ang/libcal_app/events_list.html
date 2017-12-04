@@ -23,7 +23,18 @@
             <button class="btn" ng-class="option1_color" ng-click = "calendar_option()" style="margin-left: 10px;">Calendar</button>
           </li>
       </nav><!--branchnav-->
+
+      <div ng-if = "branch == 'Main' && spaces_option_selected" class="form-group dash">
+          <div class="form-check">
+            <label class="form-check-label">
+              <input class="form-check-input" type="checkbox" ng-model="main_study_rooms" ng-click="filter_study_rooms()"><span>Filter out study rooms</span>
+            </label>
+        </div>
+      </div>
+
     </div><!--col-sm-12-->
+
+
 
 
   </div><!--datepicker row -->
