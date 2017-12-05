@@ -43,7 +43,8 @@
             //Preferences
             $scope.preferences_page = function(){
               var url = "/users/preferences";
-              window.open(url,'_blank');
+              window.location = url;
+              window.location.replace(url);
             }
             // LOGOUT FUNCTION
             $scope.removeUser = function(){

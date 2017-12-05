@@ -26,8 +26,7 @@ from rest_framework.filters import (
     OrderingFilter,
 )
 
-# from accounts.models import Profile
-
+from accounts.models import User
 from .pagination import RequestLimitOffsetPagination, RequestPageNumberPagination
 from rest_framework.permissions import (
     AllowAny,
@@ -178,7 +177,7 @@ class RequestCreateAPIView(CreateAPIView):
     serializer_class = RequestCreateUpdateSerializer
     def perform_create(self,serializer):
         serializer.save(user=self.request.user)
-        branch = Profile.objects.get(user=self.request.user).branch
+        branch = self.request.user.branch
         serializer.save(branch=branch)
         # serializer.save(branch=self.request.)
 
