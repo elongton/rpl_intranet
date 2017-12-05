@@ -54,6 +54,14 @@ h1 {
 .infoh2 {
   margin: 20px 0; }
 
+.page-link {
+  color: black; }
+
+.page-item.active .page-link {
+  background-color: #cc6600;
+  border-color: #cc6600;
+  color: white; }
+
 /*stats page*/
 .table_blur {
   -webkit-filter: blur(3px);
@@ -159,4 +167,4 @@ h1 {
 .rpl-links {
   cursor: pointer; }
 
-/*# sourceMappingURL=style.css.map */
+/*# sourceMappingURL=ref_style.css.map */

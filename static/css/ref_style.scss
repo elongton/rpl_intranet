@@ -31,6 +31,10 @@ h1{margin: 20px 0;}
 // info page
 .infoh2{margin: 20px 0;}
 
+//menu
+.page-link{color: black;}
+.page-item.active .page-link{background-color: #cc6600; border-color: #cc6600; color: white;}
+
 
 /*stats page*/
 // .filter_row{display:none;}

@@ -42,7 +42,7 @@ angular.module('referenceApp')
             resolve:{
               loggedIn:onlyLoggedIn
             },
-            css:[staticfiles('css/style.css'),staticfiles('css/menu_style.css')],
+            css:[staticfiles('css/ref_style.css'),staticfiles('css/menu_style.css')],
           })
           .when("/reference/controls", {
             template: '<controls></controls>',
@@ -50,7 +50,7 @@ angular.module('referenceApp')
           })
           .when("/reference/info", {
             template: '<infopage></infopage>',
-            css:[staticfiles('css/style.css'),staticfiles('css/menu_style.css')],
+            css:[staticfiles('css/ref_style.css'),staticfiles('css/menu_style.css')],
           })
           .otherwise({
             template: "<div class='container'><h1>Page not found</h1></div>"
