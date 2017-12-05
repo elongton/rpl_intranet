@@ -42,7 +42,7 @@ from ..models import Request
 def datemaker(date1, date2):
     startdate = dparser.parse(date1)
     enddate = dparser.parse(date2)
-    generic_date = timezone.localtime()
+    generic_date = timezone.localtime(timezone.now())
     startdate = generic_date.replace(hour=0, minute=0,
                                     second=0, day = startdate.day,
                                     month = startdate.month, year = startdate.year)

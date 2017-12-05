@@ -15,7 +15,7 @@ angular.
                 // console.log(finalData.results)
                 return finalData//.results
               }
-        }
+        }//requestquery
 
 
         var requestDelete = {

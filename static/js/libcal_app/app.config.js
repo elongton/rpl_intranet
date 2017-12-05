@@ -41,7 +41,7 @@ angular.module('libcalApp').
                   resolve:{
                     loggedIn:onlyLoggedIn
                   },
-                  css: staticfiles('css/libcal_style.css'),
+                  css: [staticfiles('css/libcal_style.css'),staticfiles('css/menu_style.css')],
                 })
                 .otherwise({
                   template: "<div class='container'><h1>Page not found</h1></div>"

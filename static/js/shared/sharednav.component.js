@@ -21,21 +21,13 @@
               window.location = url;
               window.location.replace(url);
             }
-
           }
-
         })
-        .component('navbarBrand', {
-          templateUrl: '/api/templates/shared/link_brand.html',
-          controller: function($scope){
-            $scope.staticfiles = staticfiles;
-            $scope.loadhomepage = function(){
-              // $route.reload()
-              var url = "/";
-              window.location = url;
-              window.location.replace(url);
+        .directive('navbarBrand', function(){
+            return {
+            templateUrl: '/api/templates/shared/link_brand.html',
+            replace:true,
             }
-          }
         })
         .component('navbarLogout',{
           templateUrl: '/api/templates/shared/link_logout.html',
@@ -47,6 +39,11 @@
               $rootScope.userLoggedIn = true
               $scope.userLoggedIn = $rootScope.userLoggedIn
               $scope.username = $cookies.get("username")
+            }
+            //Preferences
+            $scope.preferences_page = function(){
+              var url = "/users/preferences";
+              window.open(url,'_blank');
             }
             // LOGOUT FUNCTION
             $scope.removeUser = function(){

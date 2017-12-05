@@ -1,25 +1,22 @@
-<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->
-<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+<nav class="navbar navbar-toggleable-md navbar-light bg-faded" id="libcal_nav">
   <div class="container">
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <!-- brand link -->
-        <navbar-brand></navbar-brand>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <!-- brand link -->
+    <navbar-brand></navbar-brand>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
+    <div ng-if="userLoggedIn" class="collapse navbar-collapse" id="navbarNavDropdown">
+      <link-dropdown style="margin-left: 10px;"></link-dropdown>
+    </div>
 
-          </ul>
-          <ul class="navbar-nav">
-            <!-- <li class="nav-item" ng-if="userLoggedIn == false"><a class="nav-link" href="/login">Login</a></li> -->
-            <li class="nav-item" ng-if="userLoggedIn"><a class="nav-link" ng-click='removeUser()' href="/login">Logout ({{username}})</a></li>
-          </ul>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
 
-        </div>
+      </ul>
+      <!-- logout button -->
+      <navbar-logout></navbar-logout>
+
+    </div>
   </div><!-- container -->
 </nav>
-
-
-
-<!-- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% -->

@@ -1,3 +1,15 @@
-<ul class="navbar-nav mr-auto">
+<!-- <ul class="navbar-nav mr-auto">
   <li class="nav-item" ng-if="userLoggedIn"><a class="nav-link" ng-click='removeUser()' href="">Logout ({{username}})</a></li>
+</ul> -->
+<ul class="navbar-nav" ng-if="userLoggedIn" class="nav-link">
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle rpl-links" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      ({{username}})
+    </a>
+    <div class="dropdown-menu rpl-links" aria-labelledby="navbarDropdownMenuLink">
+      <a class="dropdown-item" ng-click='preferences_page()'>Preferences</a>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item" href="#" ng-click='removeUser()' >Logout</a>
+    </div>
+  </li>
 </ul>

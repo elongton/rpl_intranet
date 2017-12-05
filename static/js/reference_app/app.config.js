@@ -42,15 +42,15 @@ angular.module('referenceApp')
             resolve:{
               loggedIn:onlyLoggedIn
             },
-            css: staticfiles('css/style.css'),
+            css:[staticfiles('css/style.css'),staticfiles('css/menu_style.css')],
           })
           .when("/reference/controls", {
             template: '<controls></controls>',
-            css: staticfiles('css/controls.css'),
+            css:[staticfiles('css/controls.css'),staticfiles('css/menu_style.css')],
           })
           .when("/reference/info", {
             template: '<infopage></infopage>',
-            css: staticfiles('css/style.css'),
+            css:[staticfiles('css/style.css'),staticfiles('css/menu_style.css')],
           })
           .otherwise({
             template: "<div class='container'><h1>Page not found</h1></div>"

@@ -40,7 +40,14 @@ angular.module('usersApp').
                 $routeProvider
                 .when("/users/login", {
                   template: '<login></login>',
-                  css: staticfiles('css/users_style.css'),
+                  css: [staticfiles('css/users_style.css'),staticfiles('css/menu_style.css')],
+                })
+                .when("/users/preferences", {
+                  template: '<preferences></preferences>',
+                  css: [staticfiles('css/users_style.css'),staticfiles('css/menu_style.css')],
+                  resolve:{
+                    loggedIn:onlyLoggedIn
+                  },
                 })
                 .otherwise({
                   template: "<div class='container'><h1>Page not found</h1></div>"
