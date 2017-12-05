@@ -1,4 +1,7 @@
 .rpl-links, .rpl-links div a {
   cursor: pointer; }
 
+#navbarNavDropdown {
+  margin-left: 15px; }
+
 /*# sourceMappingURL=menu_style.css.map */

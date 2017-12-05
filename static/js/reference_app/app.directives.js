@@ -7,3 +7,8 @@ angular.module('referenceApp')
       }
 
   })
+  .directive('navBar', function(){
+      return {
+      templateUrl: '/api/templates/reference_app/reference_menu.html',
+      }
+  })

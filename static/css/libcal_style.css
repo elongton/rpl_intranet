@@ -35,6 +35,14 @@
 .modal-header {
   padding-left: 40px; }
 
+.modal_image_container {
+  width: 45%;
+  display: inline-block;
+  vertical-align: top; }
+
+.modal_image {
+  max-height: 60vh; }
+
 .btn-s1, .options-s1 {
   background-color: #006599;
   color: white; }

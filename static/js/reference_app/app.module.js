@@ -16,6 +16,5 @@ angular.module('referenceApp', [
   // 'login',
   'sharednav',
   'stats',
-  'navBar',
 
 ]);

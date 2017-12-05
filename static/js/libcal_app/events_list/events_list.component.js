@@ -8,8 +8,13 @@ angular.module('events').
 
 //////////////     app initialization   //////////////
           $scope.staticfiles = staticfiles;
-          $scope.calendar_option_selected = false
-          $scope.spaces_option_selected = true
+          $scope.calendar_option_selected = true
+          $scope.calendartoggleswitch = true
+          if ($scope.calendar_option_selected){
+            $scope.spaces_option_selected = false
+          }else{
+            $scope.spaces_option_selected = true
+          }
           $scope.startup = true
           $scope.bchange == false
           if ($scope.calendar_option_selected){
@@ -17,7 +22,7 @@ angular.module('events').
           } else {
             $scope.mobile_header = "Spaces"
           }
-          $scope.calendartoggleswitch = false
+
 
           $scope.clicked = function(){
             $scope.calendartoggleswitch = !$scope.calendartoggleswitch;

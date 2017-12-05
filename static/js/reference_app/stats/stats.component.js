@@ -4,6 +4,13 @@ angular.module('stats').
       component('stats', {
         templateUrl: '/api/templates/reference_app/stats.html',
         controller: function(Request, Cache, BigData, $scope, $rootScope, $timeout, $cookies, $window, $filter, $location){
+
+
+          //menu
+          $scope.opencontrols = function(){$scope.controlswindow = $window.open("/reference/controls", "controlswindow", "width=300, height=530");};
+          $scope.navinfopage = function(){$location.url('/reference/info')}
+
+          //app initialization
           $scope.branch = $cookies.get("branch")
           $scope.username = $cookies.get("username")
           $scope.csvbranch = $scope.branch

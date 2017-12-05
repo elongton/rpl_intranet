@@ -13,29 +13,27 @@
 .dashed{border: 1px dashed black;}
 .rpl-links{cursor: pointer;}
 
-//modal stuff
-
+////modal stuff
 $modal_padding: 40px;
 @media (min-width: 576px){
   .modal-dialog{max-width: 100%;}
 }
-
 .modal-dialog {
   width: 100%;
   height: 100%;
   margin: 0;
   padding: 0;
 }
-
 .modal-content {
   height: auto;
   min-height: 100%;
   border-radius: 0;
 }
-
 .modal-body{padding-left: $modal_padding; padding-right: $modal_padding;}
 .modal-header{padding-left: $modal_padding;}
 
+.modal_image_container{width: 45%; display:inline-block; vertical-align: top;}
+.modal_image{max-height: 60vh;}
 
 //color schemes
 $background_dark: #E1E2E1;

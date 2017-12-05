@@ -43,7 +43,7 @@ angular.module('homeApp').
                   resolve:{
                     loggedIn:onlyLoggedIn
                   },
-                  css: staticfiles('css/style.css', 'css/menu_style.css'),
+                  css: [staticfiles('css/style.css'),staticfiles('css/menu_style.css')],
                 })
                 .otherwise({
                   template: "<div class='container'><h1>Page not found</h1></div>"

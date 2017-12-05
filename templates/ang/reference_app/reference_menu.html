@@ -7,17 +7,19 @@
         <!-- brand link -->
         <navbar-brand></navbar-brand>
 
-        <div ng-if="userLoggedIn" class="collapse navbar-collapse" id="navbarNavDropdown">
-          <link-dropdown style="margin-left: 10px;"></link-dropdown>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <link-dropdown></link-dropdown>
         </div>
 
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent" ng-init = "load_pagination()">
           <ul class="navbar-nav mr-auto">
           </ul>
 
-          <button ng-click="navinfopage()" style = "margin-right: 10px; padding-left: 10px; padding-right: 10px;" ng-disabled="!userLoggedIn" class="btn btn-secondary"><i class="fa fa-question-circle" aria-hidden="true"></i></button>
-          <button class="btn btn-secondary" type="button" ng-disabled="!userLoggedIn" ng-click='opencontrols()'>Open Controls</button>
+          <dir-pagination-controls ng-if = "showpagination == true && showdata" style="height: 38px;margin-top: 1px; margin-right: 10px;"></dir-pagination-controls>
+
+          <button ng-click="navinfopage()" style = "margin-right: 10px; padding-left: 10px; padding-right: 10px;" class="btn btn-secondary"><i class="fa fa-question-circle" aria-hidden="true"></i></button>
+          <button class="btn btn-secondary" type="button" ng-click='opencontrols()'>Open Controls</button>
 
           <!-- logout button -->
           <navbar-logout></navbar-logout>

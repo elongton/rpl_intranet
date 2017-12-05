@@ -26,17 +26,16 @@
           </h6>
           <h6 ng-if="calevent_modal.category.length == 0" style="color: red;">No categories added.  Please contact <i>{{calevent_modal.owner.name}}</i>.</h6>
         </div><!--50% div -->
-        <div class="" style="width: 45%; display: inline-block; vertical-align: top;">
-
+<!-- IMAGE SECTION -->
+        <div class="modal_image_container">
           <div ng-if="calevent_modal.featured_image">
-            <a href="{{calevent_modal.featured_image}}" target='/'><img style="max-width: 100%; min-width: 70%;" src={{calevent_modal.featured_image}} alt=""></a>
+            <a href="{{calevent_modal.featured_image}}" target='/'><img  class="modal_image" src={{calevent_modal.featured_image}} alt=""></a>
           </div>
           <div ng-if="!calevent_modal.featured_image" class="table_parent" style="width: 250px; height: 250px;">
             <span class="table_child" style="text-align: center; background-color: #D3D3D3; padding: 10px;"><h6 style="color: red;">No image added.  Please contact <i>{{calevent_modal.owner.name}}</i>.</h6></span>
           </div>
-
-
         </div>
+<!-- IMAGE SECTION -->
       </div><!--modal-body -->
       <div class="modal-footer">
         <a href={{calevent_modal.url.admin}} target="/"><button type="button" class="btn btn-success">Edit Event</button></a>
