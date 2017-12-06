@@ -23,8 +23,13 @@ angular.
 
         var userupdate = {
           url: '/api/users/:id/edit/',
-          method: 'POST',
+          method: 'PUT',
           params: {id:'@id'},
+          interceptor: {responseError: function(response){
+            if (response.status == 401){
+              console.log("you need to log in.")
+            }
+          }},
         }
 
         var tokenverify = {
