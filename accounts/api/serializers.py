@@ -16,12 +16,14 @@ class IntranetURLSerializer(ModelSerializer):
     class Meta:
         model = IntranetURL
         fields = [
+        'id',
         'url'
         ]
 
 class UserDetailSerializer(ModelSerializer):
     branch = SerializerMethodField()
     startup_page = SerializerMethodField()
+    startup_page_id = SerializerMethodField()
     class Meta:
         model = User
         fields = [
@@ -33,6 +35,7 @@ class UserDetailSerializer(ModelSerializer):
         'is_admin',
         'branch',
         'startup_page',
+        'startup_page_id',
         'calendar_preference',
         'calendar_condensed_view',
         ]
@@ -40,6 +43,8 @@ class UserDetailSerializer(ModelSerializer):
         return str(obj.branch.name)
     def get_startup_page(self, obj):
         return str(obj.startup_page.url)
+    def get_startup_page_id(self, obj):
+        return str(obj.startup_page.id)
 
 
 class UserUpdateSerializer(ModelSerializer):

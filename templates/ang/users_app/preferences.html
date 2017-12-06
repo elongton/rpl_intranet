@@ -11,7 +11,7 @@
           {{startup_page}}
         </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a ng-repeat = "location in mapping" class="dropdown-item" ng-click = "changebranch(location.branch)" href="#">{{location.branch}}</a>
+            <a ng-repeat = "urlchoice in urls" class="dropdown-item" ng-click = "updateUrl(urlchoice)" href="#">{{urlchoice.url}}</a>
           </div> <!-- dropdown-menu -->
       </div> <!-- dropdown -->
 
@@ -21,19 +21,22 @@
       <span>When you use the Libcal event lister, your preference is:</span>
       <br>
       <div style="margin-top: 10px;">
-        <label class="radio-inline"><input type="radio" name="optradio"><span style="margin-left: 5px;">Spaces</span></label>
-        <label class="radio-inline"><input type="radio" name="optradio" style="margin-left: 5px;"><span style="margin-left: 5px;">Calendar</span></label>
+        <label class="radio-inline"><input type="radio" name="optradio" ng-model='calchoice' value='spaces'><span style="margin-left: 5px;">Spaces</span></label>
+        <label class="radio-inline"><input type="radio" name="optradio" ng-model='calchoice' value='calendar' style="margin-left: 5px;"><span style="margin-left: 5px;">Calendar</span></label>
       </div>
       <hr style='margin-right: 75%; margin-top: 9px;'>
-      <span>Calendar condensed view:</span>
       <div style="margin-top: 10px;">
         <label class="form-check-label">
-          <input class="form-check-input" type="checkbox"> Check me out
+          <input class="form-check-input" type="checkbox" ng-model="calendar_condensed_view"><span>Calendar condensed view</span>
         </label>
       </div>
 
+      <div style="margin-top: 15px;">
+        <button class="btn btn-success" ng-click = "save_user()">Save</button>
+      </div>
+      <span ng-if="unsavedchanges == true" style="color: red;">Unsaved Changes</span>
     </div><!-- col-sm-12-->
-    <hr>
+
 
 
   </div>

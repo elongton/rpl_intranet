@@ -10,6 +10,7 @@ angular.module('usersApp', [
 
   //internal
   'user',
+  'data',
   'login',
   'navBar',
   'sharednav',

@@ -42,9 +42,9 @@ from .serializers import (
       IntranetURLSerializer
       )
 
-class IntranetURLListView():
+class IntranetURLListView(ListAPIView):
     serializer_class = IntranetURLSerializer
-
+    queryset = IntranetURL.objects.all()
 
 class UserCreateAPIView(CreateAPIView):
     serializer_class = UserCreateSerializer
@@ -66,6 +66,7 @@ class UserLoginAPIView(APIView):
 class UserUpdateAPIView(RetrieveUpdateAPIView):
     queryset = User.objects.all()
     serializer_class = UserUpdateSerializer
+    permission_classes = [IsAuthenticated]
     def perform_update(self,serializer):
         serializer.save(user=self.request.user)
 

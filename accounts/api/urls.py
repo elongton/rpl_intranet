@@ -7,6 +7,7 @@ from .views import (
     UserLoginAPIView,
     UserListAPIView,
     UserUpdateAPIView,
+    IntranetURLListView,
 )
 
 
@@ -16,6 +17,7 @@ urlpatterns = [
     url(r'^register/$', UserCreateAPIView.as_view(), name='register'),
     url(r'^$', UserListAPIView.as_view(), name='list'),
     url(r'^(?P<pk>\d+)/edit/$', UserUpdateAPIView.as_view(), name='update'),
+    url(r'^urls/$', IntranetURLListView.as_view(), name='urls'),
 ]
 
 
