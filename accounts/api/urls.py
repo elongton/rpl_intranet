@@ -6,6 +6,7 @@ from .views import (
     UserCreateAPIView,
     UserLoginAPIView,
     UserListAPIView,
+    UserUpdateAPIView,
 )
 
 
@@ -14,6 +15,7 @@ urlpatterns = [
     url(r'^login/$', UserLoginAPIView.as_view(), name='login'),
     url(r'^register/$', UserCreateAPIView.as_view(), name='register'),
     url(r'^$', UserListAPIView.as_view(), name='list'),
+    url(r'^(?P<pk>\d+)/edit/$', UserUpdateAPIView.as_view(), name='update'),
 ]
 
 

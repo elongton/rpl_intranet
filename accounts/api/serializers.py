@@ -8,38 +8,48 @@ from rest_framework.serializers import (
                                 SerializerMethodField,
                                 ValidationError,)
 
-from ..models import User, Branch
+from ..models import User, IntranetURL, Branch
 from rest_framework_jwt.settings import api_settings
 
-# class ProfileSerializer(ModelSerializer):
-#     branch = SerializerMethodField()
-#     branchid = SerializerMethodField()
-#     class Meta:
-#         model = User
-#         fields = [
-#         'branch',
-#         'branchid'
-#         ]
-#     def get_branch(self, obj):
-#         return str(obj.branch.name)
-#     def get_branchid(self, obj):
-#         return str(obj.branch.id)
+
+class IntranetURLSerializer(ModelSerializer):
+    class Meta:
+        model = IntranetURL
+        fields = [
+        'url'
+        ]
 
 class UserDetailSerializer(ModelSerializer):
     branch = SerializerMethodField()
+    startup_page = SerializerMethodField()
     class Meta:
         model = User
         fields = [
+        'id',
         'username',
         'email',
         'first_name',
         'last_name',
         'is_admin',
-        'branch'
+        'branch',
+        'startup_page',
+        'calendar_preference',
+        'calendar_condensed_view',
         ]
     def get_branch(self, obj):
         return str(obj.branch.name)
+    def get_startup_page(self, obj):
+        return str(obj.startup_page.url)
 
+
+class UserUpdateSerializer(ModelSerializer):
+    class Meta:
+        model = User
+        fields = [
+        'startup_page',
+        'calendar_preference',
+        'calendar_condensed_view',
+        ]
 
 class UserCreateSerializer(ModelSerializer):
     email = EmailField(label = 'Email Address')

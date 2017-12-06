@@ -14,6 +14,13 @@ class Branch(models.Model):
         verbose_name = 'Branch'
         verbose_name_plural = 'Branches'
 
+class IntranetURL(models.Model):
+    url = models.CharField(max_length=120)
+    def __str__(self):
+        return self.url
+    class Meta:
+        verbose_name = 'Intranet URL'
+        verbose_name_plural = 'Intranet URLs'
 
 class UserManager(BaseUserManager):
     def create_user(self, username, branch, password=None):
@@ -49,6 +56,8 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
+calendarOptions = [('spaces','Spaces'),('calendar', 'Calendar')]
+
 class User(AbstractBaseUser):
     username=models.CharField(max_length=25, unique=True)
     active = models.BooleanField(default=True)
@@ -58,6 +67,12 @@ class User(AbstractBaseUser):
     first_name = models.CharField(max_length=50, blank=True)
     last_name = models.CharField(max_length=50, blank=True)
     is_superuser = models.BooleanField(default=False)
+
+    startup_page = models.ForeignKey(IntranetURL, related_name = 'accounts', default='1')
+    calendar_preference = models.CharField(max_length=60, choices=calendarOptions, default='calendar')
+    calendar_condensed_view = models.BooleanField(default=False)
+
+
     email = models.EmailField(
         verbose_name='email address',
         max_length=255,

@@ -3,7 +3,38 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-12">
-      <h1 style="margin-top: 25px">These are your preferences</h1>
-    </div>
+      <h3 style="margin-top: 15px; margin-bottom: 10px;">Startup Page</h3>
+      <span>Your account opens to:</span>
+      <div class="dropdown" style="margin-top: 5px;">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ng-disabled = "datedisable">
+          {{startup_page}}
+        </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a ng-repeat = "location in mapping" class="dropdown-item" ng-click = "changebranch(location.branch)" href="#">{{location.branch}}</a>
+          </div> <!-- dropdown-menu -->
+      </div> <!-- dropdown -->
+
+      <hr>
+
+      <h3 style="margin-top: 15px; margin-bottom: 10px;">Calendar Preferences</h3>
+      <span>When you use the Libcal event lister, your preference is:</span>
+      <br>
+      <div style="margin-top: 10px;">
+        <label class="radio-inline"><input type="radio" name="optradio"><span style="margin-left: 5px;">Spaces</span></label>
+        <label class="radio-inline"><input type="radio" name="optradio" style="margin-left: 5px;"><span style="margin-left: 5px;">Calendar</span></label>
+      </div>
+      <hr style='margin-right: 75%; margin-top: 9px;'>
+      <span>Calendar condensed view:</span>
+      <div style="margin-top: 10px;">
+        <label class="form-check-label">
+          <input class="form-check-input" type="checkbox"> Check me out
+        </label>
+      </div>
+
+    </div><!-- col-sm-12-->
+    <hr>
+
+
   </div>
 </div>

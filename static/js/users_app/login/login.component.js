@@ -22,8 +22,13 @@ angular.module('login').
             User.query({q:user.username}).$promise.then(
               function(result){
                 $scope.userdata = result
+                // console.log($scope.userdata)
                 $cookies.put("branch", $scope.userdata[0].branch)
-                var url = "/libcal";
+                $cookies.put("calendar_condensed_view", $scope.userdata[0].calendar_condensed_view)
+                $cookies.put("calendar_preference", $scope.userdata[0].calendar_preference)
+                $cookies.put("startup_page", $scope.userdata[0].startup_page)
+                $cookies.put("user_id", $scope.userdata[0].id)
+                var url = $scope.userdata[0].startup_page
                 window.location = url;
                 window.location.replace(url);
               })//function(result)

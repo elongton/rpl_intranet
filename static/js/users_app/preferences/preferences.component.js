@@ -6,4 +6,5 @@ angular.module('preferences').
     controller: function($cookies,$http,$location,$routeParams,$rootScope,$scope,$route,){
 
       $scope.preferences = 'hello';
+      $scope.startup_page = $cookies.get("startup_page")
 }});

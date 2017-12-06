@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import User, Branch
+from .models import User, Branch, IntranetURL
 from django.contrib.auth.models import Group
 
 
@@ -24,11 +24,11 @@ class UserAdmin(BaseUserAdmin):
     # The fields to be used in displaying the User model.
     # These override the definitions on the base UserAdmin
     # that reference specific fields on auth.User.
-    list_display = ('username', 'branch')
+    list_display = ('username', 'branch', 'startup_page', 'calendar_preference')
     list_filter = ('admin',)
     fieldsets = (
-        (None, {'fields': ('username', 'email', 'password')}),
-        ('Personal info', {'fields': ('branch',)}),
+        (None, {'fields': ('username', 'password')}),
+        ('Personal info', {'fields': ('branch', 'startup_page', 'calendar_preference', 'calendar_condensed_view',)}),
         ('Permissions', {'fields': ('admin','is_superuser', 'staff')}),
     )
     # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
@@ -46,5 +46,6 @@ class UserAdmin(BaseUserAdmin):
 
 admin.site.register(User, UserAdmin)
 admin.site.register(Branch)
+admin.site.register(IntranetURL)
 
 admin.site.unregister(Group) #not using this.

@@ -30,7 +30,7 @@ from rest_framework.permissions import (
     IsAuthenticatedOrReadOnly,
 )
 
-from ..models import User
+from ..models import User, IntranetURL
 # User = get_user_model()
 # from ..models import Profile
 
@@ -38,7 +38,13 @@ from .serializers import (
       UserCreateSerializer,
       UserLoginSerializer,
       UserDetailSerializer,
+      UserUpdateSerializer,
+      IntranetURLSerializer
       )
+
+class IntranetURLListView():
+    serializer_class = IntranetURLSerializer
+
 
 class UserCreateAPIView(CreateAPIView):
     serializer_class = UserCreateSerializer
@@ -49,7 +55,6 @@ class UserLoginAPIView(APIView):
     permission_classes = [AllowAny]
     serializer_class = UserLoginSerializer
 
-
     def post(self, request, *args, **kwargs):
         data = request.data
         serializer = UserLoginSerializer(data=data)
@@ -58,6 +63,11 @@ class UserLoginAPIView(APIView):
             return Response(new_data, status=HTTP_200_OK)
         return Response(serializer.errors, status=HTTP_400_BAD_REQUEST)
 
+class UserUpdateAPIView(RetrieveUpdateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserUpdateSerializer
+    def perform_update(self,serializer):
+        serializer.save(user=self.request.user)
 
 class UserListAPIView(ListAPIView):
     serializer_class = UserDetailSerializer
@@ -76,5 +86,4 @@ class UserListAPIView(ListAPIView):
             queryset_list = queryset_list.filter(
                 Q(username__iexact=query)
             ).distinct()
-
         return queryset_list
