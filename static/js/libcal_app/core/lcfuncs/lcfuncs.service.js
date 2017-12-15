@@ -141,6 +141,18 @@ angular.
           }
 
 
+          function readable_date(date){
+            var monthNames = ["January", "February", "March", "April", "May", "June",
+                              "July", "August", "September", "October", "November", "December"];
+            var dayNames = ["Sunday","Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+            var monthInt = date.getMonth()
+            var dayWeekInt = date.getDay()
+            var dayMonthInt = date.getDate()
+
+            var readableDate = dayNames[dayWeekInt] + ", " + monthNames[monthInt]  + " " + dayMonthInt.toString()
+            return readableDate
+          }//readable_date()
+
           var processcaldata = function(data){
               data.sort(function(a,b){return new Date(b.start) - new Date(a.start);}).reverse();
               var j = 0; //set date index to zero
@@ -164,18 +176,6 @@ angular.
                 }//if
               }//for loop
               caldatacondensed = data;
-
-            function readable_date(date){
-              var monthNames = ["January", "February", "March", "April", "May", "June",
-                                "July", "August", "September", "October", "November", "December"];
-              var dayNames = ["Sunday","Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-              var monthInt = date.getMonth()
-              var dayWeekInt = date.getDay()
-              var dayMonthInt = date.getDate()
-
-              var readableDate = dayNames[dayWeekInt] + ", " + monthNames[monthInt]  + " " + dayMonthInt.toString()
-              return readableDate
-            }//readable_date()
 
             var datalibrary = {
               caldata: caldata,
@@ -215,13 +215,22 @@ angular.
          }//saveTextAsFile
 
          function htmlToPlainText(text){
-             return  text ? String(text).replace(/<[^>]+>/gm, '') : '';
+             text = text.replace(/<[^>]+>/gm, '')
+             text = text.replace(/&nbsp;/gm, ' ')
+             text = text.replace(/&ndash;/gm, '-')
+             text = text.replace(/&#39;/gm, '`')
+             text = text.replace(/&quot;/gm, '"')
+             return text
          }
 
          function expFile(event_array) {
+           event_array.sort(function(a,b){return new Date(b.start) - new Date(a.start);}).reverse();
            var fileText = '';
            for (var i = 0; i < event_array.length; i++){
+             var date = new Date(event_array[i].start)
+             var description = event_array[i].description
              fileText = fileText.concat(event_array[i].title + '\r\n'
+                                      + readable_date(date) + '\r\n'
                                       + event_array[i].start_time + ' - ' + event_array[i].end_time + '\r\n'
                                       + htmlToPlainText(event_array[i].description) + '\r\n' + '\r\n'
 
@@ -229,6 +238,7 @@ angular.
            }
            var fileName = "calevents.txt"
            saveTextAsFile(fileText, fileName);
+          // console.log(fileText)
          }
 
 

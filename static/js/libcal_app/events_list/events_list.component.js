@@ -463,6 +463,7 @@ angular.module('events').
 
           //changing branch dropdown
           $scope.changebranch = function(branch){
+            $scope.textfile_array = [];//set textfile_array (condensed view save function) to empty
             $scope.branch = branch
             var newbranch = branch
             $scope.lbid = $scope.mapping[branch].lbid
