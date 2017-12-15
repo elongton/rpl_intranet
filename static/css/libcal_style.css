@@ -526,4 +526,10 @@
   right: auto;
   left: -10px; }
 
+.condensed_check {
+  vertical-align: middle;
+  /* Double-sized Checkboxes */
+  zoom: 1.5;
+  background: none; }
+
 /*# sourceMappingURL=libcal_style.css.map */

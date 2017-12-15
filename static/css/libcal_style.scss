@@ -508,3 +508,16 @@ $toggle_color: $s1_primary;
   right: auto;
   left: -10px;
 }
+
+$check_scale: 1.5;
+//checkboxes:
+.condensed_check{
+  vertical-align: middle;
+  /* Double-sized Checkboxes */
+  // -ms-transform: scale($check_scale); /* IE */
+  // -moz-transform: scale($check_scale); /* FF */
+  // -webkit-transform: scale($check_scale); /* Safari and Chrome */
+  // -o-transform: scale($check_scale); /* Opera */
+  zoom: $check_scale;
+  background: none;
+}

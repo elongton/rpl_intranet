@@ -44,6 +44,8 @@
       <ul class="navbar-nav mr-auto">
 
       </ul>
+      <button style = "margin-right: 10px;" class="btn btn-secondary pull-right" ng-if="calendartoggleswitch==false && calendar_option_selected" ng-click = "write_text_file()" ng-disabled = "textfile_array.length == 0"><i class="fa fa-save" aria-hidden="true"></i></button>
+
       <button style = "margin-right: 10px;" class="btn btn-secondary pull-right"  ng-print print-element-id="printThisElement" ng-disabled = "datedisable || disable_load"><i class="fa fa-print" aria-hidden="true"></i></button>
 
       <!-- logout button -->

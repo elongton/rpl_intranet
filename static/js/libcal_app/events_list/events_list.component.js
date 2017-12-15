@@ -61,10 +61,24 @@ angular.module('events').
           }
 
 
+          //creating the add_event_to_textfile
+          $scope.text_writeout = ''
+          $scope.textfile_array = [];
+
+          $scope.add_event_to_textfile = function(event_item){
+            if (event_item.checked){
+              $scope.textfile_array.push(event_item)
+              console.log($scope.textfile_array)
+            }else{
+              var index = $scope.textfile_array.indexOf(event_item)
+              if (index > -1) {$scope.textfile_array.splice(index, 1);}
+              console.log($scope.textfile_array)
+            }
+          }
+
           //sorting
           $scope.sortType = 'start';
           $scope.sortReverse = false;
-
 
           function addAlert(){
             var button = angular.element( document.querySelector( '#get_events_button' ) );
@@ -265,7 +279,6 @@ angular.module('events').
               $q.all(funcArray)
               .then(function(data){
                 $scope.sortedarray = lcFuncs.formatEvents(data);
-                $scope.filter_study_rooms()
                 //add the set date for comparisons
                 removeAlert()
               });
