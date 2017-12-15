@@ -214,12 +214,18 @@ angular.
                  }
          }//saveTextAsFile
 
+         function htmlToPlainText(text){
+             return  text ? String(text).replace(/<[^>]+>/gm, '') : '';
+         }
+
          function expFile(event_array) {
            var fileText = '';
            for (var i = 0; i < event_array.length; i++){
              fileText = fileText.concat(event_array[i].title + '\r\n'
                                       + event_array[i].start_time + ' - ' + event_array[i].end_time + '\r\n'
-                                      + event_array[i].description + '\r\n' + '\r\n')
+                                      + htmlToPlainText(event_array[i].description) + '\r\n' + '\r\n'
+
+                                      +'===============================================================' + '\r\n' + '\r\n')
            }
            var fileName = "calevents.txt"
            saveTextAsFile(fileText, fileName);
