@@ -116,6 +116,9 @@
   display: inline !important; }
 
 @media (min-width: 768px) {
+  .events_table td, .events_table th {
+    padding: .50rem; }
+
   .event_data_container_div {
     padding-top: 20px; }
 

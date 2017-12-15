@@ -216,10 +216,12 @@ angular.
 
          function htmlToPlainText(text){
              text = text.replace(/<[^>]+>/gm, '')
+             text = text.replace(/&amp;/gm, '&')
              text = text.replace(/&nbsp;/gm, ' ')
-             text = text.replace(/&ndash;/gm, '-')
-             text = text.replace(/&#39;/gm, '`')
-             text = text.replace(/&quot;/gm, '"')
+             text = text.replace(/&ndash;|&mdash;/gm, '-')
+             text = text.replace(/&#39;|&rsquo;/gm, "'")
+             text = text.replace(/&quot;|&ldquo;|&rdquo;/gm, '"')
+
              return text
          }
 

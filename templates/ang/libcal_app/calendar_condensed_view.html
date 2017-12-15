@@ -2,13 +2,13 @@
   <div class="col-sm-12"><h2>Events between: {{set_from | date:'MM/dd'}} and {{set_to | date:'MM/dd'}}</h2></div>
   <div class="col-sm-12" ng-class="loading_class">
 
-    <table class="table table-hover stats_table" id="stats_table" style="margin-top: 15px;">
+    <table class="table table-hover events_table" id="stats_table" style="margin-top: 15px; font-size: 15px;">
       <thead>
         <tr>
-          <td class="text-center"><a href="#" ng-click="sortType = 'select'; sortReverse = !sortReverse">
+          <td><a href="#" ng-click="sortType = 'checked'; sortReverse = !sortReverse">
             Select
-            <span ng-show="sortType == 'select' && !sortReverse" class="fa fa-caret-down"></span>
-            <span ng-show="sortType == 'select' && sortReverse" class="fa fa-caret-up"></span>
+            <span ng-show="sortType == 'checked' && !sortReverse" class="fa fa-caret-down"></span>
+            <span ng-show="sortType == 'checked' && sortReverse" class="fa fa-caret-up"></span>
           </a></td>
 
 
@@ -63,7 +63,7 @@
       </thead>
       <tbody><!--ng-repeat = "event_item in calendar_array"-->
           <tr ng-repeat = "event_item in condensed_calendar_array | orderBy:sortType:sortReverse" data-toggle="modal" data-target="#exampleModal" ng-click="assign_calevent_modal(event_item)">
-              <td class="text-center" ng-click = "$event.stopPropagation()">
+              <td style="padding-left: 21px;" ng-click = "$event.stopPropagation()">
                 <input class="condensed_check" ng-click = "$event.stopPropagation(); add_event_to_textfile(event_item)" ng-model = "event_item.checked" type="checkbox"/>
               </td>
               <td scope="row">{{event_item.start | date:'MM/dd'}}</td>

@@ -112,6 +112,9 @@ $loading_dim: 100px;
 //////////////////above mobile size//////////////////////
 @media (min-width: 768px){
 
+
+.events_table td, .events_table th{padding: .50rem;}
+
 //both spaces and events
 .event_data_container_div{padding-top: 20px;}
 //events calendar
