@@ -76,6 +76,10 @@ angular.module('events').
             }
           }
 
+          $scope.write_text_file = function(){
+            lcFuncs.makeEventsFile($scope.textfile_array);
+          }
+
           //sorting
           $scope.sortType = 'start';
           $scope.sortReverse = false;
@@ -271,6 +275,7 @@ angular.module('events').
           // GET EVENTS BUTTON -- this is either calendar or spaces, depending on setting
           $scope.start_event_loop = function(){
             // console.log($scope.lbid)
+            $scope.textfile_array = [];//set textfile_array (condensed view save function) to empty
             if($scope.spaces_option_selected){
               var funcArray = new Array();
               for (var i = 0; i < $scope.dateArray.length; i++ ){
