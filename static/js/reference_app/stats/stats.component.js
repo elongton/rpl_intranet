@@ -248,14 +248,26 @@ angular.module('stats').
           }
           // build CSV URL
           $scope.buildCSV = function(){
-
             var convertbranch = function(branch){
               branch = branch.replace(" ", "+")
               return branch
             }
-            var url = '/api/requests/csv/' + createtextdate($scope.csvstartdate)
-                    + '/' + createtextdate($scope.csvenddate) + '/' + convertbranch($scope.csvbranch) + '/'
-            return(url)
+            // var url = '/api/requests/csv/' + createtextdate($scope.csvstartdate)
+            //         + '/' + createtextdate($scope.csvenddate) + '/' + convertbranch($scope.csvbranch) + '/'
+            // return(url)
+            // console.log(url)
+            Request.csvGet({start:createtextdate($scope.csvstartdate),
+                            end:createtextdate($scope.csvenddate),
+                            branch:convertbranch($scope.csvbranch)}).$promise.then(
+              function(result){
+                console.log(result)
+              },
+              function(error){
+                console.log(error)
+              }
+            )//request.csvGet
+
+
           } //buildCSV
 
 

@@ -3,18 +3,17 @@
 angular.
   module('request').
     factory('Request', function($cookies, $location, $httpParamSerializer, $resource){
-        var url = '/api/reference/requests/'
         var requestQuery = {
-              url: url,
-              method: "GET",
-              params: {},
-              isArray: true,
-              cache: true,
-              transformResponse: function(data, headersGetter, status){
-                var finalData = angular.fromJson(data)
-                // console.log(finalData.results)
-                return finalData//.results
-              }
+          url: '/api/reference/requests/',
+          method: "GET",
+          params: {},
+          isArray: true,
+          cache: true,
+          transformResponse: function(data, headersGetter, status){
+            var finalData = angular.fromJson(data)
+            // console.log(finalData.results)
+            return finalData//.results
+          }
         }//requestquery
 
 
@@ -25,28 +24,46 @@ angular.
         }
 
         var requestGet = {
-              url: url,
-              method: "GET",
-              // params: {"id": @id},
-              isArray: true,
-              cache: true,
+          url: '/api/reference/requests/',
+          method: "GET",
+          // params: {"id": @id},
+          isArray: true,
+          cache: true,
         }
 
         var requestCreate = {
-              url: '/api/reference/requests/create/',
-              method: "POST",
-              interceptor: {responseError: function(response){
-                if (response.status == 401){
-                  console.log("you need to log in.")
-                }
-              }},
-              transformResponse: function(data, headersGetter, status){
-                var data = angular.fromJson(data)
-                // console.log(data)
-                return data//.results
-              }
+          url: '/api/reference/requests/create/',
+          method: "POST",
+          interceptor: {responseError: function(response){
+            if (response.status == 401){
+              console.log("you need to log in.")
+            }
+          }},
+          transformResponse: function(data, headersGetter, status){
+            var data = angular.fromJson(data)
+            // console.log(data)
+            return data//.results
+          }
+        }//requestCreate
 
-        }
+        var csvget = {
+          url: '/api/requests/csv/:start/:end/:branch/',
+          params: {'start': '@start',
+                   'end': '@end',
+                   'branch': '@branch'},
+          method: "GET",
+          interceptor: {responseError: function(response){
+            if (response.status == 401){
+              console.log("you need to log in.")
+            }
+          }},
+          // isArray: true,
+          // transformResponse: function(data, headersGetter, status){
+          //   var finalData = angular.fromJson(data)
+          //   // console.log(finalData.results)
+          //   return finalData//.results
+          // }
+        }//csvGet
 
         var token = $cookies.get("token")
         if (token) {
@@ -54,7 +71,8 @@ angular.
           requestDelete["headers"] = {"Authorization": "JWT " + token}
         }
 
-        return $resource(url, {}, {
+        return $resource(null, {}, {
+            csvGet: csvget,
             query: requestQuery,
             get: requestGet,
             create: requestCreate,

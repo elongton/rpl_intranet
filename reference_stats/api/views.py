@@ -120,6 +120,7 @@ def BigDataChart(request, date1, date2, branch):
 
 
 def CreateCSV(request, date1, date2, branch):
+    print('this is working')
     # def addCSVrow(r):
     #     if r.over_five == True:
     #         over = 'Yes'
@@ -145,28 +146,30 @@ def CreateCSV(request, date1, date2, branch):
     #         addCSVrow(r)
     #     # http://127.0.0.1:8000/api/requests/csv/2017-07-07/2017-07-29/Broad+Rock/
     # return response
-    rows = (
-        ['First row', 'Foo', 'Bar', 'Baz'],
-        ['Second row', 'A', 'B', 'C', '"Testing"', "Here's a quote"]
-    )
 
-    # Define a generator to stream data directly to the client
-    def stream():
-        buffer_ = StringIO()
-        writer = csv.writer(buffer_)
-        for row in rows:
-            writer.writerow(row)
-            buffer_.seek(0)
-            data = buffer_.read()
-            buffer_.seek(0)
-            buffer_.truncate()
-            yield data
 
-    # Create the streaming response  object with the appropriate CSV header.
-    response = StreamingHttpResponse(stream(), content_type='text/csv')
-    response['Content-Disposition'] = 'attachment; filename="somefilename.csv"'
+    # rows = (
+    #     ['First row', 'Foo', 'Bar', 'Baz'],
+    #     ['Second row', 'A', 'B', 'C', '"Testing"', "Here's a quote"]
+    # )
+    #
+    # # Define a generator to stream data directly to the client
+    # def stream():
+    #     buffer_ = StringIO()
+    #     writer = csv.writer(buffer_)
+    #     for row in rows:
+    #         writer.writerow(row)
+    #         buffer_.seek(0)
+    #         data = buffer_.read()
+    #         buffer_.seek(0)
+    #         buffer_.truncate()
+    #         yield data
+    #
+    # # Create the streaming response  object with the appropriate CSV header.
+    # response = StreamingHttpResponse(stream(), content_type='text/csv')
+    # response['Content-Disposition'] = 'attachment; filename="somefilename.csv"'
 
-    return response
+    return JsonResponse('yes')
 
 
 
