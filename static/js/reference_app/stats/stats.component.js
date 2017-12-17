@@ -3,7 +3,7 @@
 angular.module('stats').
       component('stats', {
         templateUrl: '/api/templates/reference_app/stats.html',
-        controller: function(Request, Cache, BigData, $scope, $rootScope, $timeout, $cookies, $window, $filter, $location){
+        controller: function(Request, Cache, BigData, $scope, $rootScope, $timeout, $cookies, $window, $filter, $location, $http){
 
 
           //menu
@@ -246,30 +246,32 @@ angular.module('stats').
           $scope.makedates = function(){
             console.log(convertbranch($scope.csvbranch))
           }
-          // build CSV URL
+
+          //GENERATE CSV FILE
+          //this must be done using the $http service to avoid returning a giant char array
+
+          // { start:createtextdate($scope.csvstartdate),
+          //   end:createtextdate($scope.csvenddate),
+          //   branch:convertbranch($scope.csvbranch)}
+
           $scope.buildCSV = function(){
-            var convertbranch = function(branch){
-              branch = branch.replace(" ", "+")
-              return branch
-            }
-            // var url = '/api/requests/csv/' + createtextdate($scope.csvstartdate)
-            //         + '/' + createtextdate($scope.csvenddate) + '/' + convertbranch($scope.csvbranch) + '/'
-            // return(url)
-            // console.log(url)
-            Request.csvGet({start:createtextdate($scope.csvstartdate),
-                            end:createtextdate($scope.csvenddate),
-                            branch:convertbranch($scope.csvbranch)}).$promise.then(
-              function(result){
-                console.log(result)
-              },
-              function(error){
-                console.log(error)
-              }
-            )//request.csvGet
-
-
-          } //buildCSV
-
+              $scope.loading = true;
+              $http({
+                method: 'GET',
+                url: '/funcs/reference/streamingcsvtest/',
+              }).then(function successCallback(response) {
+                $scope.loading = false;
+                  var anchor = angular.element('<a/>');
+                  anchor.attr({
+                      href: 'data:attachment/csv;charset=utf-8,' + encodeURI(response.data),
+                      target: '_blank',
+                      download: 'filename.csv'
+                  })[0].click();
+              }, function errorCallback(response) {
+                // called asynchronously if an error occurs
+                // or server returns response with an error status.
+              });
+            }//buildCSV
 
           $scope.retrieve_bigdatachart = function(branch, fromdate, todate){
               $scope.datedisable = true;

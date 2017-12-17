@@ -18,7 +18,7 @@ fakegen = Faker()
 cal = Calendar()
 
 
-def add_requests(N=2, iteryear=2017, itermonth=10): #N is the number of requests per day
+def add_requests(N=5, iteryear=2017, itermonth=12): #N is the number of requests per day
 
     totaldays = 0
     for day in cal.itermonthdates(iteryear, itermonth):

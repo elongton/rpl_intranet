@@ -1,8 +1,6 @@
 from django.db.models import Q
 # from django.utils.decorators import method_decorator
 # from django.views.decorators.csrf import csrf_exempt
-
-import csv
 from django.http import HttpResponse, HttpRequest, StreamingHttpResponse, JsonResponse
 from datetime import tzinfo, timedelta
 import datetime
@@ -17,23 +15,23 @@ from rest_framework.generics import (
                     RetrieveAPIView,
                     UpdateAPIView,
                     RetrieveUpdateAPIView,)
+from rest_framework.views import APIView
 from .serializers import (RequestCreateUpdateSerializer,
                           RequestDetailSerializer,
-                          RequestListSerializer,
-                          )
+                          RequestListSerializer,)
 from rest_framework.filters import (
     SearchFilter,
-    OrderingFilter,
-)
-
+    OrderingFilter,)
 from accounts.models import User
 from .pagination import RequestLimitOffsetPagination, RequestPageNumberPagination
 from rest_framework.permissions import (
     AllowAny,
     IsAuthenticated,
     IsAdminUser,
-    IsAuthenticatedOrReadOnly,
-)
+    IsAuthenticatedOrReadOnly,)
+from rest_framework.settings import api_settings
+from rest_framework_csv import renderers as r
+
 from .permissions import IsOwner
 from ..models import Request
 
@@ -50,77 +48,15 @@ def datemaker(date1, date2):
                                     month = enddate.month, year = enddate.year)
     return([startdate, enddate])
 
+# CreateCSV(request, date1, date2, branch):
+class CreateCSV(APIView):
+    queryset = Request.objects.all()
+    permission_classes = [AllowAny]
+    serializer_class = RequestListSerializer
 
-def BigData(request, date1, date2, branch):
-    branch = branch.replace('+', ' ')
-    [startdate, enddate] = datemaker(date1, date2)
-    request_objects = Request.objects.filter(branch__name=branch).filter(create_date__gt=startdate).filter(create_date__lt=enddate)
-    totalquant = request_objects.count()
-    circquant = request_objects.filter(type_of_request__type='Circulation').count()
-    dirquant = request_objects.filter(type_of_request__type='Directional').count()
-    refquant = request_objects.filter(type_of_request__type='Reference').count()
-    overfivequant = request_objects.filter(over_five=True).count()
-
-    if totalquant == 0:
-        response = {
-            'total_quant':0,
-            'circ_quant':0,
-            'dir_quant':0,
-            'ref_quant':0,
-            'overfive_quant':0,
-        }
-    else:
-        response = {
-            'total_quant':totalquant,
-            'circ_quant':circquant,
-            'dir_quant':dirquant,
-            'ref_quant':refquant,
-            'overfive_quant':round(overfivequant/totalquant*100),
-        }
-
-    return JsonResponse(response)
-
-
-def BigDataChart(request, date1, date2, branch):
-    branch = branch.replace('+', ' ')
-    [startdate, enddate] = datemaker(date1, date2)
-    request_objects = Request.objects.filter(branch__name=branch).filter(create_date__gt=startdate).filter(create_date__lt=enddate)
-
-    dt = enddate - startdate
-    dt = dt.days
-
-    bin9am = request_objects.filter(create_date__time__lt=datetime.time(9,30,0)).count()
-    bin10am = request_objects.filter(create_date__time__gte=datetime.time(9,30,0)).filter(create_date__time__lt=datetime.time(10,30,0)).count()
-    bin11am = request_objects.filter(create_date__time__gte=datetime.time(10,30,0)).filter(create_date__time__lt=datetime.time(11,30,0)).count()
-    bin12pm = request_objects.filter(create_date__time__gte=datetime.time(11,30,0)).filter(create_date__time__lt=datetime.time(12,30,0)).count()
-    bin1pm = request_objects.filter(create_date__time__gte=datetime.time(12,30,0)).filter(create_date__time__lt=datetime.time(13,30,0)).count()
-    bin2pm = request_objects.filter(create_date__time__gte=datetime.time(13,30,0)).filter(create_date__time__lt=datetime.time(14,30,0)).count()
-    bin3pm = request_objects.filter(create_date__time__gte=datetime.time(14,30,0)).filter(create_date__time__lt=datetime.time(15,30,0)).count()
-    bin4pm = request_objects.filter(create_date__time__gte=datetime.time(15,30,0)).filter(create_date__time__lt=datetime.time(16,30,0)).count()
-    bin5pm = request_objects.filter(create_date__time__gte=datetime.time(16,30,0)).filter(create_date__time__lt=datetime.time(17,30,0)).count()
-    bin6pm = request_objects.filter(create_date__time__gte=datetime.time(17,30,0)).filter(create_date__time__lt=datetime.time(18,30,0)).count()
-    bin7pm = request_objects.filter(create_date__time__gte=datetime.time(18,30,0)).filter(create_date__time__lt=datetime.time(19,30,0)).count()
-    bin8pm = request_objects.filter(create_date__time__gte=datetime.time(19,30,0)).count()
-
-    response = {
-        'bin9am':round(bin9am/dt),
-        'bin10am':round(bin10am/dt),
-        'bin11am':round(bin11am/dt),
-        'bin12pm':round(bin12pm/dt),
-        'bin1pm':round(bin1pm/dt),
-        'bin2pm':round(bin2pm/dt),
-        'bin3pm':round(bin3pm/dt),
-        'bin4pm':round(bin4pm/dt),
-        'bin5pm':round(bin5pm/dt),
-        'bin6pm':round(bin6pm/dt),
-        'bin7pm':round(bin7pm/dt),
-        'bin8pm':round(bin8pm/dt),
-    }
-    return JsonResponse(response)
-
-
-def CreateCSV(request, date1, date2, branch):
-    print('this is working')
+#
+# def CreateCSV(request, date1, date2, branch):
+#     print('this is working')
     # def addCSVrow(r):
     #     if r.over_five == True:
     #         over = 'Yes'
@@ -169,10 +105,7 @@ def CreateCSV(request, date1, date2, branch):
     # response = StreamingHttpResponse(stream(), content_type='text/csv')
     # response['Content-Disposition'] = 'attachment; filename="somefilename.csv"'
 
-    return JsonResponse('yes')
-
-
-
+    # return JsonResponse('yes')
 
 
 class RequestCreateAPIView(CreateAPIView):

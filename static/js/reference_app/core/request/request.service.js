@@ -46,24 +46,29 @@ angular.
           }
         }//requestCreate
 
-        var csvget = {
-          url: '/api/requests/csv/:start/:end/:branch/',
-          params: {'start': '@start',
-                   'end': '@end',
-                   'branch': '@branch'},
+        var csv_s_get = {
+          url: '/funcs/reference/streamingcsvtest/',
+          // url: '/api/requests/csv/:start/:end/:branch/',
+          // params: {'start': '@start',
+          //          'end': '@end',
+          //          'branch': '@branch'},
           method: "GET",
-          interceptor: {responseError: function(response){
-            if (response.status == 401){
-              console.log("you need to log in.")
-            }
-          }},
-          // isArray: true,
           // transformResponse: function(data, headersGetter, status){
-          //   var finalData = angular.fromJson(data)
-          //   // console.log(finalData.results)
-          //   return finalData//.results
-          // }
-        }//csvGet
+          //   console.log(data)
+          //   console.log(status)
+          //   console.log(headersGetter)
+          //   return data
+          // },
+        }//STREAMING
+
+        var csv_get = {
+          url: '/funcs/reference/csvtest/',
+          method: "GET",
+          transformResponse: function(data, headersGetter, status){
+              return data.toString()
+            // return data.type()
+          },
+        }
 
         var token = $cookies.get("token")
         if (token) {
@@ -72,7 +77,8 @@ angular.
         }
 
         return $resource(null, {}, {
-            csvGet: csvget,
+            csvGet: csv_get,
+            csvStreamingGet: csv_s_get,
             query: requestQuery,
             get: requestGet,
             create: requestCreate,

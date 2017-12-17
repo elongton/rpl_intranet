@@ -37,6 +37,7 @@ urlpatterns = [
     url(r'^api/auth/api-token-verify/', verify_jwt_token),
     url(r'^api/auth/token/refresh/', refresh_jwt_token),
     url(r'^api/reference/', include('reference_stats.api.urls', namespace='questions-api' )),
+    url(r'^funcs/reference/', include('reference_stats.urls', namespace='questions-funcs' )),
     url(r'^api/users/', include('accounts.api.urls', namespace='users-api' )),
     url(r'^api/libcal/', include('libcal.api.urls', namespace='libcal-api' )),
     url(r'^api/remoteapis/', include('remote_api_manager.api.urls', namespace='remoteapis-api')),

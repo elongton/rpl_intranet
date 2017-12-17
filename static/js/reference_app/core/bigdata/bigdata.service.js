@@ -3,10 +3,8 @@
 angular.
   module('bigdata').
     factory('BigData', function($cookies, $location, $httpParamSerializer, $resource){
-        var url = '/api/requests/bigdata/:date1/:date2/:branch/'
-        var url2 = '/api/requests/bigdatachart/:date1/:date2/:branch/'
         var dataQuery = {
-              url: url,
+              url: '/funcs/reference/bigdata/:date1/:date2/:branch/',
               method: "GET",
               params: {"date1":'@date1', "date2":'@date2',"branch":'@branch'},
               isArray: false,
@@ -19,7 +17,7 @@ angular.
 
 
         var chartGet = {
-          url: url2,
+          url: '/funcs/reference/bigdatachart/:date1/:date2/:branch/',
           method: "GET",
           params: {"date1":'@date1', "date2":'@date2',"branch":'@branch'},
           isArray: false,
@@ -31,7 +29,7 @@ angular.
 
         }
 
-        return $resource(url, {}, {
+        return $resource(null, {}, {
             query: dataQuery,
             get: chartGet,
         })
