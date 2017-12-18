@@ -14,6 +14,7 @@ import csv
 
 
 def datemaker(date1, date2):
+#this function makes a start date 12AM, and end date 11:59PM
     startdate = dparser.parse(date1)
     enddate = dparser.parse(date2)
     generic_date = timezone.localtime(timezone.now())
@@ -100,15 +101,37 @@ class Echo:
     def write(self, value):
         return value
 
-def some_streaming_csv_view(request):
-    # """A view that streams a large CSV file."""
-    # Generate a sequence of rows. The range is based on the maximum number of
-    # rows that can be handled by a single sheet in most spreadsheet
-    # applications.
-    rows = (["Row {}".format(idx), str(idx)] for idx in range(65536))
+def generate_csv(request, date1, date2, branch):
+
+    #the goal here is to create the entire array of rows and then iterate over it within the StreamingHttpResponse
+    #build array:
+    # Create the HttpResponse object with the appropriate CSV header.
+
+    branch = branch.replace('+', ' ')
+    [startdate, enddate] = datemaker(date1, date2)
+
+
+    def addCSVrow(r, array):
+        if r.over_five == True:
+            over = 'Yes'
+        else:
+            over = 'No'
+        adjusted_create = timezone.localtime(r.create_date)
+        array.append([adjusted_create.date(), adjusted_create.time().strftime('%H:%M:%S'),
+                        r.branch.name, r.user.username, r.medium.type, r.type_of_request.type, over, r.comment])
+
+    csv_array = [['Date', 'Time', 'Branch', 'User', 'Medium', 'Type', 'Over 5 minutes?', 'Comment']]
+    if branch == "All Branches":
+        for r in Request.objects.filter(create_date__gt=startdate).filter(create_date__lt=enddate):
+            addCSVrow(r, csv_array)
+    else:
+        for r in Request.objects.filter(branch__name=branch).filter(create_date__gt=startdate).filter(create_date__lt=enddate):
+            addCSVrow(r, csv_array)
+
     pseudo_buffer = Echo()
     writer = csv.writer(pseudo_buffer)
-    response = StreamingHttpResponse((writer.writerow(row) for row in rows),
+    response = StreamingHttpResponse(
+                                     (writer.writerow(row) for row in csv_array),
                                      content_type="text/csv")
     # response['Transfer-Encoding'] = 'chunked'
     response['Content-Disposition'] = 'attachment; filename="somefilename.csv"'

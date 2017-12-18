@@ -250,15 +250,19 @@ angular.module('stats').
           //GENERATE CSV FILE
           //this must be done using the $http service to avoid returning a giant char array
 
-          // { start:createtextdate($scope.csvstartdate),
-          //   end:createtextdate($scope.csvenddate),
-          //   branch:convertbranch($scope.csvbranch)}
+          var convertbranch = function(branch){
+            branch = branch.replace(" ", "+")
+            return branch
+          }
 
           $scope.buildCSV = function(){
               $scope.loading = true;
               $http({
                 method: 'GET',
-                url: '/funcs/reference/streamingcsvtest/',
+                url: '/funcs/reference/csv/'+
+                     createtextdate($scope.csvstartdate)+ '/'
+                     + createtextdate($scope.csvenddate)+ '/'
+                     + convertbranch($scope.csvbranch) + '/',
               }).then(function successCallback(response) {
                 $scope.loading = false;
                   var anchor = angular.element('<a/>');
