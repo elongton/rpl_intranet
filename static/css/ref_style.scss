@@ -101,3 +101,8 @@ animation:spin .9s linear infinite;
 @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
 
 .rpl-links{cursor: pointer;}
+
+//csv loading Bar
+#loading-bar-spinner{display:none;}
+#loading-bar{}
+#loading-bar .bar{height: 10px; position: absolute!important; bottom: 0!important;}

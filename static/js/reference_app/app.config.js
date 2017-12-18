@@ -2,10 +2,18 @@
 
 angular.module('referenceApp')
     .config(
+      ['cfpLoadingBarProvider', function(cfpLoadingBarProvider){
+        //loading bar
+        cfpLoadingBarProvider.parentSelector = '#csv_modal_content';
+        // cfpLoadingBarProvider.spinnerTemplate = '<div><span class="fa fa-spinner">Custom Loading Message...</div>';
+      }]
+    )
+    .config(
       function(
         $locationProvider,
         $resourceProvider,
         $routeProvider,
+        cfpLoadingBarProvider,
       ){
           var onlyLoggedIn = function (User, $location,$q, $cookies,) {
               var deferred = $q.defer();

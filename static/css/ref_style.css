@@ -167,4 +167,12 @@ h1 {
 .rpl-links {
   cursor: pointer; }
 
+#loading-bar-spinner {
+  display: none; }
+
+#loading-bar .bar {
+  height: 10px;
+  position: absolute !important;
+  bottom: 0 !important; }
+
 /*# sourceMappingURL=ref_style.css.map */
