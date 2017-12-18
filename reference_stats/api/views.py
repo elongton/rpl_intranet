@@ -1,6 +1,4 @@
 from django.db.models import Q
-# from django.utils.decorators import method_decorator
-# from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse, HttpRequest, StreamingHttpResponse, JsonResponse
 from datetime import tzinfo, timedelta
 import datetime
@@ -15,7 +13,6 @@ from rest_framework.generics import (
                     RetrieveAPIView,
                     UpdateAPIView,
                     RetrieveUpdateAPIView,)
-from rest_framework.views import APIView
 from .serializers import (RequestCreateUpdateSerializer,
                           RequestDetailSerializer,
                           RequestListSerializer,)
@@ -29,8 +26,6 @@ from rest_framework.permissions import (
     IsAuthenticated,
     IsAdminUser,
     IsAuthenticatedOrReadOnly,)
-from rest_framework.settings import api_settings
-from rest_framework_csv import renderers as r
 
 from .permissions import IsOwner
 from ..models import Request
@@ -48,13 +43,6 @@ def datemaker(date1, date2):
                                     month = enddate.month, year = enddate.year)
     return([startdate, enddate])
 
-# CreateCSV(request, date1, date2, branch):
-class CreateCSV(APIView):
-    queryset = Request.objects.all()
-    permission_classes = [AllowAny]
-    serializer_class = RequestListSerializer
-
-#
 # def CreateCSV(request, date1, date2, branch):
 #     print('this is working')
     # def addCSVrow(r):
