@@ -115,7 +115,7 @@ class UserCreateSerializer(ModelSerializer):
 
 class UserLoginSerializer(ModelSerializer):
     token = CharField(allow_blank=True, read_only=True)
-    username = CharField(required=False, allow_blank=True,)
+    username = CharField(required=True, allow_blank=True,)
     # email = EmailField(label = 'Email Address',required=False, allow_blank=True,)
     class Meta:
         model = User

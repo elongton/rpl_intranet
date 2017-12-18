@@ -34,7 +34,9 @@ angular.module('login').
                 window.location.replace(url);
               })//function(result)
           }//userSuccess
-          var userError = function(response){console.log(error)}
+          var userError = function(response){
+            $scope.loginError = response.data
+          }
           User.userLogin({username: user.username, password: user.password}).$promise.then(userSuccess, userError)
         }//doLogin
     }//controller
