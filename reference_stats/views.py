@@ -116,13 +116,20 @@ def some_streaming_csv_view(request):
 
 
 
-def normal_csv(request):
-    # Create the HttpResponse object with the appropriate CSV header.
-    response = HttpResponse(content_type='text/csv')
-    # response['Content-Disposition'] = 'attachment; filename="somefilename.csv"'
 
-    writer = csv.writer(response)
-    rows = (["Row {}".format(idx), str(idx)] for idx in range(100))
-    for row in rows:
-        writer.writerow(row)
-    return response
+
+
+
+
+
+
+# def normal_csv(request):
+#     # Create the HttpResponse object with the appropriate CSV header.
+#     response = HttpResponse(content_type='text/csv')
+#     # response['Content-Disposition'] = 'attachment; filename="somefilename.csv"'
+#
+#     writer = csv.writer(response)
+#     rows = (["Row {}".format(idx), str(idx)] for idx in range(100))
+#     for row in rows:
+#         writer.writerow(row)
+#     return response
