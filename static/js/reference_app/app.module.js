@@ -8,6 +8,7 @@ angular.module('referenceApp', [
   'ngRoute',
   'ngResource',
   'chart.js',
+  'angular-loading-bar',
 
 
   //internal
