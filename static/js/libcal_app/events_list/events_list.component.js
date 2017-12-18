@@ -77,7 +77,7 @@ angular.module('events').
           }
 
           $scope.write_text_file = function(){
-            lcFuncs.makeEventsFile($scope.textfile_array);
+            lcFuncs.makeEventsFile($scope.textfile_array, $scope.set_from, $scope.set_to);
           }
 
           //sorting

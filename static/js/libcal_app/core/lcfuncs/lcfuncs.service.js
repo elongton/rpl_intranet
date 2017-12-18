@@ -225,15 +225,24 @@ angular.
              return text
          }
 
-         function expFile(event_array) {
+         function expFile(event_array, start, end) {
            event_array.sort(function(a,b){return new Date(b.start) - new Date(a.start);}).reverse();
-           var fileText = '';
+           var fileText = '////////////////////////////////////////' + '\r\n' +
+                          '//////////////' + event_array[0].calendar.name + ' Branch' + '///////////////' + '\r\n' +
+                          '////////////////////////////////////////' + '\r\n' + '\r\n';
+           if (readable_date(start) == readable_date(end)){
+             fileText = fileText.concat(readable_date(start))
+           } else {
+             fileText = fileText.concat(readable_date(start) + ' - ' + readable_date(end))
+           }
+           fileText = fileText.concat('\r\n' + '===============================================================' + '\r\n' + '\r\n')
            for (var i = 0; i < event_array.length; i++){
              var date = new Date(event_array[i].start)
              var description = event_array[i].description
              fileText = fileText.concat(event_array[i].title + '\r\n'
+                                      + event_array[i].location.name + '\r\n'
                                       + readable_date(date) + '\r\n'
-                                      + event_array[i].start_time + ' - ' + event_array[i].end_time + '\r\n'
+                                      + event_array[i].start_time + ' - ' + event_array[i].end_time + '\r\n' + '\r\n'
                                       + htmlToPlainText(event_array[i].description) + '\r\n' + '\r\n'
 
                                       +'===============================================================' + '\r\n' + '\r\n')
