@@ -7,6 +7,7 @@ angular.module('events').
 
 
 //////////////     app initialization   //////////////
+
           $scope.staticfiles = staticfiles;
           $scope.calendar_option_selected = ($cookies.get("calendar_preference") == 'calendar')
           $scope.calendartoggleswitch = !($cookies.get("calendar_condensed_view") == 'true')
@@ -134,16 +135,20 @@ angular.module('events').
           //animating the buttons in mobile:
           var downanimation = function(){
             $scope.dates_button_class = 'animate_date_button_up';
+            $scope.menu_button_class = 'animate_menu_button_up';
             $scope.menu_position = !$scope.menu_position
           }
           var upanimation = function(){
               $scope.dates_button_class = 'animate_date_button_down';
+              $scope.menu_button_class = 'animate_menu_button_down';
               $scope.menu_position = !$scope.menu_position
           }//addanimation()
           //actual menu
-          $scope.is_shown = 'nodisplay';
-          $scope.showmenu = function(){$scope.is_shown = '';}
-          $scope.hidemenu = function(){$scope.is_shown = 'nodisplay';}
+          $scope.branch_menu_is_shown = 'nodisplay';
+          $scope.date_menu_is_shown = 'nodisplay';
+          $scope.showbranchmenu = function(){$scope.branch_menu_is_shown = ''; $scope.is_shown = '';}
+          $scope.showdatemenu = function(){$scope.date_menu_is_shown = ''; $scope.is_shown = '';}
+          $scope.hidemenu = function(){$scope.branch_menu_is_shown = 'nodisplay'; $scope.date_menu_is_shown = 'nodisplay'; $scope.is_shown = 'nodisplay';}
           //MOBILE STUFF
           //scroll direction code:
           $scope.lastScrollTop = 0;
@@ -424,6 +429,9 @@ angular.module('events').
             $scope.lbid = branchinfo[1]
             $scope.lcalid = branchinfo[2]
             $scope.mapping = branchinfo[3]
+
+            //mobile menu dropdown model assignment
+            $scope.branch_menu_location = $scope.mapping[$scope.branch]
             // console.log($scope.lbid)
             lcData().getRequestCreds({q:'springshare'}).$promise.then(requestCredsSuccess, requestCredsError)
 

@@ -184,17 +184,14 @@ $loading_dim: 100px;
 
   div.mobile_dates_button{display: none;}
   div.mobile_menu_button{display: none;}
-  div.mobile_date_menu_container{display:none;}
+  div.mobile_date_menu_container, div.mobile_branch_menu_container{display:none;}
 
   .events_container,
   .nav_container{min-width: 992px;}
 
 
   h2{font-family: 'Mate SC';}
-  .events_title{
-    padding: 10px 0px;
-    font-family: 'Mate SC';}
-  .events_title h1{font-size: 50px; font-weight: bold;}
+
 
   .angular_event_list h4{font-size: 22px; font-weight: normal;}
   .angular_event_list h6{font-weight: 500;}
@@ -227,9 +224,18 @@ $loading_dim: 100px;
 $xtrans: 85px;
 $datebuttondim: 85px;
 $datebuttonpos: 17.5px;
-$animationspeed: .2s;
 $dateupangle: 225deg;
 $datedownangle:135deg;
+
+
+$menuxtrans: 50px;
+$menubuttondim: $datebuttondim*2/3;
+$menubuttonpos: 25px;
+$menuupangle: 275deg;
+$menudownangle:400deg;
+
+$animationspeed: .2s;
+
 
 @keyframes date_down {
   from { transform: rotate($dateupangle) translateX($xtrans) rotate(-$dateupangle); }
@@ -238,6 +244,15 @@ $datedownangle:135deg;
 @keyframes date_up {
   from { transform: rotate($datedownangle) translateX($xtrans) rotate(-$datedownangle);}
   to   { transform: rotate($dateupangle) translateX($xtrans) rotate(-$dateupangle); }
+}
+
+@keyframes menu_down {
+  from { transform: rotate($menuupangle) translateX($menuxtrans) rotate(-$menuupangle); }
+  to   { transform: rotate($menudownangle) translateX($menuxtrans) rotate(-$menudownangle); }
+}
+@keyframes menu_up {
+  from { transform: rotate($menudownangle) translateX($menuxtrans) rotate(-$menudownangle);}
+  to   { transform: rotate($menuupangle) translateX($menuxtrans) rotate(-$menuupangle); }
 }
 
 @media only screen and (max-width: 768px) {
@@ -276,6 +291,18 @@ $datedownangle:135deg;
     right: -$datebuttondim/2!important;
   }
 
+  .animate_menu_button_down{
+    animation: menu_down $animationspeed linear forwards; // infinite; /* Chrome, Firefox 16+, IE 10+, Safari 5 */
+    bottom: -$menubuttondim/2!important;
+    right: -$menubuttondim/2!important;
+  }
+  .animate_menu_button_up{
+    animation: menu_up $animationspeed linear forwards; // infinite; /* Chrome, Firefox 16+, IE 10+, Safari 5 */
+    bottom: -$menubuttondim/2!important;
+    right: -$menubuttondim/2!important;
+  }
+
+
   div.mobile_dates_button{
     height: $datebuttondim;
     width: $datebuttondim;
@@ -286,33 +313,36 @@ $datedownangle:135deg;
     right: $datebuttonpos;
     color: white;
     font-size: 35px;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)
 
     }
 
   div.mobile_menu_button{
-    height: 40px;
-    width: 40px;
+    height: $menubuttondim;
+    width: $menubuttondim;
     background-color: #4885ed;
     border-radius: 100%;
     position: fixed;
-    bottom: 30px;
-    left: 37px;
+    bottom: $menubuttonpos;
+    left: $menubuttonpos;
     color: white;
-    font-size: 20px;}
+    font-size: 25px;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22)
+  }
 
 
     #datepickernav{display: none;}
 
 
 
-  div.mobile_date_menu_container{
+  div.mobile_date_menu_container, div.mobile_branch_menu_container{
     z-index: 3;
     position: fixed;
     bottom: 10px;
     width: 100%;
     padding: 0 10px;}
 
-  div.mobile_date_menu{
+  div.mobile_date_menu, div.mobile_branch_menu{
     position: relative;
     width: 100%;
     background-color: #4885ed;
@@ -326,7 +356,6 @@ $datedownangle:135deg;
 
   div.events_title{
     text-align: center;
-    padding: 10px 0;
     position: absolute;
     z-index: 10;
     top: 0;
@@ -334,8 +363,11 @@ $datedownangle:135deg;
     width: 100%;
     color: white;
     background-color: #4885ed;
+    font-family: 'Mate SC';
     }
-  div.events_title h1{margin: 0 0; padding: 0; font-family: 'Mate SC';}
+    div.events_title h1{font-size: 30px; font-weight: bold; margin-top: 13px; margin-bottom: 15px;}
+
+  // div.events_title h1{margin: 0 0; padding: 0; font-family: 'Mate SC';}
   div.angular_event_list{margin-top: 35px;}
 
 

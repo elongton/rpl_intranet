@@ -10,7 +10,7 @@
   <div class="row" id="libcal_events_header">
     <div class="col-sm-12" ng-click = "mobile_mode_toggle()">
       <div class="events_title" ng-class="header_shown">
-        <h1>{{mobile_header}}</h1>
+        <h1>{{mobile_header}} ({{branch}})</h1>
       </div>
     </div>
   </div>
@@ -45,14 +45,40 @@
   </div><!--container -->
 
   <!-- mobile stuff -->
-  <div class="mobile_dates_button table_parent text-center" ng-class="dates_button_class" ng-click = "showmenu()">
+
+  <!-- mobile dates button -->
+  <div class="mobile_dates_button table_parent text-center" ng-class="dates_button_class" ng-click = "showdatemenu()">
     <i class="fa fa-calendar table_child" aria-hidden="true"></i>
+  </div>
+
+  <!-- mobile menu button -->
+  <div class="mobile_menu_button table_parent text-center" ng-class="menu_button_class" ng-click = "showbranchmenu()">
+    <i class="fa fa-university table_child" aria-hidden="true"></i>
   </div>
 
   <!-- mobile menu click area cancelation -->
   <div class="cancel_clickable" ng-class="is_shown" ng-click="hidemenu();"></div>
 
-  <div class="mobile_date_menu_container" ng-class="is_shown" id="date_menu">
+<!-- mobile branch menu -->
+<div class="mobile_branch_menu_container" ng-class="branch_menu_is_shown" id="branch_menu">
+  <div class="mobile_branch_menu">
+    <div>
+      <select name="mySelect" style="background-color: white; width: 100%; height: 40px;"
+         ng-options="location.branch for location in mapping"
+         ng-model="branch_menu_location"></select>
+
+
+      <!-- <select style="background-color: white; width: 100%; height: 40px;" >
+        <option ng-repeat = "location in mapping" ng-model="branch_menu_location" style="text-align: center;">{{location.branch}}</option>
+      </select> -->
+    </div>
+    <div class=""><button class="retrievebutton btn btn-success" ng-click = "changebranch(branch_menu_location.branch); hidemenu();">Submit</button></div>
+  </div>
+
+</div><!-- mobile_date_menu_container -->
+
+<!-- mobile date menu -->
+  <div class="mobile_date_menu_container" ng-class="date_menu_is_shown" id="date_menu">
     <div class="mobile_date_menu">
 
       <div class="button_container">

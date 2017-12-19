@@ -205,7 +205,7 @@
   div.mobile_menu_button {
     display: none; }
 
-  div.mobile_date_menu_container {
+  div.mobile_date_menu_container, div.mobile_branch_menu_container {
     display: none; }
 
   .events_container,
@@ -214,14 +214,6 @@
 
   h2 {
     font-family: 'Mate SC'; }
-
-  .events_title {
-    padding: 10px 0px;
-    font-family: 'Mate SC'; }
-
-  .events_title h1 {
-    font-size: 50px;
-    font-weight: bold; }
 
   .angular_event_list h4 {
     font-size: 22px;
@@ -264,6 +256,16 @@
     transform: rotate(135deg) translateX(85px) rotate(-135deg); }
   to {
     transform: rotate(225deg) translateX(85px) rotate(-225deg); } }
+@keyframes menu_down {
+  from {
+    transform: rotate(275deg) translateX(50px) rotate(-275deg); }
+  to {
+    transform: rotate(400deg) translateX(50px) rotate(-400deg); } }
+@keyframes menu_up {
+  from {
+    transform: rotate(400deg) translateX(50px) rotate(-400deg); }
+  to {
+    transform: rotate(275deg) translateX(50px) rotate(-275deg); } }
 @media only screen and (max-width: 768px) {
   .event_data_container_div {
     padding-top: 50px; }
@@ -304,6 +306,16 @@
     bottom: -42.5px !important;
     right: -42.5px !important; }
 
+  .animate_menu_button_down {
+    animation: menu_down 0.2s linear forwards;
+    bottom: -28.33333px !important;
+    right: -28.33333px !important; }
+
+  .animate_menu_button_up {
+    animation: menu_up 0.2s linear forwards;
+    bottom: -28.33333px !important;
+    right: -28.33333px !important; }
+
   div.mobile_dates_button {
     height: 85px;
     width: 85px;
@@ -313,30 +325,32 @@
     bottom: 17.5px;
     right: 17.5px;
     color: white;
-    font-size: 35px; }
+    font-size: 35px;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22); }
 
   div.mobile_menu_button {
-    height: 40px;
-    width: 40px;
+    height: 56.66667px;
+    width: 56.66667px;
     background-color: #4885ed;
     border-radius: 100%;
     position: fixed;
-    bottom: 30px;
-    left: 37px;
+    bottom: 25px;
+    left: 25px;
     color: white;
-    font-size: 20px; }
+    font-size: 25px;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22); }
 
   #datepickernav {
     display: none; }
 
-  div.mobile_date_menu_container {
+  div.mobile_date_menu_container, div.mobile_branch_menu_container {
     z-index: 3;
     position: fixed;
     bottom: 10px;
     width: 100%;
     padding: 0 10px; }
 
-  div.mobile_date_menu {
+  div.mobile_date_menu, div.mobile_branch_menu {
     position: relative;
     width: 100%;
     background-color: #4885ed;
@@ -353,19 +367,20 @@
 
   div.events_title {
     text-align: center;
-    padding: 10px 0;
     position: absolute;
     z-index: 10;
     top: 0;
     left: 0;
     width: 100%;
     color: white;
-    background-color: #4885ed; }
+    background-color: #4885ed;
+    font-family: 'Mate SC'; }
 
   div.events_title h1 {
-    margin: 0 0;
-    padding: 0;
-    font-family: 'Mate SC'; }
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: 13px;
+    margin-bottom: 15px; }
 
   div.angular_event_list {
     margin-top: 35px; }
