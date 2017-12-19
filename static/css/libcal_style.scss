@@ -128,7 +128,6 @@ $loading_dim: 100px;
   $nav_color: $background_dark;//#d6d6d6;
   body{background-color: $background_light;}
 //date change alert
-
   $alert_red_color: #E5B27F;
   $alert_blue_color: #72cfff;//#fee24a;
 
@@ -177,14 +176,8 @@ $loading_dim: 100px;
                       width: $geb_size; height: $geb_size; background-color: $nav_color;
                       border-top-left-radius: $geb_size/2; border-top-right-radius: $geb_size/2;}
 
-// box-shadow: none|h-shadow v-shadow blur spread color |inset|initial|inherit;
-
-
-
   #options_row{position: absolute; right: 0; z-index: 100;}
   div.angular_event_list{padding-bottom: 100px;}
-
-
 
 
   #libcal_events_header{display: none;}
@@ -226,6 +219,10 @@ $loading_dim: 100px;
 
 ////////////////////////mobile size////////////////////////////
 
+//calendar view
+#featured_img_div{padding: 35px;}
+
+
 //date button variables
 $xtrans: 85px;
 $datebuttondim: 85px;
@@ -249,7 +246,7 @@ $datedownangle:135deg;
   .event_data_container_div{padding-top: 50px;}
 
   #options_row{display: none;}
-  div.cal_event_container{padding-right:25px; padding-left: 15px;}
+  div.cal_event_container{padding-right:30px;}
   #calendar_featured_img{width: 100%;}
   //header transition
 

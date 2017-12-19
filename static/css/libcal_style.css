@@ -251,6 +251,9 @@
   #bottom_date_nav {
     height: 100px;
     border: 1px dashed black; } }
+#featured_img_div {
+  padding: 35px; }
+
 @keyframes date_down {
   from {
     transform: rotate(225deg) translateX(85px) rotate(-225deg); }
@@ -269,8 +272,7 @@
     display: none; }
 
   div.cal_event_container {
-    padding-right: 25px;
-    padding-left: 15px; }
+    padding-right: 30px; }
 
   #calendar_featured_img {
     width: 100%; }
