@@ -334,6 +334,17 @@ $animationspeed: .2s;
     #datepickernav{display: none;}
 
 
+  $branch_button_dim: 65px;
+  $menu_background_color: #4885ed;
+
+  div.branch_button_container{
+        height: $branch_button_dim;
+        width: $branch_button_dim;
+        background-color: $menu_background_color;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        color: white;
+        font-size: 30px;}
 
   div.mobile_date_menu_container, div.mobile_branch_menu_container{
     z-index: 3;
@@ -345,7 +356,7 @@ $animationspeed: .2s;
   div.mobile_date_menu, div.mobile_branch_menu{
     position: relative;
     width: 100%;
-    background-color: #4885ed;
+    background-color: $menu_background_color;
     padding: 10px 10px;
   }
   .mobile_date_menu span{color: white;}
@@ -362,7 +373,7 @@ $animationspeed: .2s;
     left: 0;
     width: 100%;
     color: white;
-    background-color: #4885ed;
+    background-color: $menu_background_color;
     font-family: 'Mate SC';
     }
     div.events_title h1{font-size: 30px; font-weight: bold; margin-top: 13px; margin-bottom: 15px;}
@@ -407,6 +418,12 @@ $animationspeed: .2s;
         width: 100%;
         height: 100px;
       }
+  button.submitbutton{
+    margin-top: 5px;
+    width: 100%;
+    height: 80px;
+    font-size: $big_button_font_size
+  }
 
 
 }//media query

@@ -343,6 +343,15 @@
   #datepickernav {
     display: none; }
 
+  div.branch_button_container {
+    height: 65px;
+    width: 65px;
+    background-color: #4885ed;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    color: white;
+    font-size: 30px; }
+
   div.mobile_date_menu_container, div.mobile_branch_menu_container {
     z-index: 3;
     position: fixed;
@@ -423,7 +432,13 @@
   button.todaybutton {
     margin-top: 5px;
     width: 100%;
-    height: 100px; } }
+    height: 100px; }
+
+  button.submitbutton {
+    margin-top: 5px;
+    width: 100%;
+    height: 80px;
+    font-size: 23px; } }
 @media screen {
   #printSection {
     display: none; } }

@@ -146,9 +146,9 @@ angular.module('events').
           //actual menu
           $scope.branch_menu_is_shown = 'nodisplay';
           $scope.date_menu_is_shown = 'nodisplay';
-          $scope.showbranchmenu = function(){$scope.branch_menu_is_shown = ''; $scope.is_shown = '';}
-          $scope.showdatemenu = function(){$scope.date_menu_is_shown = ''; $scope.is_shown = '';}
-          $scope.hidemenu = function(){$scope.branch_menu_is_shown = 'nodisplay'; $scope.date_menu_is_shown = 'nodisplay'; $scope.is_shown = 'nodisplay';}
+          $scope.showbranchmenu = function(){$scope.branch_menu_is_shown = ''; $scope.is_shown = ''; $scope.date_menu_is_shown = 'nodisplay'; $scope.dates_button_class = 'nodisplay';}
+          $scope.showdatemenu = function(){$scope.date_menu_is_shown = ''; $scope.is_shown = ''; $scope.dates_button_class = 'nodisplay';}
+          $scope.hidemenu = function(){$scope.branch_menu_is_shown = 'nodisplay'; $scope.date_menu_is_shown = 'nodisplay'; $scope.is_shown = 'nodisplay'; $scope.dates_button_class = '';}
           //MOBILE STUFF
           //scroll direction code:
           $scope.lastScrollTop = 0;

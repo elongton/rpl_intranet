@@ -48,13 +48,13 @@
 
   <!-- mobile dates button -->
   <div class="mobile_dates_button table_parent text-center" ng-class="dates_button_class" ng-click = "showdatemenu()">
-    <i class="fa fa-calendar table_child" aria-hidden="true"></i>
+    <i class="fa fa-bars table_child" aria-hidden="true"></i>
   </div>
 
   <!-- mobile menu button -->
-  <div class="mobile_menu_button table_parent text-center" ng-class="menu_button_class" ng-click = "showbranchmenu()">
+  <!-- <div class="mobile_menu_button table_parent text-center" ng-class="menu_button_class" ng-click = "showbranchmenu()">
     <i class="fa fa-university table_child" aria-hidden="true"></i>
-  </div>
+  </div> -->
 
   <!-- mobile menu click area cancelation -->
   <div class="cancel_clickable" ng-class="is_shown" ng-click="hidemenu();"></div>
@@ -72,16 +72,20 @@
         <option ng-repeat = "location in mapping" ng-model="branch_menu_location" style="text-align: center;">{{location.branch}}</option>
       </select> -->
     </div>
-    <div class=""><button class="retrievebutton btn btn-success" ng-click = "changebranch(branch_menu_location.branch); hidemenu();">Submit</button></div>
+    <div class=""><button class="submitbutton btn btn-success" ng-click = "changebranch(branch_menu_location.branch); hidemenu();">Submit</button></div>
   </div>
 
 </div><!-- mobile_date_menu_container -->
 
 <!-- mobile date menu -->
   <div class="mobile_date_menu_container" ng-class="date_menu_is_shown" id="date_menu">
+    <div class="branch_button_container table_parent text-center" ng-click = "showbranchmenu()">
+        <i class="fa fa-university table_child" aria-hidden="true"></i>
+    </div>
     <div class="mobile_date_menu">
 
       <div class="button_container">
+
         <div class="menu_button_div_left menu_button_div"><button class="btn btn-success" ng-click="lose_day_button()" ng-disabled = "backdisable">Previous Day</i></button></div>
         <div class="menu_button_div_right menu_button_div"><button class="btn btn-success" ng-click = "add_day_button()">Next Day</i></button></div>
       </div>
