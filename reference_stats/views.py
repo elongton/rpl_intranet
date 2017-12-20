@@ -65,33 +65,36 @@ def BigDataChart(request, date1, date2, branch):
     dt = enddate - startdate
     dt = dt.days
 
-    bin9am = request_objects.filter(create_date__time__lt=datetime.time(9,30,0)).count()
-    bin10am = request_objects.filter(create_date__time__gte=datetime.time(9,30,0)).filter(create_date__time__lt=datetime.time(10,30,0)).count()
-    bin11am = request_objects.filter(create_date__time__gte=datetime.time(10,30,0)).filter(create_date__time__lt=datetime.time(11,30,0)).count()
-    bin12pm = request_objects.filter(create_date__time__gte=datetime.time(11,30,0)).filter(create_date__time__lt=datetime.time(12,30,0)).count()
-    bin1pm = request_objects.filter(create_date__time__gte=datetime.time(12,30,0)).filter(create_date__time__lt=datetime.time(13,30,0)).count()
-    bin2pm = request_objects.filter(create_date__time__gte=datetime.time(13,30,0)).filter(create_date__time__lt=datetime.time(14,30,0)).count()
-    bin3pm = request_objects.filter(create_date__time__gte=datetime.time(14,30,0)).filter(create_date__time__lt=datetime.time(15,30,0)).count()
-    bin4pm = request_objects.filter(create_date__time__gte=datetime.time(15,30,0)).filter(create_date__time__lt=datetime.time(16,30,0)).count()
-    bin5pm = request_objects.filter(create_date__time__gte=datetime.time(16,30,0)).filter(create_date__time__lt=datetime.time(17,30,0)).count()
-    bin6pm = request_objects.filter(create_date__time__gte=datetime.time(17,30,0)).filter(create_date__time__lt=datetime.time(18,30,0)).count()
-    bin7pm = request_objects.filter(create_date__time__gte=datetime.time(18,30,0)).filter(create_date__time__lt=datetime.time(19,30,0)).count()
-    bin8pm = request_objects.filter(create_date__time__gte=datetime.time(19,30,0)).count()
+    print(request_objects.first().create_date.minute)
 
-    response = {
-        'bin9am':round(bin9am/dt),
-        'bin10am':round(bin10am/dt),
-        'bin11am':round(bin11am/dt),
-        'bin12pm':round(bin12pm/dt),
-        'bin1pm':round(bin1pm/dt),
-        'bin2pm':round(bin2pm/dt),
-        'bin3pm':round(bin3pm/dt),
-        'bin4pm':round(bin4pm/dt),
-        'bin5pm':round(bin5pm/dt),
-        'bin6pm':round(bin6pm/dt),
-        'bin7pm':round(bin7pm/dt),
-        'bin8pm':round(bin8pm/dt),
-    }
+    # bin9am = request_objects.filter(create_date__hour__lt=9, create_date__minute__lt=30).count()
+    # bin10am = request_objects.filter(create_date__hour__gte=9, create_date__minute__gte=30).filter(create_date__hour__lt=10, create_date__minute__lt=30).count()
+    # bin11am = request_objects.filter(create_date__hour__gte=10, create_date__minute__gte=30).filter(create_date__hour__lt=11, create_date__minute__lt=30).count()
+    # bin12pm = request_objects.filter(create_date__hour__gte=11, create_date__minute__gte=30).filter(create_date__hour__lt=12, create_date__minute__lt=30).count()
+    # bin1pm = request_objects.filter(create_date__hour__gte=12, create_date__minute__gte=30).filter(create_date__hour__lt=13, create_date__minute__lt=30).count()
+    # bin2pm = request_objects.filter(create_date__hour__gte=13, create_date__minute__gte=30).filter(create_date__hour__lt=14, create_date__minute__lt=30).count()
+    # bin3pm = request_objects.filter(create_date__hour__gte=14, create_date__minute__gte=30).filter(create_date__hour__lt=15, create_date__minute__lt=30).count()
+    # bin4pm = request_objects.filter(create_date__hour__gte=15, create_date__minute__gte=30).filter(create_date__hour__lt=16, create_date__minute__lt=30).count()
+    # bin5pm = request_objects.filter(create_date__hour__gte=16, create_date__minute__gte=30).filter(create_date__hour__lt=17, create_date__minute__lt=30).count()
+    # bin6pm = request_objects.filter(create_date__hour__gte=17, create_date__minute__gte=30).filter(create_date__hour__lt=18, create_date__minute__lt=30).count()
+    # bin7pm = request_objects.filter(create_date__hour__gte=18, create_date__minute__gte=30).filter(create_date__hour__lt=19, create_date__minute__lt=30).count()
+    # bin8pm = request_objects.filter(create_date__hour__gte=19, create_date__minute__gte=30).count()
+    #
+    # response = {
+    #     'bin9am':round(bin9am/dt),
+    #     'bin10am':round(bin10am/dt),
+    #     'bin11am':round(bin11am/dt),
+    #     'bin12pm':round(bin12pm/dt),
+    #     'bin1pm':round(bin1pm/dt),
+    #     'bin2pm':round(bin2pm/dt),
+    #     'bin3pm':round(bin3pm/dt),
+    #     'bin4pm':round(bin4pm/dt),
+    #     'bin5pm':round(bin5pm/dt),
+    #     'bin6pm':round(bin6pm/dt),
+    #     'bin7pm':round(bin7pm/dt),
+    #     'bin8pm':round(bin8pm/dt),
+    # }
+    response = {'hi':'yo'}
     return JsonResponse(response)
 
 
