@@ -1,5 +1,10 @@
 <div class="col-sm-12" ng-if="calendartoggleswitch==false"><!--Log Table -->
-  <div class=""><h2>Events between: {{set_from | date:'MM/dd'}} and {{set_to | date:'MM/dd'}}</h2></div>
+  <div class="condensed_header">
+    <h4>
+      {{branch}} Branch: <span ng-if = "set_from.getDate() == set_to.getDate()">{{set_from | date:'MM/dd'}}</span><span ng-if = "set_from.getDate() != set_to.getDate()">{{set_from | date:'MM/dd'}} - {{set_to | date:'MM/dd'}}</span>
+    </h4>
+    <span>Total Events: {{condensed_calendar_array.length}}</span>  &middot;  <span>Unique Events: {{unique_count(condensed_calendar_array)}}</span>
+  </div>
   <div class="" ng-class="loading_class">
 
     <table class="table table-hover events_table" id="stats_table" style="margin-top: 15px; font-size: 15px;">

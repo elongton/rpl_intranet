@@ -443,6 +443,22 @@ angular.module('events').
 ///////////////////////  END SPACES HTTP  ////////////////////////////
 /////////////////////////////////////////////////////////////////////
 
+          //function to count how many unique events exist
+          $scope.unique_count = function(condensed_calendar_array){
+            var holding_array = [];
+            for (var i = 0; i < condensed_calendar_array.length; i++ ){
+              var unique = true;
+                for (var j=0; j < holding_array.length; j++){
+                  if (condensed_calendar_array[i].title == holding_array[j].title){
+                    unique = false;
+                  }//if
+                }//for j
+                if (unique == true){
+                  holding_array.push(condensed_calendar_array[i]);
+                }//if unique
+            }//for i
+            return holding_array.length
+          }//unique_count
 
 ///////////////////////  CALENDAR OPTION PROCESSING  //////////////////////////////
 

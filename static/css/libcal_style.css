@@ -212,7 +212,7 @@
   .nav_container {
     min-width: 992px; }
 
-  h2 {
+  h2, .condensed_header h4 {
     font-family: 'Mate SC'; }
 
   .angular_event_list h4 {
