@@ -8,6 +8,7 @@
     </a>
     <div class="dropdown-menu rpl-links" aria-labelledby="navbarDropdownMenuLink">
       <a class="dropdown-item" ng-click='preferences_page()'>Preferences</a>
+      <a ng-if='is_admin' class="dropdown-item" ng-click='admin_preferences_page()'>Admin Preferences</a>
       <div class="dropdown-divider"></div>
       <a class="dropdown-item" href="#" ng-click='removeUser()' >Logout</a>
     </div>

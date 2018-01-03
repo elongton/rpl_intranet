@@ -34,6 +34,24 @@ angular.module('usersApp').
                 };
 
 
+                var adminLogin = function (User, $location,$q, $cookies,) {
+                    var deferred = $q.defer();
+                    if ($cookies.get("is_admin") == 'true'){
+                          deferred.resolve();
+                    }else{
+                      rejection(deferred);
+                    }//else
+
+                    function rejection(deferral){
+                      deferral.reject();
+                      var url = "/";
+                      window.location = url;
+                      window.location.replace(url);
+                    }
+                    return deferred.promise;
+                };
+
+
                 $locationProvider.html5Mode(true);
                 $resourceProvider.defaults.stripTrailingSlashes = false;
 
@@ -46,7 +64,15 @@ angular.module('usersApp').
                   template: '<preferences></preferences>',
                   css: [staticfiles('css/users_style.css'),staticfiles('css/menu_style.css')],
                   resolve:{
-                    loggedIn:onlyLoggedIn
+                    loggedIn:onlyLoggedIn,
+                  },
+                })
+                .when("/users/admin_preferences", {
+                  template: '<admin-preferences></admin-preferences>',
+                  css: [staticfiles('css/users_style.css'),staticfiles('css/menu_style.css')],
+                  resolve:{
+                    loggedIn:onlyLoggedIn,
+                    isAdmin:adminLogin,
                   },
                 })
                 .otherwise({

@@ -15,5 +15,6 @@ angular.module('usersApp', [
   'navBar',
   'sharednav',
   'preferences',
+  'admin_preferences',
 
 ]);

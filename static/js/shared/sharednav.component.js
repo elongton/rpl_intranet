@@ -39,6 +39,7 @@
               $rootScope.userLoggedIn = true
               $scope.userLoggedIn = $rootScope.userLoggedIn
               $scope.username = $cookies.get("username")
+              $scope.is_admin = ($cookies.get("is_admin") == 'true')
             }
             //Preferences
             $scope.preferences_page = function(){
@@ -46,11 +47,19 @@
               window.location = url;
               window.location.replace(url);
             }
+            //Admin Preferences
+            $scope.admin_preferences_page = function(){
+              var url = "/users/admin_preferences";
+              window.location = url;
+              window.location.replace(url);
+            }
+
             // LOGOUT FUNCTION
             $scope.removeUser = function(){
               $cookies.remove("token")
               $cookies.remove("username")
               $cookies.remove("branch")
+              $cookies.remove("is_admin")
               // $cookies.remove()
               // console.log($cookies.get("branch"))
 

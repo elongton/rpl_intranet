@@ -29,6 +29,7 @@ angular.module('login').
                 $cookies.put("startup_page", $scope.userdata[0].startup_page)
                 $cookies.put("startup_page_id", $scope.userdata[0].startup_page_id)
                 $cookies.put("user_id", $scope.userdata[0].id)
+                $cookies.put("is_admin", $scope.userdata[0].is_admin)
                 var url = $scope.userdata[0].startup_page
                 window.location = url;
                 window.location.replace(url);
