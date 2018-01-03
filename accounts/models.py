@@ -61,7 +61,7 @@ calendarOptions = [('spaces','Spaces'),('calendar', 'Calendar')]
 class User(AbstractBaseUser):
     username=models.CharField(max_length=25, unique=True)
     active = models.BooleanField(default=True)
-    staff = models.BooleanField(default=False) # a admin user; non super-user
+    staff = models.BooleanField(default=True) # a admin user; non super-user
     admin = models.BooleanField(default=False) # a superuser
     branch = models.ForeignKey(Branch, related_name = 'accounts', blank=True, null=True)
     first_name = models.CharField(max_length=50, blank=True)
