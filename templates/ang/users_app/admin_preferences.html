@@ -39,7 +39,7 @@
         </tr>
         <tr>
           <td>Email:</td>
-          <td>{{users.selectedOption.email}}</td>
+          <td><span ng-if="users.selectedOption.email">{{users.selectedOption.email}}</span><span ng-if="!users.selectedOption.email">none</span></td>
         </tr>
         <tr>
           <td>Admin:</td>
@@ -47,7 +47,7 @@
         </tr>
         <tr>
           <td>Ref Entries:</td>
-          <td>50</td>
+          <td>{{users.selectedOption.ref_quant}}</td>
         </tr>
       </table>
       <div style="bottom: 0; position: absolute;">
