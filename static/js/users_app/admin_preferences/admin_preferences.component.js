@@ -40,6 +40,11 @@ angular.module('admin_preferences').
           $scope.usercreate = {
             selected_branch: $scope.branches[0],
             admin: false,}
+      }//$scope.createUser
+
+      //delete user code
+      $scope.deleteUser = function(user_id){
+        User.userDelete({id: user_id}).$promise.then(function)
       }
 
 
