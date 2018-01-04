@@ -56,6 +56,11 @@ class UserCreateAPIView(CreateAPIView):
     permission_classes = [AllowAny]
     queryset = User.objects.all()
 
+class UserDeleteAPIView(DestroyAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserDetailSerializer
+
+
 class UserLoginAPIView(APIView):
     permission_classes = [AllowAny]
     serializer_class = UserLoginSerializer
