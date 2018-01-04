@@ -127,10 +127,26 @@
         </button>
       </div>
       <div class="modal-body">
-        This is the body
+
+        <input type="password" ng-model="useredit.password" class="form-control" placeholder='New Password' id="edit_password" style="margin-top: 10px;">
+        <input type="password" ng-model="useredit.passwordagain" class="form-control" placeholder='New Password Again' id="edit_passwordagain" style="margin-top: 10px;">
+
+
+        <select name="branchSelect" id="userCreateBranch" class="form-control"  placeholder='Branch' style="background-color: white; width: 100%; margin-top: 10px;"
+           ng-options="branch.name for branch in branches"
+           ng-model="users.selectedOption"></select>
+
+
+         <label style="margin-top: 10px;"><input id="checkBox" type="checkbox" ng-model="users.selectedOption.is_admin"> Admin</label>
+
+
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <div style="position: absolute; left: 20px;">
+          <button type="button" class="btn btn-danger">Delete</button>
+        </div>
+
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Update</button>
       </div>
     </div>
   </div>

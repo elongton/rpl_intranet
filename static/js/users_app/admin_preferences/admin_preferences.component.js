@@ -27,7 +27,7 @@ angular.module('admin_preferences').
       $scope.createUser = function(usercreate){
         User.userCreate({username: usercreate.username,
                          password: usercreate.password,
-                         branch: usercreate.branch,
+                         branch: usercreate.selected_branch.id,
                          admin: usercreate.admin,
                           }).$promise.then(
             function(success){
@@ -37,6 +37,9 @@ angular.module('admin_preferences').
               console.log(error)
             }
           )
+          $scope.usercreate = {
+            selected_branch: $scope.branches[0],
+            admin: false,}
       }
 
 

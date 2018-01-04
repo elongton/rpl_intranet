@@ -17,6 +17,7 @@ class BranchListSerializer(ModelSerializer):
     class Meta:
         model = Branch
         fields = [
+        'id',
         'name',
         ]
 
