@@ -30,7 +30,7 @@ from rest_framework.permissions import (
     IsAuthenticatedOrReadOnly,
 )
 
-from ..models import User, IntranetURL
+from ..models import User, IntranetURL, Branch
 # User = get_user_model()
 # from ..models import Profile
 
@@ -39,8 +39,13 @@ from .serializers import (
       UserLoginSerializer,
       UserDetailSerializer,
       UserUpdateSerializer,
-      IntranetURLSerializer
+      IntranetURLSerializer,
+      BranchListSerializer
       )
+
+class BranchListView(ListAPIView):
+    serializer_class = BranchListSerializer
+    queryset = Branch.objects.all()
 
 class IntranetURLListView(ListAPIView):
     serializer_class = IntranetURLSerializer

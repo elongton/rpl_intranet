@@ -11,7 +11,7 @@
     <div class="col-sm-12">
       <h4 style="margin-bottom: 15px;">Reference Stats</h4>
       <button class="btn btn-success">Activate Collection</button>
-      <span>Currently Deactivated</span>
+      <span style="margin-left: 15px;">Currently Deactivated</span>
       <hr>
     </div>
   </div>
@@ -51,8 +51,8 @@
         </tr>
       </table>
       <div style="bottom: 0; position: absolute;">
-        <button class="btn btn-secondary">Edit User</button>
-        <button class="btn btn-secondary">Add New User</button>
+        <button class="btn btn-secondary" data-toggle="modal" data-target="#edit_modal">Edit User</button>
+        <button class="btn btn-secondary" data-toggle="modal" data-target="#new_user_modal">Add New User</button>
       </div>
     </div>
   </div><!--row-->
@@ -61,9 +61,77 @@
 </div><!--container-->
 
 
-
+<!-- <a href="" data-toggle="modal" data-target="#comment_modal" ng-click = "assign_comment_modal(x)" >{{(x.comment | limitTo : 15) + (x.comment.length > 15 ? '...' : '')}}</a> -->
 
 
 
 
 </div><!-- container -->
+
+
+
+
+
+<!-- New User Modal -->
+<div class="modal fade" id="new_user_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Create New User</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form ng-submit='createUser(usercreate)'>
+        <div class="modal-body">
+          <div class="alert alert-danger" ng-if="loginError.non_field_errors"><span ng-repeat="error in loginError.non_field_errors">{{error}}</span></div>
+            <input type="text" ng-model="usercreate.username" class="form-control" placeholder='Username' id="username">
+            <input type="email" ng-model="usercreate.email" class="form-control" placeholder='Email' id="email" style="margin-top: 10px;">
+            <label class="text-warning" for="password" ng-if = "userCreate_error.password"><span ng-repeat="error in userCreate_error.username">{{error}}</span></label>
+            <input type="password" ng-model="usercreate.password" class="form-control" placeholder='Password' id="password" style="margin-top: 10px;">
+            <input type="password" ng-model="usercreate.password_again" class="form-control" placeholder='Password Again' id="passwordagain" style="margin-top: 10px;">
+            <select name="branchSelect" id="userCreateBranch" class="form-control" style="background-color: white; width: 100%; margin-top: 10px;"
+               ng-options="branch.name for branch in branches"
+               ng-model="usercreate.selected_branch"></select>
+        </div><!--modal-body-->
+        <div class="modal-footer">
+            <div style="position: absolute; left: 15px;">
+              <label><input id="checkBox" type="checkbox" ng-model="usercreate.admin"> Admin</label>
+              <label class="text-warning" for="passwordagain" ng-if="usercreate.password_again" style="margin-bottom: 0; margin-left: 10px;">
+                <span ng-if="usercreate.password==usercreate.password_again">Password match</span>
+                <span ng-if="usercreate.password!=usercreate.password_again">Password mismatch</span>
+              </label>
+            </div>
+            <input type="submit" value='Create' class='btn btn-primary' id="login_button"
+                ng-disabled="usercreate.password!=usercreate.password_again ||
+                            !usercreate.password ||
+                            !usercreate.password_again ||
+                            !usercreate.username ||
+                            !usercreate.email">
+        </div><!--modal-footer-->
+     </form>
+    </div>
+  </div>
+</div><!--Comment Modal-->
+
+
+
+<!-- Edit Modal -->
+<div class="modal fade" id="edit_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit "{{users.selectedOption.username}}"</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        This is the body
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div><!--Comment Modal-->

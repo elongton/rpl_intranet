@@ -13,6 +13,13 @@ from reference_stats.models import Request
 from rest_framework_jwt.settings import api_settings
 
 
+class BranchListSerializer(ModelSerializer):
+    class Meta:
+        model = Branch
+        fields = [
+        'name',
+        ]
+
 class IntranetURLSerializer(ModelSerializer):
     class Meta:
         model = IntranetURL

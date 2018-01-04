@@ -8,6 +8,7 @@ from .views import (
     UserListAPIView,
     UserUpdateAPIView,
     IntranetURLListView,
+    BranchListView,
 )
 
 
@@ -18,6 +19,7 @@ urlpatterns = [
     url(r'^$', UserListAPIView.as_view(), name='list'),
     url(r'^(?P<pk>\d+)/edit/$', UserUpdateAPIView.as_view(), name='update'),
     url(r'^urls/$', IntranetURLListView.as_view(), name='urls'),
+    url(r'^branches/$', BranchListView.as_view(), name='branches'),
 ]
 
 

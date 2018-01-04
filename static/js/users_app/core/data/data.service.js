@@ -30,6 +30,19 @@ angular.
           }
         }//userQuery
 
+        var getbranches = {
+          url: '/api/users/branches/',
+          method: "GET",
+          params: {},
+          isArray: true,
+          cache: false,
+          transformResponse: function(data, headersGetter, status){
+            var finalData = angular.fromJson(data)
+            // console.log(finalData.results)
+            return finalData//.results
+          }
+        }//userQuery
+
 
 
         var token = $cookies.get("token")
@@ -40,5 +53,6 @@ angular.
         return $resource(null, {}, {
             getUrls: geturls,
             getUsers: getusers,
+            getBranches: getbranches,
         })
     });

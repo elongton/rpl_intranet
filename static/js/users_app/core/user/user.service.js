@@ -21,6 +21,11 @@ angular.
           method: 'POST',
         }
 
+        var usercreate= {
+          url: '/api/users/register/',
+          method: 'POST',
+        }
+
         var userupdate = {
           url: '/api/users/:id/edit/',
           method: 'PUT',
@@ -42,6 +47,7 @@ angular.
         }
 
         return $resource(null, {}, {
+            userCreate: usercreate,
             query: userquery,
             userLogin: userlogin,
             tokenVerify: tokenverify,
