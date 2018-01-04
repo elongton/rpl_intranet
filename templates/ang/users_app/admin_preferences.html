@@ -1,7 +1,69 @@
 <nav-bar></nav-bar>
 
 <div class="container">
-  <div class="col-sm-12">
-    <h3 style="margin-top: 15px; margin-bottom: 10px;">Admin Preferences</h3>
+  <div class="row">
+    <div class="col-sm-12">
+      <h3 style="margin-top: 15px; margin-bottom: 10px;">Admin Preferences</h3>
+      <hr>
+    </div><!-- col-sm-12 -->
+  </div><!--row-->
+  <div class="row">
+    <div class="col-sm-12">
+      <h4 style="margin-bottom: 15px;">Reference Stats</h4>
+      <button class="btn btn-success">Activate Collection</button>
+      <span>Currently Deactivated</span>
+      <hr>
+    </div>
   </div>
-</div>
+  <div class="row">
+    <div class="col-sm-12">
+      <h4>Users</h4>
+    </div>
+    <div class="col-sm-3">
+
+      <select size="10"
+              style="max-width: 200px; width: 100%; margin-top: 5px;"
+              ng-options="option.username for option in users.availableOptions"
+              ng-model="users.selectedOption">
+      </select>
+    </div>
+    <div style="padding-left: 10px; width: 300px;">
+      <table style="width:100%;">
+        <tr>
+          <td>Username:</td>
+          <td>{{users.selectedOption.username}}</td>
+        </tr>
+        <tr>
+          <td>Branch:</td>
+          <td>{{users.selectedOption.branch}}</td>
+        </tr>
+        <tr>
+          <td>Email:</td>
+          <td>{{users.selectedOption.email}}</td>
+        </tr>
+        <tr>
+          <td>Admin:</td>
+          <td>{{users.selectedOption.is_admin}}</td>
+        </tr>
+        <tr>
+          <td>Ref Entries:</td>
+          <td>50</td>
+        </tr>
+      </table>
+      <div style="bottom: 0; position: absolute;">
+        <button class="btn btn-secondary">Edit User</button>
+        <button class="btn btn-secondary">Add New User</button>
+      </div>
+    </div>
+  </div><!--row-->
+
+
+</div><!--container-->
+
+
+
+
+
+
+
+</div><!-- container -->
