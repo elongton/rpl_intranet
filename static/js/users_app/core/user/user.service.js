@@ -26,6 +26,12 @@ angular.
           method: 'POST',
         }
 
+        var userdelete = {
+          url: '/api/users/:id/delete/',
+          method: "DELETE",
+          params: {"id": '@id'},
+        }
+
         var userupdate = {
           url: '/api/users/:id/edit/',
           method: 'PUT',
@@ -47,6 +53,7 @@ angular.
         }
 
         return $resource(null, {}, {
+            userDelete: userdelete,
             userCreate: usercreate,
             query: userquery,
             userLogin: userlogin,
