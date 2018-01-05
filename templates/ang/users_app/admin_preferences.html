@@ -128,9 +128,13 @@
       </div>
       <div class="modal-body">
 
+        <h6 style-"margin-left: 5px; margin-bottom: 0!important;">Update Password (leave blank to keep existing)</h6>
+        <hr style="margin-top: 0;">
         <input type="password" ng-model="useredit.password" class="form-control" placeholder='New Password' id="edit_password" style="margin-top: 10px;">
         <input type="password" ng-model="useredit.passwordagain" class="form-control" placeholder='New Password Again' id="edit_passwordagain" style="margin-top: 10px;">
-
+        <h6 style="margin-top: 20px; margin-left: 5px;">Update Details</h6>
+        <hr style="margin-top: 0;">
+        <input type="email" class="form-control" placeholder='Email' id="updateemail" style="margin-top: 10px;">
 
         <select name="branchSelect" id="userCreateBranch" class="form-control"  placeholder='Branch' style="background-color: white; width: 100%; margin-top: 10px;"
            ng-options="branch.name for branch in branches"
@@ -143,7 +147,10 @@
       </div>
       <div class="modal-footer">
         <div style="position: absolute; left: 20px;">
-          <button type="button" class="btn btn-danger">Delete</button>
+          <button ng-if="!deletecrucible" type="button" class="btn btn-danger" ng-click="deletetoggle()">Delete</button>
+          <button ng-if="deletecrucible" type="button" class="btn btn-secondary" ng-click="deletetoggle()">No</button>
+          <button ng-if="deletecrucible" type="button" class="btn btn-danger"  data-dismiss="modal" ng-click="deleteUser(users.selectedOption.id)">Yes</button>
+          <span ng-if="deletecrucible">Are you sure?</span>
         </div>
 
         <button type="button" class="btn btn-primary" data-dismiss="modal">Update</button>
