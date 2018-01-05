@@ -20,7 +20,6 @@
       <h4>Users</h4>
     </div>
     <div class="col-sm-3">
-
       <select size="10"
               style="max-width: 200px; width: 100%; margin-top: 5px;"
               ng-options="option.username for option in users.availableOptions"
@@ -51,8 +50,8 @@
         </tr>
       </table>
       <div style="bottom: 0; position: absolute;">
-        <button class="btn btn-secondary" data-toggle="modal" data-target="#edit_modal">Edit User</button>
-        <button class="btn btn-secondary" data-toggle="modal" data-target="#new_user_modal">Add New User</button>
+        <button class="btn btn-secondary" data-toggle="modal" data-target="#edit_modal" data-backdrop="static" data-keyboard="false">Edit User</button>
+        <button class="btn btn-secondary" data-toggle="modal" data-target="#new_user_modal" data-backdrop="static" data-keyboard="false">Add New User</button>
       </div>
     </div>
   </div><!--row-->
@@ -61,101 +60,4 @@
 </div><!--container-->
 
 
-<!-- <a href="" data-toggle="modal" data-target="#comment_modal" ng-click = "assign_comment_modal(x)" >{{(x.comment | limitTo : 15) + (x.comment.length > 15 ? '...' : '')}}</a> -->
-
-
-
-
-</div><!-- container -->
-
-
-
-
-
-<!-- New User Modal -->
-<div class="modal fade" id="new_user_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Create New User</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <form ng-submit='createUser(usercreate)'>
-        <div class="modal-body">
-          <div class="alert alert-danger" ng-if="loginError.non_field_errors"><span ng-repeat="error in loginError.non_field_errors">{{error}}</span></div>
-            <input type="text" ng-model="usercreate.username" class="form-control" placeholder='Username' id="username">
-            <input type="email" ng-model="usercreate.email" class="form-control" placeholder='Email' id="email" style="margin-top: 10px;">
-            <label class="text-warning" for="password" ng-if = "userCreate_error.password"><span ng-repeat="error in userCreate_error.username">{{error}}</span></label>
-            <input type="password" ng-model="usercreate.password" class="form-control" placeholder='Password' id="password" style="margin-top: 10px;">
-            <input type="password" ng-model="usercreate.password_again" class="form-control" placeholder='Password Again' id="passwordagain" style="margin-top: 10px;">
-            <select name="branchSelect" id="userCreateBranch" class="form-control" style="background-color: white; width: 100%; margin-top: 10px;"
-               ng-options="branch.name for branch in branches"
-               ng-model="usercreate.selected_branch"></select>
-        </div><!--modal-body-->
-        <div class="modal-footer">
-            <div style="position: absolute; left: 15px;">
-              <label><input id="checkBox" type="checkbox" ng-model="usercreate.admin"> Admin</label>
-              <label class="text-warning" for="passwordagain" ng-if="usercreate.password_again" style="margin-bottom: 0; margin-left: 10px;">
-                <span ng-if="usercreate.password==usercreate.password_again">Password match</span>
-                <span ng-if="usercreate.password!=usercreate.password_again">Password mismatch</span>
-              </label>
-            </div>
-            <input type="submit" value='Create' class='btn btn-primary' id="login_button"
-                ng-disabled="usercreate.password!=usercreate.password_again ||
-                            !usercreate.password ||
-                            !usercreate.password_again ||
-                            !usercreate.username ||
-                            !usercreate.email">
-        </div><!--modal-footer-->
-     </form>
-    </div>
-  </div>
-</div><!--Comment Modal-->
-
-
-
-<!-- Edit Modal -->
-<div class="modal fade" id="edit_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Edit "{{users.selectedOption.username}}"</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-
-        <h6 style-"margin-left: 5px; margin-bottom: 0!important;">Update Password (leave blank to keep existing)</h6>
-        <hr style="margin-top: 0;">
-        <input type="password" ng-model="useredit.password" class="form-control" placeholder='New Password' id="edit_password" style="margin-top: 10px;">
-        <input type="password" ng-model="useredit.passwordagain" class="form-control" placeholder='New Password Again' id="edit_passwordagain" style="margin-top: 10px;">
-        <h6 style="margin-top: 20px; margin-left: 5px;">Update Details</h6>
-        <hr style="margin-top: 0;">
-        <input type="email" class="form-control" placeholder='Email (currently {{users.selectedOption.email ? users.selectedOption.email : "none"}})'  id="updateemail" style="margin-top: 10px;">
-
-        <select name="branchSelect" id="userCreateBranch" class="form-control"  placeholder='Branch' style="background-color: white; width: 100%; margin-top: 10px;"
-           ng-options="branch.name for branch in branches"
-           ng-model="useredit.branch"></select>
-
-
-         <label style="margin-top: 10px;"><input id="checkBox" type="checkbox" ng-model="users.selectedOption.is_admin"> Admin</label>
-
-
-      </div>
-      <div class="modal-footer">
-        <div style="position: absolute; left: 20px;">
-          <button ng-if="!deletecrucible && users.selectedOption.ref_quant==0" type="button" class="btn btn-danger" ng-click="deletetoggle()">Delete</button>
-          <span ng-if="users.selectedOption.ref_quant>0">Delete Disabled (ref count {{users.selectedOption.ref_quant}})</span>
-          <button ng-if="deletecrucible" type="button" class="btn btn-secondary" ng-click="deletetoggle()">No</button>
-          <button ng-if="deletecrucible" type="button" class="btn btn-danger"  data-dismiss="modal" ng-click="deleteUser(users.selectedOption.id)">Yes</button>
-          <span ng-if="deletecrucible">Are you sure?</span>
-        </div>
-
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Update</button>
-      </div>
-    </div>
-  </div>
-</div><!--Comment Modal-->
+<modals></modals>

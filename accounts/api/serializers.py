@@ -71,7 +71,7 @@ class UserUpdateSerializer(ModelSerializer):
         ]
 
 class UserCreateSerializer(ModelSerializer):
-    # email = EmailField(label = 'Email Address')
+    email = EmailField(label = 'Email Address')
     # email2 = EmailField(label = 'Confirm Email')
     class Meta:
         model = User
@@ -80,16 +80,17 @@ class UserCreateSerializer(ModelSerializer):
             'password',  #should be a write only field
             'branch',
             'admin',
+            'email',
         ]
         extra_kwargs = {"password":
                             {"write_only": True}
                         }
-    def validate(self, data):
+    # def validate(self, data):
     #     email = data['email']
     #     user_qs = User.objects.filter(email=email)
     #     if user_qs.exists():
     #         raise ValidationError("This user already exists in the system.")
-        return data
+    #     return data
 
     # def validate_email(self, value):
     #     data = self.get_initial()
@@ -97,13 +98,12 @@ class UserCreateSerializer(ModelSerializer):
     #     email2 = value
     #     if email1 != email2:
     #         raise ValidationError("Emails must match.")
-    #
     #     user_qs = User.objects.filter(email=email2)
     #     if user_qs.exists():
     #         raise ValidationError("This user already exists in the system.")
     #
     #     return value
-    #
+
     #
     # def validate_email2(self, value):
     #     data = self.get_initial()
@@ -116,13 +116,14 @@ class UserCreateSerializer(ModelSerializer):
     def create(self, validated_data):
         username = validated_data['username']
         branch = validated_data['branch']
-        # email = validated_data['email']
+        email = validated_data['email']
         admin = validated_data['admin']
         password = validated_data['password']
         user_obj = User(
             username = username,
             branch = branch,
             admin = admin,
+            email = email,
         )
         user_obj.set_password(password)
         user_obj.save()

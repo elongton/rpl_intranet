@@ -14,9 +14,6 @@ angular.module('admin_preferences').
                       availableOptions: result,
                       selectedOption: result[0]
                     }
-                    $scope.useredit = {
-                      branch: $filter('filter')($scope.branches, $scope.users.selectedOption.branch)[0],
-                    }
                   },
                   function(error){console.log(error)});
       }
@@ -33,14 +30,13 @@ angular.module('admin_preferences').
 
         },
         function(error){console.log(error)});
-      //watch to see if different user is selected.
-      $scope.$watch(function(){
-        if ($scope.users){
-          $scope.useredit = {
-            branch: $filter('filter')($scope.branches, $scope.users.selectedOption.branch)[0],
-          }//$scope.useredit
-        }//if
-      })//$scope.watch``
+
+
+      $scope.clearfields = function(){
+        $scope.usercreate = {email: '', selected_branch: $scope.branches[0]}
+        $scope.useredit = {email: ''}
+        $scope.deletecrucible = false;
+      }
 
       //edit user code
 
@@ -51,6 +47,7 @@ angular.module('admin_preferences').
                          password: usercreate.password,
                          branch: usercreate.selected_branch.id,
                          admin: usercreate.admin,
+                         email: usercreate.email,
                           }).$promise.then(
             function(success){
               console.log(success)
@@ -60,10 +57,7 @@ angular.module('admin_preferences').
               console.log(error)
             }
           )
-          $scope.usercreate = {
-            selected_branch: $scope.branches[0],
-            admin: false,}
-      }//$scope.createUser
+          $scope.clearfields()}
 
       //delete user code
 
@@ -78,10 +72,26 @@ angular.module('admin_preferences').
             getUsers();
         },
         function(error){console.log(error)}
-      )};
+      )
+      $scope.clearfields()
+      };
+
+
 
 
 //deleteUser(users.selectedOption.id)
 
 
 }});
+
+
+
+
+// watch to see if different user is selected.
+// $scope.$watch(function(){
+//   if ($scope.users){
+//     $scope.useredit = {
+//       branch: $filter('filter')($scope.branches, $scope.users.selectedOption.branch)[0],
+//     }//$scope.useredit
+//   }//if
+// })//$scope.watch``
