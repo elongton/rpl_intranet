@@ -54,6 +54,7 @@ angular.module('admin_preferences').
                           }).$promise.then(
             function(success){
               console.log(success)
+              getUsers();
             },
             function(error){
               console.log(error)

@@ -134,7 +134,7 @@
         <input type="password" ng-model="useredit.passwordagain" class="form-control" placeholder='New Password Again' id="edit_passwordagain" style="margin-top: 10px;">
         <h6 style="margin-top: 20px; margin-left: 5px;">Update Details</h6>
         <hr style="margin-top: 0;">
-        <input type="email" class="form-control" placeholder='Email' id="updateemail" style="margin-top: 10px;">
+        <input type="email" class="form-control" placeholder='Email (currently {{users.selectedOption.email ? users.selectedOption.email : "none"}})'  id="updateemail" style="margin-top: 10px;">
 
         <select name="branchSelect" id="userCreateBranch" class="form-control"  placeholder='Branch' style="background-color: white; width: 100%; margin-top: 10px;"
            ng-options="branch.name for branch in branches"
@@ -147,7 +147,8 @@
       </div>
       <div class="modal-footer">
         <div style="position: absolute; left: 20px;">
-          <button ng-if="!deletecrucible" type="button" class="btn btn-danger" ng-click="deletetoggle()">Delete</button>
+          <button ng-if="!deletecrucible && users.selectedOption.ref_quant==0" type="button" class="btn btn-danger" ng-click="deletetoggle()">Delete</button>
+          <span ng-if="users.selectedOption.ref_quant>0">Delete Disabled (ref count {{users.selectedOption.ref_quant}})</span>
           <button ng-if="deletecrucible" type="button" class="btn btn-secondary" ng-click="deletetoggle()">No</button>
           <button ng-if="deletecrucible" type="button" class="btn btn-danger"  data-dismiss="modal" ng-click="deleteUser(users.selectedOption.id)">Yes</button>
           <span ng-if="deletecrucible">Are you sure?</span>
