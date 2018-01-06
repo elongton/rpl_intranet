@@ -24,7 +24,6 @@ angular.module('admin_preferences').
           $scope.usercreate = {
             selected_branch: $scope.branches[0],
             admin: false,}
-
             //sequence...
             getUsers();
 
@@ -38,12 +37,16 @@ angular.module('admin_preferences').
         $scope.deletecrucible = false;
       }
 
-      //edit user code
 
+      // $scope.useredit = {}
+      $scope.$watch('useredit', function(){
+        console.log($scope.useredit.branch)
+      })
+      //edit user code
       $scope.editUser = function(useredit, selectedoption){
         User.userUpdate({id: selectedoption.id,
                          password: useredit.password,
-                         branch: useredit.branch,
+                         // branch: useredit.branch.id,
                          email: useredit.email,
                          admin: useredit.is_admin,
                         })
