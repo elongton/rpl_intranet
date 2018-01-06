@@ -40,6 +40,15 @@ angular.module('admin_preferences').
 
       //edit user code
 
+      $scope.editUser = function(useredit, selectedoption){
+        User.userUpdate({id: selectedoption.id,
+                         password: useredit.password,
+                         branch: useredit.branch,
+                         email: useredit.email,
+                         admin: useredit.is_admin,
+                        })
+          .$promise.then(function(result){console.log(result)}, function(error){console.log(error)});
+      }//editUser
 
       //create user code
       $scope.createUser = function(usercreate){

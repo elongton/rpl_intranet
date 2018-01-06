@@ -77,7 +77,7 @@
        </div>
 
 
-         <label style="margin-top: 10px;"><input id="checkBox" type="checkbox" ng-model="users.selectedOption.is_admin"> Admin</label>
+         <label style="margin-top: 10px;"><input id="checkBox" type="checkbox" ng-model="useredit.is_admin"> Admin</label>
 
 
       </div>
@@ -90,7 +90,7 @@
           <span ng-if="deletecrucible">Are you sure?</span>
         </div>
 
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Update</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="editUser(useredit, users.selectedOption)">Update</button>
       </div>
     </div>
   </div>
