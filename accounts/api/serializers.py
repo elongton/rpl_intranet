@@ -3,6 +3,7 @@ from django.db.models import Q
 from rest_framework.serializers import (
                                 CharField,
                                 EmailField,
+                                BooleanField,
                                 ModelSerializer,
                                 HyperlinkedIdentityField,
                                 SerializerMethodField,
@@ -62,12 +63,20 @@ class UserDetailSerializer(ModelSerializer):
 
 
 class UserUpdateSerializer(ModelSerializer):
+    email = EmailField(label='Email Address', allow_blank=True, required=False)
+    branch = CharField(allow_blank=True, required=False)
+    admin = BooleanField(required=False)
+    password = CharField(allow_blank=True, required=False)
     class Meta:
         model = User
         fields = [
         'startup_page',
         'calendar_preference',
         'calendar_condensed_view',
+        'password',
+        'email',
+        'branch',
+        'admin',
         ]
 
 class UserCreateSerializer(ModelSerializer):

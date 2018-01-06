@@ -76,7 +76,7 @@ class UserLoginAPIView(APIView):
 class UserUpdateAPIView(RetrieveUpdateAPIView):
     queryset = User.objects.all()
     serializer_class = UserUpdateSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
     def perform_update(self,serializer):
         serializer.save(user=self.request.user)
 
