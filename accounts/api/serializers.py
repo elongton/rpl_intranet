@@ -2,6 +2,7 @@ from django.db.models import Q
 
 from rest_framework.serializers import (
                                 CharField,
+                                ListField,
                                 EmailField,
                                 BooleanField,
                                 ModelSerializer,
@@ -64,7 +65,6 @@ class UserDetailSerializer(ModelSerializer):
 
 class UserUpdateSerializer(ModelSerializer):
     email = EmailField(label='Email Address', allow_blank=True, required=False)
-    branch = CharField(allow_blank=True, required=False)
     admin = BooleanField(required=False)
     password = CharField(allow_blank=True, required=False)
     class Meta:
@@ -78,6 +78,20 @@ class UserUpdateSerializer(ModelSerializer):
         'branch',
         'admin',
         ]
+    def update(self, instance, validated_data):
+        instance.startup_page = validated_data.get('startup_page', instance.startup_page)
+        instance.calendar_preference = validated_data.get('calendar_preference', instance.calendar_preference)
+        instance.calendar_condensed_view = validated_data.get('calendar_condensed_view', instance.calendar_condensed_view)
+        instance.email = validated_data.get('email', instance.email)
+        instance.branch = validated_data.get('branch', instance.branch)
+        instance.admin = validated_data.get('admin', instance.admin)
+
+        if (validated_data.get('password')):
+            instance.password = validated_data.get('password', instance.password)
+            instance.set_password(instance.password)
+
+        instance.save()
+        return instance
 
 class UserCreateSerializer(ModelSerializer):
     email = EmailField(label = 'Email Address')

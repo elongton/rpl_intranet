@@ -33,24 +33,28 @@ angular.module('admin_preferences').
 
       $scope.clearfields = function(){
         $scope.usercreate = {email: '', selected_branch: $scope.branches[0]}
-        $scope.useredit = {email: ''}
+        $scope.useredit = {}
         $scope.deletecrucible = false;
       }
 
-
-      // $scope.useredit = {}
-      $scope.$watch('useredit', function(){
-        console.log($scope.useredit.branch)
-      })
       //edit user code
       $scope.editUser = function(useredit, selectedoption){
+
+        //the API requires that we send a branch (I just haven't figured out how to make it not required)
+        if (typeof useredit.branch == 'undefined'){
+          useredit.branch = selectedoption.branch
+        }
         User.userUpdate({id: selectedoption.id,
                          password: useredit.password,
-                         // branch: useredit.branch.id,
+                         branch: useredit.branch.id,
                          email: useredit.email,
                          admin: useredit.is_admin,
                         })
-          .$promise.then(function(result){console.log(result)}, function(error){console.log(error)});
+          .$promise.then(function(success){
+            console.log(success)
+            getUsers();
+            $scope.clearfields()
+            }, function(error){console.log(error)});
       }//editUser
 
       //create user code
@@ -87,12 +91,6 @@ angular.module('admin_preferences').
       )
       $scope.clearfields()
       };
-
-
-
-
-//deleteUser(users.selectedOption.id)
-
 
 }});
 
