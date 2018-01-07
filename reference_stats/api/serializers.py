@@ -4,8 +4,16 @@ from rest_framework.serializers import (
                                 SerializerMethodField,)
 
 # from accounts.api.serializers import UserDetailSerializer
-from ..models import Request
+from ..models import Request, Activation
 
+
+class ActivationListSerializer(ModelSerializer):
+    class Meta:
+        model = Activation
+        fields = [
+            'startdate',
+            'expiration',
+        ]
 
 class RequestListSerializer(ModelSerializer):
     # url = HyperlinkedIdentityField(

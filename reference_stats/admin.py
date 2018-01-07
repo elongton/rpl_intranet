@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Request, TypeOfRequest, Medium
+from .models import Request, TypeOfRequest, Medium, Activation
 # Register your models here.
 
 
@@ -12,6 +12,10 @@ class MediumAdmin(admin.ModelAdmin):
 class TypeOfRequestAdmin(admin.ModelAdmin):
     list_display = ('type', 'pk')
 #
+class ActivationAdmin(admin.ModelAdmin):
+    list_display = ('startdate', 'expiration',)
+
+admin.site.register(Activation, ActivationAdmin)
 admin.site.register(Medium, MediumAdmin)
 admin.site.register(Request, RequestAdmin)
 admin.site.register(TypeOfRequest, TypeOfRequestAdmin)

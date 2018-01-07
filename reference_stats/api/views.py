@@ -15,7 +15,8 @@ from rest_framework.generics import (
                     RetrieveUpdateAPIView,)
 from .serializers import (RequestCreateUpdateSerializer,
                           RequestDetailSerializer,
-                          RequestListSerializer,)
+                          RequestListSerializer,
+                          ActivationListSerializer,)
 from rest_framework.filters import (
     SearchFilter,
     OrderingFilter,)
@@ -28,7 +29,7 @@ from rest_framework.permissions import (
     IsAuthenticatedOrReadOnly,)
 
 from .permissions import IsOwner
-from ..models import Request
+from ..models import Request, Activation
 
 
 def datemaker(date1, date2):
@@ -43,57 +44,11 @@ def datemaker(date1, date2):
                                     month = enddate.month, year = enddate.year)
     return([startdate, enddate])
 
-# def CreateCSV(request, date1, date2, branch):
-#     print('this is working')
-    # def addCSVrow(r):
-    #     if r.over_five == True:
-    #         over = 'Yes'
-    #     else:
-    #         over = 'No'
-    #     adjusted_create = timezone.localtime(r.create_date)
-    #     writer.writerow([adjusted_create.date(), adjusted_create.time().strftime('%H:%M:%S'),
-    #                     r.branch, r.user.username, r.medium, r.type_of_request, over, r.comment])
-    #
-    # # Create the HttpResponse object with the appropriate CSV header.
-    # branch = branch.replace('+', ' ')
-    # [startdate, enddate] = datemaker(date1, date2)
-    # # detect local timezone
-    # response = HttpResponse(content_type='text/csv')
-    # response['Content-Disposition'] = 'attachment; filename="requests.csv"'
-    # writer = csv.writer(response)
-    # writer.writerow(['Date', 'Time', 'Branch', 'User', 'Medium', 'Type', 'Over 5 minutes?', 'Comment'])
-    # if branch == "All Branches":
-    #     for r in Request.objects.filter(create_date__gt=startdate).filter(create_date__lt=enddate):
-    #         addCSVrow(r)
-    # else:
-    #     for r in Request.objects.filter(branch__name=branch).filter(create_date__gt=startdate).filter(create_date__lt=enddate):
-    #         addCSVrow(r)
-    #     # http://127.0.0.1:8000/api/requests/csv/2017-07-07/2017-07-29/Broad+Rock/
-    # return response
 
+class ActivationListAPIView(ListAPIView):
+    queryset = Activation.objects.all()
+    serializer_class = ActivationListSerializer
 
-    # rows = (
-    #     ['First row', 'Foo', 'Bar', 'Baz'],
-    #     ['Second row', 'A', 'B', 'C', '"Testing"', "Here's a quote"]
-    # )
-    #
-    # # Define a generator to stream data directly to the client
-    # def stream():
-    #     buffer_ = StringIO()
-    #     writer = csv.writer(buffer_)
-    #     for row in rows:
-    #         writer.writerow(row)
-    #         buffer_.seek(0)
-    #         data = buffer_.read()
-    #         buffer_.seek(0)
-    #         buffer_.truncate()
-    #         yield data
-    #
-    # # Create the streaming response  object with the appropriate CSV header.
-    # response = StreamingHttpResponse(stream(), content_type='text/csv')
-    # response['Content-Disposition'] = 'attachment; filename="somefilename.csv"'
-
-    # return JsonResponse('yes')
 
 
 class RequestCreateAPIView(CreateAPIView):

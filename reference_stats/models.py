@@ -6,11 +6,7 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.dispatch import receiver
 
-
 from accounts.models import Branch, User
-
-
-
 
 class Medium(models.Model):
     type = models.CharField(max_length=255)
@@ -43,11 +39,14 @@ class Request(models.Model):
 
     def nowtime(self):
         return timezone.localtime(self.create_date)
-    # def save(self, *args, **kwargs):
-    #     self.create_date = timezone.now()
-    #     return super(Request, self).save(*args, **kwargs)
 
 
+class Activation(models.Model):
+    startdate = models.DateTimeField(default = timezone.now)
+    expiration = models.DateTimeField(default = timezone.now)
+
+    def __str__(self):
+        return str(self.startdate)
 #
 # class MediumAdmin(admin.ModelAdmin):
 #     list_display = ('type', 'id')
