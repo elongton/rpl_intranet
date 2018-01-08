@@ -49,7 +49,10 @@ class ActivationListAPIView(ListAPIView):
     queryset = Activation.objects.all()
     serializer_class = ActivationListSerializer
 
-
+class ActivationCreateAPIView(CreateAPIView):
+    queryset = Activation.objects.all()
+    serializer_class = ActivationListSerializer
+    permission_classes = [AllowAny]
 
 class RequestCreateAPIView(CreateAPIView):
     queryset = Request.objects.all()

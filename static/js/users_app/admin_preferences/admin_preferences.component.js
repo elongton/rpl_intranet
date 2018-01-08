@@ -7,15 +7,33 @@ angular.module('admin_preferences').
       //startup
       $scope.deletecrucible = false
 
+      Data.getActivations().$promise.then(
+        function(result){
+          $scope.activations = result
+          $scope.activation = $scope.activations[0]
+        },
+        function(error){console.log(error)}
+      )
+
+
+      $scope.addActivation = function(start, end){
+        Data.createActivation({startdate: start, expiration: end}).$promise.then(
+          function(success){console.log(success)},
+          function(fail){console.log(fail)}
+        )
+      }
+
+
+
       var getUsers = function(){
         Data.getUsers().$promise.then(
-                  function(result){
-                    $scope.users = {
-                      availableOptions: result,
-                      selectedOption: result[0]
-                    }
-                  },
-                  function(error){console.log(error)});
+          function(result){
+            $scope.users = {
+              availableOptions: result,
+              selectedOption: result[0]
+            }
+          },
+          function(error){console.log(error)});
       }
       //get some data
       Data.getBranches().$promise.then(

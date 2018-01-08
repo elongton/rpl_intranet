@@ -44,13 +44,35 @@ angular.
         }//userQuery
 
 
+        var getactivations = {
+          url: '/api/reference/activation/',
+          method: "GET",
+          // params: {"id": @id},
+          isArray: true,
+        }
+
+
+        var createactivation = {
+          url: '/api/reference/activation/create/',
+          method: "POST",
+          interceptor: {responseError: function(response){
+            if (response.status == 401){
+              console.log("you need to log in.")
+            }
+          }},
+        }
+
+
 
         var token = $cookies.get("token")
         if (token) {
           geturls["headers"] = {"Authorization": "JWT " + token}
+          createactivation["headers"] = {"Authorization": "JWT " + token}
         }
 
         return $resource(null, {}, {
+            createActivation: createactivation,
+            getActivations: getactivations,
             getUrls: geturls,
             getUsers: getusers,
             getBranches: getbranches,

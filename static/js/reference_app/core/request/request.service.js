@@ -70,6 +70,7 @@ angular.
           },
         }
 
+
         var token = $cookies.get("token")
         if (token) {
           requestCreate["headers"] = {"Authorization": "JWT " + token}

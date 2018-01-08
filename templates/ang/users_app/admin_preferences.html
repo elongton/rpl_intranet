@@ -8,13 +8,23 @@
     </div><!-- col-sm-12 -->
   </div><!--row-->
   <div class="row">
-    <div class="col-sm-12">
-      <h4 style="margin-bottom: 15px;">Reference Stats</h4>
-      <button class="btn btn-success">Activate Collection</button>
-      <span style="margin-left: 15px;">Currently Deactivated</span>
-      <hr>
+    <div class="col-sm-12"><h4 style="margin-bottom: 15px;">Request Collection Periods</h4></div>
+    <div class="col-sm-3">
+      <select size="10"
+              style="max-width: 200px; width: 100%; margin-top: 5px;"
+              ng-options="((option.startdate | date:'MM/dd') + ' - ' + (option.expiration | date:'MM/dd')) for option in activations"
+              ng-model="activation">
+      </select>
     </div>
-  </div>
+    <div class="col-sm-9" style="padding-top: 3px;">
+      <button class="btn btn-success" ng-click="addActivation('2018-01-19T00:00:00Z', '2018-01-30T13:00:00Z')">Add Collection Period</button>
+
+    </div>
+    <div class="col-sm-12">
+          <hr>
+    </div>
+
+  </div><!-- row -->
   <div class="row">
     <div class="col-sm-12">
       <h4>Users</h4>
