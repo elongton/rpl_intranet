@@ -38,7 +38,7 @@ angular.module('events').
                 return detail.cid !== 2710}
               }else{$scope.categoryfilter = ''}
           }
-
+          $scope.filter_study_rooms();
           //had to add this b/c page was starting up with black logos and grey buttons
           if ($scope.calendar_option_selected){
             $scope.button_color = 'btn-s1';
