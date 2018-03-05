@@ -461,18 +461,18 @@
   -webkit-text-stroke: 3px #282c34; }
 
 .tileview_container .today-title, .tileview_container .tomorrow-title {
-  height: 3vh;
+  height: 3.5vh;
   color: #d7dae0;
-  font-size: 2vh; }
+  font-size: 2.5vh; }
 
 .tileview_container .today {
-  height: calc(47vh - 10px);
+  height: calc(46.5vh - 10px);
   color: #d7dae0;
   display: flex;
   flex-wrap: wrap; }
 
 .tileview_container .tomorrow {
-  height: calc(47vh - 10px);
+  height: calc(46.5vh - 10px);
   color: #d7dae0;
   display: flex;
   flex-wrap: wrap; }

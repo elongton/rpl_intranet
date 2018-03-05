@@ -141,11 +141,39 @@ angular.module('events').
 
           //tile view toggle and config
           $scope.toggle_tileview = function(){
-            $scope.spaces_tileview = !$scope.spaces_tileview;
-            $scope.add_day_to_range();
-            $scope.sorted_array = [];
-            $scope.start_event_loop();
+            function getEventsBeforeTile(){
+              return $q(function(resolve, reject){
+                $scope.sorted_array = [];
+                $scope.add_day_to_range();
+                $scope.start_event_loop()
+              });
+            }
+            var promise = getEventsBeforeTile();
+            promise.then(function(){
+              $scope.spaces_tileview = !$scope.spaces_tileview;
+            }, function(reason){
+              console.log('tile view failed');
+            })
           }
+
+
+          $scope.cancel_tileview = function(){
+            function getEventsBeforeTile(){
+              return $q(function(resolve, reject){
+                 $scope.sorted_array = [];
+                 $scope.subtract_day_from_range();
+                 $scope.start_event_loop();
+              });
+            }
+            var promise = getEventsBeforeTile();
+            promise.then(function(){
+              console.log('switch from tile succeeded')
+              $scope.spaces_tileview = !$scope.spaces_tileview;
+              }, function(reason){
+              console.log('tile view failed');
+            })
+          }
+
 
 ///////////////////////   MOBILE  //////////////////////////////
           //animating the buttons in mobile:
@@ -241,6 +269,15 @@ angular.module('events').
             dummy_date.setDate($scope.from.getDate() + 1)
             $scope.to = new Date(dummy_date);
           }
+
+          $scope.subtract_day_from_range = function(){
+            var dummy_date = new Date();
+            dummy_date.setFullYear($scope.to.getFullYear())
+            dummy_date.setMonth($scope.to.getMonth())
+            dummy_date.setDate($scope.to.getDate() - 1)
+            $scope.to = dummy_date;
+            }
+
 
           $scope.lose_day_button = function(){
             var dummy_date = new Date();

@@ -452,9 +452,9 @@ $t_background_color: #282c34;
 
 
 
-.tileview_container .today-title, .tileview_container .tomorrow-title{height: 3vh; color: $t_color; font-size: 2vh;}
-.tileview_container .today{height: calc(47vh - 10px); color: $t_color; display: flex; flex-wrap: wrap;}
-.tileview_container .tomorrow{height: calc(47vh - 10px); color: $t_color; display: flex; flex-wrap: wrap;}
+.tileview_container .today-title, .tileview_container .tomorrow-title{height: 3.5vh; color: $t_color; font-size: 2.5vh;}
+.tileview_container .today{height: calc(46.5vh - 10px); color: $t_color; display: flex; flex-wrap: wrap;}
+.tileview_container .tomorrow{height: calc(46.5vh - 10px); color: $t_color; display: flex; flex-wrap: wrap;}
 .tileview_container .tile-event1,
 .tileview_container .tile-event2,
 .tileview_container .tile-event3,
