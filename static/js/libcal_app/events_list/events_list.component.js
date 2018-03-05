@@ -11,7 +11,7 @@ angular.module('events').
           $scope.staticfiles = staticfiles;
           $scope.calendar_option_selected = ($cookies.get("calendar_preference") == 'calendar')
           $scope.calendartoggleswitch = !($cookies.get("calendar_condensed_view") == 'true')
-          $scope.spaces_tileview = true;
+          $scope.spaces_tileview = false;
 
 
           if ($scope.calendar_option_selected){
