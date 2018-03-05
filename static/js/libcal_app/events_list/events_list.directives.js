@@ -49,6 +49,16 @@ angular.module('events')
       templateUrl: '/api/templates/libcal_app/spaces.html',
       }
   })
+  .directive('tileView', function(){
+      return {
+      templateUrl: '/api/templates/libcal_app/tile_view/spaces_tileview.html',
+      }
+  })
+  .directive('tileContent', function(){
+      return {
+      templateUrl: '/api/templates/libcal_app/tile_view/tile_content.html',
+      }
+  })
   .directive('calendarList', function(){
       return {
       templateUrl: '/api/templates/libcal_app/calendar.html',

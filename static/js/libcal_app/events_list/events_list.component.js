@@ -11,6 +11,9 @@ angular.module('events').
           $scope.staticfiles = staticfiles;
           $scope.calendar_option_selected = ($cookies.get("calendar_preference") == 'calendar')
           $scope.calendartoggleswitch = !($cookies.get("calendar_condensed_view") == 'true')
+          $scope.spaces_tileview = true;
+
+
           if ($scope.calendar_option_selected){
             $scope.spaces_option_selected = false
           }else{
@@ -38,6 +41,10 @@ angular.module('events').
                 return detail.cid !== 2710}
               }else{$scope.categoryfilter = ''}
           }
+          $scope.cancelledfilter = function(detail){
+            return detail.status !== 'Cancelled by Admin';
+          }
+
           $scope.filter_study_rooms();
           //had to add this b/c page was starting up with black logos and grey buttons
           if ($scope.calendar_option_selected){
@@ -131,6 +138,15 @@ angular.module('events').
             }
           }
 
+
+          //tile view toggle and config
+          $scope.toggle_tileview = function(){
+            $scope.spaces_tileview = !$scope.spaces_tileview;
+            $scope.add_day_to_range();
+            $scope.sorted_array = [];
+            $scope.start_event_loop();
+          }
+
 ///////////////////////   MOBILE  //////////////////////////////
           //animating the buttons in mobile:
           var downanimation = function(){
@@ -217,6 +233,15 @@ angular.module('events').
             $scope.to = $scope.from;
           }
 
+
+          $scope.add_day_to_range = function(){
+            var dummy_date = new Date();
+            dummy_date.setFullYear($scope.from.getFullYear())
+            dummy_date.setMonth($scope.from.getMonth())
+            dummy_date.setDate($scope.from.getDate() + 1)
+            $scope.to = new Date(dummy_date);
+          }
+
           $scope.lose_day_button = function(){
             var dummy_date = new Date();
             dummy_date.setFullYear($scope.to.getFullYear())
@@ -272,6 +297,7 @@ angular.module('events').
           $scope.get_room_key = function(eid){
             return $scope.spaces_dict[eid]
           }
+
 
 
 
@@ -533,6 +559,10 @@ angular.module('events').
               $scope.startup = false
               $scope.bchange = false
               $scope.mobile_header = "Spaces"
+
+              if ($scope.spaces_tileview){
+                $scope.add_day_to_range();
+              }
               // lcData().getRequestCreds({q:'springshare'}).$promise.then(requestCredsSuccess, requestCredsError)
               lcData({token:$cookies.get("libcal_token")}).pullCats({location_id:$scope.lbid})
               .$promise.then(catsSuccess, catsError);

@@ -1,139 +1,145 @@
-<nav-bar></nav-bar>
-
-<div class="loading_div_parent" style="display:none;" ng-class="loading_display">
-  <div class="loading_div table_parent" style="text-align: center;"><i class="fa fa-spinner table_child spinner" aria-hidden="true"></i></div>
+<div ng-show="spaces_tileview == true" class="tileview_container">
+  <tile-view></tile-view>
 </div>
 
-<div class="container events_container" ng-class="loading_blur">
+<div ng-show="spaces_tileview == false">
+  <nav-bar></nav-bar>
 
-
-  <div class="row" id="libcal_events_header">
-    <div class="col-sm-12" ng-click = "mobile_mode_toggle()">
-      <div class="events_title" ng-class="header_shown">
-        <h1>{{mobile_header}} ({{branch}})</h1>
-      </div>
-    </div>
+  <div class="loading_div_parent" style="display:none;" ng-class="loading_display">
+    <div class="loading_div table_parent" style="text-align: center;"><i class="fa fa-spinner table_child spinner" aria-hidden="true"></i></div>
   </div>
 
-  <div class="row text-right" id="options_row"><!--datepicker row -->
-    <div class="col-sm-12" style="margin-top: 15px;">
-      <nav class="nav nav-pills" id="branchnav">
-          <li class="nav-item text-right ml-auto">
-            <button class="btn" ng-class="option2_color" ng-click = "spaces_option()" >Spaces</button>
-            <button class="btn" ng-class="option1_color" ng-click = "calendar_option()" style="margin-left: 10px;">Calendar</button>
-          </li>
-      </nav><!--branchnav-->
+  <div class="container events_container" ng-class="loading_blur">
 
-      <div ng-if = "branch == 'Main' && spaces_option_selected" class="form-group dash">
-          <div class="form-check">
-            <label class="form-check-label">
-              <input class="form-check-input" type="checkbox" ng-model="main_study_rooms" ng-click="filter_study_rooms()"><span>Filter out study rooms</span>
-            </label>
+
+    <div class="row" id="libcal_events_header">
+      <div class="col-sm-12" ng-click = "mobile_mode_toggle()">
+        <div class="events_title" ng-class="header_shown">
+          <h1>{{mobile_header}} ({{branch}})</h1>
         </div>
       </div>
-
-    </div><!--col-sm-12-->
-  </div><!--datepicker row -->
-
-
-
-    <div class="row angular_event_list" id = "printThisElement">
-      <spaces-list style="width: 100%;" ng-if="spaces_option_selected"></spaces-list>
-      <calendar-list style="width: 100%;" ng-if="calendar_option_selected"></calendar-list>
-    </div><!--row -->
-
-  </div><!--container -->
-
-  <!-- mobile stuff -->
-
-  <!-- mobile dates button -->
-  <div class="mobile_dates_button table_parent text-center" ng-class="dates_button_class" ng-click = "showdatemenu()">
-    <i class="fa fa-bars table_child" aria-hidden="true"></i>
-  </div>
-
-  <!-- mobile menu button -->
-  <!-- <div class="mobile_menu_button table_parent text-center" ng-class="menu_button_class" ng-click = "showbranchmenu()">
-    <i class="fa fa-university table_child" aria-hidden="true"></i>
-  </div> -->
-
-  <!-- mobile menu click area cancelation -->
-  <div class="cancel_clickable" ng-class="is_shown" ng-click="hidemenu();"></div>
-
-<!-- mobile branch menu -->
-<div class="mobile_branch_menu_container" ng-class="branch_menu_is_shown" id="branch_menu">
-  <div class="mobile_branch_menu">
-    <div>
-      <select name="mySelect" style="background-color: white; width: 100%; height: 40px;"
-         ng-options="location.branch for location in mapping"
-         ng-model="branch_menu_location"></select>
-
-
-      <!-- <select style="background-color: white; width: 100%; height: 40px;" >
-        <option ng-repeat = "location in mapping" ng-model="branch_menu_location" style="text-align: center;">{{location.branch}}</option>
-      </select> -->
     </div>
-    <div class=""><button class="submitbutton btn btn-success" ng-click = "changebranch(branch_menu_location.branch); hidemenu();">Submit</button></div>
-  </div>
 
-</div><!-- mobile_date_menu_container -->
+    <div class="row text-right" id="options_row"><!--datepicker row -->
+      <div class="col-sm-12" style="margin-top: 15px;">
+        <nav class="nav nav-pills" id="branchnav">
+            <li class="nav-item text-right ml-auto">
+              <button class="btn" ng-class="option2_color" ng-click = "spaces_option()" >Spaces</button>
+              <button class="btn" ng-class="option1_color" ng-click = "calendar_option()" style="margin-left: 10px;">Calendar</button>
+            </li>
+        </nav><!--branchnav-->
 
-<!-- mobile date menu -->
-  <div class="mobile_date_menu_container" ng-class="date_menu_is_shown" id="date_menu">
-    <div class="branch_button_container table_parent text-center" ng-click = "showbranchmenu()">
-        <i class="fa fa-university table_child" aria-hidden="true"></i>
+        <div ng-if = "branch == 'Main' && spaces_option_selected" class="form-group dash">
+            <div class="form-check">
+              <label class="form-check-label">
+                <input class="form-check-input" type="checkbox" ng-model="main_study_rooms" ng-click="filter_study_rooms()"><span>Filter out study rooms</span>
+              </label>
+          </div>
+        </div>
+
+      </div><!--col-sm-12-->
+    </div><!--datepicker row -->
+
+
+
+      <div class="row angular_event_list" id = "printThisElement">
+        <spaces-list style="width: 100%;" ng-if="spaces_option_selected"></spaces-list>
+        <calendar-list style="width: 100%;" ng-if="calendar_option_selected"></calendar-list>
+      </div><!--row -->
+
+    </div><!--container -->
+
+    <!-- mobile stuff -->
+
+    <!-- mobile dates button -->
+    <div class="mobile_dates_button table_parent text-center" ng-class="dates_button_class" ng-click = "showdatemenu()">
+      <i class="fa fa-bars table_child" aria-hidden="true"></i>
     </div>
-    <div class="mobile_date_menu">
 
-      <div class="button_container">
+    <!-- mobile menu button -->
+    <!-- <div class="mobile_menu_button table_parent text-center" ng-class="menu_button_class" ng-click = "showbranchmenu()">
+      <i class="fa fa-university table_child" aria-hidden="true"></i>
+    </div> -->
 
-        <div class="menu_button_div_left menu_button_div"><button class="btn btn-success" ng-click="lose_day_button()" ng-disabled = "backdisable">Previous Day</i></button></div>
-        <div class="menu_button_div_right menu_button_div"><button class="btn btn-success" ng-click = "add_day_button()">Next Day</i></button></div>
+    <!-- mobile menu click area cancelation -->
+    <div class="cancel_clickable" ng-class="is_shown" ng-click="hidemenu();"></div>
+
+  <!-- mobile branch menu -->
+  <div class="mobile_branch_menu_container" ng-class="branch_menu_is_shown" id="branch_menu">
+    <div class="mobile_branch_menu">
+      <div>
+        <select name="mySelect" style="background-color: white; width: 100%; height: 40px;"
+           ng-options="location.branch for location in mapping"
+           ng-model="branch_menu_location"></select>
+
+
+        <!-- <select style="background-color: white; width: 100%; height: 40px;" >
+          <option ng-repeat = "location in mapping" ng-model="branch_menu_location" style="text-align: center;">{{location.branch}}</option>
+        </select> -->
       </div>
-      <input type="date" style="text-align: center; font-size: 22px; padding-left: 10px;" class="form-control" id="mobile_startdate" ng-model="from" ng-disabled = "datedisable">
-      <div class="mobile_bottom_menu_left_div"><button class="todaybutton btn btn-success" ng-click = "todaybutton()">Today</button></div>
-      <div class="mobile_bottom_menu_right_div"><button class="retrievebutton btn btn-success" ng-click = "start_event_loop(); hidemenu();">Retrieve</button></div>
+      <div class=""><button class="submitbutton btn btn-success" ng-click = "changebranch(branch_menu_location.branch); hidemenu();">Submit</button></div>
     </div>
 
   </div><!-- mobile_date_menu_container -->
 
-
-<!--DESKTOP BOTTOM MENU -->
-  <nav class="navbar fixed-bottom navbar-light bg-faded" id="bottom_datepicker_nav">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-12">
-          <nav class="nav" id="datepickernav">
-            <ul class="nav" style="padding: 3px 0;">
-              <li class="nav-item text-left datepicker">
-                <form class="form-inline">
-                  <label style="margin-right: 10px;"for="startdate">Start:</label>
-                  <input type="date" class="form-control" ng-class="submit_needed" id="startdate" ng-model="from" ng-disabled = "datedisable">
-                </form>
-              </li>
-              <li class="nav-item text-left datepicker">
-                <form class="form-inline">
-                  <label style="margin-right: 10px;" for="enddate">End:</label>
-                  <input type="date" class="form-control" ng-class="submit_needed" id="enddate" ng-model="to" ng-disabled = "datedisable">
-                </form>
-              </li>
-              <li class="nav-item text-left datepicker">
-                <button class="btn btn-secondary" ng-click = "todaybutton()" ng-disabled = "datedisable">Today</button>
-              </li>
-              <li class="nav-item text-left datepicker">
-                <button class="btn btn-secondary" ng-class="disable_today" ng-click = "lose_day_button()" ng-disabled = "backdisable" style="font-size: 20px;">-</i></button>
-              </li>
-              <li class="nav-item text-left datepicker">
-                <button class="btn btn-secondary" ng-click = "add_day_button()" ng-disabled = "datedisable" style="font-size: 20px;">+</i></button>
-              </li>
-            </ul>
-
-            <ul class="nav" style="right: 0px; bottom: 0px; position: absolute;" id="querybutton_ul">
-                  <div class=""></div>
-                  <button class="btn" ng-class="button_color" id="get_events_button"  ng-click = "start_event_loop()" ng-disabled = "datedisable || disable_load"><i class="fa fa-search" aria-hidden="true"></i></button>
-            </ul>
-
-          </nav>
-        </div><!-- col-sm-12 -->
+  <!-- mobile date menu -->
+    <div class="mobile_date_menu_container" ng-class="date_menu_is_shown" id="date_menu">
+      <div class="branch_button_container table_parent text-center" ng-click = "showbranchmenu()">
+          <i class="fa fa-university table_child" aria-hidden="true"></i>
       </div>
-    </div>
-  </nav>
+      <div class="mobile_date_menu">
+
+        <div class="button_container">
+
+          <div class="menu_button_div_left menu_button_div"><button class="btn btn-success" ng-click="lose_day_button()" ng-disabled = "backdisable">Previous Day</i></button></div>
+          <div class="menu_button_div_right menu_button_div"><button class="btn btn-success" ng-click = "add_day_button()">Next Day</i></button></div>
+        </div>
+        <input type="date" style="text-align: center; font-size: 22px; padding-left: 10px;" class="form-control" id="mobile_startdate" ng-model="from" ng-disabled = "datedisable">
+        <div class="mobile_bottom_menu_left_div"><button class="todaybutton btn btn-success" ng-click = "todaybutton()">Today</button></div>
+        <div class="mobile_bottom_menu_right_div"><button class="retrievebutton btn btn-success" ng-click = "start_event_loop(); hidemenu();">Retrieve</button></div>
+      </div>
+
+    </div><!-- mobile_date_menu_container -->
+
+
+  <!--DESKTOP BOTTOM MENU -->
+    <nav class="navbar fixed-bottom navbar-light bg-faded" id="bottom_datepicker_nav">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12">
+            <nav class="nav" id="datepickernav">
+              <ul class="nav" style="padding: 3px 0;">
+                <li class="nav-item text-left datepicker">
+                  <form class="form-inline">
+                    <label style="margin-right: 10px;"for="startdate">Start:</label>
+                    <input type="date" class="form-control" ng-class="submit_needed" id="startdate" ng-model="from" ng-disabled = "datedisable">
+                  </form>
+                </li>
+                <li class="nav-item text-left datepicker">
+                  <form class="form-inline">
+                    <label style="margin-right: 10px;" for="enddate">End:</label>
+                    <input type="date" class="form-control" ng-class="submit_needed" id="enddate" ng-model="to" ng-disabled = "datedisable">
+                  </form>
+                </li>
+                <li class="nav-item text-left datepicker">
+                  <button class="btn btn-secondary" ng-click = "todaybutton()" ng-disabled = "datedisable">Today</button>
+                </li>
+                <li class="nav-item text-left datepicker">
+                  <button class="btn btn-secondary" ng-class="disable_today" ng-click = "lose_day_button()" ng-disabled = "backdisable" style="font-size: 20px;">-</i></button>
+                </li>
+                <li class="nav-item text-left datepicker">
+                  <button class="btn btn-secondary" ng-click = "add_day_button()" ng-disabled = "datedisable" style="font-size: 20px;">+</i></button>
+                </li>
+              </ul>
+
+              <ul class="nav" style="right: 0px; bottom: 0px; position: absolute;" id="querybutton_ul">
+                    <div class=""></div>
+                    <button class="btn" ng-class="button_color" id="get_events_button"  ng-click = "start_event_loop()" ng-disabled = "datedisable || disable_load"><i class="fa fa-search" aria-hidden="true"></i></button>
+              </ul>
+
+            </nav>
+          </div><!-- col-sm-12 -->
+        </div>
+      </div>
+    </nav>
+</div>

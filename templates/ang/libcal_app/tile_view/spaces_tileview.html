@@ -1,0 +1,44 @@
+<section class="body">
+  <i class=" tile_escape fa fa-times-circle-o" aria-hidden="true" ng-click="toggle_tileview()"></i>
+
+  <div class="today-title">{{sortedarray[0].date}}</div>
+  <div class="today">
+
+    <div ng-if="(sortedarray[0].eventinfo | filter: categoryfilter | filter:cancelledfilter).length <= 5
+              && (sortedarray[0].eventinfo | filter: categoryfilter | filter:cancelledfilter).length > 0"
+              ng-repeat="detail in sortedarray[0].eventinfo | filter: categoryfilter | filter:cancelledfilter" class="tile-event1">
+      <tile-content></tile-content>
+    </div>
+    <div ng-if="(sortedarray[0].eventinfo | filter: categoryfilter | filter:cancelledfilter).length > 5
+              && (sortedarray[0].eventinfo | filter: categoryfilter | filter:cancelledfilter).length <= 10"
+              ng-repeat="detail in sortedarray[0].eventinfo | filter: categoryfilter | filter:cancelledfilter" class="tile-event2">
+      <tile-content></tile-content>
+    </div>
+    <div ng-if="(sortedarray[0].eventinfo | filter: categoryfilter | filter:cancelledfilter).length > 10 && sortedarray[0].eventinfo.length <= 15" ng-repeat="detail in sortedarray[0].eventinfo | filter: categoryfilter | filter:cancelledfilter" class="tile-event3">
+      <tile-content></tile-content>
+    </div>
+
+    <div ng-if="(sortedarray[0].eventinfo | filter: categoryfilter | filter:cancelledfilter).length == 0">No events</div>
+  </div>
+
+
+  <div class="tomorrow-title">{{sortedarray[1].date}}</div>
+  <div class="tomorrow ">
+
+    <div ng-if="(sortedarray[1].eventinfo | filter: categoryfilter | filter:cancelledfilter).length <= 5  && sortedarray[1].eventinfo.length > 0" ng-repeat="detail in sortedarray[1].eventinfo | filter:categoryfilter | filter:cancelledfilter" class="tile-event1">
+      <tile-content></tile-content>
+    </div>
+    <div ng-if="(sortedarray[1].eventinfo | filter: categoryfilter | filter:cancelledfilter).length > 5 && sortedarray[1].eventinfo.length <= 10" ng-repeat="detail in sortedarray[1].eventinfo | filter: categoryfilter | filter:cancelledfilter" class="tile-event2">
+      <tile-content></tile-content>
+    </div>
+    <div ng-if="(sortedarray[1].eventinfo | filter: categoryfilter | filter:cancelledfilter).length > 10 && sortedarray[1].eventinfo.length <= 15" ng-repeat="detail in sortedarray[1].eventinfo | filter: categoryfilter | filter:cancelledfilter" class="tile-event3">
+      <tile-content></tile-content>
+    </div>
+    <div ng-if="(sortedarray[1].eventinfo | filter: categoryfilter | filter:cancelledfilter).length == 0">No events</div>
+
+  </div>
+
+
+
+
+</section>
