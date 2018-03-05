@@ -141,37 +141,15 @@ angular.module('events').
 
           //tile view toggle and config
           $scope.toggle_tileview = function(){
-            function getEventsBeforeTile(){
-              return $q(function(resolve, reject){
-                $scope.sorted_array = [];
-                $scope.add_day_to_range();
-                $scope.start_event_loop()
-              });
-            }
-            var promise = getEventsBeforeTile();
-            promise.then(function(){
-              $scope.spaces_tileview = !$scope.spaces_tileview;
-            }, function(reason){
-              console.log('tile view failed');
-            })
+            $scope.add_day_to_range();
+            $scope.start_event_loop()
+
+            $scope.spaces_tileview = !$scope.spaces_tileview;
           }
 
 
           $scope.cancel_tileview = function(){
-            function getEventsBeforeTile(){
-              return $q(function(resolve, reject){
-                 $scope.sorted_array = [];
-                 $scope.subtract_day_from_range();
-                 $scope.start_event_loop();
-              });
-            }
-            var promise = getEventsBeforeTile();
-            promise.then(function(){
-              console.log('switch from tile succeeded')
-              $scope.spaces_tileview = !$scope.spaces_tileview;
-              }, function(reason){
-              console.log('tile view failed');
-            })
+             $scope.spaces_tileview = !$scope.spaces_tileview;
           }
 
 
