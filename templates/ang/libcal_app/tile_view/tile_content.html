@@ -1,10 +1,16 @@
 <h3>{{get_time(detail.fromDate)}} - {{get_time(detail.toDate)}}</h3>
-<h4>{{get_room_key(detail.eid)}}</h4>
+
+<div ng-if = "detail.q1905">
+  <h4>{{detail.q1905 | limitTo : 25}}<span ng-if="detail.q1905.length > 25">...</span></h4>
+  {{get_room_key(detail.eid)}}
+</div>
+<div ng-if = "!detail.q1905">
+  <h4>{{get_room_key(detail.eid)}}</h4>
+  <span style="color: #b26275;">no program title provided</span>
+</div>
+
 <i>{{detail.firstName}} {{detail.lastName}}</i>
-<br>
-<span ng-if="detail.q1905">{{detail.q1905}} <!--program title --></span>
-<span ng-if="!detail.q1905" style="color: #b26275;">no program title provided <!--program title --></span>
 <span ng-if="detail.q1777"> - {{detail.q1777}} expected
 <br>
-<div ng-if="detail.q1906" style="padding-left: 10px;">{{detail.q1906}}</div>
+<div class="tileview setup_inst" ng-if="detail.q1906" style="padding-left: 10px;">{{detail.q1906}}</div>
 <div ng-if="!detail.q1906" style="padding-left: 10px; color: #b26275;">no setup instructions provided</div>
