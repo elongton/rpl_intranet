@@ -71,6 +71,7 @@ class User(AbstractBaseUser):
     startup_page = models.ForeignKey(IntranetURL, related_name = 'accounts', default='1')
     calendar_preference = models.CharField(max_length=60, choices=calendarOptions, default='calendar')
     calendar_condensed_view = models.BooleanField(default=False)
+    tileview = models.BooleanField(default=False)
 
 
     email = models.EmailField(

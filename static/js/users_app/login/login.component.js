@@ -27,6 +27,7 @@ angular.module('login').
                 $cookies.put("calendar_condensed_view", $scope.userdata[0].calendar_condensed_view)
                 $cookies.put("calendar_preference", $scope.userdata[0].calendar_preference)
                 $cookies.put("startup_page", $scope.userdata[0].startup_page)
+                $cookies.put("tileview", $scope.userdata[0].tileview)
                 $cookies.put("startup_page_id", $scope.userdata[0].startup_page_id)
                 $cookies.put("user_id", $scope.userdata[0].id)
                 $cookies.put("is_admin", $scope.userdata[0].is_admin)

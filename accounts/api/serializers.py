@@ -50,6 +50,7 @@ class UserDetailSerializer(ModelSerializer):
         'startup_page_id',
         'calendar_preference',
         'calendar_condensed_view',
+        'tileview',
         'ref_quant',
         ]
     def get_branch(self, obj):

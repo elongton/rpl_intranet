@@ -11,7 +11,8 @@ angular.module('events').
           $scope.staticfiles = staticfiles;
           $scope.calendar_option_selected = ($cookies.get("calendar_preference") == 'calendar')
           $scope.calendartoggleswitch = !($cookies.get("calendar_condensed_view") == 'true')
-          $scope.spaces_tileview = false;
+          $scope.spaces_tileview = ($cookies.get('tileview') == 'true')
+          // $scope.spaces_tileview = false;
 
 
           if ($scope.calendar_option_selected){
@@ -578,6 +579,7 @@ angular.module('events').
 
               if ($scope.spaces_tileview){
                 $scope.add_day_to_range();
+                $scope.dateArray = lcFuncs.getDates($scope.from, $scope.to);
               }
               // lcData().getRequestCreds({q:'springshare'}).$promise.then(requestCredsSuccess, requestCredsError)
               lcData({token:$cookies.get("libcal_token")}).pullCats({location_id:$scope.lbid})
