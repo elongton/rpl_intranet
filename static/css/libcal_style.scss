@@ -461,7 +461,9 @@ $t_background_color: #282c34;
 .tileview_container .tile-event4{
   border: 1px solid $t_color;
   width: calc(20vw - 10px);
-  padding: 10px;}
+  padding: 10px;
+  padding-bottom: 20px;
+  overflow: hidden;}
 
 .tileview_container .tile-event1{height: 100%;}
 .tileview_container .tile-event1 h3{font-size: 2vh; }

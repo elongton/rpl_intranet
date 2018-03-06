@@ -142,6 +142,7 @@ angular.module('events').
           //tile view toggle and config
           $scope.toggle_tileview = function(){
             $scope.add_day_to_range();
+            $scope.dateArray = lcFuncs.getDates($scope.from, $scope.to);
             $scope.start_event_loop()
 
             $scope.spaces_tileview = !$scope.spaces_tileview;

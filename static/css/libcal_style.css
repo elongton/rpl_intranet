@@ -483,7 +483,9 @@
 .tileview_container .tile-event4 {
   border: 1px solid #d7dae0;
   width: calc(20vw - 10px);
-  padding: 10px; }
+  padding: 10px;
+  padding-bottom: 20px;
+  overflow: hidden; }
 
 .tileview_container .tile-event1 {
   height: 100%; }
