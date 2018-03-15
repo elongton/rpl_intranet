@@ -8,11 +8,18 @@ angular.module('events').
 
 //////////////     app initialization   //////////////
 
+
+
+
+
           $scope.staticfiles = staticfiles;
           $scope.calendar_option_selected = ($cookies.get("calendar_preference") == 'calendar')
           $scope.calendartoggleswitch = !($cookies.get("calendar_condensed_view") == 'true')
           $scope.spaces_tileview = ($cookies.get('tileview') == 'true')
           // $scope.spaces_tileview = false;
+
+
+
 
 
           if ($scope.calendar_option_selected){
@@ -145,15 +152,39 @@ angular.module('events').
             $scope.add_day_to_range();
             $scope.dateArray = lcFuncs.getDates($scope.from, $scope.to);
             $scope.start_event_loop()
-
             $scope.spaces_tileview = !$scope.spaces_tileview;
           }
-
-
           $scope.cancel_tileview = function(){
              $scope.spaces_tileview = !$scope.spaces_tileview;
           }
 
+          //tileview refresh timer
+          $interval(function(){
+            if ($scope.spaces_tileview){
+              $scope.todaybutton()
+              $scope.add_day_to_range()
+              $scope.dateArray = lcFuncs.getDates($scope.from, $scope.to);
+              $scope.start_event_loop()
+            }
+          },60000);
+
+
+          var getMonday = function(d) {
+            d = new Date(d);
+            var day = d.getDay(),
+                diff = d.getDate() - day + (day == 0 ? -6:1); // adjust when day is sunday
+            return new Date(d.setDate(diff));
+          }
+
+          var getSaturday = function(d) {
+            d = new Date(d);
+            var day = d.getDay(),
+                diff = d.getDate() - day + (day == 0 ? -6:1) + 5; // adjust when day is sunday
+            return new Date(d.setDate(diff));
+          }
+
+          $scope.thisMonday = getMonday(new Date()); // Mon Nov 08 2010
+          $scope.thisSaturday = getSaturday(new Date()); // Mon Nov 08 2010
 
 ///////////////////////   MOBILE  //////////////////////////////
           //animating the buttons in mobile:

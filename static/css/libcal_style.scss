@@ -451,23 +451,25 @@ $t_background_color: #282c34;
   -webkit-text-stroke: 3px $t_background_color;}
 
 
-
-.tileview_container .today-title, .tileview_container .tomorrow-title{height: 3.5vh; color: $t_color; font-size: 2.5vh;}
-.tileview_container .today{height: calc(46.5vh - 10px); color: $t_color; display: flex; flex-wrap: wrap;}
-.tileview_container .tomorrow{height: calc(46.5vh - 10px); color: $t_color; display: flex; flex-wrap: wrap;}
+$date_fontsize: 20px;
+$event_titlefontsize:  $date_fontsize - 3px;
+$event_datefontsize: $event_titlefontsize - 2px;
+.tileview_container .today-title, .tileview_container .tomorrow-title{height: 50px; color: $t_color; font-size: $date_fontsize;}
+.tileview_container .today{height: calc(50vh - 60px); color: $t_color; display: flex; flex-wrap: wrap;}
+.tileview_container .tomorrow{height: calc(50vh - 60px); color: $t_color; display: flex; flex-wrap: wrap;}
 .tileview_container .tile-event1,
 .tileview_container .tile-event2,
 .tileview_container .tile-event3,
 .tileview_container .tile-event4{
   border: 1px solid $t_color;
-  width: calc(20vw - 10px);
+  width: calc(20vw - 15px);
   padding: 10px;
   padding-bottom: 20px;
   overflow: hidden;}
 
 .tileview_container .tile-event1{height: 100%;}
-.tileview_container .tile-event1 h3{font-size: 2vh; }
-.tileview_container .tile-event1 h4{font-size: 2.5vh; }
+.tileview_container .tile-event1 h3{font-size: $event_datefontsize; }
+.tileview_container .tile-event1 h4{font-size: $event_titlefontsize; }
 
 
 .tileview_container .tile-event2{height: 50%;}
@@ -479,8 +481,12 @@ $t_background_color: #282c34;
 .tileview_container .tile-event4{height: 25%;}
 
 
-
-
+.today div.tile-event:not(:first-child),
+.tomorrow div.tile-event:not(:first-child){ margin-left: 10px;}
+.today div.tile-event,
+.tomorrow div.tile-event{
+  border-radius: 10px;}
+.setup_inst{margin-top: 10px;}
 
 ////////////////////// PRINTING////////////////////////////////
 @media screen {
