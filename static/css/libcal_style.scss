@@ -434,6 +434,7 @@ $animationspeed: .2s;
 $t_color: #d7dae0;
 $t_background_color: #282c34;
 .dashed-white{border: 1px dashed white;}
+.dashed-red{border: 3px dashed red;}
 .tileview_container .body{
   padding: 10px;
   background-color: $t_background_color;
@@ -461,7 +462,7 @@ $event_datefontsize: $event_titlefontsize - 2px;
 .tileview_container .tile-event2,
 .tileview_container .tile-event3,
 .tileview_container .tile-event4{
-  border: 1px solid $t_color;
+  // border: 1px solid $t_color;
   width: calc(20vw - 15px);
   padding: 10px;
   padding-bottom: 20px;
