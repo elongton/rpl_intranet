@@ -1,0 +1,5 @@
+//Refresh token
+curl -X POST -H "Content-Type: application/json" -d '{"token":""}' http://127.0.0.1:8000/api/auth/api-token-refresh/
+
+//Get token
+curl -X POST -H "Content-Type: application/json" -d '{"username":"tileview","password":"reading123"}' http://127.0.0.1:8000/api/auth/token/

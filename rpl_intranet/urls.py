@@ -35,7 +35,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api/auth/token/', obtain_jwt_token),
     url(r'^api/auth/api-token-verify/', verify_jwt_token),
-    url(r'^api/auth/token/refresh/', refresh_jwt_token),
+    url(r'^api/auth/api-token-refresh/', refresh_jwt_token),
     url(r'^api/reference/', include('reference_stats.api.urls', namespace='questions-api' )),
     url(r'^funcs/reference/', include('reference_stats.urls', namespace='questions-funcs' )),
     url(r'^api/users/', include('accounts.api.urls', namespace='users-api' )),

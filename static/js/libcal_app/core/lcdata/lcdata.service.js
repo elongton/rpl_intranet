@@ -8,6 +8,13 @@ angular.
                       categoryList = null,} = {}){
 
 
+
+
+        var tokenrefresh = {
+          url: '/api/auth/api-token-refresh/',
+          method: 'POST',
+        }
+
         var getbranchmapping = {
           url: '/api/libcal/list/',
           method: "GET",
@@ -111,6 +118,7 @@ angular.
 
 
        return $resource(null, {}, {
+              tokenRefresh:tokenrefresh,
               getBranchMapping:getbranchmapping,
               getRequestCreds:getrequestcreds,
               getCreds: getCreds,

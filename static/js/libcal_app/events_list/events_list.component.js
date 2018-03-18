@@ -168,6 +168,19 @@ angular.module('events').
             }
           },60000);
 
+          //Refresh token every day (86400000 milliseconds)
+          $interval(function(){
+            var tokenSuccess = function(result){
+              console.log(result)
+              $cookies.put("token", result.token)
+            }
+            var tokenError = function(error){
+              console.log('There was a token refresh error, contact Max.')
+              console.log(result)
+            }
+            lcData().tokenRefresh({"token":$cookies.get("token")}).$promise.then(tokenSuccess, tokenError)
+          },86400000)
+
 
           var getMonday = function(d) {
             d = new Date(d);
@@ -391,7 +404,8 @@ angular.module('events').
               var arraypush = {
                 date: iterdate,
                 eventinfo: result,}
-              console.log(arraypush)
+              // output data console log the data, this is what you want to uncommeent
+              // console.log(arraypush)
               $scope.loading_display = '';
               $scope.loading_blur = '';
               d.resolve(arraypush)
