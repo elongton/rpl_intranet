@@ -9,3 +9,11 @@ class CalendarBranchMapping(models.Model):  # this is an integer
 
     def __str__(self):
         return self.branch.name
+
+
+class SetupTeam(models.Model):
+    team = models.CharField(max_length=100)
+    date = models.DateField()
+
+    def __str__(self):
+        return self.date.strftime('%m/%d/%Y')

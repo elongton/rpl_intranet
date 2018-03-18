@@ -7,6 +7,9 @@ angular.module('admin_preferences').
       //startup
       $scope.deletecrucible = false
 
+
+///////////REFERENCE APPLICATION ADMIN///////////////////////
+
       Data.getActivations().$promise.then(
         function(result){
           $scope.activations = result
@@ -23,8 +26,20 @@ angular.module('admin_preferences').
         )
       }
 
+///////////SETUP SCHEDULE///////////////////////
 
 
+
+
+
+
+
+
+
+
+
+
+///////////USERS///////////////////////
       var getUsers = function(){
         Data.getUsers().$promise.then(
           function(result){
@@ -109,6 +124,9 @@ angular.module('admin_preferences').
       )
       $scope.clearfields()
       };
+
+
+
 
 }});
 

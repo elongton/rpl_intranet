@@ -7,24 +7,42 @@
       <hr>
     </div><!-- col-sm-12 -->
   </div><!--row-->
+
+
   <div class="row">
-    <div class="col-sm-12"><h4 style="margin-bottom: 15px;">Request Collection Periods</h4></div>
+    <div class="col-sm-12">
+      <h4>Setup Schedule</h4>
+    </div>
+
     <div class="col-sm-3">
       <select size="10"
-              style="max-width: 200px; width: 100%; margin-top: 5px;"
-              ng-options="((option.startdate | date:'MM/dd') + ' - ' + (option.expiration | date:'MM/dd')) for option in activations"
-              ng-model="activation">
+              style="max-width: 200px; width: 100%; margin-top: 5px;">
       </select>
     </div>
-    <div class="col-sm-9" style="padding-top: 3px;">
-      <button class="btn btn-success" ng-click="addActivation('2018-01-19T00:00:00Z', '2018-01-30T13:00:00Z')">Add Collection Period</button>
 
+    <div style="padding-left: 10px; width: 300px;">
+      <table style="width:100%;">
+        <tr>
+          <td>Date Range:</td>
+          <td>3/19 thru 3/25</td>
+        </tr>
+        <tr>
+          <td>Setup team:</td>
+          <td>David, Lynn, Max</td>
+        </tr>
+      </table>
+      <div style="bottom: 0; position: absolute;">
+        <button class="btn btn-secondary" data-toggle="modal" data-target="#edit_modal" data-backdrop="static" data-keyboard="false" ng-click="useredit.is_admin = users.selectedOption.is_admin">Edit User</button>
+        <button class="btn btn-secondary" data-toggle="modal" data-target="#new_user_modal" data-backdrop="static" data-keyboard="false">Add New User</button>
+      </div>
     </div>
+
     <div class="col-sm-12">
-          <hr>
+      <hr>
     </div>
+  </div>
 
-  </div><!-- row -->
+
   <div class="row">
     <div class="col-sm-12">
       <h4>Users</h4>
@@ -65,6 +83,28 @@
       </div>
     </div>
   </div><!--row-->
+
+
+  <!-- <div class="row">
+    <div class="col-sm-12"><h4 style="margin-bottom: 15px;">Request Collection Periods</h4></div>
+    <div class="col-sm-3">
+      <select size="10"
+              style="max-width: 200px; width: 100%; margin-top: 5px;"
+              ng-options="((option.startdate | date:'MM/dd') + ' - ' + (option.expiration | date:'MM/dd')) for option in activations"
+              ng-model="activation">
+      </select>
+    </div>
+    <div class="col-sm-9" style="padding-top: 3px;">
+      <button class="btn btn-success" ng-click="addActivation('2018-01-19T00:00:00Z', '2018-01-30T13:00:00Z')">Add Collection Period</button>
+
+    </div>
+    <div class="col-sm-12">
+          <hr>
+    </div>
+
+  </div> -->
+
+
 
 
 </div><!--container-->
