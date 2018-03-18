@@ -161,12 +161,14 @@ angular.module('events').
           //tileview refresh timer
           $interval(function(){
             if ($scope.spaces_tileview){
+              $scope.thisMonday = getMonday(new Date());
+              $scope.thisSunday = getSunday(new Date());
               $scope.todaybutton()
               $scope.add_day_to_range()
               $scope.dateArray = lcFuncs.getDates($scope.from, $scope.to);
               $scope.start_event_loop()
             }
-          },60000);
+          },120000);
 
           //Refresh token every day (86400000 milliseconds)
           $interval(function(){
@@ -189,15 +191,15 @@ angular.module('events').
             return new Date(d.setDate(diff));
           }
 
-          var getSaturday = function(d) {
+          var getSunday = function(d) {
             d = new Date(d);
             var day = d.getDay(),
-                diff = d.getDate() - day + (day == 0 ? -6:1) + 5; // adjust when day is sunday
+                diff = d.getDate() - day + (day == 0 ? -6:1) + 6; // adjust when day is sunday
             return new Date(d.setDate(diff));
           }
 
           $scope.thisMonday = getMonday(new Date()); // Mon Nov 08 2010
-          $scope.thisSaturday = getSaturday(new Date()); // Mon Nov 08 2010
+          $scope.thisSunday = getSunday(new Date()); // Mon Nov 08 2010
 
 ///////////////////////   MOBILE  //////////////////////////////
           //animating the buttons in mobile:

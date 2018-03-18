@@ -5,7 +5,7 @@
               position: absolute;
               right: 70px;
               height: 50px">
-       Set up Team {{thisMonday | date : "M/dd"}}-{{thisSaturday | date : "M/dd"}}:<br> feature not yet active
+       Set up Team {{thisMonday | date : "M/dd"}}-{{thisSunday | date : "M/dd"}}:<br> feature not yet active
    </div>
 
 
@@ -26,7 +26,13 @@
       <tile-content></tile-content>
     </div>
 
-    <div ng-if="(sortedarray[0].eventinfo | filter: categoryfilter | filter:cancelledfilter).length == 0">No events</div>
+    <div ng-if="(sortedarray[0].eventinfo | filter: categoryfilter | filter:cancelledfilter).length == 0" class="table_parent" style="height: 100%; width: 100%; text-align: center; border: 1px solid #535b6b; border-radius: 10px;">
+      <div class="table_child">
+        <div class="" style="display: inline-block; font-size: 20px; color: #535b6b;">
+          No events today
+        </div>
+      </div>
+    </div>
   </div>
 
 
@@ -48,7 +54,15 @@
              ng-repeat="detail in sortedarray[1].eventinfo | filter: categoryfilter | filter:cancelledfilter" class="tile-event3 tile-event">
       <tile-content></tile-content>
     </div>
-    <div ng-if="(sortedarray[1].eventinfo | filter: categoryfilter | filter:cancelledfilter).length == 0">No events</div>
+    <div ng-if="(sortedarray[1].eventinfo | filter: categoryfilter | filter:cancelledfilter).length == 0" class="table_parent" style="height: 100%; width: 100%; text-align: center; border: 1px solid #535b6b; border-radius: 10px;">
+      <div class="table_child">
+        <div class="" style="display: inline-block; font-size: 20px; color: #535b6b;">
+          No events today
+        </div>
+      </div>
+    </div>
+  </div>
+
 
   </div>
 

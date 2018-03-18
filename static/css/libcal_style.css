@@ -499,20 +499,14 @@
 .tileview_container .tile-event1 {
   height: 100%; }
 
-.tileview_container .tile-event1 h3 {
+.tileview_container h3 {
   font-size: 15px; }
 
-.tileview_container .tile-event1 h4 {
+.tileview_container h4 {
   font-size: 17px; }
 
 .tileview_container .tile-event2 {
   height: 50%; }
-
-.tileview_container .tile-event2 h3 {
-  font-size: 2vh; }
-
-.tileview_container .tile-event2 h4 {
-  font-size: 2.5vh; }
 
 .tileview_container .tile-event3 {
   height: 33%; }
@@ -520,8 +514,7 @@
 .tileview_container .tile-event4 {
   height: 25%; }
 
-.today div.tile-event:not(:first-child),
-.tomorrow div.tile-event:not(:first-child) {
+div.tile-event:not(:first-child):not(:nth-child(6)):not(:nth-child(11)) {
   margin-left: 10px; }
 
 .today div.tile-event,
