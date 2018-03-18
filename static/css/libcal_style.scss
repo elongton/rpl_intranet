@@ -462,11 +462,17 @@ $event_datefontsize: $event_titlefontsize - 2px;
 .tileview_container .tile-event2,
 .tileview_container .tile-event3,
 .tileview_container .tile-event4{
-  // border: 1px solid $t_color;
+  border: 1px solid $t_color;
   width: calc(20vw - 15px);
+  overflow: hidden;}
+
+.tilecontent{
   padding: 10px;
   padding-bottom: 20px;
-  overflow: hidden;}
+  height: 100%;
+}
+
+.setup_required{background-color: #393f4a;}
 
 .tileview_container .tile-event1{height: 100%;}
 .tileview_container .tile-event1 h3{font-size: $event_datefontsize; }
