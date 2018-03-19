@@ -5,6 +5,16 @@ angular.
     factory('lcFuncs', function(){
 
 
+
+      var twodigit = function(number){
+        var formattedNumber = ("0" + number).slice(-2);
+        return formattedNumber
+      }
+      var createtextdate = function(date){
+        var ready_date = String(date.getFullYear()) + "-" + String(twodigit(date.getMonth()+1)) + "-" + String(twodigit(date.getDate()))
+        return(ready_date)
+      }
+
       var tokenexpired = function(result, resolve_func, success, error){
         if (result.data.error_description == "The access token provided has expired"){
           resolve_func.$promise.then(success, error);
@@ -254,6 +264,7 @@ angular.
 
 
         return {
+          createtextdate: createtextdate,
           makeEventsFile: expFile,
           getDates: getdates,
           formatDate: formatdate,

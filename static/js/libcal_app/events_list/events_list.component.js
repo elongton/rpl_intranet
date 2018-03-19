@@ -147,10 +147,14 @@ angular.module('events').
           }
 
 
+
+
+
           //tile view toggle and config
           $scope.toggle_tileview = function(){
             $scope.add_day_to_range();
             $scope.dateArray = lcFuncs.getDates($scope.from, $scope.to);
+            getTeamList();
             $scope.start_event_loop()
             $scope.spaces_tileview = !$scope.spaces_tileview;
           }
@@ -163,6 +167,7 @@ angular.module('events').
             if ($scope.spaces_tileview){
               $scope.thisMonday = getMonday(new Date());
               $scope.thisSunday = getSunday(new Date());
+              getTeamList();
               $scope.todaybutton()
               $scope.add_day_to_range()
               $scope.dateArray = lcFuncs.getDates($scope.from, $scope.to);
@@ -200,6 +205,15 @@ angular.module('events').
 
           $scope.thisMonday = getMonday(new Date()); // Mon Nov 08 2010
           $scope.thisSunday = getSunday(new Date()); // Mon Nov 08 2010
+
+          //get setup group
+
+          var getTeamList = function(){
+            lcData().getTeamList({q:lcFuncs.createtextdate($scope.thisMonday), t:'yes'}).$promise.then(
+              function(success){$scope.teamList = success[0].team;},
+              function(error){console.log(error)}
+            )}
+          getTeamList();
 
 ///////////////////////   MOBILE  //////////////////////////////
           //animating the buttons in mobile:

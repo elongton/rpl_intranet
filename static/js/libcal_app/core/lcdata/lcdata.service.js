@@ -8,7 +8,16 @@ angular.
                       categoryList = null,} = {}){
 
 
+        var getteamlist = {
+          url: '/api/libcal/teamlist/',
+          method: 'GET',
+          isArray: true,
+          transformResponse: function(data, headersGetter, status){
+            var finalData = angular.fromJson(data)
+            return finalData
+          },
 
+        }
 
         var tokenrefresh = {
           url: '/api/auth/api-token-refresh/',
@@ -118,6 +127,7 @@ angular.
 
 
        return $resource(null, {}, {
+              getTeamList: getteamlist,
               tokenRefresh:tokenrefresh,
               getBranchMapping:getbranchmapping,
               getRequestCreds:getrequestcreds,
