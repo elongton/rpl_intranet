@@ -11,12 +11,18 @@
 
   <div class="row">
     <div class="col-sm-12">
-      <h4>Setup Schedule</h4>
+      <h4>Setup Teams (Main)</h4>
     </div>
 
     <div class="col-sm-3">
       <select size="10"
-              style="max-width: 200px; width: 100%; margin-top: 5px;">
+              style="max-width: 200px; width: 100%; margin-top: 5px;"
+              ng-options="(option[0] | date : 'M/dd') +
+                           ' - ' +
+                           (option[1] | date : 'M/dd') +
+                           ' ' + (option[2])  for option in dates.availableDates"
+              ng-model="dates.selectedDate"
+              ng-change="resetteam()">
       </select>
     </div>
 
@@ -24,17 +30,24 @@
       <table style="width:100%;">
         <tr>
           <td>Date Range:</td>
-          <td>3/19 thru 3/25</td>
+          <td>{{dates.selectedDate[0] | date : 'M/dd'}} - {{dates.selectedDate[1] | date : 'M/dd'}}</td>
         </tr>
-        <tr>
+        <tr ng-if= "dates.selectedDate[2]">
           <td>Setup team:</td>
-          <td>David, Lynn, Max</td>
+          <td>{{dates.selectedDate[2]}}</td>
         </tr>
       </table>
-      <div style="bottom: 0; position: absolute;">
-        <button class="btn btn-secondary" data-toggle="modal" data-target="#edit_modal" data-backdrop="static" data-keyboard="false" ng-click="useredit.is_admin = users.selectedOption.is_admin">Edit User</button>
-        <button class="btn btn-secondary" data-toggle="modal" data-target="#new_user_modal" data-backdrop="static" data-keyboard="false">Add New User</button>
+      <div ng-if="dates.selectedDate[2]">
+        <form ng-if="editteam" ng-submit="updateTeam(newtext, dates.selectedDate[3])">
+          <input style="margin-top: 10px;" class="form-control" ng-model="newtext" type="text" placeholder="add setup team here" ng-init="newtext = dates.selectedDate[2]">
+          <button style="margin-top: 10px;" class="btn btn-secondary" type="submit" ng-disabled="newtext == dates.selectedDate[2]">Update</button>
+        </form>
+        <button style="margin-top: 10px;" class="btn btn-secondary" ng-click="start_teamedit()" ng-hide="editteam == true">Edit</button>
       </div>
+      <form ng-if="!dates.selectedDate[2]" ng-submit="addTeam(dates.selectedDate[0], teamtext)">
+        <input style="margin-top: 10px;" class="form-control" ng-model="teamtext.text" type="text" placeholder="add setup team here">
+        <button style="margin-top: 10px;" class="btn btn-secondary" type="submit" ng-disabled="!teamtext">Add</button>
+      </form>
     </div>
 
     <div class="col-sm-12">

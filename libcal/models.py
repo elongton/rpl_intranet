@@ -12,7 +12,7 @@ class CalendarBranchMapping(models.Model):  # this is an integer
 
 
 class SetupTeam(models.Model):
-    team = models.CharField(max_length=100)
+    team = models.CharField(max_length=100, blank = True)
     date = models.DateField()
 
     def __str__(self):

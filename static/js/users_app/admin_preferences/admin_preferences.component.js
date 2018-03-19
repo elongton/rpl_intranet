@@ -6,7 +6,7 @@ angular.module('admin_preferences').
     controller: function(Data, User, $filter, $cookies,$http,$location,$routeParams,$rootScope,$scope,$route,){
       //startup
       $scope.deletecrucible = false
-
+      $scope.editteam = false
 
 ///////////REFERENCE APPLICATION ADMIN///////////////////////
 
@@ -28,12 +28,93 @@ angular.module('admin_preferences').
 
 ///////////SETUP SCHEDULE///////////////////////
 
+//Get the next year of Mondays
+    var mondays = [];
+    var today  = new Date(),
+        year   = today.getFullYear(),
+        month  = today.getMonth(),
+        date   = today.getDate(),
+        offset = 1 -(today.getDay() || 7), // days till next Monday
+        sunOffset = 7 - (today.getDay() || 7); // days till next Monday
+
+    for(var i = 0 ; i < 53 ; i++) {
+      mondays.push( [new Date(year, month, date + offset + 7 * i),
+                     new Date(year, month, date + sunOffset + 7 * i)]
+                   );
+    }
+    $scope.dates= {
+      availableDates: mondays,
+      selectedDate: mondays[0]
+    }
+
+    var twodigit = function(number){
+      var formattedNumber = ("0" + number).slice(-2);
+      return formattedNumber
+    }
+    var createtextdate = function(date){
+      var ready_date = String(date.getFullYear()) + "-" + String(twodigit(date.getMonth()+1)) + "-" + String(twodigit(date.getDate()))
+      return(ready_date)
+    }
+
+    var initSetupTeams = function(){
+      Data.getSetupTeams({q: createtextdate(mondays[0][0])}).$promise.then(
+        function(success){
+            for (var i = 0; i < mondays.length; i++){
+              for (var j = 0; j < success.length; j++){
+                if (createtextdate(mondays[i][0]) == success[j].date){
+                  mondays[i].push(success[j].team)
+                  mondays[i].push(success[j].id)
+                }
+              }
+            }//for
+        },
+        function(fail){console.log(fail)}
+      )
+    }
+
+    initSetupTeams();
 
 
+    $scope.addTeam = function(date, teamtext){
+      console.log(date);
+      console.log(teamtext.text);
+
+      Data.createTeam({date: createtextdate(date),
+                       team: teamtext.text,
+                        }).$promise.then(
+          function(success){
+            console.log(success)
+            initSetupTeams();
+          },
+          function(error){
+            console.log(error)
+          }
+        )
+    }
 
 
+    $scope.start_teamedit = function(){
+      $scope.editteam = true;
+    }
 
+    $scope.resetteam = function(){
+      $scope.editteam = false;
+    }
 
+    $scope.updateTeam = function(newtext, id){
+      console.log(newtext)
+      console.log(id)
+      Data.updateTeam({team: newtext,
+                      id: id}).$promise.then(
+          function(success){
+            $scope.dates.selectedDate[2] = newtext;
+          },
+          function(error){
+            console.log(error)
+          }
+        )
+
+    }
 
 
 

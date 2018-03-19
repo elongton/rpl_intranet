@@ -485,7 +485,7 @@
 .tileview_container .tile-event3,
 .tileview_container .tile-event4 {
   border: 1px solid #d7dae0;
-  width: calc(20vw - 12px);
+  width: calc(20vw - 16px);
   overflow: hidden; }
 
 .tilecontent {
