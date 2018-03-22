@@ -19,9 +19,6 @@ angular.module('events').
           // $scope.spaces_tileview = false;
 
 
-
-
-
           if ($scope.calendar_option_selected){
             $scope.spaces_option_selected = false
           }else{
@@ -214,6 +211,12 @@ angular.module('events').
               function(error){console.log(error)}
             )}
           getTeamList();
+
+
+          $scope.tilesetupcomplete = function(detail){
+            console.log(detail);
+          }
+
 
 ///////////////////////   MOBILE  //////////////////////////////
           //animating the buttons in mobile:
@@ -420,7 +423,7 @@ angular.module('events').
               var arraypush = {
                 date: iterdate,
                 eventinfo: result,}
-              // output data console log the data, this is what you want to uncommeent
+              // output data console log the data, this is what you want to uncomment
               // console.log(arraypush)
               $scope.loading_display = '';
               $scope.loading_blur = '';

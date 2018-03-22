@@ -524,6 +524,9 @@ div.tile-event:not(:first-child):not(:nth-child(6)):not(:nth-child(11)) {
 .setup_inst {
   margin-top: 10px; }
 
+.tile-event {
+  cursor: pointer; }
+
 @media screen {
   #printSection {
     display: none; } }

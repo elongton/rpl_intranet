@@ -1,7 +1,7 @@
 from rest_framework.serializers import (
                                 ModelSerializer,
                                 SerializerMethodField,)
-from ..models import CalendarBranchMapping, SetupTeam
+from ..models import CalendarBranchMapping, SetupTeam, SetupComplete
 from accounts.models import Branch
 
 
@@ -37,3 +37,24 @@ class SetupTeamUpdateSerializer(ModelSerializer):
             'id',
         ]
         read_only_fields = ('id', 'date')
+
+
+class SetupSerializer(ModelSerializer):
+    class Meta:
+        model = SetupComplete
+        fields = [
+            'date',
+            'setup',
+            'book_id',
+        ]
+
+class SetupUpdateSerializer(ModelSerializer):
+    class Meta:
+        model = SetupComplete
+        fields = [
+            'date',
+            'setup',
+            'book_id',
+            'id',
+        ]
+        read_only_fields = ('book_id', 'date', 'id')

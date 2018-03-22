@@ -488,6 +488,7 @@ div.tile-event:not(:first-child):not(:nth-child(6)):not(:nth-child(11)){ margin-
 .tomorrow div.tile-event{
   border-radius: 10px;}
 .setup_inst{margin-top: 10px;}
+.tile-event{cursor: pointer;}
 
 ////////////////////// PRINTING////////////////////////////////
 @media screen {

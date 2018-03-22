@@ -17,3 +17,12 @@ class SetupTeam(models.Model):
 
     def __str__(self):
         return self.date.strftime('%m/%d/%Y')
+
+
+class SetupComplete(models.Model):
+    book_id = models.CharField(max_length=100)
+    date = models.DateField()
+    setup = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.book_id
