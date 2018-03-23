@@ -46,6 +46,7 @@ class SetupSerializer(ModelSerializer):
             'date',
             'setup',
             'book_id',
+            'id',
         ]
 
 class SetupUpdateSerializer(ModelSerializer):

@@ -77,16 +77,11 @@ class SetupListAPIView(ListAPIView):
     filter_backends = [SearchFilter, OrderingFilter]
     search_fields = ['date']
     def get_queryset(self, *args, **kwargs):
-        queryset_list = SetupTeam.objects.all()
+        queryset_list = SetupComplete.objects.all()
         date = self.request.GET.get("q")
-        tileview = self.request.GET.get("t")
         if date:
             queryset_list = queryset_list.filter(
                 Q(date__gte=date)
-            ).distinct()
-        if date and tileview == 'yes':
-            queryset_list = queryset_list.filter(
-                Q(date__iexact=date)
             ).distinct()
         return queryset_list
 
