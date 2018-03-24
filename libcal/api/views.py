@@ -75,13 +75,18 @@ class SetupListAPIView(ListAPIView):
     serializer_class = SetupSerializer
     # permission_classes = [IsAuthenticated]
     filter_backends = [SearchFilter, OrderingFilter]
-    search_fields = ['date']
+    search_fields = ['date', 'specific']
     def get_queryset(self, *args, **kwargs):
         queryset_list = SetupComplete.objects.all()
         date = self.request.GET.get("q")
+        specific = self.request.GET.get("s")
         if date:
             queryset_list = queryset_list.filter(
                 Q(date__gte=date)
+            ).distinct()
+        if specific:
+            queryset_list = queryset_list.filter(
+                Q(book_id__iexact=specific)
             ).distinct()
         return queryset_list
 

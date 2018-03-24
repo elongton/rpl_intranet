@@ -8,6 +8,17 @@ angular.
                       categoryList = null,} = {}){
 
 
+        var updatesetup = {
+          url: '/api/libcal/setup/:id/update/',
+          method: 'PUT',
+          params: {id:'@id'},
+          interceptor: {responseError: function(response){
+            if (response.status == 401){
+              console.log("you need to log in.")
+            }
+          }},
+        }
+
         var createsetup = {
           url: '/api/libcal/setup/create/',
           method: 'POST',
@@ -145,6 +156,7 @@ angular.
 
 
        return $resource(null, {}, {
+              updateSetup: updatesetup,
               createSetup: createsetup,
               getSetupCompletes: getsetupcompletes,
               getTeamList: getteamlist,

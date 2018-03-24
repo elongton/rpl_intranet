@@ -228,18 +228,47 @@ angular.module('events').
 
           $scope.tilesetupcomplete = function(bookId, date){
 
+            lcData().getSetupCompletes({s:bookId}).$promise.then(
+              function(success){
+                if (success.length == 0){
+                  //open dialog in center
+                  console.log('empty')
+                  lcData().createSetup({date: lcFuncs.createtextdate(new Date(date)), book_id: bookId, setup: 'true'}).$promise.then(
+                    function(success){console.log(success)},
+                    function(error){console.log(error)}
+                  )
+                } else {
+
+                  //open dialog in center
+                  console.log('filled')
+                  console.log(success.length)
+                  //update setup to opposite
+                  User.userUpdate({id: success.id,
+                                   password: useredit.password,
+                                   branch: useredit.branch.id,
+                                   email: useredit.email,
+                                   admin: useredit.is_admin,
+                                  })
+                    .$promise.then
+
+                }
+
+
+
+              },
+              function(error){console.log('this was an error', error)}
+            )
+
             //add a get request to check whether bookID exists in the system
             //if it does, check its state:
                 //if state is true, use update method to change to false
                 //if state is false, use update method to change to true
             //if it doesn't, use createSetup method to create a true setup for bookID
 
-
-
-            lcData().createSetup({date: lcFuncs.createtextdate(new Date(date)), book_id: bookId, setup: 'true'}).$promise.then(
-              function(success){console.log(success)},
-              function(error){console.log(error)}
-            )
+            // lcData().createSetup({date: lcFuncs.createtextdate(new Date(date)), book_id: bookId, setup: 'true'}).$promise.then(
+            //   function(success){console.log(success)},
+            //   function(error){console.log(error)}
+            // )
           }
 
 
@@ -449,7 +478,7 @@ angular.module('events').
                 date: iterdate,
                 eventinfo: result,}
               // output data console log the data, this is what you want to uncomment
-              console.log(arraypush)
+              // console.log(arraypush)
               $scope.loading_display = '';
               $scope.loading_blur = '';
               d.resolve(arraypush)
