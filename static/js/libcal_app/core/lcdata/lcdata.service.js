@@ -29,6 +29,7 @@ angular.
           url: '/api/libcal/setuplist/',
           method: 'GET',
           isArray: true,
+          cache: false,
           transformResponse: function(data, headersGetter, status){
             var finalData = angular.fromJson(data)
             return finalData

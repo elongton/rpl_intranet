@@ -144,41 +144,18 @@ angular.module('events').
           $scope.toggle_tileview = function(){
             $scope.add_day_to_range();
             $scope.dateArray = lcFuncs.getDates($scope.from, $scope.to);
-            getTeamList();
-            getSetups();
+            $q.all([$scope.start_event_loop(), getTeamList(), getSetups()])
+              .then(function onFulfilled(thesuccess) {
+                $scope.setupsquery = thesuccess[2];
+                $scope.spaces_tileview = !$scope.spaces_tileview;
+            }).catch(function onRejected(){});
             console.log($scope.setupsquery)
-            $scope.start_event_loop()
+
             //add function that combs through sortedarray and adds a field for setup
-            if ($scope.setupsquery.length > 0){
-              console.log('setupsquery.length > 0')
-              for (var i = 0; i < $scope.sortedarray[0].eventinfo.length; i++){
-                // console.log('i = ' + i)
-                for (var j = 0; j < $scope.setupsquery.length; j++ ){
-                  // console.log('j = ' + j)
-                  // console.log($scope.setupsquery)
-                  if ($scope.sortedarray[0].eventinfo[i].bookId == $scope.setupsquery[j].book_id){
-                    // $scope.sortedarray[0].eventinfo[i].push(['blarg'])
-                    // $scope.sortedarray[0].eventinfo[i].setup = $scope.setupsquery[j].setup;
-                    $scope.sortedarray[0].eventinfo[i]['setup'] = $scope.setupsquery[j].setup;
-                    console.log('pushed something')
-                    console.log($scope.sortedarray[0].eventinfo[i])
-                  }
-                }
-              }//first for
-              for (var i = 0; i < $scope.sortedarray[1].length; i++){
-                for (var j = 0; i < $scope.setupsquery.length; j++ ){
 
-                }
-              }//second for
-
-
-
-            }
-
-
-
-            $scope.spaces_tileview = !$scope.spaces_tileview;
           }
+
+
           $scope.cancel_tileview = function(){
              $scope.spaces_tileview = !$scope.spaces_tileview;
           }
@@ -240,12 +217,38 @@ angular.module('events').
 
 
           var getSetups = function(){
+            var d = $q.defer();
             lcData().getSetupCompletes({q:lcFuncs.createtextdate(new Date())}).$promise.then(
-              function(success){$scope.setupsquery = success;},
+              function(success){$scope.setupsquery = success; d.resolve(success)},
               function(error){console.log(error)}
             )
+            return d.promise;
           }
           getSetups();
+
+
+          var addSetupProperties = function(){
+            if ($scope.setupsquery.length > 0){
+              for (var i = 0; i < $scope.sortedarray[0].eventinfo.length; i++){
+                for (var j = 0; j < $scope.setupsquery.length; j++ ){
+                  if ($scope.sortedarray[0].eventinfo[i].bookId == $scope.setupsquery[j].book_id){
+                    $scope.sortedarray[0].eventinfo[i]['setup'] = $scope.setupsquery[j].setup;
+                    console.log('pushed something')
+                    console.log($scope.sortedarray[0].eventinfo[i])
+                  }
+                }
+              }//first for
+              for (var i = 0; i < $scope.sortedarray[1].eventinfo.length; i++){
+                for (var j = 0; j < $scope.setupsquery.length; j++ ){
+                  if ($scope.sortedarray[1].eventinfo[i].bookId == $scope.setupsquery[j].book_id){
+                    $scope.sortedarray[1].eventinfo[i]['setup'] = $scope.setupsquery[j].setup;
+                    console.log('pushed something')
+                    console.log($scope.sortedarray[1].eventinfo[i])
+                  }
+                }
+              }//second for
+            }//if statement
+          }
 
           $scope.tilesetupcomplete = function(bookId, date){
 
@@ -467,6 +470,9 @@ angular.module('events').
               $q.all(funcArray)
               .then(function(data){
                 $scope.sortedarray = lcFuncs.formatEvents(data);
+                if ($scope.spaces_tileview){
+                  addSetupProperties();
+                }
                 //add the set date for comparisons
                 removeAlert()
               });
