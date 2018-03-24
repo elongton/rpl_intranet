@@ -226,12 +226,17 @@ angular.module('events').
           }
           getSetups();
 
-          $scope.tilesetupcomplete = function(detail, date){
+          $scope.tilesetupcomplete = function(bookId, date){
+
+            //add a get request to check whether bookID exists in the system
+            //if it does, check its state:
+                //if state is true, use update method to change to false
+                //if state is false, use update method to change to true
+            //if it doesn't, use createSetup method to create a true setup for bookID
 
 
 
-
-            lcData().createSetup({date: lcFuncs.createtextdate(new Date(date)), book_id: detail, setup: 'true'}).$promise.then(
+            lcData().createSetup({date: lcFuncs.createtextdate(new Date(date)), book_id: bookId, setup: 'true'}).$promise.then(
               function(success){console.log(success)},
               function(error){console.log(error)}
             )
