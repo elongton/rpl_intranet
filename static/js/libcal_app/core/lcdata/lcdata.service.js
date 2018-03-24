@@ -8,6 +8,24 @@ angular.
                       categoryList = null,} = {}){
 
 
+        var createsetup = {
+          url: '/api/libcal/setup/create/',
+          method: 'POST',
+        }
+
+
+        var getsetupcompletes = {
+          url: '/api/libcal/setuplist/',
+          method: 'GET',
+          isArray: true,
+          transformResponse: function(data, headersGetter, status){
+            var finalData = angular.fromJson(data)
+            return finalData
+          },
+
+        }
+
+
         var getteamlist = {
           url: '/api/libcal/teamlist/',
           method: 'GET',
@@ -127,6 +145,8 @@ angular.
 
 
        return $resource(null, {}, {
+              createSetup: createsetup,
+              getSetupCompletes: getsetupcompletes,
               getTeamList: getteamlist,
               tokenRefresh:tokenrefresh,
               getBranchMapping:getbranchmapping,

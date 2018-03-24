@@ -9,9 +9,6 @@ angular.module('events').
 //////////////     app initialization   //////////////
 
 
-
-
-
           $scope.staticfiles = staticfiles;
           $scope.calendar_option_selected = ($cookies.get("calendar_preference") == 'calendar')
           $scope.calendartoggleswitch = !($cookies.get("calendar_condensed_view") == 'true')
@@ -152,6 +149,12 @@ angular.module('events').
             $scope.add_day_to_range();
             $scope.dateArray = lcFuncs.getDates($scope.from, $scope.to);
             getTeamList();
+            getSetups();
+
+            //add api call to setups complete
+
+
+
             $scope.start_event_loop()
             $scope.spaces_tileview = !$scope.spaces_tileview;
           }
@@ -165,6 +168,7 @@ angular.module('events').
               $scope.thisMonday = getMonday(new Date());
               $scope.thisSunday = getSunday(new Date());
               getTeamList();
+              getSetups();
               $scope.todaybutton()
               $scope.add_day_to_range()
               $scope.dateArray = lcFuncs.getDates($scope.from, $scope.to);
@@ -213,8 +217,24 @@ angular.module('events').
           getTeamList();
 
 
-          $scope.tilesetupcomplete = function(detail){
-            console.log(detail);
+
+          var getSetups = function(){
+            lcData().getSetupCompletes({q:lcFuncs.createtextdate(new Date())}).$promise.then(
+              function(success){console.log(success); console.log('got a success on getSetups()')},
+              function(error){console.log(error)}
+            )
+          }
+          getSetups();
+
+          $scope.tilesetupcomplete = function(detail, date){
+
+
+
+
+            lcData().createSetup({date: lcFuncs.createtextdate(new Date(date)), book_id: detail, setup: 'true'}).$promise.then(
+              function(success){console.log(success)},
+              function(error){console.log(error)}
+            )
           }
 
 
@@ -424,7 +444,7 @@ angular.module('events').
                 date: iterdate,
                 eventinfo: result,}
               // output data console log the data, this is what you want to uncomment
-              // console.log(arraypush)
+              console.log(arraypush)
               $scope.loading_display = '';
               $scope.loading_blur = '';
               d.resolve(arraypush)
