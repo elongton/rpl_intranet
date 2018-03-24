@@ -140,22 +140,43 @@ angular.module('events').
             }
           }
 
-
-
-
-
           //tile view toggle and config
           $scope.toggle_tileview = function(){
             $scope.add_day_to_range();
             $scope.dateArray = lcFuncs.getDates($scope.from, $scope.to);
             getTeamList();
             getSetups();
-
-            //add api call to setups complete
-
-
-
+            console.log($scope.setupsquery)
             $scope.start_event_loop()
+            //add function that combs through sortedarray and adds a field for setup
+            if ($scope.setupsquery.length > 0){
+              console.log('setupsquery.length > 0')
+              for (var i = 0; i < $scope.sortedarray[0].eventinfo.length; i++){
+                // console.log('i = ' + i)
+                for (var j = 0; j < $scope.setupsquery.length; j++ ){
+                  // console.log('j = ' + j)
+                  // console.log($scope.setupsquery)
+                  if ($scope.sortedarray[0].eventinfo[i].bookId == $scope.setupsquery[j].book_id){
+                    // $scope.sortedarray[0].eventinfo[i].push(['blarg'])
+                    // $scope.sortedarray[0].eventinfo[i].setup = $scope.setupsquery[j].setup;
+                    $scope.sortedarray[0].eventinfo[i]['setup'] = $scope.setupsquery[j].setup;
+                    console.log('pushed something')
+                    console.log($scope.sortedarray[0].eventinfo[i])
+                  }
+                }
+              }//first for
+              for (var i = 0; i < $scope.sortedarray[1].length; i++){
+                for (var j = 0; i < $scope.setupsquery.length; j++ ){
+
+                }
+              }//second for
+
+
+
+            }
+
+
+
             $scope.spaces_tileview = !$scope.spaces_tileview;
           }
           $scope.cancel_tileview = function(){
@@ -220,7 +241,7 @@ angular.module('events').
 
           var getSetups = function(){
             lcData().getSetupCompletes({q:lcFuncs.createtextdate(new Date())}).$promise.then(
-              function(success){console.log(success); console.log('got a success on getSetups()')},
+              function(success){$scope.setupsquery = success;},
               function(error){console.log(error)}
             )
           }
@@ -238,20 +259,17 @@ angular.module('events').
                     function(error){console.log(error)}
                   )
                 } else {
-
                   //open dialog in center
                   console.log('filled')
                   console.log(success.length)
-                  //update setup to opposite
-                  User.userUpdate({id: success.id,
-                                   password: useredit.password,
-                                   branch: useredit.branch.id,
-                                   email: useredit.email,
-                                   admin: useredit.is_admin,
-                                  })
-                    .$promise.then
-
-                }
+                  //check current setup status and set to opposite
+                  var setupstatus = success[0].setup == true ? false : true;
+                  //http update setup to opposite
+                  lcData().updateSetup({id: success[0].id, setup: setupstatus}).$promise.then(
+                    function(success){console.log(success)},
+                    function(error){console.log(error)}
+                  )
+                }//if else
 
 
 
