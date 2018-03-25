@@ -233,8 +233,8 @@ angular.module('events').
                 for (var j = 0; j < $scope.setupsquery.length; j++ ){
                   if ($scope.sortedarray[0].eventinfo[i].bookId == $scope.setupsquery[j].book_id){
                     $scope.sortedarray[0].eventinfo[i]['setup'] = $scope.setupsquery[j].setup;
-                    console.log('pushed something')
-                    console.log($scope.sortedarray[0].eventinfo[i])
+                    // console.log('pushed something')
+                    // console.log($scope.sortedarray[0].eventinfo[i])
                   }
                 }
               }//first for
@@ -242,8 +242,8 @@ angular.module('events').
                 for (var j = 0; j < $scope.setupsquery.length; j++ ){
                   if ($scope.sortedarray[1].eventinfo[i].bookId == $scope.setupsquery[j].book_id){
                     $scope.sortedarray[1].eventinfo[i]['setup'] = $scope.setupsquery[j].setup;
-                    console.log('pushed something')
-                    console.log($scope.sortedarray[1].eventinfo[i])
+                    // console.log('pushed something')
+                    // console.log($scope.sortedarray[1].eventinfo[i])
                   }
                 }
               }//second for
@@ -256,15 +256,15 @@ angular.module('events').
               function(success){
                 if (success.length == 0){
                   //open dialog in center
-                  console.log('empty')
+                  // console.log('empty')
                   lcData().createSetup({date: lcFuncs.createtextdate(new Date(date)), book_id: bookId, setup: 'true'}).$promise.then(
                     function(success){console.log(success)},
                     function(error){console.log(error)}
                   )
                 } else {
                   //open dialog in center
-                  console.log('filled')
-                  console.log(success.length)
+                  // console.log('filled')
+                  // console.log(success.length)
                   //check current setup status and set to opposite
                   var setupstatus = success[0].setup == true ? false : true;
                   //http update setup to opposite
@@ -272,28 +272,22 @@ angular.module('events').
                     function(success){console.log(success)},
                     function(error){console.log(error)}
                   )
-
-
                 }//if else
-
-
-
               },
               function(error){console.log('this was an error', error)}
             )
-
-            //add a get request to check whether bookID exists in the system
-            //if it does, check its state:
-                //if state is true, use update method to change to false
-                //if state is false, use update method to change to true
-            //if it doesn't, use createSetup method to create a true setup for bookID
-
-            // lcData().createSetup({date: lcFuncs.createtextdate(new Date(date)), book_id: bookId, setup: 'true'}).$promise.then(
-            //   function(success){console.log(success)},
-            //   function(error){console.log(error)}
-            // )
           }
 
+
+          $scope.setupcompleteclass = function(detail){
+            if(detail.q1906){
+              if(detail.setup == true){
+                return 'setup_complete'
+              }else{
+                return 'setup_required'
+              }
+            }
+          }//setupcompleteclass
 
 ///////////////////////   MOBILE  //////////////////////////////
           //animating the buttons in mobile:

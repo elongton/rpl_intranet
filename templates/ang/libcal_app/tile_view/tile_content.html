@@ -1,4 +1,4 @@
-<div style="position: relative;" class="tilecontent" ng-class="detail.q1906 ? 'setup_required': '' " ng-click="tilesetupcomplete(detail.bookId, detail.fromDate); detail.setup = !detail.setup">
+<div style="position: relative;" class="tilecontent" ng-class="setupcompleteclass(detail)" ng-click="tilesetupcomplete(detail.bookId, detail.fromDate); detail.setup = !detail.setup">
   <h3 class="">{{get_time(detail.fromDate)}} - {{get_time(detail.toDate)}}</h3>
 
   <div ng-if = "detail.q1905" class="">
@@ -24,5 +24,5 @@
     no setup required
   </div>
 
-  <i ng-if="detail.setup == true" style="color:green; position: absolute; right: 10px; bottom: 10px; font-size: 25px;" class="fa fa-check"></i>
+  <i ng-if="detail.setup == true" style="color:#3cba54; position: absolute; right: 10px; bottom: 10px; font-size: 40px;" class="fa fa-check"></i>
 </div>
