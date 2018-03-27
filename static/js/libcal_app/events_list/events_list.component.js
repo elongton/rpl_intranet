@@ -165,14 +165,18 @@ angular.module('events').
             if ($scope.spaces_tileview){
               $scope.thisMonday = getMonday(new Date());
               $scope.thisSunday = getSunday(new Date());
-              getTeamList();
-              getSetups();
+              // getTeamList();
+              // getSetups();
               $scope.todaybutton()
               $scope.add_day_to_range()
               $scope.dateArray = lcFuncs.getDates($scope.from, $scope.to);
-              $scope.start_event_loop()
+              // $scope.start_event_loop()
+              $q.all([$scope.start_event_loop(), getTeamList(), getSetups()])
+                .then(function onFulfilled(thesuccess) {
+                  $scope.setupsquery = thesuccess[2];
+                }).catch(function onRejected(){});
             }
-          },120000);
+          },60000);
 
           //Refresh token every day (86400000 milliseconds)
           $interval(function(){
