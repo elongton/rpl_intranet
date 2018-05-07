@@ -223,7 +223,7 @@ angular.module('events').
           var getSetups = function(){
             var d = $q.defer();
             lcData().getSetupCompletes({q:lcFuncs.createtextdate(new Date())}).$promise.then(
-              function(success){$scope.setupsquery = success; d.resolve(success);},
+              function(success){$scope.setupsquery = success; console.log($scope.setupsquery); d.resolve(success);},
               function(error){console.log(error)}
             )
             return d.promise;
