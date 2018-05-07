@@ -146,13 +146,9 @@ angular.module('events').
             $scope.dateArray = lcFuncs.getDates($scope.from, $scope.to);
             $q.all([$scope.start_event_loop(), getTeamList(), getSetups()])
               .then(function onFulfilled(thesuccess) {
-                $scope.setupsquery = thesuccess[2];
                 $scope.spaces_tileview = !$scope.spaces_tileview;
             }).catch(function onRejected(){});
-            console.log($scope.setupsquery)
-
             //add function that combs through sortedarray and adds a field for setup
-
           }
 
 
@@ -170,10 +166,11 @@ angular.module('events').
               $scope.todaybutton()
               $scope.add_day_to_range()
               $scope.dateArray = lcFuncs.getDates($scope.from, $scope.to);
+              $scope.setupsquery = [];
               // $scope.start_event_loop()
               $q.all([$scope.start_event_loop(), getTeamList(), getSetups()])
                 .then(function onFulfilled(thesuccess) {
-                  $scope.setupsquery = thesuccess[2];
+                  console.log('refresh succeeded')
                 }).catch(function onRejected(){});
             }
           },60000);
@@ -226,7 +223,7 @@ angular.module('events').
           var getSetups = function(){
             var d = $q.defer();
             lcData().getSetupCompletes({q:lcFuncs.createtextdate(new Date())}).$promise.then(
-              function(success){$scope.setupsquery = success; d.resolve(success)},
+              function(success){$scope.setupsquery = success; d.resolve(success);},
               function(error){console.log(error)}
             )
             return d.promise;
@@ -537,7 +534,7 @@ angular.module('events').
             for (var i=0; i< raw_spaces_list.length; i++){
               var dictval = raw_spaces_list[i].id;
               $scope.spaces_dict[dictval] = raw_spaces_list[i].name}//for
-              console.log($scope.spaces_dict)
+              // console.log($scope.spaces_dict)
             //run get_events on startup
             $scope.start_event_loop();
           }//spacesSuccess
@@ -558,7 +555,7 @@ angular.module('events').
                 cat_string = cat_string.concat(cats[i].cid );
                 if (i+1 < cats.length){cat_string = cat_string.concat(',');}}//for
               //now we call the space puller
-              console.log(cats)
+              // console.log(cats)
               lcData({token:$cookies.get("libcal_token"), categoryList:cat_string})
               .pullSpaces().$promise.then(spacesSuccess, spacesError);
             }catch(err){
