@@ -214,11 +214,8 @@ angular.module('events').
           var getTeamList = function(){
             lcData().getTeamList({q:lcFuncs.createtextdate($scope.thisMonday), t:'yes'}).$promise.then(
               function(success){
-                  try{
-                    $scope.teamList = success[0].team;
-                  }catch{
-                    $scope.teamList = null
-                  }
+                  try{$scope.teamList = success[0].team;}
+                  catch(err){$scope.teamList = null; console.log('no team list')}
                 },//success
                   function(error){console.log(error)}
                 )}
