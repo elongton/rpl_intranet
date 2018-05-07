@@ -213,9 +213,15 @@ angular.module('events').
 
           var getTeamList = function(){
             lcData().getTeamList({q:lcFuncs.createtextdate($scope.thisMonday), t:'yes'}).$promise.then(
-              function(success){$scope.teamList = success[0].team;},
-              function(error){console.log(error)}
-            )}
+              function(success){
+                  try{
+                    $scope.teamList = success[0].team;
+                  }catch{
+                    $scope.teamList = null
+                  }
+                },//success
+                  function(error){console.log(error)}
+                )}
           getTeamList();
 
 
@@ -502,7 +508,7 @@ angular.module('events').
                 date: iterdate,
                 eventinfo: result,}
               // output data console log the data, this is what you want to uncomment
-              // console.log(arraypush)
+              console.log(arraypush)
               $scope.loading_display = '';
               $scope.loading_blur = '';
               d.resolve(arraypush)
@@ -534,6 +540,7 @@ angular.module('events').
             for (var i=0; i< raw_spaces_list.length; i++){
               var dictval = raw_spaces_list[i].id;
               $scope.spaces_dict[dictval] = raw_spaces_list[i].name}//for
+              console.log($scope.spaces_dict)
             //run get_events on startup
             $scope.start_event_loop();
           }//spacesSuccess
@@ -554,6 +561,7 @@ angular.module('events').
                 cat_string = cat_string.concat(cats[i].cid );
                 if (i+1 < cats.length){cat_string = cat_string.concat(',');}}//for
               //now we call the space puller
+              console.log(cats)
               lcData({token:$cookies.get("libcal_token"), categoryList:cat_string})
               .pullSpaces().$promise.then(spacesSuccess, spacesError);
             }catch(err){
