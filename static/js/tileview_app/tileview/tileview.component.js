@@ -18,11 +18,9 @@ angular.module('tileview').
             return mytime
           }
           //creates or updates the django database record of setupcomplete for the bookID
-          $scope.tilesetupcomplete = function(bookId, date){return tvFuncs.setupComplete(this.bookID, this.date)}
+          $scope.tilesetupcomplete = function(bookId, date){return tvFuncs.setupComplete(bookId, date)}
           //determines whether setup is required based on the detail.q1906 property
           $scope.setupcompleteclass = function(detail){return tvFuncs.setupCompleteClass(this.detail)}
-
-
 
           $scope.start_event_loop = function(){
               var funcArray = new Array();
@@ -31,7 +29,9 @@ angular.module('tileview').
               }
               $q.all(funcArray)
               .then(function(data){
-                $scope.sortedarray = lcFuncs.formatEvents(data);
+                var preSetupArray = lcFuncs.formatEvents(data);
+                $scope.sortedarray = tvFuncs.addSetupProperties($scope.setupsQuery, preSetupArray);
+
               });
           }//$scope.start_event_loop()
 
@@ -69,9 +69,29 @@ angular.module('tileview').
           //#1 getCreds - get the access token
           //#2 pullCats - get the categories of spaces for the location
           //#3 pullSpaces - get the spaces for all the categories
+          //#4 setupQuery - get all event setups (from Django database)
+          //#5 teamList - get the teamList
           var credsSuccess, credsError, catsSuccess,
               catsError, spacesSuccess, spacesError,
-              requestCredsSuccess, requestCredsError
+              requestCredsSuccess, requestCredsError,
+              setupQuerySuccess, setupQueryError,
+              teamSuccess, teamError
+
+          ///////this is #5////////
+            teamSuccess = function(success){
+              console.log(success)
+              try{$scope.teamList = success[0].team;}
+              catch(err){$scope.teamList = null; console.log('no team list')}
+              $scope.start_event_loop();
+            }
+            teamError = function(error){console.log(error)}
+          ///////this is #4///////
+          setupQuerySuccess = function(result){
+            console.log(result);
+            $scope.setupsQuery = result;
+            lcData().getTeamList({q:lcFuncs.createtextdate($scope.thisMonday), t:'yes'}).$promise.then(teamSuccess, teamError)
+          }
+          setupQueryError = function(error){console.log(error)}
           ///////this is #3///////
           spacesSuccess = function(result){
             var raw_spaces_list = new Array();
@@ -81,9 +101,9 @@ angular.module('tileview').
             for (var i=0; i< raw_spaces_list.length; i++){
               var dictval = raw_spaces_list[i].id;
               $scope.spaces_dict[dictval] = raw_spaces_list[i].name}//for
-              console.log($scope.spaces_dict)
+              // console.log($scope.spaces_dict)
             //run get_events on startup
-            $scope.start_event_loop();
+            lcData().getSetupCompletes({q:lcFuncs.createtextdate(new Date())}).$promise.then(setupQuerySuccess, setupQueryError)
           }//spacesSuccess
           spacesError = function(result){
             console.log('spacesError error'); console.log(result)
@@ -163,7 +183,23 @@ angular.module('tileview').
 
 
 
+          //tileview refresh timer
+          $interval(function(){
+            lcData().getRequestCreds({q:'springshare'}).$promise.then(requestCredsSuccess, requestCredsError)
+          },60000);
 
+          //Refresh token every day (86400000 milliseconds)
+          $interval(function(){
+            var tokenSuccess = function(result){
+              console.log(result)
+              $cookies.put("token", result.token)
+            }
+            var tokenError = function(error){
+              console.log('There was a token refresh error, contact Max.')
+              console.log(result)
+            }
+            lcData().tokenRefresh({"token":$cookies.get("token")}).$promise.then(tokenSuccess, tokenError)
+          },86400000)
 
 
 
