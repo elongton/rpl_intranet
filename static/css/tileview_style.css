@@ -96,4 +96,46 @@ div.tile-event:not(:first-child):not(:nth-child(6)):not(:nth-child(11)) {
 .tile-event {
   cursor: pointer; }
 
+.dialog_overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(1, 1, 1, 0.5);
+  display: flex;
+  justify-content: center; }
+
+.dialog {
+  align-self: center;
+  height: 175px;
+  width: 500px;
+  background-color: #282c34;
+  border: 1px solid white;
+  border-radius: 10px; }
+
+.dialog_text {
+  color: white;
+  height: 50%;
+  text-align: center;
+  padding: 20px;
+  padding-top: 30px;
+  display: flex;
+  justify-content: center; }
+
+.dialog_text span {
+  align-self: center;
+  font-size: 20px; }
+
+.dialog_buttons {
+  height: 49%;
+  display: flex;
+  justify-content: center; }
+
+.dialog_buttons button {
+  height: 40px;
+  width: 100px;
+  margin: 30px;
+  align-self: center; }
+
 /*# sourceMappingURL=tileview_style.css.map */

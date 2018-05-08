@@ -2,7 +2,7 @@
 
 angular.module('tileview').
       component('tileView', {
-        templateUrl: '/api/templates/tileview_app/spaces_tileview.html',
+        templateUrl: '/api/templates/tileview_app/tileview.html',
         controller: function(lcFuncs, lcData, tvFuncs, $scope, $cookies, $location, $http, $rootScope, $q, $window, $document, $interval, $filter){
 
           $scope.thisMonday = tvFuncs.getMonday(new Date()); // Mon Nov 08 2010
@@ -17,8 +17,40 @@ angular.module('tileview').
             var mytime = lcFuncs.formatDate(timestring)
             return mytime
           }
-          //creates or updates the django database record of setupcomplete for the bookID
-          $scope.tilesetupcomplete = function(bookId, date){return tvFuncs.setupComplete(bookId, date)}
+
+          //create dialog to ensure setup state change is truly desired
+          var setup_dialog = function(message){
+            $scope.dialog_text = message;
+            $scope.viewdialog = true;
+            var defer = $q.defer();
+            if ($window.confirm(message)){
+              defer.resolve();
+            }else{
+              defer.reject();
+            }
+            return(defer.promise);
+          }
+
+          $scope.onTileClick = function(detail){
+
+            var oppositeSetup
+            if (detail.setup){
+              oppositeSetup = detail.setup ? "'setup incomplete'" : "'set up and ready to go'";
+            }else{
+              oppositeSetup = "'set up and ready to go'"
+            }
+            var message = "Change to " + oppositeSetup.toString() + "?";
+            setup_dialog(message).then(
+              function(success){
+                detail.setup = !detail.setup;
+                return tvFuncs.setupComplete(detail.bookId, detail.date)
+              },
+              function(rejected){
+                console.log('canceled')
+              }
+            );
+          }
+
           //determines whether setup is required based on the detail.q1906 property
           $scope.setupcompleteclass = function(detail){return tvFuncs.setupCompleteClass(this.detail)}
 
@@ -192,10 +224,6 @@ angular.module('tileview').
           lcData().getBranchMapping().$promise.then(branchSuccess, branchError);
 
 
-
-
-
-
           //tileview refresh timer
           $interval(function(){
             lcData().getRequestCreds({q:'springshare'}).$promise.then(requestCredsSuccess, requestCredsError)
@@ -213,13 +241,6 @@ angular.module('tileview').
             }
             lcData().tokenRefresh({"token":$cookies.get("token")}).$promise.then(tokenSuccess, tokenError)
           },86400000)
-
-
-
-
-
-
-
 
         }//controller
 
