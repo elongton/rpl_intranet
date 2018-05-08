@@ -12,9 +12,6 @@ angular.module('events').
           $scope.staticfiles = staticfiles;
           $scope.calendar_option_selected = ($cookies.get("calendar_preference") == 'calendar')
           $scope.calendartoggleswitch = !($cookies.get("calendar_condensed_view") == 'true')
-          $scope.spaces_tileview = ($cookies.get('tileview') == 'true')
-          // $scope.spaces_tileview = false;
-
 
           if ($scope.calendar_option_selected){
             $scope.spaces_option_selected = false
@@ -33,6 +30,13 @@ angular.module('events').
           $scope.clicked = function(){
             $scope.calendartoggleswitch = !$scope.calendartoggleswitch;
           }
+          //tileview toggle
+          $scope.toggle_tileview = function(){
+            var url = '/tileview';
+            window.location = url;
+            window.location.replace(url);
+          }
+
 
           //main branch study room filter
           $scope.main_study_rooms = false
@@ -140,158 +144,8 @@ angular.module('events').
             }
           }
 
-          //tile view toggle and config
-          $scope.toggle_tileview = function(){
-            $scope.add_day_to_range();
-            $scope.dateArray = lcFuncs.getDates($scope.from, $scope.to);
-            $q.all([$scope.start_event_loop(), getTeamList(), getSetups()])
-              .then(function onFulfilled(thesuccess) {
-                $scope.spaces_tileview = !$scope.spaces_tileview;
-            }).catch(function onRejected(){});
-            //add function that combs through sortedarray and adds a field for setup
-          }
 
 
-          $scope.cancel_tileview = function(){
-             $scope.spaces_tileview = !$scope.spaces_tileview;
-          }
-
-          //tileview refresh timer
-          $interval(function(){
-            if ($scope.spaces_tileview){
-              $scope.thisMonday = getMonday(new Date());
-              $scope.thisSunday = getSunday(new Date());
-              // getTeamList();
-              // getSetups();
-              $scope.todaybutton()
-              $scope.add_day_to_range()
-              $scope.dateArray = lcFuncs.getDates($scope.from, $scope.to);
-              $scope.setupsquery = [];
-              // $scope.start_event_loop()
-              $q.all([$scope.start_event_loop(), getTeamList(), getSetups()])
-                .then(function onFulfilled(thesuccess) {
-                  console.log('refresh succeeded')
-                }).catch(function onRejected(){});
-            }
-          },60000);
-
-          //Refresh token every day (86400000 milliseconds)
-          $interval(function(){
-            var tokenSuccess = function(result){
-              console.log(result)
-              $cookies.put("token", result.token)
-            }
-            var tokenError = function(error){
-              console.log('There was a token refresh error, contact Max.')
-              console.log(result)
-            }
-            lcData().tokenRefresh({"token":$cookies.get("token")}).$promise.then(tokenSuccess, tokenError)
-          },86400000)
-
-
-          var getMonday = function(d) {
-            d = new Date(d);
-            var day = d.getDay(),
-                diff = d.getDate() - day + (day == 0 ? -6:1); // adjust when day is sunday
-            return new Date(d.setDate(diff));
-          }
-
-          var getSunday = function(d) {
-            d = new Date(d);
-            var day = d.getDay(),
-                diff = d.getDate() - day + (day == 0 ? -6:1) + 6; // adjust when day is sunday
-            return new Date(d.setDate(diff));
-          }
-
-          $scope.thisMonday = getMonday(new Date()); // Mon Nov 08 2010
-          $scope.thisSunday = getSunday(new Date()); // Mon Nov 08 2010
-
-          //get setup group
-
-          var getTeamList = function(){
-            lcData().getTeamList({q:lcFuncs.createtextdate($scope.thisMonday), t:'yes'}).$promise.then(
-              function(success){
-                  try{$scope.teamList = success[0].team;}
-                  catch(err){$scope.teamList = null; console.log('no team list')}
-                },//success
-                  function(error){console.log(error)}
-                )}
-          getTeamList();
-
-
-
-          var getSetups = function(){
-            var d = $q.defer();
-            lcData().getSetupCompletes({q:lcFuncs.createtextdate(new Date())}).$promise.then(
-              function(success){$scope.setupsquery = success; console.log($scope.setupsquery); d.resolve(success);},
-              function(error){console.log(error)}
-            )
-            return d.promise;
-          }
-          getSetups();
-
-
-          var addSetupProperties = function(){
-            if ($scope.setupsquery.length > 0){
-              for (var i = 0; i < $scope.sortedarray[0].eventinfo.length; i++){
-                for (var j = 0; j < $scope.setupsquery.length; j++ ){
-                  if ($scope.sortedarray[0].eventinfo[i].bookId == $scope.setupsquery[j].book_id){
-                    $scope.sortedarray[0].eventinfo[i]['setup'] = $scope.setupsquery[j].setup;
-                    // console.log('pushed something')
-                    // console.log($scope.sortedarray[0].eventinfo[i])
-                  }
-                }
-              }//first for
-              for (var i = 0; i < $scope.sortedarray[1].eventinfo.length; i++){
-                for (var j = 0; j < $scope.setupsquery.length; j++ ){
-                  if ($scope.sortedarray[1].eventinfo[i].bookId == $scope.setupsquery[j].book_id){
-                    $scope.sortedarray[1].eventinfo[i]['setup'] = $scope.setupsquery[j].setup;
-                    // console.log('pushed something')
-                    // console.log($scope.sortedarray[1].eventinfo[i])
-                  }
-                }
-              }//second for
-            }//if statement
-          }
-
-          $scope.tilesetupcomplete = function(bookId, date){
-
-            lcData().getSetupCompletes({s:bookId}).$promise.then(
-              function(success){
-                if (success.length == 0){
-                  //open dialog in center
-                  // console.log('empty')
-                  lcData().createSetup({date: lcFuncs.createtextdate(new Date(date)), book_id: bookId, setup: 'true'}).$promise.then(
-                    function(success){console.log(success)},
-                    function(error){console.log(error)}
-                  )
-                } else {
-                  //open dialog in center
-                  // console.log('filled')
-                  // console.log(success.length)
-                  //check current setup status and set to opposite
-                  var setupstatus = success[0].setup == true ? false : true;
-                  //http update setup to opposite
-                  lcData().updateSetup({id: success[0].id, setup: setupstatus}).$promise.then(
-                    function(success){console.log(success)},
-                    function(error){console.log(error)}
-                  )
-                }//if else
-              },
-              function(error){console.log('this was an error', error)}
-            )
-          }
-
-
-          $scope.setupcompleteclass = function(detail){
-            if(detail.q1906){
-              if(detail.setup == true){
-                return 'setup_complete'
-              }else{
-                return 'setup_required'
-              }
-            }
-          }//setupcompleteclass
 
 ///////////////////////   MOBILE  //////////////////////////////
           //animating the buttons in mobile:
@@ -470,9 +324,6 @@ angular.module('events').
               $q.all(funcArray)
               .then(function(data){
                 $scope.sortedarray = lcFuncs.formatEvents(data);
-                if ($scope.spaces_tileview){
-                  addSetupProperties();
-                }
                 //add the set date for comparisons
                 removeAlert()
               });
@@ -721,10 +572,6 @@ angular.module('events').
               $scope.bchange = false
               $scope.mobile_header = "Spaces"
 
-              if ($scope.spaces_tileview){
-                $scope.add_day_to_range();
-                $scope.dateArray = lcFuncs.getDates($scope.from, $scope.to);
-              }
               // lcData().getRequestCreds({q:'springshare'}).$promise.then(requestCredsSuccess, requestCredsError)
               lcData({token:$cookies.get("libcal_token")}).pullCats({location_id:$scope.lbid})
               .$promise.then(catsSuccess, catsError);

@@ -22,6 +22,21 @@ angular.module('tileview').
           //determines whether setup is required based on the detail.q1906 property
           $scope.setupcompleteclass = function(detail){return tvFuncs.setupCompleteClass(this.detail)}
 
+
+          $scope.toggle_libcal_listview = function(){
+            var url = '/libcal';
+            window.location = url;
+            window.location.replace(url);
+          }
+
+
+
+
+
+
+
+
+
           $scope.start_event_loop = function(){
               var funcArray = new Array();
               for (var i = 0; i < $scope.dateArray.length; i++ ){
@@ -34,8 +49,6 @@ angular.module('tileview').
 
               });
           }//$scope.start_event_loop()
-
-
           //check if there's a token. if not, get one
           if ($cookies.get("libcal_token")){$scope.renewtoken=false}else{$scope.renewtoken=true}
           // OBTAIN THE ACCESS TOKEN!
