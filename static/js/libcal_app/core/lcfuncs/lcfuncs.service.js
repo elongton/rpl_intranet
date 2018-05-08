@@ -35,6 +35,10 @@ angular.
         return Math.round(difference_ms/one_day);
       }
 
+      Date.prototype.addDays = function(days) {
+        this.setDate( this.getDate()  + days);
+        return this;
+      };
 
       //this function creates an array of all the dates in the range
       var getdates =  function(startDate, stopDate){
@@ -47,7 +51,8 @@ angular.
                 if(dd<10) {dd = '0'+dd}
                 if(mm<10) {mm = '0'+mm}
                 dateArray.push(yyyy + '-' + mm + '-' + dd);
-                currentDate = currentDate.addDays(1);}//while
+                currentDate = currentDate.addDays(1);
+              }//while
             return dateArray;
         }//getdates
 

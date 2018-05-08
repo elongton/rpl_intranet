@@ -1,0 +1,65 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en-us" ng-app='tileviewApp'>
+  <head>
+    <base href="/">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tileview</title>
+
+    <link rel="shortcut icon" href='{% static "img/favicon.png" %}' type="image/x-icon">
+
+    <!-- BOOTSTRAP-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Mate+SC" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular-route.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular-resource.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-cookies.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-sanitize.js""></script>
+
+    <!-- External modules -->
+    <script src='{% static "js/external/angular-css.min.js" %}'></script>
+    <script src='{% static "js/shared/sharednav.module.js" %}'></script>
+    <script src='{% static "js/shared/sharednav.component.js" %}'></script>
+    <script src='{% static "js/users_app/core/user/user.module.js" %}'></script>
+    <script src='{% static "js/users_app/core/user/user.service.js" %}'></script>
+    <script src='{% static "js/libcal_app/core/lcfuncs/lcfuncs.module.js" %}'></script>
+    <script src='{% static "js/libcal_app/core/lcfuncs/lcfuncs.service.js" %}'></script>
+    <script src='{% static "js/libcal_app/core/lcdata/lcdata.module.js" %}'></script>
+    <script src='{% static "js/libcal_app/core/lcdata/lcdata.service.js" %}'></script>
+
+
+
+    <!-- Internal modules -->
+    <script src='{% static "js/tileview_app/app.module.js" %}'></script>
+    <script src='{% static "js/tileview_app/app.config.js" %}'></script>
+
+    <script src='{% static "js/tileview_app/tileview/tileview.module.js" %}'></script>
+    <script src='{% static "js/tileview_app/tileview/tileview.component.js" %}'></script>
+    <script src='{% static "js/tileview_app/tileview/tileview.directives.js" %}'></script>
+    <script src='{% static "js/tileview_app/core/tvfuncs.module.js" %}'></script>
+    <script src='{% static "js/tileview_app/core/tvfuncs.service.js" %}'></script>
+
+
+
+
+
+    <script>
+        var STATIC_URL = '{{ STATIC_URL|escapejs }}';
+        function staticfiles(path) {return STATIC_URL + path;}
+    </script>
+  </head>
+
+  <body>
+    <div ng-view></div>
+  </body>
+</html>

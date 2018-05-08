@@ -29,6 +29,7 @@ from ang.views import (AngularTemplateView,
                       ReferenceTemplateView,
                       UserTemplateView,
                       HomeTemplateView,
+                      TileviewTemplateView,
                       LibcalTemplateView)
 
 urlpatterns = [
@@ -54,6 +55,7 @@ urlpatterns += [
     url(r'^users',UserTemplateView.as_view()),
     url(r'^reference', ReferenceTemplateView.as_view()),
     url(r'^libcal', LibcalTemplateView.as_view()),
+    url(r'^tileview', TileviewTemplateView.as_view()),
     url(r'^wiki/', get_wiki_pattern()),
     url(r'^wiki/notifications/', get_nyt_pattern()),
     url(r'^wiki/auth/', include('django.contrib.auth.urls')),

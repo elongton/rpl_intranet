@@ -496,6 +496,9 @@
 .setup_required {
   background-color: #393f4a; }
 
+.setup_complete {
+  background-color: none !important; }
+
 .tileview_container .tile-event1 {
   height: 100%; }
 
