@@ -24,15 +24,24 @@ angular.
         return date
       }
 
+      var twodigit = function(number){
+        var formattedNumber = ("0" + number).slice(-2);
+        return formattedNumber
+      }
+      var createtextdate = function(date){
+        var ready_date = String(date.getFullYear()) + "-" + String(twodigit(date.getMonth()+1)) + "-" + String(twodigit(date.getDate()))
+        return(ready_date)
+      }
 
 
       var setupcomplete = function(bookId, mydate){
-        // console.log(mydate)
+        console.log(mydate)
+        var event_date = createtextdate(new Date(mydate));
         // console.log(bookId)
         lcData().getSetupCompletes({s:bookId}).$promise.then(
           function(success){
             if (success.length == 0){
-              lcData().createSetup({date: lcFuncs.createtextdate(new Date(mydate)), book_id: bookId, setup: 'true'}).$promise.then(
+              lcData().createSetup({date: event_date, book_id: bookId, setup: 'true'}).$promise.then(
                 function(success){console.log('create success!'); console.log(success)},
                 function(error){ console.log('create error!'); console.log(error)}
               )

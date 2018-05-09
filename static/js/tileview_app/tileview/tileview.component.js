@@ -43,7 +43,7 @@ angular.module('tileview').
             setup_dialog(message).then(
               function(success){
                 detail.setup = !detail.setup;
-                return tvFuncs.setupComplete(detail.bookId, detail.date)
+                tvFuncs.setupComplete(detail.bookId, detail.fromDate)
               },
               function(rejected){
                 console.log('canceled')
