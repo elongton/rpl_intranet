@@ -10,7 +10,7 @@ angular.module('tileview').
           //Filters out the study rooms within template
           $scope.categoryfilter = function(detail){return detail.cid !== 2710}
           $scope.cancelledfilter = function(detail){
-            return detail.status !== 'Cancelled by Admin';
+            return (detail.status !== 'Cancelled by Admin') && (detail.status !== 'Cancelled by User') && (detail.status !== 'Mediated Denied');
           }
           $scope.get_room_key = function(eid){return $scope.spaces_dict[eid]}
           $scope.get_time = function(timestring){
