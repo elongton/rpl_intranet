@@ -39,18 +39,17 @@ INSTALLED_APPS = [
     'remote_api_manager',
     'libcal',
     'storages',
-
     'django.contrib.sites',
-    'django.contrib.humanize',
-    'django_nyt',
-    'mptt',
-    'sekizai',
-    'sorl.thumbnail',
-    'wiki',
-    'wiki.plugins.attachments',
-    'wiki.plugins.notifications',
-    'wiki.plugins.images',
-    'wiki.plugins.macros',
+    # 'django.contrib.humanize',
+    # 'django_nyt',
+    # 'mptt',
+    # 'sekizai',
+    # 'sorl.thumbnail',
+    # 'wiki',
+    # 'wiki.plugins.attachments',
+    # 'wiki.plugins.notifications',
+    # 'wiki.plugins.images',
+    # 'wiki.plugins.macros',
 ]
 
 MIDDLEWARE = [

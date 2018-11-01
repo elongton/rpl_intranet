@@ -22,8 +22,8 @@ from rest_framework_jwt.views import (obtain_jwt_token,
                                       verify_jwt_token,
                                       refresh_jwt_token,)
 
-from wiki.urls import get_pattern as get_wiki_pattern
-from django_nyt.urls import get_pattern as get_nyt_pattern
+# from wiki.urls import get_pattern as get_wiki_pattern
+# from django_nyt.urls import get_pattern as get_nyt_pattern
 
 from ang.views import (AngularTemplateView,
                       ReferenceTemplateView,
@@ -56,8 +56,9 @@ urlpatterns += [
     url(r'^reference', ReferenceTemplateView.as_view()),
     url(r'^libcal', LibcalTemplateView.as_view()),
     url(r'^tileview', TileviewTemplateView.as_view()),
-    url(r'^wiki/', get_wiki_pattern()),
-    url(r'^wiki/notifications/', get_nyt_pattern()),
-    url(r'^wiki/auth/', include('django.contrib.auth.urls')),
-    url(r'^(?!wiki/).*$', HomeTemplateView.as_view(), name='homeview'),
+    # url(r'^wiki/', get_wiki_pattern()),
+    # url(r'^wiki/notifications/', get_nyt_pattern()),
+    # url(r'^wiki/auth/', include('django.contrib.auth.urls')),
+    # url(r'^(?!wiki/).*$', HomeTemplateView.as_view(), name='homeview'),
+    url(r'', HomeTemplateView.as_view(), name='homeview'),
 ]
