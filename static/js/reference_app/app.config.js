@@ -46,7 +46,7 @@ angular.module('referenceApp')
 
           $routeProvider
           .when('/reference',{
-            template: '<maintenance></maintenance>',
+            template: '<stats></stats>',
             resolve:{
               loggedIn:onlyLoggedIn
             },
