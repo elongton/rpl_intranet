@@ -2,8 +2,13 @@
 
 
 ## Event Puller
-Addresses multiple problems: 1. An easy way to see how many events by library branch were posted 2. A printable list of space reservations that updates. 3. A persistent tile view display to show on multiple monitors throughout each branch.
+Addresses multiple problems: 
 
+<ol>
+<li>1. An easy way to see how many events by library branch were posted </li>
+<li>2. A printable list of space reservations that updates. </li>
+<li>3. A persistent tile view display to show on multiple monitors throughout each branch.</li>
+</ol>
 
 ## Library Desk Stats
 Special Features: Cross browser window communication, csv export, dynamic charts.
