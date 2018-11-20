@@ -2,7 +2,7 @@
 
 
 ## Event Puller
-Addresses multiple problems: 
+Offers multiple features: 
 
 <ol>
 <li>An easy way to see how many events by library branch were posted </li>
